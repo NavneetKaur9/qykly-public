@@ -1,0 +1,27 @@
+<div ng-controller="formCtrl"> <div class="row"> <div class="col-lg-12"> <h3 class="page-header"> </h3> </div> <!-- /.col-lg-12 --> </div> <div class="alert alert-success alert-dismissable" ng-show="alerts.length" ng-repeat="alert in alerts"> <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="closeAlert($index)"> × </button> {{alert.msg}} </div> <!-- /.row --> <div class="row"> <div class="col-lg-12"> <form ng-submit="addRegex()"> <div class="form-group"> <label>Add Regex Pattern/ Patterns: </label> <textarea class="form-control" rows="15" ng:model="textarea" ng-change="changeTextarea()" placeholder=" Add Regex Pattern here......">
+                    {{textarea}}</textarea> </div> <button type="submit" class="btn btn-success btn-lg pull-right" ng-disabled="showAddButton"> Add </button> </form> <!--  <form class="ng-pristine ng-valid" role="form" ng-submit="regexTest()">
+                <div class="form-group">
+                    <label>
+                        Sms:
+                    </label>
+                    <textarea class="form-control" rows="1" ng:model="sms">
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Regex pattern
+                    </label>
+                    <textarea class="form-control" rows="1" ng:model="regex">
+                    </textarea>
+                </div>
+                <div class="alert alert-success alert-dismissable" ng-show="showMatch" >
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" >
+                        ×
+                    </button>
+                    Regex Match : {{match}}
+                </div>
+              
+                <button type="submit" class="btn btn-default">
+                    Test Regex
+                </button>
+            </form> --> </div> </div> </div>
