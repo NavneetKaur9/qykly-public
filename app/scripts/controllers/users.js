@@ -6,7 +6,7 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-	.controller('usersCtrl', function($scope, $position, $location, $http) {
+	.controller('usersCtrl', function($scope, $location, $http) {
 
 
 		$http.get('api/userdetails').then(function(response) {

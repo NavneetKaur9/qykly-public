@@ -1,0 +1,68 @@
+<section ng-controller="smsCtrl"> <div class="title_left"> SMS </div> <!-- <div class="row">
+        <div class="col-md-3">
+            <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">
+                Show  Messages Summary
+            </button>
+        </div>
+        <div class="col-md-9">
+            <div uib-collapse="isCollapsed">
+                <div class="tile-stats">
+                    <div ng-repeat="sum in summary" >
+                        <div class="col-md-2 col-sm-2 col-xs-6 tile" ng-if="sum.status=='3'">
+                            <span >
+                                Processed
+                            </span>
+                            <h2>
+                                {{sum.count}}
+                            </h2>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div> --> <div class="row"> <div class="col-md-8 col-md-offset-4"> <div class=""> <!-- <div class="x_title">
+                    <h2>
+                        Summary                        
+                    </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link" ng-click="isCollapsed = !isCollapsed" ng-show="isCollapsed">
+                                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true">
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="collapse-link" ng-click="isCollapsed = !isCollapsed" ng-hide="isCollapsed">
+                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true">
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix">
+                    </div>
+                </div> --> <div class="x_content"> <article class="media event"> <a class="pull-left date"> <p class="month"> Total Regex </p> <p class="day"> {{regexSummary}} </p> </a> <div ng-repeat="sum in summary"> <a class="pull-left date" ng-if="sum.status=='3'"> <p class="month"> Processed </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='0'"> <p class="month"> UnProcessed </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='1'"> <p class="month"> Blacklisted </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='4'"> <p class="month"> Dump </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='5'"> <p class="month"> Pending for regex </p> <p class="day"> {{sum.count}} </p> </a> </div> </article> </div> </div> </div> </div> <hr> <!--
+        <div class="row">
+            <div class="col-md-5">
+                <label for="status">
+                    Status :
+                </label>
+                <select class="form-control input-sm" aria-controls="datatable" name="datatable_length" ng-model="status" ng-change="click()">
+                    <option value="3">
+                        Processed
+                    </option>
+                    <option value="0">
+                        Unprocessed
+                    </option>
+                    <option value="">
+                        All
+                    </option>
+                    <option value="4">
+                        Dump
+                    </option>
+                </select>
+            </div>
+        </div>
+    --> <div class="row"> <div class="col-md-11 x_panel"> <table datatable="" dt-options="vm.dtOptions" dt-columns="vm.dtColumns" class="table table-bordered"> </table> </div> </div> <div class="sidebar-footer hidden-small"> <a data-original-title="Settings" data-toggle="tooltip" data-placement="top" title=""> <select class="form-control input-sm" aria-controls="datatable" name="datatable_length"> <option value="10"> john  <option value="25"> julie  <option value="50"> steph  <option value="100"> tin tin  </select> </a> <a data-original-title="FullScreen" data-toggle="tooltip" data-placement="top" title=""> <button type="button" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-ok"> </span> Assign </button> </a> <a data-original-title="Lock" data-toggle="tooltip" data-placement="top" title=""> <button type="button" class="btn btn-round btn-success pull-right"> Move to Dump </button> </a> </div> </section>

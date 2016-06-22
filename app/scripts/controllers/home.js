@@ -4,6 +4,6 @@
  */
 angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http) {
 
-
+	console.log('hello');
 
 });
