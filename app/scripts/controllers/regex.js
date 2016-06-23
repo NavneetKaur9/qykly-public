@@ -22,18 +22,18 @@ angular.module('sbAdminApp').controller('regexCtrl', function($scope, $http, DTO
 	$scope.dtOptions = DTOptionsBuilder.newOptions()
 		.withOption('ajax', {
 			url: url + 'get-regex',
-			type: 'GET',
-			// Either you specify the AjaxDataProp here
-			dataSrc: function(tablesdata) {
-				$scope.tablesdata = tablesdata;
-				console.log(tablesdata);
-			}
+			type: 'GET'
+				// Either you specify the AjaxDataProp here
+				// dataSrc: function(tablesdata) {
+				// 	$scope.tablesdata = tablesdata.length;
+				// 	console.log(tablesdata);
+				// }
 		})
 		// or here
-		.withDataProp('data')
+		// .withDataProp('data')
 		.withOption('processing', true)
-		.withOption('serverSide', true)
-		.withPaginationType('full_numbers');
+		.withOption('serverSide', true);
+
 	$scope.dtColumns = [
 		DTColumnBuilder.newColumn('address').withTitle('address'),
 		DTColumnBuilder.newColumn('msgType').withTitle('msgType '),

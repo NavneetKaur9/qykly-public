@@ -1,7 +1,7 @@
 <section ng-controller="shortcodesCtrl">
     <div class="title_left">
-    Shortcodes
-   </div>
+        Shortcodes
+    </div>
     <!--
         <div class="page-header">
             <h1>
@@ -13,9 +13,9 @@
     <div class="title_left">
         <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-left top_search">
             <div class="input-group">
-                <input class="form-control" placeholder="Search for Short Code..." type="text" ng-model="searchCode"/>
+                <input class="form-control" placeholder="Search for Short Code..." type="text" ng-model="searchCode" />
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-click="vm.shortcode()">
+                    <button class="btn btn-default" type="button" ng-click="shortcode()">
                         Go!
                     </button>
                 </span>
@@ -25,9 +25,9 @@
     <!-- End :search box -->
     <div class="row">
         <div class="col-md-9">
-           <ul ng-repeat="(key, value) in summary">
-               <li ng-click="smss(value.status)">{{value}}</li>
-           </ul>
+            <ul ng-repeat="(key, value) in ShortcodeSummary">
+                <li ng-click="smss(value.status)">{{value}}</li>
+            </ul>
         </div>
         <div class="col-md-3">
             <div class="x_panel">
@@ -45,14 +45,12 @@
                                 </span>
                             </a>
                         </li>
-
-                         <li>
+                        <li>
                             <a class="collapse-link" ng-click="isCollapsed = !isCollapsed" ng-hide="isCollapsed">
                                 <span class="glyphicon glyphicon-chevron-up" aria-hidden="true">
                                 </span>
                             </a>
                         </li>
-                       
                         <li>
                             <a class="close-link" ng-show="!isCollapsed">
                                 <span class="glyphicon glyphicon-pencil">
@@ -68,8 +66,7 @@
                         <ul class="to_do" ng-repeat="code in newcodes">
                             <li>
                                 <p>
-                                    <input type="checkbox"/>
-                                    {{code}}
+                                    <input type="checkbox" /> {{code}}
                                 </p>
                             </li>
                         </ul>
@@ -81,12 +78,10 @@
     <div class="row">
         {{smss}}
     </div>
-     <div class="row">
+    <div class="row">
         <div class="col-md-12">
-           <!--  <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
+            <!--  <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
             </table> -->
         </div>
     </div>
-   
 </section>
-

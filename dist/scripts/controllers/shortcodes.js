@@ -1,1 +1,1 @@
-"use strict";angular.module("sbAdminApp").controller("shortcodesCtrl",function($scope,$http){$scope.remarkField={Select:null,availableOptions:["Marketing","OTP","Miscellaneous"]}});
+"use strict";angular.module("sbAdminApp").controller("shortcodesCtrl",function($scope,$http,api){$scope.searchCode="",api.get("new-codes",!1,!1,!1,function(err,response){$scope.newcodes=response}),$scope.shortcode=function(){api.get("short-code",!1,!1,{sender:$scope.searchCode},function(err,response){$scope.ShortcodeSummary=response})}});

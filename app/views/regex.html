@@ -12,14 +12,14 @@
         <div class="col-md-10">
             <div uib-collapse="isCollapsed">
                 <div class="tile-stats">
-                    <div ng-repeat="msgtype in msgtypes |orderBy:'-count'"  class="col-md-2 col-sm-2 col-xs-6 tile">
+                    <div ng-repeat="msgtype in msgtypes |orderBy:'-count'" class="col-md-2 col-sm-2 col-xs-6 tile">
                         <span>
                             {{msgtype.msgType}}
                         </span>
                         <span class="badge bg-green">
                             {{msgtype.count}}
                         </span>
-                       <!--  <h2>
+                        <!--  <h2>
                             {{msgtype.count}}
                         </h2> -->
                     </div>
@@ -28,15 +28,12 @@
         </div>
     </div>
     <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper">
-    {{tablesdata}}
+        {{tablesdata}}
         <div class="row">
             <div class="col-md-12 x_panel">
                 <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
-
                 </table>
-                
             </div>
         </div>
-       
     </div>
 </section>
