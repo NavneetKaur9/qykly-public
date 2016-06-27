@@ -15,10 +15,10 @@ angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, 
 		DTColumnBuilder.newColumn('text').withTitle('smsText'),
 		DTColumnBuilder.newColumn('status').withTitle('Status '),
 		DTColumnBuilder.newColumn('time').withTitle('time ').renderWith(function(data, type, full) {
-			return $filter('date')(data, 'dd/MM/yyyy'); //date filter 
+			return $filter('date')(data, 'medium'); //date filter 
 		}),
 		DTColumnBuilder.newColumn('saveTime').withTitle('saveTime ').renderWith(function(data, type, full) {
-			return $filter('date')(data, 'dd/MM/yyyy'); //date filter 
+			return $filter('date')(data, 'medium'); //date filter 
 		})
 	]
 

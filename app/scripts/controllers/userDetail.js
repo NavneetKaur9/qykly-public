@@ -43,7 +43,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		DTColumnBuilder.newColumn('address').withTitle('address'),
 		DTColumnBuilder.newColumn('text').withTitle('text '),
 		DTColumnBuilder.newColumn('time').withTitle('time ').renderWith(function(data, type, full) {
-			return $filter('date')(data, 'dd/MM/yyyy'); //date filter 
+			return $filter('date')(data, 'medium'); //date filter 
 
 		}),
 		DTColumnBuilder.newColumn('status').withTitle('status ')

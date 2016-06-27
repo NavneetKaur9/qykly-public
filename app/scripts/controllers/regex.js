@@ -36,7 +36,7 @@ angular.module('sbAdminApp').controller('regexCtrl', function($scope, $http, DTO
 		DTColumnBuilder.newColumn('msgSubType').withTitle('msgSubType '),
 		DTColumnBuilder.newColumn('pattern').withTitle('pattern '),
 		DTColumnBuilder.newColumn('dateModified').withTitle('dateModified ').renderWith(function(data, type, full) {
-			return $filter('date')(data, 'dd/MM/yyyy'); //date filter 
+			return $filter('date')(data, 'medium'); //date filter 
 
 		}).withOption('searchable', false)
 
