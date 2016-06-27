@@ -1,4 +1,3 @@
-
 'use strict';
 /*
 * merchant module
@@ -19,8 +18,5 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http)
   });
 
 });
-
-
-
 
 

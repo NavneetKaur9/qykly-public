@@ -16,14 +16,8 @@ angular.module('sbAdminApp')
 			.withOption('ajax', {
 				url: url + 'get-user',
 				type: 'GET'
-					// Either you specify the AjaxDataProp here
-					// dataSrc: function(dataset) {
-					// 	$scope.dataset = dataset;
-					// 	console.log(dataset.length);
-					// }
-
 			})
-			// .withDataProp('data')
+			.withDataProp('data')
 			.withOption('processing', true)
 			.withOption('serverSide', true)
 			.withOption('rowCallback', rowCallback);
@@ -34,14 +28,14 @@ angular.module('sbAdminApp')
 
 			DTColumnBuilder.newColumn('primaryEmail').withTitle('Email '),
 			DTColumnBuilder.newColumn('dateCreated').withTitle('dateCreated ').renderWith(function(data, type, full) {
-				return $filter('date')(data, 'dd/MM/yyyy'); //date filter 
-			}),
+				return $filter('date')(data, 'medium'); //date filter 
+			}).withOption('searchable', false),
 			DTColumnBuilder.newColumn('dateModified').withTitle('dateModified ').renderWith(function(data, type, full) {
-				return $filter('date')(data, 'dd/MM/yyyy'); //date filter 
-			}),
+				return $filter('date')(data, 'medium'); //date filter 
+			}).withOption('searchable', false),
 			DTColumnBuilder.newColumn('smsShortCodes').withTitle('Codes ').renderWith(function(data, type, full) {
 				return data = data.length;
-			}).notSortable()
+			}).notSortable().withOption('searchable', false)
 
 		];
 
