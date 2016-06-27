@@ -23,6 +23,10 @@
         </div>
     </div>
     <!-- End :search box -->
+    <div class="jumbotron">
+        {{newcodes.regex}}
+        <hr/> {{newcodes.shortcode}}
+    </div>
     <div class="row">
         <div class="col-md-9">
             <ul ng-repeat="(key, value) in ShortcodeSummary">
@@ -63,13 +67,14 @@
                 </div>
                 <div class="x_content" uib-collapse="isCollapsed">
                     <div class="">
-                        <ul class="to_do" ng-repeat="code in newcodes">
-                            <li>
-                                <p>
-                                    <input type="checkbox" /> {{code}}
-                                </p>
-                            </li>
-                        </ul>
+                       <!-- <ul class="to_do" ng-repeat="code in newcodes">
+    <li>
+        <p>
+            <input type="checkbox" /> {{code}}
+        </p>
+    </li>
+</ul>
+ -->
                     </div>
                 </div>
             </div>

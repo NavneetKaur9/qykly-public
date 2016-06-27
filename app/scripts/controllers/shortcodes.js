@@ -8,6 +8,8 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 
 	api.get('new-codes', false, false, false, function(err, response) {
 		$scope.newcodes = response;
+		console.log(response);
+
 	});
 	$scope.shortcode = function() {
 		api.get('short-code', false, false, {

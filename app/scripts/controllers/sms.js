@@ -2,7 +2,7 @@
 /**
  * 
  */
-angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, DTOptionsBuilder, DTColumnBuilder) {
+angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, DTOptionsBuilder, DTColumnBuilder, $filter) {
 
 	var url = 'http://localhost:3000/mod-api/';
 	$scope.dtOptions = DTOptionsBuilder.newOptions().withOption('ajax', {
@@ -11,10 +11,10 @@ angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, 
 		})
 		.withOption('processing', true).withOption('serverSide', true).withPaginationType('full_numbers');
 	$scope.dtColumns = [
-		DTColumnBuilder.newColumn('sender').withTitle('sender'),
-		DTColumnBuilder.newColumn('smsText').withTitle('smsText'),
+		DTColumnBuilder.newColumn('address').withTitle('Address'),
+		DTColumnBuilder.newColumn('text').withTitle('smsText'),
 		DTColumnBuilder.newColumn('status').withTitle('Status '),
-		DTColumnBuilder.newColumn('SmsTime').withTitle('SmsTime ').renderWith(function(data, type, full) {
+		DTColumnBuilder.newColumn('time').withTitle('time ').renderWith(function(data, type, full) {
 			return $filter('date')(data, 'dd/MM/yyyy'); //date filter 
 		}),
 		DTColumnBuilder.newColumn('saveTime').withTitle('saveTime ').renderWith(function(data, type, full) {
