@@ -110,15 +110,15 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'angul
           });
         }
       }
-    }).state('dashboard.merchant', {
-      url: '/merchant',
-      templateUrl: 'views/merchant.html',
-      controller: 'merchantCtrl',
+    }).state('dashboard.merchants', {
+      url: '/merchants',
+      templateUrl: 'views/merchants.html',
+      controller: 'merchantsCtrl',
       resolve: {
         loadMyFile: function($ocLazyLoad) {
           return $ocLazyLoad.load({
             name: 'sbAdminApp',
-            files: ['scripts/controllers/merchant.js']
+            files: ['scripts/controllers/merchants.js']
           });
         }
       }
