@@ -1,450 +1,97 @@
 <div ng-controller="userDetailCtrl">
-    <!-- {{user.PrimaryEmail}} -->
-    <div class="jumbotron">
-        <a ui-sref="dashboard.users">
+    <!-- <div class="jumbotron"> -->
+    <a ui-sref="dashboard.users">
             back
         </a>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                user Details
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <dl class="dl-horizontal">
-                            <dt>
-                                Mobile Number:
-                            </dt>
-                            <dd>
-                                {{user.MobileNumber}}
-                            </dd>
-                            <dt>
-                                PrimaryEmail :
-                            </dt>
-                            <dd>
-                                {{user.PrimaryEmail}}
-                            </dd>
-                            <dt>
-                                Sms Count :
-                            </dt>
-                            <dd>
-                                {{user.SmsCount}}
-                            </dd>
-                            <!--
+    <div class="row">
+        <!-- <div class="col-md- 8"></div> -->
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    user Details
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <dl class="dl-horizontal">
+                                <dt style="width:120px">
+                                    PrimaryEmail :
+                                </dt>
+                                <dd style="margin-left:130px">
+                                    {{userData.primaryEmail}}
+                                </dd>
+                                <dt style="width:120px">
+                                    deviceResolution:
+                                </dt>
+                                <dd style="margin-left:130px">
+                                    {{userData.deviceResolution}}
+                                </dd>
+                                <dt style="width:120px">
+                                    imei:
+                                </dt>
+                                <dd style="margin-left:130px">
+                                    {{userData.imei}}
+                                </dd>
+                                <dt style="width:120px">
+                                    Platform :
+                                </dt>
+                                <dd style="margin-left:130px">
+                                    {{userData.platform}}
+                                </dd>
                             </dl>
                         </div>
                         <div class="col-md-6">
                             <dl class="dl-horizontal">
-                            -->
-                            <dt>
-                                Username:
-                            </dt>
-                            <dd>
-                                {{user.Username}}
-                            </dd>
-                            <dt>
-                                Platform :
-                            </dt>
-                            <dd>
-                                {{user.Platform}}
-                            </dd>
-                            <dt>
-                                Secondary Email :
-                            </dt>
-                            <dd>
-                                {{user.SecondaryEmail}}
-                            </dd>
-                            <dt>
-                                SyncDate:
-                            </dt>
-                            <dd>
-                                {{user.SyncDate|date:'medium'}}
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="col-md-6">
-                        <dl class="dl-horizontal">
-                            <dt>
-                                Active
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.Active}}
-                            </dd>
-                            <dt>
-                                BatteryStatus
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.BatteryStatus}}
-                            </dd>
-                            <dt>
-                                Charging
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.Charging}}
-                            </dd>
-                            <dt>
-                                DeviceId
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.DeviceId}}
-                            </dd>
-                            <dt>
-                                DeviceResolution
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.DeviceResolution}}
-                            </dd>
-                            <dt>
-                                Imei
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.Imei}}
-                            </dd>
-                            <dt>
-                                IpAddress
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.IpAddress}}
-                            </dd>
-                            <dt>
-                                Location
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.Location}}
-                            </dd>
-                            <dt>
-                                Model
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.Model}}
-                            </dd>
-                            <dt>
-                                Root
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.Root}}
-                            </dd>
-                            <dt>
-                                SDK
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.SDK}}
-                            </dd>
-                            <dt>
-                                Sim1
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.Sim1}}
-                            </dd>
-                            <dt>
-                                Sim2
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.Sim2}}
-                            </dd>
-                            <dt>
-                                Wifi
-                            </dt>
-                            <dd>
-                                {{userDeviceInfo.Wifi}}
-                            </dd>
-                            <!--
-                                <dt ng-repeat="(key, value) in userDeviceInfo">
-                                    {{key}} :
+                                <dt style="width:120px">
+                                    appVersion :
                                 </dt>
-                                <dd ng-repeat="(key, value) in userDeviceInfo">
-                                    {{value}}
+                                <dd style="margin-left:130px">
+                                    {{userData.appVersion}}
                                 </dd>
-                            -->
-                        </dl>
+                                <dt style="width:120px">
+                                    smsShortCodes:
+                                </dt>
+                                <dd style="margin-left:130px">
+                                    {{userData.smsShortCodes.length}}
+                                    <div style="" class="btn-group dropdown open" uib-dropdown="">
+                                        <button aria-expanded="true" aria-haspopup="true" type="button" class="btn btn-default btn-xs dropdown-toggle" uib-dropdown-toggle="">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Split button!</span>
+                                        </button>
+                                        <ul class="dropdown-menu" uib-dropdown-menu="" role="menu" aria-labelledby="split-button" style="overflow:auto;width: 150px;height: 150px;">
+                                            <li role="menuitem" ng-repeat="code in userData.smsShortCodes |orderBy"><a href="">{{code}}</a></li>
+                                        </ul>
+                                    </div>
+                                </dd>
+                                <dt style="width:120px">
+                                    dateModified
+                                </dt>
+                                <dd style="margin-left:130px">
+                                    {{userData.dateModified|date:'medium'}}
+                                </dd>
+                                <dt style="width:120px">
+                                    dateCreated:
+                                </dt>
+                                <dd style="margin-left:130px">
+                                    {{userData.dateCreated|date:'medium'}}
+                                </dd>
+                            </dl>
+                        </div>
                     </div>
                 </div>
+                <!-- /.panel-body -->
             </div>
-            <!-- /.panel-body -->
         </div>
     </div>
+    <!-- </div> -->
     <div class="row">
-        <!--
-            =========================
-            =============================
-        -->
-        <div class="col-md-12 col-xs-12 col-lg-12">
-            <div class="panel-body">
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="userDetails.html#processed" data-toggle="tab">
-                          <strong>
-                                    {{ UserCodes.length}}
-                                </strong> Processed
-                        </a>
-                    </li>
-                    <li>
-                        <a href="userDetails.html#unprocessed" data-toggle="tab">
-                          <strong>
-                                    {{Unknown.length}}
-                                </strong> Unprocessed
-                        </a>
-                    </li>
-                    <li>
-                        <a href="userDetails.html#blacklist" data-toggle="tab">
-                            <strong>
-                                    {{BlackListed.length}}
-                                </strong> Blacklisted
-                        </a>
-                    </li>
-                    
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane fade in active" id="processed">
-                        <h4>
-                            Processed
-                        </h4>
-                        <div class="row">
-                            
-                            <div class="col-lg-3 col-md-4">
-                                <div class="panel-body">
-                                    <input class="list-group-item" type="text" ng:model="a" placeholder="Search" />
-                                    <a href="" class="list-group-item" ng-repeat="value in UserCodes|orderBy|filter:a" ng-click="getProcessed(value)">
-                                        {{value}}
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-9 col-md-8">
-                                <div ng-show="show">
-                                    <h3 >
-                                        {{Code}}
-                                    </h3>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        #
-                                                    </th>
-                                                    <th>
-                                                        message
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr ng-repeat="(key, value) in messages">
-                                                    <td>
-                                                        {{$index+1}}
-                                                    </td>
-                                                    <td>
-                                                        {{value}}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <!--    end processed    -->
-
-                    <div class="tab-pane fade" id="unprocessed">
-                        <h4>
-                           Unprocessed
-                        </h4>
-                         <div class="row">
-                            
-                            <div class="col-lg-3 col-md-4">
-
-                                <div class="panel-body">
-
-                                   <input class="list-group-item" type="text" ng:model="b" placeholder="Search" />
-                                   <!--   add block button here -->
-                                    
-                                   
-                                    <button ng-click="blacklistTest()" >
-                                        Blacklist
-                                    </button>
-
-                                    <table class="table table-striped table-bordered table-hover">
-                                        <tbody>
-                                             <tr>
-                                                <td>
-                                                    
-                                                    <input type="checkbox" ng:model="bulkCode" ng:click="selectAllToBlacklist()"/>
-                                                </td>
-                                                <td>
-                                                    Select all
-                                                </td>
-                                            </tr>
-                                            <tr ng-repeat="code in Unknown|orderBy|filter:b">
-                                                <td>
-                                                    <input type="checkbox" name="blockme" value="{{code}}"/>
-                                                </td>
-                                                <td>
-                                                    <a style="cursor:pointer" ng-click="getunProcessed(code)">
-                                                        {{code}}
-                                                    </a>                                                   
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-
-
-                                    <!-- <a href="" class="list-group-item" ng-repeat="value in Unknown|orderBy|filter:b" ng-click="getunProcessed(value)">
-                                        {{value}}
-                                    </a> -->
-                                
-                                </div>
-                            </div>
-                            <div class="col-lg-9 col-md-8">
-                                <div ng-show="show">
-                                    <h3 >
-                                        {{Code}}
-                                    </h3>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        #
-                                                    </th>
-                                                    <th>
-                                                        message
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr ng-repeat="(key, value) in messages">
-                                                    <td>
-                                                        {{$index+1}}
-                                                    </td>
-                                                    <td>
-                                                        {{value}}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--   end unprocessed   -->
-                    <div class="tab-pane fade" id="blacklist">
-                        <h4>
-                           Blacklist
-                        </h4>
-                        <div class="panel-body">
-                            <a class="list-group-item" ng-repeat="value in BlackListed|orderBy" >
-                                {{value}}
-                            </a>
-                        </div>
-                    </div>
-                   
+        <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper">
+            <div class="row">
+                <div class="col-md-12 x_panel">
+                    <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
+                    </table>
                 </div>
             </div>
         </div>
-        <!--
-            =========================
-            =============================
-        -->
-        <!-- <div class="col-md-2">
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a class="collapsed" aria-expanded="false" data-toggle="collapse" data-parent="#accordion" href="userDetails.html#collapseOne">
-                                <strong>
-                                    {{ UserCodes.length}}
-                                </strong>
-                                Processed
-                            </a>
-                        </h4>
-                    </div>
-                    <div style="height: 0px;" aria-expanded="false" id="collapseOne" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <input class="list-group-item" type="text" ng:model="a" placeholder="Search" />
-                            <a href="" class="list-group-item" ng-repeat="value in UserCodes|orderBy|filter:a" ng-click="getProcessed(value)">
-                                {{value}}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a aria-expanded="false" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="userDetails.html#collapseTwo">
-                                <strong>
-                                    {{Unknown.length}}
-                                </strong>
-                                Unprocessed
-                            </a>
-                        </h4>
-                    </div>
-                    <div aria-expanded="false" id="collapseTwo" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <input class="list-group-item" type="text" ng:model="b" placeholder="Search" />
-                            <a href="" class="list-group-item" ng-repeat="value in Unknown|orderBy|filter:b" ng-click="getunProcessed(value)">
-                                {{value}}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a aria-expanded="false" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="userDetails.html#collapseThree" ng-click="showBlacklisted()">
-                                <strong>
-                                    {{BlackListed.length}}
-                                </strong>
-                                Blacklisted
-                            </a>
-                        </h4>
-                    </div>
-                    <div aria-expanded="false" id="collapseThree" class="panel-collapse collapse">
-                       
-                    </div>
-                </div>
-            </div>
-        </div> -->
-       <!--  <div class="col-md-10">
-           
-            <div ng-show="show">
-                <h3 >
-                    {{Code}}
-                </h3>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>
-                                    #
-                                </th>
-                                <th>
-                                    message
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="(key, value) in messages">
-                                <td>
-                                    {{$index+1}}
-                                </td>
-                                <td>
-                                    {{value}}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-            </div>
-            <div ng-hide="show">
-                <div class="panel-body">
-                    <a class="list-group-item" ng-repeat="value in BlackListed|orderBy" >
-                        {{value}}
-                    </a>
-                </div>
-            </div>
-        </div> -->
     </div>
 </div>

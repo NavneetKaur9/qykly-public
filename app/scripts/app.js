@@ -99,7 +99,7 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'angul
         }
       }
     }).state('dashboard.moreUserDetail', {
-      url: '/user/:userId/:id',
+      url: '/user/:id',
       templateUrl: 'views/userDetail.html',
       controller: 'userDetailCtrl',
       resolve: {
@@ -107,6 +107,18 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'angul
           return $ocLazyLoad.load({
             name: 'sbAdminApp',
             files: ['scripts/controllers/userDetail.js']
+          });
+        }
+      }
+    }).state('dashboard.merchant', {
+      url: '/merchant',
+      templateUrl: 'views/merchant.html',
+      controller: 'merchantCtrl',
+      resolve: {
+        loadMyFile: function($ocLazyLoad) {
+          return $ocLazyLoad.load({
+            name: 'sbAdminApp',
+            files: ['scripts/controllers/merchant.js']
           });
         }
       }
