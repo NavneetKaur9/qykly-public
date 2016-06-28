@@ -10,7 +10,7 @@
 angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', function($rootScope, $http) {
 
 	// var parseUrl = 'http://192.168.10.167:3000/mod-api';
-	var parseUrl = 'https://api.qykly.mobi:3000/mod-api';
+	var parseUrl = 'https://api.qykly.mobi/mod-api';
 
 
 	var parseHeaders = {}; //set Headers for JWTTOKEN

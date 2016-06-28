@@ -4,7 +4,7 @@
  */
 
 
-angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http, DTOptionsBuilder, DTColumnBuilder, $compile, $filter) {
+angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http, DTOptionsBuilder, DTColumnBuilder, $compile, $filter, api) {
 
 	var url = api.addr();
 	$http({
@@ -70,11 +70,11 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
 				return '<img ng-src="' + data.imageUrl + '" height="70" width="80" alt=""/>';
 			}
 
-		}),
-		DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable().renderWith(function(data, type, full, meta) {
-			//console.log(data.);
-			//return '<input ng-model="selected['+data._id+']" ng-click="toggleOne(selected)" type="checkbox">';
 		})
+		// DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable().renderWith(function(data, type, full, meta) {
+		// 	//console.log(data.);
+		// 	//return '<input ng-model="selected['+data._id+']" ng-click="toggleOne(selected)" type="checkbox">';
+		// })
 	];
 
 	function toggleAll(selectAll, selectedItems) {
