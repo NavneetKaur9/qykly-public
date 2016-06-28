@@ -1,1 +1,1 @@
-"use strict";angular.module("sbAdminApp").controller("merchantsCtrl",function($scope,$http){console.log("merchant")});
+"use strict";angular.module("sbAdminApp").controller("merchantsCtrl",function($scope,$http,api){var url=api.addr();$http({method:"GET",url:url+"get-categories"}).then(function(response){var cats=response.data.list;return $scope.categories=cats,cats},function(response){console.log("Oops, Somethings went wrong.")})});

@@ -22,7 +22,8 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'angul
         loadMyDirectives: function($ocLazyLoad) {
           return $ocLazyLoad.load({
             name: 'sbAdminApp',
-            files: ['scripts/directives/header/header.js', 'scripts/directives/header/header-notification/header-notification.js', 'scripts/directives/sidebar/sidebar.js', 'scripts/services/restful.js']
+            files: ['scripts/directives/header/header.js', 'scripts/directives/header/header-notification/header-notification.js', 'scripts/directives/sidebar/sidebar.js', 'scripts/services/restful.js'
+]
           })
           $ocLazyLoad.load({
               name: 'ngCookies',

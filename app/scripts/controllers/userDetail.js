@@ -7,10 +7,8 @@
  */
 angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http, $stateParams, api, DTOptionsBuilder, DTColumnBuilder, $filter) {
 
-	// console.log($stateParams);
 	var id = $stateParams.id;
-	var url = 'http://localhost:3000/mod-api/';
-
+	var url = api.addr();
 
 	api.get('get-user', id, false, false, function(err, response) {
 		if (err || response.error) {
@@ -23,18 +21,14 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		}
 	});
 
-
 	$scope.dtOptions = DTOptionsBuilder.newOptions()
 		.withOption('ajax', {
 			url: url + 'get-user-sms/' + id,
-			type: 'GET'
-				// Either you specify the AjaxDataProp here
-				// dataSrc: function(tablesdata) {
-				// 	$scope.tablesdata = tablesdata.length;
-				// 	console.log(tablesdata);
-				// }
+			type: 'GET',
+			data: function(data, dtinstance) {
+				// console.log(data);
+			}
 		})
-		// or here
 		// .withDataProp('data')
 		.withOption('processing', true)
 		.withOption('serverSide', true);
@@ -43,11 +37,17 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		DTColumnBuilder.newColumn('address').withTitle('address'),
 		DTColumnBuilder.newColumn('text').withTitle('text '),
 		DTColumnBuilder.newColumn('time').withTitle('time ').renderWith(function(data, type, full) {
-			return $filter('date')(data, 'medium'); //date filter 
-
+			return $filter('date')(data, 'd MMM y, h:mm a');
 		}),
-		DTColumnBuilder.newColumn('status').withTitle('status ')
-
+		DTColumnBuilder.newColumn('status').withTitle('status ').renderWith(function(data, type, full) {
+			if (data === 0) {
+				return data = ' unprocessed';
+			} else if (data === 3) {
+				return data = ' processed';
+			} else {
+				return data;
+			}
+		})
 	];
 
 });

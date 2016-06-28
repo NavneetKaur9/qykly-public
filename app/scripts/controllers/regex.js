@@ -4,7 +4,7 @@
  */
 angular.module('sbAdminApp').controller('regexCtrl', function($scope, $http, DTOptionsBuilder, DTColumnBuilder, api, $filter) {
 
-	var url = 'http://localhost:3000/mod-api/';
+	var url = api.addr();
 	$scope.isCollapsed = true;
 	api.get('msgtype-count', false, false, false, function(err, response) {
 		if (err || response.error) {
@@ -36,7 +36,7 @@ angular.module('sbAdminApp').controller('regexCtrl', function($scope, $http, DTO
 		DTColumnBuilder.newColumn('msgSubType').withTitle('msgSubType '),
 		DTColumnBuilder.newColumn('pattern').withTitle('pattern '),
 		DTColumnBuilder.newColumn('dateModified').withTitle('dateModified ').renderWith(function(data, type, full) {
-			return $filter('date')(data, 'medium'); //date filter 
+			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 
 		}).withOption('searchable', false)
 

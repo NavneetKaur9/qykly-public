@@ -2,8 +2,8 @@
 /**
  * 
  */
-angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http) {
+angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api) {
 
-	console.log('hello');
+	var url = api.addr();
 
 });

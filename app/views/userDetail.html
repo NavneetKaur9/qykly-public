@@ -53,7 +53,7 @@
                                 </dt>
                                 <dd style="margin-left:130px">
                                     {{userData.smsShortCodes.length}}
-                                    <div style="" class="btn-group dropdown open" uib-dropdown="">
+                                    <!-- <div style="" class="btn-group dropdown open" uib-dropdown="">
                                         <button aria-expanded="true" aria-haspopup="true" type="button" class="btn btn-default btn-xs dropdown-toggle" uib-dropdown-toggle="">
                                             <span class="caret"></span>
                                             <span class="sr-only">Split button!</span>
@@ -61,7 +61,7 @@
                                         <ul class="dropdown-menu" uib-dropdown-menu="" role="menu" aria-labelledby="split-button" style="overflow:auto;width: 150px;height: 150px;">
                                             <li role="menuitem" ng-repeat="code in userData.smsShortCodes |orderBy"><a href="">{{code}}</a></li>
                                         </ul>
-                                    </div>
+                                    </div> -->
                                 </dd>
                                 <dt style="width:120px">
                                     dateModified
@@ -84,12 +84,31 @@
         </div>
     </div>
     <!-- </div> -->
+    <!-- <div class="row">
+    <dl class="dl-horizontal col-md-offset-4">
+        <dt style="width:120px">
+            processed :
+        </dt>
+        <dd style="margin-left:130px">
+            {{}}
+        </dd>
+        <dt style="width:120px">
+            unprocessed :
+        </dt>
+        <dd style="margin-left:130px">
+            {{}}
+        </dd>
+    </dl>
+</div>
+ -->
     <div class="row">
-        <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper">
-            <div class="row">
-                <div class="col-md-12 x_panel">
-                    <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
-                    </table>
+        <div class="col-md-12 col-xs-12 col-lg-12">
+            <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper">
+                <div class="row">
+                    <div class="col-md-12 x_panel">
+                        <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

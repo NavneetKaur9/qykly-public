@@ -1,1 +1,25 @@
-<div ng-controller="userDetailCtrl"> <!-- <div class="jumbotron"> --> <a ui-sref="dashboard.users"> back </a> <div class="row"> <!-- <div class="col-md- 8"></div> --> <div class="col-md-12"> <div class="panel panel-default"> <div class="panel-heading"> user Details </div> <div class="panel-body"> <div class="row"> <div class="col-md-6"> <dl class="dl-horizontal"> <dt style="width:120px"> PrimaryEmail :  <dd style="margin-left:130px"> {{userData.primaryEmail}}  <dt style="width:120px"> deviceResolution:  <dd style="margin-left:130px"> {{userData.deviceResolution}}  <dt style="width:120px"> imei:  <dd style="margin-left:130px"> {{userData.imei}}  <dt style="width:120px"> Platform :  <dd style="margin-left:130px"> {{userData.platform}}  </dl> </div> <div class="col-md-6"> <dl class="dl-horizontal"> <dt style="width:120px"> appVersion :  <dd style="margin-left:130px"> {{userData.appVersion}}  <dt style="width:120px"> smsShortCodes:  <dd style="margin-left:130px"> {{userData.smsShortCodes.length}} <div style="" class="btn-group dropdown open" uib-dropdown=""> <button aria-expanded="true" aria-haspopup="true" type="button" class="btn btn-default btn-xs dropdown-toggle" uib-dropdown-toggle=""> <span class="caret"></span> <span class="sr-only">Split button!</span> </button> <ul class="dropdown-menu" uib-dropdown-menu="" role="menu" aria-labelledby="split-button" style="overflow:auto;width: 150px;height: 150px"> <li role="menuitem" ng-repeat="code in userData.smsShortCodes |orderBy"><a href="">{{code}}</a></li> </ul> </div>  <dt style="width:120px"> dateModified  <dd style="margin-left:130px"> {{userData.dateModified|date:'medium'}}  <dt style="width:120px"> dateCreated:  <dd style="margin-left:130px"> {{userData.dateCreated|date:'medium'}}  </dl> </div> </div> </div> <!-- /.panel-body --> </div> </div> </div> <!-- </div> --> <div class="row"> <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper"> <div class="row"> <div class="col-md-12 x_panel"> <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered"> </table> </div> </div> </div> </div> </div>
+<div ng-controller="userDetailCtrl"> <!-- <div class="jumbotron"> --> <a ui-sref="dashboard.users"> back </a> <div class="row"> <!-- <div class="col-md- 8"></div> --> <div class="col-md-12"> <div class="panel panel-default"> <div class="panel-heading"> user Details </div> <div class="panel-body"> <div class="row"> <div class="col-md-6"> <dl class="dl-horizontal"> <dt style="width:120px"> PrimaryEmail :  <dd style="margin-left:130px"> {{userData.primaryEmail}}  <dt style="width:120px"> deviceResolution:  <dd style="margin-left:130px"> {{userData.deviceResolution}}  <dt style="width:120px"> imei:  <dd style="margin-left:130px"> {{userData.imei}}  <dt style="width:120px"> Platform :  <dd style="margin-left:130px"> {{userData.platform}}  </dl> </div> <div class="col-md-6"> <dl class="dl-horizontal"> <dt style="width:120px"> appVersion :  <dd style="margin-left:130px"> {{userData.appVersion}}  <dt style="width:120px"> smsShortCodes:  <dd style="margin-left:130px"> {{userData.smsShortCodes.length}} <!-- <div style="" class="btn-group dropdown open" uib-dropdown="">
+                                        <button aria-expanded="true" aria-haspopup="true" type="button" class="btn btn-default btn-xs dropdown-toggle" uib-dropdown-toggle="">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Split button!</span>
+                                        </button>
+                                        <ul class="dropdown-menu" uib-dropdown-menu="" role="menu" aria-labelledby="split-button" style="overflow:auto;width: 150px;height: 150px;">
+                                            <li role="menuitem" ng-repeat="code in userData.smsShortCodes |orderBy"><a href="">{{code}}</a></li>
+                                        </ul>
+                                    </div> -->  <dt style="width:120px"> dateModified  <dd style="margin-left:130px"> {{userData.dateModified|date:'medium'}}  <dt style="width:120px"> dateCreated:  <dd style="margin-left:130px"> {{userData.dateCreated|date:'medium'}}  </dl> </div> </div> </div> <!-- /.panel-body --> </div> </div> </div> <!-- </div> --> <!-- <div class="row">
+    <dl class="dl-horizontal col-md-offset-4">
+        <dt style="width:120px">
+            processed :
+        </dt>
+        <dd style="margin-left:130px">
+            {{}}
+        </dd>
+        <dt style="width:120px">
+            unprocessed :
+        </dt>
+        <dd style="margin-left:130px">
+            {{}}
+        </dd>
+    </dl>
+</div>
+ --> <div class="row"> <div class="col-md-12 col-xs-12 col-lg-12"> <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper"> <div class="row"> <div class="col-md-12 x_panel"> <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered"> </table> </div> </div> </div> </div> </div> </div>
