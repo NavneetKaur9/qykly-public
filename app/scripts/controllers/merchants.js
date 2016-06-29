@@ -18,10 +18,10 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
 		console.log('Oops, Somethings went wrong.');
 	});
 
-
 	$scope.selected = {};
 	$scope.selectAll = false;
-	$scope.toggleAll = toggleAll;
+	// $scope.toggleAll = toggleAll;
+
 	$scope.toggleOne = toggleOne;
 
 	var titleHtml = '<input ng-model="selectAll" ng-click="toggleAll(selectAll, selected)" type="checkbox">';
@@ -33,7 +33,6 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
 			url: url + 'get-merchants',
 			type: 'POST'
 		})
-		// or here
 		.withDataProp('data')
 		.withOption('processing', true)
 		.withOption('serverSide', true)
@@ -41,16 +40,18 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
 			// Recompiling so we can bind Angular directive to the DT
 			$compile(angular.element(row).contents())($scope);
 		})
-		.withOption('headerCallback', function(header) {
-			if (!$scope.headerCompiled) {
-				// Use this headerCompiled field to only compile header once
-				$scope.headerCompiled = true;
-				$compile(angular.element(header).contents())($scope);
-			}
+		// .withOption('headerCallback', function(header) {
+		// 	if (!$scope.headerCompiled) {
+		// 		// Use this headerCompiled field to only compile header once
+		// 		$scope.headerCompiled = true;
+		// 		$compile(angular.element(header).contents())($scope);
+		// 	}
+		// })
 
-		});
+	.withPaginationType('full_numbers');
 
 	$scope.dtColumns = [
+
 
 		DTColumnBuilder.newColumn('name').withTitle('Merchant'),
 		DTColumnBuilder.newColumn('Type').withTitle('Type'),
@@ -62,7 +63,7 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
 		}),
 		DTColumnBuilder.newColumn('icon').notVisible(),
 		DTColumnBuilder.newColumn('imageUrl').notVisible(),
-		DTColumnBuilder.newColumn(null).withTitle('Category').notSortable().renderWith(function(data, type, full, meta) {
+		DTColumnBuilder.newColumn(null).withTitle('icon').notSortable().renderWith(function(data, type, full, meta) {
 
 			if (data.icon) {
 				return '<img ng-src="' + data.icon + '" height="70" width="80" alt=""/>';
@@ -70,18 +71,20 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
 				return '<img ng-src="' + data.imageUrl + '" height="70" width="80" alt=""/>';
 			}
 
+		}),
+		DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable().renderWith(function(data, type, full, meta) {
+			var id = data._id;
+
+			return '<input type="checkbox" name="check" value="' + id + '">';
+
 		})
-		// DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable().renderWith(function(data, type, full, meta) {
-		// 	//console.log(data.);
-		// 	//return '<input ng-model="selected['+data._id+']" ng-click="toggleOne(selected)" type="checkbox">';
-		// })
 	];
 
-	function toggleAll(selectAll, selectedItems) {
-		for (var id in selectedItems) {
-			if (selectedItems.hasOwnProperty(id)) {
-				selectedItems[id] = selectAll;
-			}
+	$scope.toggleAll = function toggleAll(selectAll, selectedItems) {
+		var checkboxes = document.getElementsByName('check');
+		console.log(checkboxes);
+		for (var i = 0; i < checkboxes.length; i++) {
+			checkboxes[i].checked = true;
 		}
 	}
 

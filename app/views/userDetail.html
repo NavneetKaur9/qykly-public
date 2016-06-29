@@ -21,13 +21,13 @@
                                     {{userData.primaryEmail}}
                                 </dd>
                                 <dt style="width:120px">
-                                    deviceResolution:
+                                    Device Resolution:
                                 </dt>
                                 <dd style="margin-left:130px">
                                     {{userData.deviceResolution}}
                                 </dd>
                                 <dt style="width:120px">
-                                    imei:
+                                    IMEI:
                                 </dt>
                                 <dd style="margin-left:130px">
                                     {{userData.imei}}
@@ -37,6 +37,18 @@
                                 </dt>
                                 <dd style="margin-left:130px">
                                     {{userData.platform}}
+                                </dd>
+                                <dt style="width:120px">
+                                    Platform Version:
+                                </dt>
+                                <dd style="margin-left:130px">
+                                    {{userData.platformVersion}}
+                                </dd>
+                                <dt style="width:120px">
+                                    Primary Network:
+                                </dt>
+                                <dd style="margin-left:130px">
+                                    {{userData.primaryNetwork}}
                                 </dd>
                             </dl>
                         </div>
@@ -49,7 +61,7 @@
                                     {{userData.appVersion}}
                                 </dd>
                                 <dt style="width:120px">
-                                    smsShortCodes:
+                                    Sms ShortCodes:
                                 </dt>
                                 <dd style="margin-left:130px">
                                     {{userData.smsShortCodes.length}}
@@ -64,16 +76,28 @@
                                     </div> -->
                                 </dd>
                                 <dt style="width:120px">
-                                    dateModified
+                                    Date Modified
                                 </dt>
                                 <dd style="margin-left:130px">
                                     {{userData.dateModified|date:'medium'}}
                                 </dd>
                                 <dt style="width:120px">
-                                    dateCreated:
+                                    Date Created:
                                 </dt>
                                 <dd style="margin-left:130px">
                                     {{userData.dateCreated|date:'medium'}}
+                                </dd>
+                                <dt style="width:120px">
+                                    Manufacturer:
+                                </dt>
+                                <dd style="margin-left:130px">
+                                    {{userData.manufacturer}}
+                                </dd>
+                                <dt style="width:120px">
+                                    Last Login:
+                                </dt>
+                                <dd style="margin-left:130px">
+                                    {{userData.lastLogin}}
                                 </dd>
                             </dl>
                         </div>

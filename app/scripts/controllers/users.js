@@ -46,9 +46,15 @@ angular.module('sbAdminApp')
 				return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 			}).withOption('searchable', false),
 
+
+			DTColumnBuilder.newColumn('lastLogin').withTitle('lastLogin ').renderWith(function(data, type, full) {
+				return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
+			}).withOption('searchable', false),
+
 			DTColumnBuilder.newColumn('smsShortCodes').withTitle('Codes ').renderWith(function(data, type, full) {
 				return data = data.length;
 			}).notSortable().withOption('searchable', false)
+
 
 		];
 
