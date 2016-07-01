@@ -33,7 +33,14 @@ angular.module('sbAdminApp')
 			.withDataProp('data')
 			.withOption('processing', true)
 			.withOption('serverSide', true)
-			.withOption('rowCallback', rowCallback);
+			.withOption('rowCallback', rowCallback)
+			.withLanguage({
+				'sSearch': 'Search user:',
+				'oPaginate': {
+					'sNext': '»',
+					'sPrevious': '«'
+				}
+			});
 
 		$scope.dtColumns = [
 			DTColumnBuilder.newColumn('primaryEmail').withTitle('Email '),

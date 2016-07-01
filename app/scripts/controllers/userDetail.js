@@ -10,19 +10,25 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	var id = $stateParams.id;
 	var url = api.addr();
 	$scope.selectAll = false;
-	console.log('checking done');
+
 	var titleHtml = '<input ng-model="selectAll" ng-click="toggleAll(selectAll)" type="checkbox">';
 
-	api.get('get-user', id, false, false, function(err, response) {
-		if (err || response.error) {
-			$scope.alerts = [{
-				msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-				type: 'error'
-			}];
-		} else {
-			$scope.userData = response;
-		}
-	});
+
+	$scope.getUser = function() {
+		// body...
+		api.get('get-user', id, false, false, function(err, response) {
+			if (err || response.error) {
+				$scope.alerts = [{
+					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
+					type: 'error'
+				}];
+			} else {
+				$scope.userData = response.userdata;
+				$scope.userUnprocCode = response.code;
+			}
+		});
+	};
+	$scope.getUser();
 
 	api.get('get-sms-count-status', id, false, false, function(err, response) {
 		if (err || response.error) {
@@ -31,7 +37,14 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 				type: 'error'
 			}];
 		} else {
-			$scope.statusCount = response;
+			// $scope.statusCount = response;
+			for (var i = 0; i < response.length; i++) {
+				if (response[i].status === 0) {
+					$scope.unproCount = response[i].count;
+				} else if (response[i].status === 3) {
+					$scope.proCount = response[i].count;
+				}
+			}
 		}
 	});
 
@@ -45,7 +58,14 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		})
 		// .withDataProp('data')
 		.withOption('processing', true)
-		.withOption('serverSide', true);
+		.withOption('serverSide', true)
+		.withLanguage({
+			'sSearch': 'Search Shortcode :',
+			'oPaginate': {
+				'sNext': '»',
+				'sPrevious': '«'
+			}
+		});
 
 	$scope.dtColumns = [
 
@@ -102,20 +122,45 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		})
 	];
 
-	$scope.toggleAll = function(selectAll) {
-		var checkboxes = document.getElementsByName('check');
-		console.log(checkboxes);
+
+
+	$scope.blacklist = function() {
+		$scope.addresses = [];
+		var checkboxes = document.getElementsByName('blacklist');
+
 		for (var i = 0; i < checkboxes.length; i++) {
-			checkboxes[i].checked = !(checkboxes[i].checked);
+			if (checkboxes[i].checked) {
+				var value = checkboxes[i].value;
+				$scope.addresses.push(value);
+			}
+		}
+
+		api.put('blacklist', false, false, {
+			address: $scope.addresses
+		}, function(err, response) {
+			if (err || response.error) {
+				$scope.alerts = [{
+					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
+					type: 'error'
+				}];
+			} else {
+				$scope.alerts = [{
+					msg: response.message || 'Server error! Are you connected to the internet?.',
+					type: 'success'
+				}];
+				$scope.getUser();
+
+			}
+		});
+	};
+	$scope.toggle = function() {
+		var checkboxes = document.getElementsByName('blacklist');
+		for (var i = 0; i < checkboxes.length; i++) {
+			checkboxes[i].checked = $scope.toggleSelection;
 		}
 	};
-	$scope.test = function() {
-
-		var checkboxes = document.getElementsByName('check');
-		for (var i = 0; i < checkboxes.length; i++) {
-			console.log(checkboxes[i].checked);
-			checkboxes[i].checked = !(checkboxes[i].checked);
-		}
+	$scope.closeAlert = function(index) {
+		$scope.alerts.splice(index, 1);
 	};
 
 
