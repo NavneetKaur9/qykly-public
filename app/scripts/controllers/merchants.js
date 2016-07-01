@@ -52,7 +52,6 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
 
 	$scope.dtColumns = [
 
-
 		DTColumnBuilder.newColumn('name').withTitle('Merchant'),
 		DTColumnBuilder.newColumn('Type').withTitle('Type'),
 		DTColumnBuilder.newColumn('dateCreated').withTitle('Created').renderWith(function(data, type, full) {
@@ -100,5 +99,15 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
 		$scope.selectAll = true;
 	}
 
+	$scope.test = function(argument) {
+		var checkboxes = document.getElementsByName('check');
+
+		for (var i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+
+				console.log(checkboxes[i].value);
+			}
+		}
+	};
 
 });

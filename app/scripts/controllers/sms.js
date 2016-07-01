@@ -68,6 +68,4 @@ angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, 
 		});
 	};
 
-
-
 });

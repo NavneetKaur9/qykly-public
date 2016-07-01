@@ -42,7 +42,7 @@ angular.module('sbAdminApp')
 				return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 			}).withOption('searchable', false),
 
-			DTColumnBuilder.newColumn('dateModified').withTitle('dateModified ').renderWith(function(data, type, full) {
+			DTColumnBuilder.newColumn('accessTime').withTitle('Access Time ').renderWith(function(data, type, full) {
 				return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 			}).withOption('searchable', false),
 

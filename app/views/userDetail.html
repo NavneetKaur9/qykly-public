@@ -4,7 +4,6 @@
             back
         </a>
     <div class="row">
-        <!-- <div class="col-md- 8"></div> -->
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -50,6 +49,12 @@
                                 <dd style="margin-left:130px">
                                     {{userData.primaryNetwork}}
                                 </dd>
+                                <dt style="width:120px">
+                                    Referal code:
+                                </dt>
+                                <dd style="margin-left:130px">
+                                    {{userData.referralCode}}
+                                </dd>
                             </dl>
                         </div>
                         <div class="col-md-6">
@@ -76,10 +81,10 @@
                                     </div> -->
                                 </dd>
                                 <dt style="width:120px">
-                                    Date Modified
+                                    Access Time
                                 </dt>
                                 <dd style="margin-left:130px">
-                                    {{userData.dateModified|date:'medium'}}
+                                    {{userData.accessTime|date:'medium'}}
                                 </dd>
                                 <dt style="width:120px">
                                     Date Created:
@@ -108,30 +113,64 @@
         </div>
     </div>
     <!-- </div> -->
-    <!-- <div class="row">
-    <dl class="dl-horizontal col-md-offset-4">
-        <dt style="width:120px">
-            processed :
-        </dt>
-        <dd style="margin-left:130px">
-            {{}}
-        </dd>
-        <dt style="width:120px">
-            unprocessed :
-        </dt>
-        <dd style="margin-left:130px">
-            {{}}
-        </dd>
-    </dl>
-</div>
- -->
+    <div class="row">
+        <dl class="dl-horizontal col-md-offset-4" ng-repeat="(key, value) in statusCount">
+            <dt style="width:120px" ng-if="value.status=='3'">
+                processed :
+            </dt>
+            <dd style="margin-left:130px" ng-if="value.status=='3'">
+                {{value.count}}
+            </dd>
+            <dt style="width:120px" ng-if="value.status=='0'">
+                unprocessed :
+            </dt>
+            <dd style="margin-left:130px" ng-if="value.status=='0'">
+                {{value.count}}
+            </dd>
+        </dl>
+        <!-- <button ng-click="test()">test</button> -->
+    </div>
     <div class="row">
         <div class="col-md-12 col-xs-12 col-lg-12">
-            <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper">
-                <div class="row">
-                    <div class="col-md-12 x_panel">
-                        <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
-                        </table>
+            <div class="x_panel">
+                <div class="x_content">
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="userDetail.html#tab_content1" id="un_proc-tab" role="tab" data-toggle="tab" aria-expanded="true">Unprocessed</a>
+                            </li>
+                            <li role="presentation" class=""><a href="userDetail.html#tab_content2" role="tab" id="proc-tab" data-toggle="tab" aria-expanded="false">Processed</a>
+                            </li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="un_proc-tab">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        user's all unprocessed shortcodes will be coming here.
+                                        <!--=============    show users unprocessed shortcodes      ===============-->
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper">
+                                            <div class="row">
+                                                <div class="col-md-12 x_panel">
+                                                    <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade " id="tab_content2" aria-labelledby="proc-tab">
+                                <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper">
+                                    <div class="row">
+                                        <div class="col-md-12 x_panel">
+                                            <table datatable="" dt-options="dtOptions1" dt-columns="dtColumns1" class="table table-bordered" style="width:100%">
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

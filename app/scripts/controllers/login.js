@@ -20,6 +20,7 @@ angular.module('sbAdminApp')
 
 				if (response.data) {
 					$location.path('/dashboard/home');
+					$cookieStore.put('c2cCookie', response.data.token);
 				}
 			});
 

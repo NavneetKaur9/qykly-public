@@ -1,7 +1,7 @@
-<section  ng-controller="smsCtrl">
+<section ng-controller="smsCtrl">
     <div class="title_left">
-    SMS
-   </div>
+        SMS
+    </div>
     <!-- <div class="row">
         <div class="col-md-3">
             <button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">
@@ -53,7 +53,7 @@
                     </div>
                 </div> -->
                 <div class="x_content">
-                    <article class="media event" >
+                    <article class="media event">
                         <a class="pull-left date">
                             <p class="month">
                                 Total Regex
@@ -62,7 +62,7 @@
                                 {{regexSummary}}
                             </p>
                         </a>
-                        <div  ng-repeat="sum in summary">
+                        <div ng-repeat="sum in summary">
                             <a class="pull-left date" ng-if="sum.status=='3'">
                                 <p class="month">
                                     Processed
@@ -100,7 +100,7 @@
                                     Pending for regex
                                 </p>
                                 <p class="day">
-                                   {{sum.count}}
+                                    {{sum.count}}
                                 </p>
                             </a>
                         </div>
@@ -139,7 +139,7 @@
             </table>
         </div>
     </div>
-    <div class="sidebar-footer hidden-small" >
+    <div class="sidebar-footer hidden-small">
         <a data-original-title="Settings" data-toggle="tooltip" data-placement="top" title="">
             <select class="form-control input-sm" aria-controls="datatable" name="datatable_length">
                 <option value="10">
@@ -159,8 +159,7 @@
         <a data-original-title="FullScreen" data-toggle="tooltip" data-placement="top" title="">
             <button type="button" class="btn btn-info btn-sm">
                 <span class="glyphicon glyphicon-ok">
-                </span>
-                Assign
+                </span> Assign
             </button>
         </a>
         <a data-original-title="Lock" data-toggle="tooltip" data-placement="top" title="">
@@ -170,4 +169,3 @@
         </a>
     </div>
 </section>
-
