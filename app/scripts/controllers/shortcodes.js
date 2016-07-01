@@ -3,7 +3,7 @@
  * 
  */
 angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http, api) {
-	var url = 'http://localhost:3000/mod-api/';
+	var url = api.addr();
 	$scope.searchCode = '';
 
 	api.get('new-codes', false, false, false, function(err, response) {

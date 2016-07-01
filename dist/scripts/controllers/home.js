@@ -1,1 +1,1 @@
-"use strict";angular.module("sbAdminApp").controller("homeCtrl",function($scope,$http){console.log("hello")});
+"use strict";angular.module("sbAdminApp").controller("homeCtrl",function($scope,$http,api){api.addr()});

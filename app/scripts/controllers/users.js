@@ -6,36 +6,62 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-	.controller('usersCtrl', function($scope, $location, $http, api, DTOptionsBuilder, DTColumnBuilder, $filter, $compile, $state) {
+	.controller('usersCtrl', function($scope, $location, $http, api, DTOptionsBuilder, DTColumnBuilder, $filter, $compile, $state, DTDefaultOptions) {
 
 
-		var url = 'http://localhost:3000/mod-api/';
+		var url = api.addr();
+
 		var vm = this;
+		var column = 1;
+		var dir = 'desc';
+
 		$scope.message = '';
+		DTDefaultOptions.setDisplayLength(100);
 		$scope.dtOptions = DTOptionsBuilder.newOptions()
 			.withOption('ajax', {
 				url: url + 'get-user',
-				type: 'GET'
+				type: 'GET',
+				data: function(aodata) {
+					if (aodata.draw == "1") {
+
+						aodata.order[0].column = "1";
+						aodata.order[0].dir = 'desc';
+					}
+
+				}
 			})
 			.withDataProp('data')
 			.withOption('processing', true)
 			.withOption('serverSide', true)
-			.withOption('rowCallback', rowCallback);
-
-		// .withPaginationType('full_numbers');
+			.withOption('rowCallback', rowCallback)
+			.withLanguage({
+				'sSearch': 'Search user:',
+				'oPaginate': {
+					'sNext': '»',
+					'sPrevious': '«'
+				}
+			});
 
 		$scope.dtColumns = [
-
 			DTColumnBuilder.newColumn('primaryEmail').withTitle('Email '),
+
 			DTColumnBuilder.newColumn('dateCreated').withTitle('dateCreated ').renderWith(function(data, type, full) {
-				return $filter('date')(data, 'medium'); //date filter 
+				return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 			}).withOption('searchable', false),
-			DTColumnBuilder.newColumn('dateModified').withTitle('dateModified ').renderWith(function(data, type, full) {
-				return $filter('date')(data, 'medium'); //date filter 
+
+			DTColumnBuilder.newColumn('accessTime').withTitle('Access Time ').renderWith(function(data, type, full) {
+				return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 			}).withOption('searchable', false),
+
+
+			DTColumnBuilder.newColumn('lastLogin').withTitle('lastLogin ').renderWith(function(data, type, full) {
+				return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
+			}).withOption('searchable', false),
+
 			DTColumnBuilder.newColumn('smsShortCodes').withTitle('Codes ').renderWith(function(data, type, full) {
 				return data = data.length;
 			}).notSortable().withOption('searchable', false)
+
 
 		];
 
@@ -55,16 +81,16 @@ angular.module('sbAdminApp')
 			return nRow;
 		}
 
-		api.get('totalusercount', false, false, false, function(err, response) {
-			if (err || response.error) {
-				$scope.alerts = [{
-					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-					type: 'error'
-				}];
-			} else {
-				$scope.usercount = response;
-			}
-		});
+		// api.get('totalusercount', false, false, false, function(err, response) {
+		// 	if (err || response.error) {
+		// 		$scope.alerts = [{
+		// 			msg: response.userMessage || 'Server error! Are you connected to the internet?.',
+		// 			type: 'error'
+		// 		}];
+		// 	} else {
+		// 		$scope.usercount = response;
+		// 	}
+		// });
 
 
 

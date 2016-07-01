@@ -7,43 +7,23 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-	.controller('loginCtrl', function($scope, $location, $http, $cookieStore) {
-		$scope.errors = false;
-		$scope.user = true;
+	.controller('loginCtrl', function($scope, $location, $http, $cookieStore, api) {
+
 		$scope.login = function() {
 
+			api.post('login', false, {
+				username: $scope.username,
+				password: $scope.password
+			}, function(err, response) {
+				$scope.success = true;
+				$scope.message = response.message;
 
-$location.path('/dashboard/home');
+				if (response.data) {
+					$location.path('/dashboard/home');
+					$cookieStore.put('c2cCookie', response.data.token);
+				}
+			});
 
-		// $http.post('api/modlogin', {
-		// 	email: $scope.email,
-		// 	password: $scope.password
-		// }).then(function(response) {
-
-		// 	if (response) {
-
-		// 		$scope.user = response.data.error;
-		// 		$scope.success = true;
-		// 		$scope.successMessage = response.data.userMessage || 'Success.';
-
-		// 		if (response.data.data) {
-
-
-		// 			$cookieStore.put('c2cCookie', response.data.data);
-
-		// 			$location.path('/dashboard/home');
-
-		// 			// window.location.reload();
-		// 		}
-
-		// 	}
-
-
-		// }, function(response) {
-		// 	$scope.errors = true;
-		// 	$scope.success = false;
-		// 	$scope.errorMessage = response.data.data.userMessage || 'Server error.';
-		// });
 
 		};
 	});

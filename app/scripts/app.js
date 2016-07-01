@@ -126,16 +126,16 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'angul
         }
       }
     }).state('dashboard.merchants', {
-    url: '/merchants',
-    templateUrl: 'views/merchants.html',
-    controller: 'merchantsCtrl',
-    resolve:{
-      loadMyFile: function($ocLazyLoad){
-        return $ocLazyLoad.load({
-          name: 'sbAdminApp',
-          files:['./assets/plugins/select2/select2.min.css','scripts/controllers/merchants.js','./assets/plugins/select2/select2.full.min.js']
-        });
+      url: '/merchants',
+      templateUrl: 'views/merchants.html',
+      controller: 'merchantsCtrl',
+      resolve: {
+        loadMyFile: function($ocLazyLoad) {
+          return $ocLazyLoad.load({
+            name: 'sbAdminApp',
+            files: ['./assets/plugins/select2/select2.min.css', 'scripts/controllers/merchants.js', './assets/plugins/select2/select2.full.min.js']
+          });
+        }
       }
-    }
-  });
+    });
   }]);

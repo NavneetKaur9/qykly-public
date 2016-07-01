@@ -9,14 +9,13 @@
 
 angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', function($rootScope, $http) {
 
-	var parseUrl = 'http://localhost:3000/mod-api';
+	var parseUrl = 'http://localhost:3000/api2';
 
-	// var parseUrl = 'http://localhost:8080/api';
-	// var parseUrl = 'http://192.168.10.196:8080/api';
+	// var parseUrl = 'http://192.168.10.167:3000/mod-api';
+	// var parseUrl = 'https://api.qykly.mobi/api2';
+	// $http.defaults.headers.common.Authorization = 'Bearer '+$cookies.c2cCookie;
 
 	var parseHeaders = {}; //set Headers for JWTTOKEN
-
-
 	var GenerateUrl = function(theClass, object, objectId) {
 		if (object && objectId) {
 			return parseUrl + '/' + theClass + '/' + object + '/' + objectId;
@@ -30,6 +29,9 @@ angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', function($ro
 	};
 
 	return {
+		addr: function() {
+			return parseUrl + '/';
+		},
 		//Create a db object on server
 		post: function(theClass, object, data, callback) {
 

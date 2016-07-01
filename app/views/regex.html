@@ -1,4 +1,4 @@
-<section class="container" ng-controller="regexCtrl">
+<div ng-controller="regexCtrl">
     <div class="page-header">
         <h1>
         </h1>
@@ -27,13 +27,16 @@
             </div>
         </div>
     </div>
-    <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper">
-        {{tablesdata}}
-        <div class="row">
-            <div class="col-md-12 x_panel">
-                <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
-                </table>
+    <div class="row">
+        <div class="col-md-12 col-xs-12 col-lg-12">
+            <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper">
+                <div class="row">
+                    <div class="col-md-12 x_panel">
+                        <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</div>

@@ -4,7 +4,7 @@
  */
 angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, DTOptionsBuilder, DTColumnBuilder, $filter) {
 
-	var url = 'http://localhost:3000/mod-api/';
+	var url = api.addr();
 	$scope.dtOptions = DTOptionsBuilder.newOptions().withOption('ajax', {
 			url: url + 'get-message',
 			type: 'GET'
@@ -15,10 +15,10 @@ angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, 
 		DTColumnBuilder.newColumn('text').withTitle('smsText'),
 		DTColumnBuilder.newColumn('status').withTitle('Status '),
 		DTColumnBuilder.newColumn('time').withTitle('time ').renderWith(function(data, type, full) {
-			return $filter('date')(data, 'medium'); //date filter 
+			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 		}),
 		DTColumnBuilder.newColumn('saveTime').withTitle('saveTime ').renderWith(function(data, type, full) {
-			return $filter('date')(data, 'medium'); //date filter 
+			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 		})
 	]
 
@@ -67,7 +67,5 @@ angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, 
 
 		});
 	};
-
-
 
 });
