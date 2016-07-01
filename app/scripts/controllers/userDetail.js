@@ -10,7 +10,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	var id = $stateParams.id;
 	var url = api.addr();
 	$scope.selectAll = false;
-
+	console.log('checking done');
 	var titleHtml = '<input ng-model="selectAll" ng-click="toggleAll(selectAll)" type="checkbox">';
 
 	api.get('get-user', id, false, false, function(err, response) {
