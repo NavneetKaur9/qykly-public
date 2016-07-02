@@ -3,9 +3,9 @@
 * merchant module
 */
 
-angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http, DTOptionsBuilder, DTColumnBuilder, $compile, $filter){
+angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http, DTOptionsBuilder, DTColumnBuilder, $compile, $filter,api){
 
-  var url = 'http://localhost:3000/mod-api/';
+  var url =api.addr();
   $http({
   method: 'GET',
   url: url + 'get-categories',

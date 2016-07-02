@@ -9,10 +9,10 @@
 
 angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', function($rootScope, $http) {
 
-	// var parseUrl = 'http://localhost:3000/api2';
+	var parseUrl = 'http://localhost:3000/api2';
 
-	// var parseUrl = 'http://192.168.10.167:3000/mod-api';
-	var parseUrl = 'https://api.qykly.mobi/api2';
+	
+	// var parseUrl = 'https://api.qykly.mobi/api2';
 	// $http.defaults.headers.common.Authorization = 'Bearer '+$cookies.c2cCookie;
 
 	var parseHeaders = {}; //set Headers for JWTTOKEN
