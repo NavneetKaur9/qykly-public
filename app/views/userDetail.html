@@ -75,24 +75,6 @@
                                 </dt>
                                 <dd style="margin-left:130px">
                                     {{userData.smsShortCodes.length}}
-                                    <!--
-                                        <div style="" class="btn-group dropdown open" uib-dropdown="">
-                                            <button aria-expanded="true" aria-haspopup="true" type="button" class="btn btn-default btn-xs dropdown-toggle" uib-dropdown-toggle="">
-                                                <span class="caret">
-                                                </span>
-                                                <span class="sr-only">
-                                                    Split button!
-                                                </span>
-                                            </button>
-                                            <ul class="dropdown-menu" uib-dropdown-menu="" role="menu" aria-labelledby="split-button" style="overflow:auto;width: 150px;height: 150px;">
-                                                <li role="menuitem" ng-repeat="code in userData.smsShortCodes |orderBy">
-                                                    <a href="">
-                                                        {{code}}
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    -->
                                 </dd>
                                 <dt style="width:120px">
                                     Access Time
@@ -124,137 +106,90 @@
                             <button type="button" class="btn btn-default" data-dismiss="modal">
                                 Close
                             </button>
-                            <!--
-                                <button type="button" class="btn btn-primary">
-                                    Save changes
-                                </button>
-                            -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            user Details
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                </div>
-                                <div class="col-md-6">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        -->
-        <!-- </div> -->
-    <!--
         <div class="row">
-            <dl class="dl-horizontal col-md-offset-4" ng-repeat="(key, value) in statusCount">
-                <dt style="width:120px" ng-if="value.status=='3'">
-                    processed :
-                </dt>
-                <dd style="margin-left:130px" ng-if="value.status=='3'">
-                    {{value.count}}
-                </dd>
-                <dt style="width:120px" ng-if="value.status=='0'">
-                    unprocessed :
-                </dt>
-                <dd style="margin-left:130px" ng-if="value.status=='0'">
-                    {{value.count}}
-                </dd>
-            </dl>
-        </div>
-    -->
-    <!--
-        <button ng-click="test()">
-            test
-        </button>
-    -->
-    <div class="row">
-        <div class="col-md-10 col-xs-10 col-lg-10">
-            <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
-                {{alert.msg}}
-            </uib-alert>
-            <div class="x_panel">
-                <div class="x_content">
-                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="userDetail.html#tab_content1" id="un_proc-tab" role="tab" data-toggle="tab" aria-expanded="true">
-                                    Unprocessed Messages
-                                    <span class="badge bg-green">
-                                        {{unproCount}}
-                                    </span>
-                                </a>
-                            </li>
-                            <li role="presentation" class="">
-                                <a href="userDetail.html#tab_content2" role="tab" id="proc-tab" data-toggle="tab" aria-expanded="false">
-                                    Processed Messages
-                                    <span class="badge bg-green">
-                                        {{proCount}}
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div id="myTabContent" class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="un_proc-tab">
-                                <div class="row">
-                                    <!--
-                                        <div class="col-md-2">
-                                            user's all unprocessed shortcodes.
-                                            <button type="button" class="btn btn-dark btn-xs pull-right" ng-click="blacklist()">
-                                                Blacklist
-                                            </button>
-                                            <input ng-model="searchText" style="width:100%" placeholde="search code" />
-                                        </label>
-                                        <table class="table  table-bordered ">
-                                            <thead>
-                                                <tr role="row">
-                                                    <th width=20%>
-                                                        <input type="checkbox" ng-model="toggleSelection" ng-click="toggle()" />
-                                                        Codes
-                                                        <span class="badge bg-green">
-                                                            {{userUnprocCode.length}}
-                                                        </span>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr ng-repeat="code in userUnprocCode |filter:searchText|orderBy">
-                                                    <td>
-                                                        <input type="checkbox" value="{{code}}" name="blacklist" />
-                                                        {{code}}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                -->
-                                <div class="col-md-12">
-                                    <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper">
-                                        <div class="row">
-                                            <div class="col-md-12 x_panel">
-                                                <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
-                                                </table>
+            <div class="col-md-10 col-xs-10 col-lg-10">
+                <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">
+                    {{alert.msg}}
+                </uib-alert>
+                <div class="x_panel">
+                    <div class="x_content">
+                        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="userDetail.html#tab_content1" id="un_proc-tab" role="tab" data-toggle="tab" aria-expanded="true">
+                                        Unprocessed Messages
+                                        <span class="badge bg-green">
+                                            {{unproCount}}
+                                        </span>
+                                    </a>
+                                </li>
+                                <li role="presentation" class="">
+                                    <a href="userDetail.html#tab_content2" role="tab" id="proc-tab" data-toggle="tab" aria-expanded="false">
+                                        Processed Messages
+                                        <span class="badge bg-green">
+                                            {{proCount}}
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="un_proc-tab">
+                                    <div class="row">
+                                        <!--
+                                            <div class="col-md-2">
+                                                user's all unprocessed shortcodes.
+                                                <button type="button" class="btn btn-dark btn-xs pull-right" ng-click="blacklist()">
+                                                    Blacklist
+                                                </button>
+                                                <input ng-model="searchText" style="width:100%" placeholde="search code" />
+                                            </label>
+                                            <table class="table  table-bordered ">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th width=20%>
+                                                            <input type="checkbox" ng-model="toggleSelection" ng-click="toggle()" />
+                                                            Codes
+                                                            <span class="badge bg-green">
+                                                                {{userUnprocCode.length}}
+                                                            </span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="code in userUnprocCode |filter:searchText|orderBy">
+                                                        <td>
+                                                            <input type="checkbox" value="{{code}}" name="blacklist" />
+                                                            {{code}}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    -->
+                                    <div class="col-md-12">
+                                        <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper">
+                                            <div class="row">
+                                                <div class="col-md-12 x_panel">
+                                                    <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
+                                                    </table>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade " id="tab_content2" aria-labelledby="proc-tab">
-                            <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper">
-                                <div class="row">
-                                    <div class="col-md-12 x_panel">
-                                        <table datatable="" dt-options="dtOptions1" dt-columns="dtColumns1" class="table table-bordered" style="width:100%">
-                                        </table>
+                            <div role="tabpanel" class="tab-pane fade " id="tab_content2" aria-labelledby="proc-tab">
+                                <div class="dataTables_wrapper form-inline dt-bootstrap no-footer" id="datatable_wrapper">
+                                    <div class="row">
+                                        <div class="col-md-12 x_panel">
+                                            <table datatable="" dt-options="dtOptions1" dt-columns="dtColumns1" class="table table-bordered" style="width:100%">
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -263,37 +198,36 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-2 col-xs-2 col-lg-2">
+            All unprocessed shortcodes.
+            <input ng-model="searchText" style="width:100%" placeholder="search code" />
+        </label>
+        <div style="overflow:auto;width: 150px;height: 400px;">
+            <table class="table  table-bordered ">
+                <thead>
+                    <tr role="row">
+                        <th width=20%>
+                            <input type="checkbox" ng-model="toggleSelection" ng-click="toggle()" />
+                            Codes
+                            <span class="badge bg-green">
+                                {{userUnprocCode.length}}
+                            </span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="code in userUnprocCode |filter:searchText|orderBy">
+                        <td>
+                            <input type="checkbox" value="{{code}}" name="blacklist" />
+                            {{code}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="button" class="btn btn-dark btn-xs pull-right" ng-click="blacklist()">
+            Blacklist
+        </button>
     </div>
-    <div class="col-md-2 col-xs-2 col-lg-2">
-        All unprocessed shortcodes.
-        <input ng-model="searchText" style="width:100%" placeholder="search code" />
-    </label>
-    <div style="overflow:auto;width: 150px;height: 400px;">
-        <table class="table  table-bordered ">
-            <thead>
-                <tr role="row">
-                    <th width=20%>
-                        <input type="checkbox" ng-model="toggleSelection" ng-click="toggle()" />
-                        Codes
-                        <span class="badge bg-green">
-                            {{userUnprocCode.length}}
-                        </span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="code in userUnprocCode |filter:searchText|orderBy">
-                    <td>
-                        <input type="checkbox" value="{{code}}" name="blacklist" />
-                        {{code}}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <button type="button" class="btn btn-dark btn-xs pull-right" ng-click="blacklist()">
-        Blacklist
-    </button>
-</div>
 </div>
 </div>
