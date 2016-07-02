@@ -30,23 +30,26 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	};
 	$scope.getUser();
 
-	api.get('get-sms-count-status', id, false, false, function(err, response) {
-		if (err || response.error) {
-			$scope.alerts = [{
-				msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-				type: 'error'
-			}];
-		} else {
-			// $scope.statusCount = response;
-			for (var i = 0; i < response.length; i++) {
-				if (response[i].status === 0) {
-					$scope.unproCount = response[i].count;
-				} else if (response[i].status === 3) {
-					$scope.proCount = response[i].count;
+	$scope.countStatus = function() {
+		api.get('get-sms-count-status', id, false, false, function(err, response) {
+			if (err || response.error) {
+				$scope.alerts = [{
+					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
+					type: 'error'
+				}];
+			} else {
+				// $scope.statusCount = response;
+				for (var i = 0; i < response.length; i++) {
+					if (response[i].status === 0) {
+						$scope.unproCount = response[i].count;
+					} else if (response[i].status === 3) {
+						$scope.proCount = response[i].count;
+					}
 				}
 			}
-		}
-	});
+		});
+	};
+	$scope.countStatus();
 
 	$scope.dtOptions = DTOptionsBuilder.newOptions()
 		.withOption('ajax', {
@@ -149,6 +152,8 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 					type: 'success'
 				}];
 				$scope.getUser();
+				$scope.countStatus();
+
 
 			}
 		});
