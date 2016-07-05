@@ -9,6 +9,9 @@
     position: fixed;
     height: 100%;
 }
+.emailpointer{
+cursor:pointer;
+}
 
 .nav-sm .container.body .col-md-3.left_col .mCSB_container,
 .nav-sm .container.body .col-md-3.left_col .mCustomScrollBox {

@@ -29,7 +29,7 @@
                         section one
         =================================================-->
     <div class="row">
-        <div class="col-md-2 col-sm-2 col-xs-2" style="overflow:auto;width: 150px;height: 250px;">
+        <div class="col-md-3 col-sm-3 col-xs-3" style="overflow:auto;height: 250px;">
             <table class="table  table-bordered ">
                 <thead>
                     <tr role="row">
@@ -42,7 +42,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="code in newcodes">
+                    <tr ng-repeat="code in codes.new">
                         <td>
                             <input type="checkbox" ng-model="checkbox_newcode" /> {{code}}
                         </td>
@@ -50,7 +50,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-2 col-sm-2 col-xs-2">
+        <div class="col-md-3 col-sm-3 col-xs-3" style="overflow:auto;height: 250px;">
             <table class="table  table-bordered ">
                 <thead>
                     <tr role="row">
@@ -60,15 +60,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr  ng-repeat="code in codes.processed">
                         <td>
-                            CODE
+                            {{code}}
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="col-md-2 col-sm-2 col-xs-2">
+        <div class="col-md-3 col-sm-3 col-xs-3" style="overflow:auto;height: 250px;">
             <table class="table  table-bordered ">
                 <thead>
                     <tr role="row">
@@ -78,15 +78,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr  ng-repeat="code in codes.unprocessed">
                         <td>
-                            CODE
+                            {{code}}
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="col-md-2 col-sm-2 col-xs-2">
+        <div class="col-md-3 col-sm-3 col-xs-3" style="overflow:auto;height: 250px;">
             <table class="table  table-bordered ">
                 <thead>
                     <tr role="row">
@@ -99,69 +99,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr  ng-repeat="code in codes.blacklisted">
                         <td>
-                            <input type="checkbox" ng-model="checkbox_blacklist" /> CODE
+                            <input type="checkbox" ng-model="checkbox_blacklist" /> {{code}}
                         </td>
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-4">
-            <div class="x_content">
-                <article class="media event">
-                    <a class="pull-left date">
-                        <p class="month">
-                            Total Regex
-                        </p>
-                        <p class="day">
-                            {{regexSummary}}
-                        </p>
-                    </a>
-                    <div ng-repeat="sum in summary">
-                        <a class="pull-left date" ng-if="sum.status=='3'">
-                            <p class="month">
-                                Processed
-                            </p>
-                            <p class="day">
-                                {{sum.count}}
-                            </p>
-                        </a>
-                        <a class="pull-left date" ng-if="sum.status=='0'">
-                            <p class="month">
-                                UnProcessed
-                            </p>
-                            <p class="day">
-                                {{sum.count}}
-                            </p>
-                        </a>
-                        <a class="pull-left date" ng-if="sum.status=='1'">
-                            <p class="month">
-                                Blacklisted
-                            </p>
-                            <p class="day">
-                                {{sum.count}}
-                            </p>
-                        </a>
-                        <a class="pull-left date" ng-if="sum.status=='4'">
-                            <p class="month">
-                                Dump
-                            </p>
-                            <p class="day">
-                                {{sum.count}}
-                            </p>
-                        </a>
-                        <a class="pull-left date" ng-if="sum.status=='5'">
-                            <p class="month">
-                                Pending for regex
-                            </p>
-                            <p class="day">
-                                {{sum.count}}
-                            </p>
-                        </a>
-                    </div>
-                </article>
-            </div>
         </div>
     </div>
     <hr/>
