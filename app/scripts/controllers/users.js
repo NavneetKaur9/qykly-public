@@ -43,7 +43,12 @@ angular.module('sbAdminApp')
 			});
 
 		$scope.dtColumns = [
-			DTColumnBuilder.newColumn('primaryEmail').withTitle('Email '),
+
+			DTColumnBuilder.newColumn('_id').withTitle('# ').renderWith(function(data, type, full, meta) {
+				return data = meta.row + 1 + '.';
+			}).notSortable().withOption('searchable', false).withOption('width', '2%'),
+
+			DTColumnBuilder.newColumn('primaryEmail').withTitle('Email ').withClass('emailpointer'),
 
 			DTColumnBuilder.newColumn('dateCreated').withTitle('dateCreated ').renderWith(function(data, type, full) {
 				return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 

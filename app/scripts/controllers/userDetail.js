@@ -9,10 +9,6 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 
 	var id = $stateParams.id;
 	var url = api.addr();
-	$scope.selectAll = false;
-
-	var titleHtml = '<input ng-model="selectAll" ng-click="toggleAll(selectAll)" type="checkbox">';
-
 
 	$scope.getUser = function() {
 		// body...
@@ -29,6 +25,27 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		});
 	};
 	$scope.getUser();
+
+
+	api.get('get-shortcode', id, false, false, function(err, response) {
+		if (err || response.error) {
+			$scope.alerts = [{
+				msg: response.userMessage || 'Server error! Are you connected to the internet?.',
+				type: 'error'
+			}];
+		} else {
+			$scope.new = response.new;
+			$scope.proc = response.processed;
+			$scope.unproc = response.unprocessed;
+		}
+	});
+
+	//----------------------------------------------------------------------------------------------------------------------------------------------------------------
+	$scope.selectAll = false;
+
+	var titleHtml = '<input ng-model="selectAll" ng-click="toggleAll(selectAll)" type="checkbox">';
+
+
 
 	$scope.countStatus = function() {
 		api.get('get-sms-count-status', id, false, false, function(err, response) {
