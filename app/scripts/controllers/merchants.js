@@ -124,6 +124,7 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
         function successCallback(response) {
            $scope.alert = response.data.Success
            $scope.merchantdata.category = '';
+           reloadData();
       console.log(response.data.Success);
   }, function errorCallback(response) {
     console.log(response);
