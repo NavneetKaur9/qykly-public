@@ -2,7 +2,7 @@
     width: 70px;
     padding: 0;
     z-index: 9999;
-    position: absolute;
+    position: fixed;
 }
 
 .nav-sm .container.body .col-md-3.left_col.menu_fixed {
@@ -229,7 +229,7 @@ cursor:pointer;
 .nav-md .container.body .col-md-3.left_col {
     width: 230px;
     padding: 0;
-    position: absolute;
+    position: fixed;
     display: flex;
 }
 
@@ -2380,13 +2380,13 @@ button,
 }
 
 .mail_list .left {
-    width: 5%;
+    width: 25%;
     float: left;
     margin-right: 3%
 }
 
 .mail_list .right {
-    width: 90%;
+    width: 60%;
     float: left
 }
 
