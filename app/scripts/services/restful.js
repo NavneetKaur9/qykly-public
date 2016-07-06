@@ -9,6 +9,8 @@
 
 angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', function($rootScope, $http) {
 
+	//var parseUrl = 'http://localhost:3000/api2';
+
 
 
 	var parseUrl = 'http://localhost:3000/api2';
