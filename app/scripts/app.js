@@ -13,6 +13,9 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
     events: true,
   });
   $urlRouterProvider.otherwise('/login');
+  // $http.defaults.headers.common['Authorization'] = 'Basic d2VudHdvcnRobWFuOkNoYW5nZV9tZQ==';
+
+
   $stateProvider.state('dashboard', {
     url: '/dashboard',
     templateUrl: 'views/dashboard/main.html',
