@@ -3,7 +3,7 @@
 * merchant module
 */
 
-angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http, DTOptionsBuilder, DTColumnBuilder, $compile, $filter,api){
+angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http, DTOptionsBuilder, DTColumnBuilder, $compile, $filter,api,$window){
 
   var url =api.addr();
   $http({
@@ -33,7 +33,7 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
     $scope.dtOptions = DTOptionsBuilder.newOptions()
               .withOption('ajax', {
                url: url + 'get-merchants',
-               type: 'POST'
+               type: 'POST',
            })
            // or here
           .withDataProp('data')
@@ -43,17 +43,22 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
               $compile(angular.element(row).contents())($scope);
           })
           .withOption('headerCallback', function(header) {
+           $window.scrollTo(0, 0);
+
               if (!$scope.headerCompiled) {
                   // Use this headerCompiled field to only compile header once
                   $scope.headerCompiled = true;
                   $compile(angular.element(header).contents())($scope);
               }
-          });
+          }).withOption('stateSave', true);
 
     $scope.dtColumns = [
+
         DTColumnBuilder.newColumn('_id').notVisible(),
+        DTColumnBuilder.newColumn(null).withTitle('#').renderWith(function(data, type, full, meta) {
+          return meta.settings._iDisplayStart + meta.row + 1;
+        }).notSortable().withOption('searchable', false).withOption('width', '2%'),
         DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable().renderWith(function(data, type, full, meta) {
-         //   $scope.selected[full._id] = false;
             var merchant_id = JSON.stringify(data._id);
             return "<input ng-model='selected["+merchant_id+"]' name=chk[] class='multi-check' ng-click='toggleOne(selected)' type='checkbox'>";
         }),
@@ -68,12 +73,7 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
         DTColumnBuilder.newColumn('icon').notVisible(),
         DTColumnBuilder.newColumn('imageUrl').notVisible(),
         DTColumnBuilder.newColumn(null).withTitle('Category').notSortable().renderWith(function(data, type, full, meta) {
-            if(data.icon){
               return '<img ng-src="'+data.icon+'" height="50" width="50" alt=""/>';
-            }else {
-              return '<img ng-src="'+data.imageUrl+'" height="50" width="50" alt=""/>';
-            }
-           
         }).withOption('width', '5%')
         
     ];
@@ -100,25 +100,41 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
     }
 
    function reloadData() {
-       $scope.dtInstance._renderer.rerender(); 
+      // $scope.dtInstance.rerender(); 
+       window.location.reload();
     }
 
     $scope.changeMerchantCategory = function(){
-       var category = $scope.merchantdata.category;
-       var allMerchants = $scope.selected;
+        var category = angular.isUndefined($scope.merchantdata) ? "" : $scope.merchantdata.category;
+        var allMerchants = $scope.selected;
+        
+        //check empty
+         if(category == ""){
+            alert('Please select category');
+            return;
+         }
+ 
+         if(Object.keys(allMerchants).length == 0){
+            alert('Please select merchant');
+            return;
+         }
 
       var merchants = [];
+      var atleastOneSelected = false;
       angular.forEach(allMerchants, function(value, merchant_id) {
         if(value){
           this.push(merchant_id);
+          atleastOneSelected = true;
         }
       }, merchants);
 
+      if(atleastOneSelected){
        var req = {
                    method: 'POST',
                    url: url + 'update-merchant-category',
                    data: { merchants: merchants, 'category' : category }
                   }
+      
 
       $http(req).then(
         function successCallback(response) {
@@ -129,6 +145,9 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
   }, function errorCallback(response) {
     console.log(response);
   });
+    } else {
+      alert("Please select merchant");
+    }
 
      }
 
