@@ -18,6 +18,7 @@ angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', '$cookieStor
 	$http.defaults.headers.common.Authorization = 'Bearer ' + token;
 
 	var parseHeaders = {};
+
 	var GenerateUrl = function(theClass, object, objectId) {
 		if (object && objectId) {
 			return parseUrl + '/' + theClass + '/' + object + '/' + objectId;

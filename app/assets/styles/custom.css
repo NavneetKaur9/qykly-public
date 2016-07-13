@@ -1389,8 +1389,8 @@ table.countries_list td {
 }
 
 .dataTables_paginate a {
-    padding: 6px 9px !important;
-    background: #ddd !important;
+   /* padding: 6px 9px !important;
+    background: #ddd !important;*/
     border-color: #ddd !important;
 }
 
@@ -1432,7 +1432,7 @@ table.jambo_table tbody tr.selected td {
 }
 
 .dataTables_paginate a {
-    background: #ff0000;
+    background: #fff;
 }
 
 .dataTables_wrapper {
