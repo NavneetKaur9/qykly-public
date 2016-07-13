@@ -54,7 +54,7 @@ angular.module('sbAdminApp').controller('merchantsCtrl', function($scope, $http,
 
     $scope.dtColumns = [
 
-        DTColumnBuilder.newColumn('_id').notVisible(),
+        DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
         DTColumnBuilder.newColumn(null).withTitle('#').renderWith(function(data, type, full, meta) {
           return meta.settings._iDisplayStart + meta.row + 1;
         }).notSortable().withOption('searchable', false).withOption('width', '2%'),
