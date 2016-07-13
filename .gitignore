@@ -8,13 +8,12 @@ app.log
 
 # Node and related ecosystem
 # ==========================
-
 .nodemonignore
 .sass-cache/
 node_modules/
 public/lib/
 app/tests/coverage/
-app/scripts/services
+app/scripts/services/
 .bower-*/
 .idea/
 coverage/
@@ -76,28 +75,3 @@ mongod
 *.ntvs*
 *.njsproj
 *.sln
-
-
-# Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-node_modules
-app/scripts/services
-public/*.pdf
-public/*.ai
-public/*.bak
-public/.tmp
-public/.sass-cache
-public/node_modules
-public/bower_components
-public/docs
-public/mockup
-public/composer.lock
-public/composer.phar
-
-*.js~
-
-
-.DS_Store
-*/*/*/.DS_Store
-*/*/.DS_Store
-*/.DS_Store
