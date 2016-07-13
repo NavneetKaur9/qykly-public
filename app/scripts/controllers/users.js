@@ -24,7 +24,7 @@ angular.module('sbAdminApp')
 				data: function(aodata) {
 					if (aodata.draw == "1") {
 
-						aodata.order[0].column = "1";
+						aodata.order[0].column = "2";
 						aodata.order[0].dir = 'desc';
 					}
 
@@ -45,7 +45,7 @@ angular.module('sbAdminApp')
 		$scope.dtColumns = [
 
 			DTColumnBuilder.newColumn('_id').withTitle('# ').renderWith(function(data, type, full, meta) {
-				return data = meta.row + 1 + '.';
+				return data = meta.row + 1;
 			}).notSortable().withOption('searchable', false).withOption('width', '2%'),
 
 			DTColumnBuilder.newColumn('primaryEmail').withTitle('Email ').withClass('emailpointer'),

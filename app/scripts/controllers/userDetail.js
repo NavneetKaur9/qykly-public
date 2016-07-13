@@ -113,17 +113,17 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	// $scope.pagination = Pagination.getNew(10);
 	// $scope.pagination.numPages = Math.ceil($scope.unproc.length / $scope.pagination.perPage);
 
-	$scope.currentPage = 1;
-	$scope.pageSize = 10;
+	// $scope.currentPage = 1;
+	// $scope.pageSize = 10;
 
-	$scope.selectAll = false;
-	var titleHtml = '<input ng-model="selectAll" ng-click="toggleAll(selectAll)" type="checkbox">';
+	// $scope.selectAll = false;
+	// var titleHtml = '<input ng-model="selectAll" ng-click="toggleAll(selectAll)" type="checkbox">';
 
-	$scope.toggle = function() {
-		var checkboxes = document.getElementsByName('blacklist');
-		for (var i = 0; i < checkboxes.length; i++) {
-			checkboxes[i].checked = $scope.toggleSelection;
-		}
-	};
+	// $scope.toggle = function() {
+	// 	var checkboxes = document.getElementsByName('blacklist');
+	// 	for (var i = 0; i < checkboxes.length; i++) {
+	// 		checkboxes[i].checked = $scope.toggleSelection;
+	// 	}
+	// };
 
 });

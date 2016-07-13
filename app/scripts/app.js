@@ -7,12 +7,13 @@
  *
  * Main module of the application.
  */
-angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datatables', 'datatables.bootstrap']).config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider) {
+angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datatables', 'datatables.bootstrap', 'ngCookies']).config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider) {
   $ocLazyLoadProvider.config({
     debug: false,
     events: true,
   });
   $urlRouterProvider.otherwise('/login');
+
   $stateProvider.state('dashboard', {
     url: '/dashboard',
     templateUrl: 'views/dashboard/main.html',

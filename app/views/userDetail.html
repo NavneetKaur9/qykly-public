@@ -194,18 +194,18 @@
                                 <div class="row">
                                     <!-- left section : UNPROCESSED -->
                                     <div class="col-md-2 col-sm-2 mail_list_column">
-                                      <input ng-model="searchText" style="width:100%" placeholder="search code">
-                                      <div style="overflow:auto;height: 500px;">
-                                        <a href="" ng-repeat="code in unproc |filter:searchText|orderBy">
-                                            <div class="mail_list">
-                                                <div class="right">
-                                                    <h3 ng-click="getSms(code,0)">
-                                                        {{code}}
-                                                    </h3>
+                                        <input ng-model="searchText_unproc" style="width:100%" placeholder="search code"/>
+                                        <div style="overflow:auto;height: 500px;">
+                                            <a href="" ng-repeat="code in unproc |filter:searchText_unproc">
+                                                <div class="mail_list">
+                                                    <div class="right">
+                                                        <h3 ng-click="getSms(code,0)">
+                                                            {{code}}
+                                                        </h3>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </a>
-                                    </div>
+                                            </a>
+                                        </div>
                                     </div>
                                     <!-- unprocessed message detail -->
                                     <div class="col-md-10 col-sm-10 mail_view" ng-show="smses.length">
@@ -245,8 +245,9 @@
                             <div role="tabpanel" class="tab-pane fade " id="tab_content2" aria-labelledby="new-tab">
                                 <div class="row">
                                     <div class="col-md-2 col-sm-2 mail_list_column">
-                                       <div style="overflow:auto;height: 500px;">
-                                            <a href="javascript:void(0)" ng-repeat="code in new |filter:searchText|orderBy">
+                                        <input ng-model="searchText_new" style="width:100%" placeholder="search code"/>
+                                        <div style="overflow:auto;height: 500px;">
+                                            <a href="javascript:void(0)" ng-repeat="code in new |filter:searchText_new">
                                                 <div class="mail_list">
                                                     <div class="left">
                                                         <input type="checkbox" value="{{code}}" name="blacklist" />
@@ -301,19 +302,21 @@
                             <div role="tabpanel" class="tab-pane fade " id="tab_content3" aria-labelledby="proc-tab">
                                 <div class="row">
                                     <div class="col-md-2 col-sm-2 mail_list_column">
-                                    <div style="overflow:auto;height: 500px;">
-                                        <a href="" ng-repeat="code in proc |filter:searchText|orderBy">
-                                            <div class="mail_list">
-                                                <div class="left">
-                                                    <!-- <input type="checkbox" value="{{code}}" name="blacklist" /> -->
+                                        <div style="overflow:auto;height: 500px;">
+                                            <input ng-model="searchText_proc" style="width:100%" placeholder="search code"/>
+                                            <a href="" ng-repeat="code in proc |filter:searchText_proc">
+                                                <div class="mail_list">
+                                                    <div class="left">
+                                                        <!-- <input type="checkbox" value="{{code}}" name="blacklist" /> -->
+                                                    </div>
+                                                    <div class="right">
+                                                        <h3 ng-click="getSms(code,3)">
+                                                            {{code}}
+                                                        </h3>
+                                                    </div>
                                                 </div>
-                                                <div class="right">
-                                                    <h3 ng-click="getSms(code,3)">
-                                                        {{code}}
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </a></div>
+                                            </a>
+                                        </div>
                                     </div>
                                     <div class="col-md-10 col-sm-10 mail_view" ng-show="smses.length">
                                         <h4>

@@ -1,188 +1,266 @@
 <section ng-controller="shortcodesCtrl">
-    <!-- <div class="title_left">
-        Shortcodes
-    </div> -->
-    <!-- 
-        <div class="page-header">
-            <h1>
-                Shortcodes
-            </h1>
-        </div>
-     -->
-    <!-- search box -->
+<!-- 
+    <ul class="stats-overview">
+        <li>
+            <span class="name">
+                Unprocessed Messages
+            </span>
+            <span class="value text-success">
+                {{unproCount}}
+            </span>
+        </li>
+        <li>
+            <span class="name">
+                Processed Messages
+            </span>
+            <span class="value text-success">
+                {{proCount}}
+            </span>
+        </li>
+        <li class="hidden-phone">
+          
+        </li>
+    </ul> -->
     <div class="row">
-        <div class="title_left">
-            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-left top_search">
-                <div class="input-group">
-                    <input class="form-control" placeholder="Search for Short Code..." type="text" ng-model="searchCode" />
-                    <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-click="shortcode()">
-                        Go!
-                    </button>
-                </span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End :search box -->
-    <!--==================================================
-                        section one
-        =================================================-->
-    <div class="row">
-        <div class="col-md-3 col-sm-3 col-xs-3" style="overflow:auto;height: 250px;">
-            <table class="table  table-bordered ">
-                <thead>
-                    <tr role="row">
-                        <th width=20%>
-                            <input type="checkbox" ng-model="checkbox_newcode" /> New Codes
-                            <button type="button" class="btn btn-dark btn-xs pull-right" ng-show="checkbox_newcode">
-                                Blacklist
-                            </button>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="code in codes.new">
-                        <td>
-                            <input type="checkbox" ng-model="checkbox_newcode" /> {{code}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-3" style="overflow:auto;height: 250px;">
-            <table class="table  table-bordered ">
-                <thead>
-                    <tr role="row">
-                        <th width=20%>
-                            Processed
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr  ng-repeat="code in codes.processed">
-                        <td>
-                            {{code}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-3" style="overflow:auto;height: 250px;">
-            <table class="table  table-bordered ">
-                <thead>
-                    <tr role="row">
-                        <th width=20%>
-                            UnProcessed
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr  ng-repeat="code in codes.unprocessed">
-                        <td>
-                            {{code}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-3 col-sm-3 col-xs-3" style="overflow:auto;height: 250px;">
-            <table class="table  table-bordered ">
-                <thead>
-                    <tr role="row">
-                        <th width=20%>
-                            <input type="checkbox" ng-model="checkbox_blacklist" /> Blacklist
-                            <button type="button" class="btn btn-dark btn-xs pull-right" ng-show="checkbox_blacklist">
-                                Remove
-                            </button>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr  ng-repeat="code in codes.blacklisted">
-                        <td>
-                            <input type="checkbox" ng-model="checkbox_blacklist" /> {{code}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <hr/>
-    <!--==================================================
-                       table section
-       ===================================================-->
-    <div class="row">
-        <div class="col-md-11 x_panel">
-            <!-- <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
-   </table>
- -->
-        </div>
-    </div>
-    <div class="jumbotron">
-        {{newcodes.regex}}
-        <hr/> {{newcodes.shortcode}}
-    </div>
-    <div class="row">
-        <div class="col-md-9">
-            <ul ng-repeat="(key, value) in ShortcodeSummary">
-                <li ng-click="smss(value.status)">{{value}}</li>
-            </ul>
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-12 col-xs-12 col-lg-12">
             <div class="x_panel">
-                <div class="x_title">
-                    <h2>
-                        New Codes
-                        <small>
-                            {{newcodes.length}}
-                        </small>
-                    </h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li>
-                            <a class="collapse-link" ng-click="isCollapsed = !isCollapsed" ng-show="isCollapsed">
-                                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true">
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="collapse-link" ng-click="isCollapsed = !isCollapsed" ng-hide="isCollapsed">
-                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true">
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="close-link" ng-show="!isCollapsed">
-                                <span class="glyphicon glyphicon-pencil">
-                                </span>Bl
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="clearfix">
-                    </div>
-                </div>
-                <div class="x_content" uib-collapse="isCollapsed">
-                    <div class="">
-                        <!-- <ul class="to_do" ng-repeat="code in newcodes">
-    <li>
-        <p>
-            <input type="checkbox" /> {{code}}
-        </p>
-    </li>
-</ul>
- -->
+                <div class="x_content">
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <!-- start:  tabs -->
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="userDetail.html#tab_content1" id="un_proc-tab" role="tab" data-toggle="tab" aria-expanded="true" ng-click="reset()">
+                                    Unprocessed
+                                    <span class="badge bg-green">
+                                        {{unproc.length}}
+                                    </span>
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="userDetail.html#tab_content2" role="tab" id="new-tab" data-toggle="tab" aria-expanded="false" ng-click="reset()">
+                                    New
+                                    <span class="badge bg-green">
+                                        {{new.length}}
+                                    </span>
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="userDetail.html#tab_content3" role="tab" id="proc-tab" data-toggle="tab" aria-expanded="false" ng-click="reset()">
+                                    Processed
+                                    <span class="badge bg-green">
+                                        {{proc.length}}
+                                    </span>
+                                </a>
+                            </li>
+                             <!-- <li role="presentation" class="">
+                                <a href="userDetail.html#tab_content4" role="tab" id="blacklist-tab" data-toggle="tab" aria-expanded="false" ng-click="reset()">
+                                  Blacklisteds
+                                    <span class="badge bg-green">
+                                        {{blacklisteds.length}}
+                                    </span>
+                                </a>
+                            </li> -->
+                        </ul>
+                        <!-- END: tabs -->
+                        <div id="myTabContent" class="tab-content">
+                            <!-- tab content 1 :unprocessed -->
+                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="un_proc-tab">
+                                <div class="row">
+                                    <!-- left section : UNPROCESSED -->
+                                    <div class="col-md-2 col-sm-2 mail_list_column">
+                                        <input ng-model="search_unproc" style="width:100%;margin-bottom:1rem" placeholder="search code"/>
+                                        
+                                        <div style="overflow:auto;height: 500px;">
+                                            <a href="" ng-repeat="code in unproc |filter:search_unproc">
+                                                <div class="mail_list">
+                                                    <div class="right">
+                                                        <h3 ng-click="getSms(code,0)">
+                                                            {{code}}
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- right section  : unprocessed message detail -->
+                                    <div class="col-md-10 col-sm-10 mail_view" ng-show="smses.length">
+                                        <h4>
+                                            {{code}}
+                                        </h4>
+                                        <table class="table table-striped jambo_table" >
+                                            <thead>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>
+                                                    Text
+                                                </th>
+                                                <th>
+                                                    Time
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="sms in smses |filter:searchText|orderBy">
+                                                    <td>
+                                                        {{$index+1}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.text}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.time }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- tab content 2 :new -->
+                            <div role="tabpanel" class="tab-pane fade " id="tab_content2" aria-labelledby="new-tab">
+                                <div class="row">
+                                    <!-- left section : NEW -->
+                                    <div class="col-md-2 col-sm-2 mail_list_column">
+                                        <input ng-model="search_new" style="width:100%;margin-bottom:1rem" placeholder="search code"/>
+
+                                        <div style="overflow:auto;height: 500px;">
+                                            <a href="javascript:void(0)" ng-repeat="code in new |filter:search_new">
+                                                <div class="mail_list">
+                                                    <div class="left">
+                                                        <input type="checkbox" value="{{code}}" name="blacklist" />
+                                                    </div>
+                                                    <div class="right">
+                                                        <h3 ng-click="getSms(code,0)">
+                                                            {{code}}
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <button type="button" class="btn btn-dark btn-xs pull-right" ng-click="blacklist()">
+                                            Blacklist
+                                        </button>
+                                    </div>
+                                    <!-- right section  : new message detail -->
+                                    <div class="col-md-10 col-sm-10 mail_view" ng-show="smses.length">
+                                        <h4>
+                                            {{code}}
+                                        </h4>
+                                        <table class="table table-striped jambo_table ">
+                                            <thead>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>
+                                                    Text
+                                                </th>
+                                                <th>
+                                                    Time
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="sms in smses |filter:searchText|orderBy">
+                                                    <td>
+                                                        {{$index+1}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.text}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.time |date:'medium'}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- tab content 3:processed -->
+                            <div role="tabpanel" class="tab-pane fade " id="tab_content3" aria-labelledby="proc-tab">
+                                <div class="row">
+                                    <!-- left section : PROCESSED -->
+                                    <div class="col-md-2 col-sm-2 mail_list_column">
+                                        <input ng-model="search_proc" style="width:100%;margin-bottom:1rem" placeholder="search code"/>
+
+                                        <div style="overflow:auto;height: 500px;">
+                                            <a href="" ng-repeat="code in proc |filter:search_proc">
+                                                <div class="mail_list">
+                                                    <div class="left">
+                                                        <!-- <input type="checkbox" value="{{code}}" name="blacklist" /> -->
+                                                    </div>
+                                                    <div class="right">
+                                                        <h3 ng-click="getSms(code,3)">
+                                                            {{code}}
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- right section  : POcessed message detail -->
+                                    <div class="col-md-10 col-sm-10 mail_view" ng-show="smses.length">
+                                        <h4>
+                                            {{code}}
+                                        </h4>
+                                        
+                                        <table class="table table-striped jambo_table ">
+                                            <thead>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>
+                                                    Text
+                                                </th>
+                                                <th>
+                                                    Time
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="sms in smses |filter:searchText|orderBy">
+                                                    <td>
+                                                        {{$index+1}}.
+                                                    </td>
+                                                    <td>
+                                                        {{sms.text}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.time |date:'medium'}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- tab content 4:blacklisteds -->
+                           <!--  <div role="tabpanel" class="tab-pane fade " id="tab_content4" aria-labelledby="blacklist-tab">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 ">
+                                    <h4 ng-repeat="value in blacklisteds">{{blacklisteds.Sender}}<span class = "label label-default">{{blacklisteds.Sender}}</span></h4>
+                                    </div>
+                                    
+                                </div>
+                            </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        {{smss}}
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <!--  <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="table table-bordered">
-            </table> -->
+    <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
+        <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
+            <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
+                <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
+                </span>
+            </div>
+            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" >
+                <!--
+                    <span class="glyphicon glyphicon-info-sign">
+                    </span>
+                -->
+                {{alert}}
+            </div>
         </div>
     </div>
 </section>
