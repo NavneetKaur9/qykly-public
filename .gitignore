@@ -13,7 +13,7 @@ app.log
 node_modules/
 public/lib/
 app/tests/coverage/
-
+app/scripts/services/restful.js
 .bower-*/
 .idea/
 coverage/

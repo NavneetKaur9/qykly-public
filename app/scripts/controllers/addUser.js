@@ -5,6 +5,7 @@
 angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, api) {
 
 	var url = api.addr();
+	console.log('hello');
 
 	function reset() {
 		$scope.name = '';

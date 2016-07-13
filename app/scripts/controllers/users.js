@@ -6,7 +6,7 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-	.controller('usersCtrl', function($scope, $location, $http, api, DTOptionsBuilder, DTColumnBuilder, $filter, $compile, $state, DTDefaultOptions) {
+	.controller('usersCtrl', function($scope, $location, $http, api, DTOptionsBuilder, DTColumnBuilder, $filter, $compile, $state, DTDefaultOptions, $window) {
 
 
 		var url = api.addr();
@@ -23,7 +23,6 @@ angular.module('sbAdminApp')
 				type: 'GET',
 				data: function(aodata) {
 					if (aodata.draw == "1") {
-
 						aodata.order[0].column = "2";
 						aodata.order[0].dir = 'desc';
 					}
@@ -40,12 +39,16 @@ angular.module('sbAdminApp')
 					'sNext': '»',
 					'sPrevious': '«'
 				}
-			});
+			})
+			.withOption('headerCallback', function(header) {
+				$window.scrollTo(0, 0);
+
+			}).withOption('stateSave', true);
 
 		$scope.dtColumns = [
-
-			DTColumnBuilder.newColumn('_id').withTitle('# ').renderWith(function(data, type, full, meta) {
-				return data = meta.row + 1;
+			DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
+			DTColumnBuilder.newColumn(null).withTitle('# ').renderWith(function(data, type, full, meta) {
+				return data = meta.settings._iDisplayStart + meta.row + 1;
 			}).notSortable().withOption('searchable', false).withOption('width', '2%'),
 
 			DTColumnBuilder.newColumn('primaryEmail').withTitle('Email ').withClass('emailpointer'),
@@ -69,6 +72,8 @@ angular.module('sbAdminApp')
 
 
 		];
+
+
 
 		function rowCallback(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
 			// console.log(aData);

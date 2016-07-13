@@ -5,9 +5,10 @@
  * @description
  * Controller of the sbAdminApp
  */
-angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http, $stateParams, api, DTOptionsBuilder, DTColumnBuilder, $filter) {
+angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http, $stateParams, api, DTOptionsBuilder, DTColumnBuilder, $filter, $window) {
 	var id = $stateParams.id;
 	var url = api.addr();
+	$window.scrollTo(0, 0);
 	$scope.getUser = function() {
 		// body...
 		api.get('get-user', id, false, false, function(err, response) {

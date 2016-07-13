@@ -1,31 +1,12 @@
 <div ng-controller="userDetailCtrl">
     <a ui-sref="dashboard.users">
-        back
+        <button type="button" class="btn btn-round btn-default btn-xs">
+            <i class="fa fa-arrow-left" aria-hidden="true">
+            </i>
+            back
+        </button>
     </a>
-    <!--
-        <div ng-repeat="(key, value) in userData">
-            {{key}}:::{{value}}
-        </div>
-    -->
-    <ul class="stats-overview">
-        <li>
-            <span class="name">
-                Unprocessed Messages
-            </span>
-            <span class="value text-success">
-                {{unproCount}}
-            </span>
-        </li>
-        <li>
-            <span class="name">
-                Processed Messages
-            </span>
-            <span class="value text-success">
-                {{proCount}}
-            </span>
-        </li>
-        <li class="hidden-phone">
-            <!-- ********   START: MODAL     ********* -->
+       <!-- ********   START: MODAL     ********* -->
             <div class="pull-right">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">
                     Check User Details
@@ -153,6 +134,31 @@
                 </div>
             </div>
             <!-- ********   END: MODAL       ********* -->
+    <!--
+        <div ng-repeat="(key, value) in userData">
+            {{key}}:::{{value}}
+        </div>
+    -->
+    <ul class="stats-overview">
+        <li>
+            <span class="name">
+                Unprocessed Messages : 
+            </span>
+
+            <span class="value text-success">
+                {{  unproCount}}
+            </span>
+        </li>
+        <li>
+            <span class="name">
+                Processed Messages : 
+            </span>
+            <span class="value text-success">
+                {{ proCount}}
+            </span>
+        </li>
+        <li class="hidden-phone">
+         
         </li>
     </ul>
     <div class="row">
@@ -260,7 +266,7 @@
                                                 </div>
                                             </a>
                                         </div>
-                                        <button type="button" class="btn btn-dark btn-xs pull-right" ng-click="blacklist()">
+                                        <button type="button" class="btn btn-dark pull-right" ng-click="blacklist()">
                                             Blacklist
                                         </button>
                                     </div>
