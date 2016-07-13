@@ -1,0 +1,115 @@
+'use strict';
+
+/**
+ * Viewport Services
+ * @module: app.core
+ * @desc: Calculate application window width and height
+ */
+//
+
+angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', '$cookieStore', function($rootScope, $http, $cookieStore) {
+
+	var parseUrl = 'http://localhost:3000/api2';
+	// var parseUrl = 'http://52.66.81.240/api2';
+
+	// var parseUrl = 'https://api.qykly.mobi/api2';
+	// var parseUrl="";
+	var token = $cookieStore.get('c2cCookie'); //set Headers for JWTTOKEN
+	$http.defaults.headers.common.Authorization = 'Bearer ' + token;
+
+	var parseHeaders = {};
+	console.log('ssa');
+
+	var GenerateUrl = function(theClass, object, objectId) {
+		if (object && objectId) {
+			return parseUrl + '/' + theClass + '/' + object + '/' + objectId;
+		} else {
+			if (object) {
+				return parseUrl + '/' + theClass + '/' + object;
+			} else {
+				return parseUrl + '/' + theClass;
+			}
+		}
+	};
+
+	return {
+		addr: function() {
+			return parseUrl + '/';
+		},
+		//Create a db object on server
+		post: function(theClass, object, data, callback) {
+
+			$http.post(
+					GenerateUrl(theClass, object, false),
+
+					data, {
+						headers: parseHeaders
+					}
+				)
+				.success(function(response) {
+
+
+					callback(null, response);
+				})
+				.error(function(response) {
+
+					callback(true, response || 'Cannot submit data!');
+				});
+		},
+		put: function(theClass, object, objectId, data, callback) {
+
+			$http.put(
+					GenerateUrl(theClass, object, objectId),
+
+					data, {
+						headers: parseHeaders
+					}
+				)
+				.success(function(response) {
+
+					callback(null, response);
+				})
+				.error(function(response) {
+
+					callback(true, response || 'There is some problem with your data.');
+				});
+		},
+		//Get a db object by id
+		get: function(theClass, object, objectId, query, callback) {
+
+			var config = {
+				headers: parseHeaders
+			};
+			if (query) {
+				config.params = query;
+			}
+			$http.get(
+
+				GenerateUrl(theClass, object, objectId),
+
+				config
+			).success(function(response) {
+
+				callback(null, response);
+			}).error(function(response) {
+
+				callback(true, response || 'Some error occured.');
+			});
+		},
+		//Remove a db object
+		delete: function(theClass, object, objectId, callback) {
+
+			$http['delete']( //['delete'] to get around using delete js keyword
+				GenerateUrl(theClass, object, objectId), {
+					headers: parseHeaders
+				}
+			).success(function(response) {
+
+				callback(null, response);
+			}).error(function(response) {
+
+				callback(true, response || 'Some error occured.');
+			});
+		}
+	};
+}]);
