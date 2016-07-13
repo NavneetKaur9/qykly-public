@@ -2,11 +2,11 @@
 /**
  *  Shortcodes controller
  */
-angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http, api, $cookieStore) {
+angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http, api, $cookieStore, $window) {
 	var url = api.addr();
 	// var token = $cookieStore.get('c2cCookie');
 	// console.log(token);
-
+	$window.scrollTo(0, 0);
 	$scope.alert = '  loading.........';
 
 	$scope.getShortcode = function(status) {
@@ -108,6 +108,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 			console.log(response);
 		})
 	};
-
+	$scope.currentPage = 1;
+	$scope.pageSize = 10;
 
 });

@@ -1,23 +1,25 @@
 <section ng-controller="shortcodesCtrl">
-  <!--   <ul class="stats-overview">
-        <li>
-            <label>
-                Sort By:
-            </label>
-            <div class="btn-group  btn-group-sm">
-                <button class="btn btn-default" type="button">
-                    date
-                </button>
-                <button class="btn btn-default" type="button">
-                    alphanum
-                </button>
-                <button class="btn btn-default" type="button">
-                    count
-                </button>
-            </div>
-        </li>
-    </ul>
-<hr> -->
+    <!--
+        <ul class="stats-overview">
+            <li>
+                <label>
+                    Sort By:
+                </label>
+                <div class="btn-group  btn-group-sm">
+                    <button class="btn btn-default" type="button">
+                        date
+                    </button>
+                    <button class="btn btn-default" type="button">
+                        alphanum
+                    </button>
+                    <button class="btn btn-default" type="button">
+                        count
+                    </button>
+                </div>
+            </li>
+        </ul>
+        <hr/>
+    -->
     <div class="row">
         <div class="col-md-12 col-xs-12 col-lg-12">
             <div class="x_panel">
@@ -195,9 +197,25 @@
                                     </div>
                                     <!-- right section  : POcessed message detail -->
                                     <div class="col-md-10 col-sm-10 mail_view" ng-show="smses.length">
-                                        <h4>
-                                            {{code}}
-                                        </h4>
+                                        <div class="row">
+                                            <div class="col-xs-2">
+                                                <h4>
+                                                    {{code}}
+                                                </h4>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <label for="search">
+                                                    items per page:
+                                                    <input type="number" min="1" max="1000" class="form-control" ng-model="pageSize"/>
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <label for="search">
+                                                    Search:
+                                                    <input ng-model="q" id="search" class="" placeholder="Filter Messages" style="width:100%" />
+                                                </label>
+                                            </div>
+                                        </div>
                                         <table class="table table-striped jambo_table ">
                                             <thead>
                                                 <th>
@@ -211,56 +229,60 @@
                                                 </th>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="sms in smses |filter:searchText|orderBy">
-                                                    <td>
-                                                        {{$index+1}}.
-                                                    </td>
-                                                    <td>
-                                                        {{sms.text}}
-                                                    </td>
-                                                    <td>
-                                                        {{sms.time |date:'medium'}}
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- tab content 4:blacklisteds -->
-                            <!--
-                                <div role="tabpanel" class="tab-pane fade " id="tab_content4" aria-labelledby="blacklist-tab">
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12 ">
-                                            <h4 ng-repeat="value in blacklisteds">
-                                                {{blacklisteds.Sender}}
-                                                <span class = "label label-default">
-                                                    {{blacklisteds.Sender}}
-                                                </span>
-                                            </h4>
+                                                <tr dir-paginate="sms in smses | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+                                                    {{ meal }}
+                                                    <!-- <tr ng-repeat="sms in smses |orderBy"> -->
+                                                        <td>
+                                                            {{$index+1}}.
+                                                        </td>
+                                                        <td>
+                                                            {{sms.text}}
+                                                        </td>
+                                                        <td>
+                                                            {{sms.time |date:'medium'}}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" >
+                                            </dir-pagination-controls>
                                         </div>
                                     </div>
                                 </div>
-                            -->
+                                <!-- tab content 4:blacklisteds -->
+                                <!--
+                                    <div role="tabpanel" class="tab-pane fade " id="tab_content4" aria-labelledby="blacklist-tab">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12 ">
+                                                <h4 ng-repeat="value in blacklisteds">
+                                                    {{blacklisteds.Sender}}
+                                                    <span class = "label label-default">
+                                                        {{blacklisteds.Sender}}
+                                                    </span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                -->
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
-        <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
-            <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
-                <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
-                </span>
-            </div>
-            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" >
-                <!--
-                    <span class="glyphicon glyphicon-info-sign">
+        <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
+            <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
+                <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
+                    <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
                     </span>
-                -->
-                {{alert}}
+                </div>
+                <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" >
+                    <!--
+                        <span class="glyphicon glyphicon-info-sign">
+                        </span>
+                    -->
+                    {{alert}}
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>

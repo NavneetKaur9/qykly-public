@@ -23,7 +23,7 @@ angular.module('sbAdminApp')
 				type: 'GET',
 				data: function(aodata) {
 					if (aodata.draw == "1") {
-						aodata.order[0].column = "2";
+						aodata.order[0].column = "3";
 						aodata.order[0].dir = 'desc';
 					}
 
