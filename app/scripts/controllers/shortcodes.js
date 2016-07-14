@@ -36,12 +36,13 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 
 	$scope.getSms = function(code, status) {
 		$scope.code = code;
-
+		$scope.alert = 'loading.......';
 		api.get('get-smss/' + code + '/' + status, false, false, false, function(err, response) {
 			if (err || response.error) {
 				$scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
 			} else {
 				$scope.smses = response;
+				$scope.alert = false;
 			}
 		});
 	};

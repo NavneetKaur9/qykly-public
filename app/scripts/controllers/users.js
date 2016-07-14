@@ -23,7 +23,7 @@ angular.module('sbAdminApp')
 				type: 'GET',
 				data: function(aodata) {
 					if (aodata.draw == "1") {
-						aodata.order[0].column = "3";
+						aodata.order[0].column = "4";
 						aodata.order[0].dir = 'desc';
 					}
 
@@ -52,10 +52,6 @@ angular.module('sbAdminApp')
 			}).notSortable().withOption('searchable', false).withOption('width', '2%'),
 
 			DTColumnBuilder.newColumn('primaryEmail').withTitle('Email ').withClass('emailpointer'),
-
-			DTColumnBuilder.newColumn('dateCreated').withTitle('dateCreated ').renderWith(function(data, type, full) {
-				return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
-			}).withOption('searchable', false),
 
 			DTColumnBuilder.newColumn('accessTime').withTitle('Access Time ').renderWith(function(data, type, full) {
 				return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
