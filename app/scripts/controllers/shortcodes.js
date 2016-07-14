@@ -4,8 +4,6 @@
  */
 angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http, api, $cookieStore, $window) {
 	var url = api.addr();
-	// var token = $cookieStore.get('c2cCookie');
-	// console.log(token);
 	$window.scrollTo(0, 0);
 	$scope.alert = '  loading.........';
 
@@ -21,7 +19,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 				if (status === '0') {
 					$scope.unproc = response.unprocessed;
 					$scope.new = response.newcode;
-					// console.log('status:0', response);
+					$scope.getSms($scope.unproc[0], 0);
 				} else {
 					$scope.proc = response;
 					// console.log('status:3', response);
@@ -33,20 +31,18 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 
 	$scope.getShortcode('0');
 	$scope.getShortcode(3);
-
 	$scope.getSms = function(code, status) {
-		$scope.code = code;
-		$scope.alert = 'loading.......';
+		$scope.alert = 'fetching ' + code + ' messages....';
 		api.get('get-smss/' + code + '/' + status, false, false, false, function(err, response) {
 			if (err || response.error) {
 				$scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
 			} else {
+				$scope.code = code;
 				$scope.smses = response;
 				$scope.alert = false;
 			}
 		});
 	};
-
 
 
 	$scope.blacklist = function() {
@@ -101,15 +97,21 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 
 	$scope.searchCode = '';
 
-	$scope.shortcode = function() {
-		api.get('short-code', false, false, {
-			sender: $scope.searchCode
-		}, function(err, response) {
-			$scope.ShortcodeSummary = response;
-			console.log(response);
-		})
-	};
+	// $scope.shortcode = function() {
+	// 	api.get('short-code', false, false, {
+	// 		sender: $scope.searchCode
+	// 	}, function(err, response) {
+	// 		$scope.ShortcodeSummary = response;
+	// 		console.log(response);
+	// 	})
+	// };
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
+	$scope.sortType = 'saveTime';
+	$scope.sortReverse = false;
+	$scope.order = function(sortType) {
+		$scope.sortReverse = ($scope.sortType === sortType) ? !$scope.sortReverse : false;
+		$scope.sortType = sortType;
+	};
 
 });

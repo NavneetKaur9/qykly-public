@@ -27,10 +27,20 @@ angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, 
 		DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
 		DTColumnBuilder.newColumn('address').withTitle('Address'),
 		DTColumnBuilder.newColumn('text').withTitle('smsText'),
-		DTColumnBuilder.newColumn('status').withTitle('Status '),
+		DTColumnBuilder.newColumn('status').withTitle('Status ').renderWith(function(data, type, full) {
+			if (data == 0) {
+				return "unprocessed";
+			} else if (data == 3) {
+				return "processed";
+			} else if (data == 1) {
+				return "blacklisted";
+			} else {
+				return data;
+			}
+		}).withOption('searchable', false),
 		DTColumnBuilder.newColumn('time').withTitle('time ').renderWith(function(data, type, full) {
 			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
-		}).withOption('searchable', false), ,
+		}).withOption('searchable', false),
 		DTColumnBuilder.newColumn('saveTime').withTitle('saveTime ').renderWith(function(data, type, full) {
 			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 		}).withOption('searchable', false)
