@@ -11,10 +11,10 @@ app.log
 .nodemonignore
 .sass-cache/
 node_modules/
-
 public/lib/
 app/tests/coverage/
-dist/scripts/services/restful.js
+
+app/scripts/services/
 .bower-*/
 .idea/
 coverage/
