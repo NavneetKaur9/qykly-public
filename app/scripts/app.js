@@ -20,10 +20,10 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
     resolve: {
       loadMyDirectives: function($ocLazyLoad) {
         return $ocLazyLoad.load({
-          name: 'sbAdminApp',
-          files: ['scripts/directives/header/header.js', 'scripts/directives/sidebar/sidebar.js']
-        })
-        $ocLazyLoad.load({
+            name: 'sbAdminApp',
+            files: ['scripts/directives/header/header.js', 'scripts/directives/sidebar/sidebar.js']
+          }),
+          $ocLazyLoad.load({
             name: 'ngCookies',
             files: ['bower_components/angular-cookies/angular-cookies.js']
           }),
@@ -34,6 +34,9 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
           $ocLazyLoad.load({
             name: 'ngSanitize',
             files: ['bower_components/angular-sanitize/angular-sanitize.js']
+          }), $ocLazyLoad.load({
+            name: 'angular.backtop',
+            files: ['bower_components/angular-backtop/dist/angular-backtop.js', 'bower_components/angular-backtop/dist/angular-backtop.css']
           });
       }
     }

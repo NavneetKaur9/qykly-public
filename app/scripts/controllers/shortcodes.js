@@ -67,7 +67,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 				$scope.alert = response.message;
 				$scope.smses = [];
 				$scope.getShortcode('0');
-				// $scope.getBlacklisteds();
+				$scope.getBlacklisteds();
 			}
 		});
 	};
@@ -83,17 +83,17 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 		$scope.alert = false;
 	};
 
-	// $scope.getBlacklisteds = function() {
-	// 	// 
-	// 	api.get('get-blacklisteds', false, false, false, function(err, response) {
-	// 		if (err || response.error) {
-	// 			$scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
-	// 		} else {
-	// 			$scope.blacklisteds = response;
-	// 		}
-	// 	});
-	// };
-	// $scope.getBlacklisteds();
+	$scope.getBlacklisteds = function() {
+		// 
+		api.get('get-blacklisteds', false, false, false, function(err, response) {
+			if (err || response.error) {
+				$scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
+			} else {
+				$scope.blacklisteds = response;
+			}
+		});
+	};
+	$scope.getBlacklisteds();
 
 	$scope.searchCode = '';
 
