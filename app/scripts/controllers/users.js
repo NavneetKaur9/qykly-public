@@ -14,7 +14,7 @@ angular.module('sbAdminApp')
 		var vm = this;
 		var column = 1;
 		var dir = 'desc';
-
+		var prevStart = "";
 		$scope.message = '';
 		DTDefaultOptions.setDisplayLength(100);
 		$scope.dtOptions = DTOptionsBuilder.newOptions()
@@ -22,11 +22,11 @@ angular.module('sbAdminApp')
 				url: url + 'get-user',
 				type: 'GET',
 				data: function(aodata) {
+
 					if (aodata.draw == "1") {
 						aodata.order[0].column = "4";
 						aodata.order[0].dir = 'desc';
 					}
-
 				}
 			})
 			.withDataProp('data')

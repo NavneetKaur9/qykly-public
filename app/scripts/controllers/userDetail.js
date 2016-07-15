@@ -110,7 +110,12 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	$scope.closeAlert = function(argument) {
 		$scope.alert = false;
 	};
-
+	$scope.sortType = 'saveTime';
+	$scope.sortReverse = false;
+	$scope.order = function(sortType) {
+		$scope.sortReverse = ($scope.sortType === sortType) ? !$scope.sortReverse : false;
+		$scope.sortType = sortType;
+	};
 
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// $scope.pagination = Pagination.getNew(10);
