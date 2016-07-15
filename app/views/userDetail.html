@@ -201,7 +201,7 @@
                                 <div class="row">
                                     <!-- left section : UNPROCESSED -->
                                     <div class="col-md-2 col-sm-2 mail_list_column">
-                                        <input ng-model="searchText_unproc" style="width:100%" placeholder="search code"/>
+                                        <input ng-model="searchText_unproc" style="width:100%;margin-bottom:1rem"  placeholder="search code"/>
                                         <div style="overflow:auto;height: 500px;">
                                             <a href="" ng-repeat="code in unproc |filter:searchText_unproc">
                                                 <div class="mail_list">
@@ -252,7 +252,7 @@
                             <div role="tabpanel" class="tab-pane fade " id="tab_content2" aria-labelledby="new-tab">
                                 <div class="row">
                                     <div class="col-md-2 col-sm-2 mail_list_column">
-                                        <input ng-model="searchText_new" style="width:100%" placeholder="search code"/>
+                                        <input ng-model="searchText_new" style="width:100%;margin-bottom:1rem"  placeholder="search code"/>
                                         <div style="overflow:auto;height: 500px;">
                                             <a href="javascript:void(0)" ng-repeat="code in new |filter:searchText_new">
                                                 <div class="mail_list">
@@ -310,7 +310,7 @@
                                 <div class="row">
                                     <div class="col-md-2 col-sm-2 mail_list_column">
                                         <div style="overflow:auto;height: 500px;">
-                                            <input ng-model="searchText_proc" style="width:100%" placeholder="search code"/>
+                                            <input ng-model="searchText_proc" style="width:100%;margin-bottom:1rem"  placeholder="search code"/>
                                             <a href="" ng-repeat="code in proc |filter:searchText_proc">
                                                 <div class="mail_list">
                                                     <div class="left">
