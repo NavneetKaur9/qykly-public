@@ -13,7 +13,7 @@ app.log
 node_modules/
 public/lib/
 app/tests/coverage/
-
+dist/scripts/services/
 app/scripts/services/
 .bower-*/
 .idea/

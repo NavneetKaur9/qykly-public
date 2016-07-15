@@ -17,16 +17,19 @@ angular.module('sbAdminApp')
 		var prevStart = "";
 		$scope.message = '';
 		DTDefaultOptions.setDisplayLength(100);
+
+		// DTOptionsBuilder.newOptions().withOption('aaSorting', [3, 'asc'])
+
 		$scope.dtOptions = DTOptionsBuilder.newOptions()
 			.withOption('ajax', {
 				url: url + 'get-user',
 				type: 'GET',
 				data: function(aodata) {
 
-					if (aodata.draw == "1") {
-						aodata.order[0].column = "4";
-						aodata.order[0].dir = 'desc';
-					}
+					// if (aodata.draw == "1") {
+					// 	aodata.order[0].column = "4";
+					// 	aodata.order[0].dir = 'desc';
+					// }
 				}
 			})
 			.withDataProp('data')
@@ -43,7 +46,8 @@ angular.module('sbAdminApp')
 			.withOption('headerCallback', function(header) {
 				$window.scrollTo(0, 0);
 
-			}).withOption('stateSave', true);
+			}).withOption('stateSave', true)
+			.withOption('aaSorting', [4, 'desc']);
 
 		$scope.dtColumns = [
 			DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
