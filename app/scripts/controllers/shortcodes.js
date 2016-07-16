@@ -16,21 +16,22 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 				$scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
 
 			} else {
+
 				if (status === '0') {
 					$scope.unproc = response.unprocessed;
 					$scope.new = response.newcode;
 					$scope.getSms($scope.unproc[0], 0);
+					$scope.getShortcode(3);
+
 				} else {
 					$scope.proc = response;
-					// console.log('status:3', response);
+					$scope.alert = false;
 				}
-				$scope.alert = false;
 			}
 		});
 	};
 
 	$scope.getShortcode('0');
-	$scope.getShortcode(3);
 	$scope.getSms = function(code, status) {
 		$scope.alert = 'fetching ' + code + ' messages....';
 		api.get('get-smss/' + code + '/' + status, false, false, false, function(err, response) {
@@ -67,7 +68,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 				$scope.alert = response.message;
 				$scope.smses = [];
 				$scope.getShortcode('0');
-				$scope.getBlacklisteds();
+				// $scope.getBlacklisteds();
 			}
 		});
 	};
@@ -114,33 +115,56 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 		$scope.sortType = sortType;
 	};
 
-	// $scope.dtOptions = DTOptionsBuilder.newOptions()
-	// 	.withOption('ajax', {
-	// 		url: url + 'get-blacklisteds',
-	// 		type: 'GET',
-	// 		data: function(aodata) {
+	$scope.dtOptions = DTOptionsBuilder.newOptions()
+		.withOption('ajax', {
+			url: url + 'get-blacklisteds',
+			type: 'GET',
+			data: function(aodata) {
 
-	// 			if (aodata.draw == "1") {
-	// 				aodata.order[0].column = "3";
-	// 				aodata.order[0].dir = 'desc';
-	// 			}
-	// 		}
-	// 	})
-	// 	// .withDataProp('data')
-	// 	.withOption('processing', true)
-	// 	.withOption('serverSide', true);
+				if (aodata.draw == "1") {
+					aodata.order[0].column = "4";
+					aodata.order[0].dir = 'desc';
+				}
+			}
+		})
+		.withDataProp('data')
+		.withOption('processing', true)
+		.withOption('serverSide', true)
+		.withLanguage({
+			'sSearch': 'Search  Blacklisted Shortcode:',
+			'oPaginate': {
+				'sNext': '»',
+				'sPrevious': '«'
+			}
+		})
+		.withOption('headerCallback', function(header) {
+			$window.scrollTo(0, 0);
+
+		});
 
 
+	$scope.dtColumns = [
+		DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
 
-	// $scope.dtColumns = [
-	// 	DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
-	// 	DTColumnBuilder.newColumn('Sender').withTitle('Sender '),
-	// 	DTColumnBuilder.newColumn('status').withTitle('status '),
-	// 	DTColumnBuilder.newColumn('saveTime').withTitle('dateModified ').renderWith(function(data, type, full) {
-	// 		return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
+		DTColumnBuilder.newColumn(null).withTitle('# ').renderWith(function(data, type, full, meta) {
+			return data = meta.settings._iDisplayStart + meta.row + 1;
+		}).notSortable().withOption('searchable', false).withOption('width', '2%'),
 
-	// 	}).withOption('searchable', false)
+		DTColumnBuilder.newColumn('Sender').withTitle('Sender '),
+		DTColumnBuilder.newColumn('Status').withTitle('Status '),
+		DTColumnBuilder.newColumn('saveTime').withTitle('DateModified      ').renderWith(function(data, type, full) {
+			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
+		}).withOption('searchable', false).withOption('width', '100%')
 
-	// ];
+	];
+	$scope.parseSms = function(code) {
+		$scope.alert = '  loading.........';
+		api.put('parsesmsbyshortcode', false, false, {
+			shortcode: code
+		}, function(err, response) {
+			$scope.alert = response.count + ' messages parsed with ' + code;
+			// $scope.alert = false;
+		});
+	};
 
 });

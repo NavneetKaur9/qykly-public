@@ -117,6 +117,27 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		$scope.sortType = sortType;
 	};
 
+
+	$scope.parseAllSms = function() {
+		$scope.alert = '  loading.........';
+
+		api.post('parsesms', false, {
+			deviceId: id
+		}, function(err, response) {
+			$scope.alert = response.count + ' messages parsed ';
+		});
+	};
+
+	$scope.parseSms = function(code) {
+		$scope.alert = '  loading.........';
+
+		api.put('parsesmsbyshortcode', false, false, {
+			shortcode: code
+		}, function(err, response) {
+			$scope.alert = response.count + ' messages parsed with ' + code;
+		});
+	};
+
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// $scope.pagination = Pagination.getNew(10);
 	// $scope.pagination.numPages = Math.ceil($scope.unproc.length / $scope.pagination.perPage);

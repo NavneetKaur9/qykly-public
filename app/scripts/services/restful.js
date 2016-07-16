@@ -9,11 +9,11 @@
 
 angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', '$cookieStore', function($rootScope, $http, $cookieStore) {
 
+
 	// var parseUrl = 'http://localhost:3000/api2';
-
 	var parseUrl = 'http://52.66.81.240/api2'; // staging server address
-
 	// var parseUrl = 'http://54.169.236.107/api2'; //  production server address
+
 	console.log(parseUrl);
 	// var parseUrl="";
 	var token = $cookieStore.get('c2cCookie'); //set Headers for JWTTOKEN

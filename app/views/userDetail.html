@@ -6,134 +6,7 @@
             back
         </button>
     </a>
-    <!-- ********   START: MODAL     ********* -->
-    <div class="pull-right">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">
-            Check User Details
-        </button>
-        <div style="display: none;" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-sm" style="width:35%">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">
-                                ×
-                            </span>
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel2">
-                            User Details
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <dl class="dl-horizontal">
-                            <dt style="width:120px">
-                                _id :
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData._id}}
-                            </dd>
-                            <dt style="width:120px">
-                                PrimaryEmail :
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.primaryEmail}}
-                            </dd>
-                            <dt style="width:120px">
-                                Device Resolution:
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.deviceResolution}}
-                            </dd>
-                            <dt style="width:120px">
-                                IMEI:
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.imei}}
-                            </dd>
-                            <dt style="width:120px">
-                                Platform :
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.platform}}
-                            </dd>
-                            <dt style="width:120px">
-                                Platform Version:
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.platformVersion}}
-                            </dd>
-                            <dt style="width:120px">
-                                Primary Network:
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.primaryNetwork}}
-                            </dd>
-                            <dt style="width:120px">
-                                Referal code:
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.referralCode}}
-                            </dd>
-                            <dt style="width:120px">
-                                appVersion :
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.appVersion}}
-                            </dd>
-                            <dt style="width:120px">
-                                Sms ShortCodes:
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.smsShortCodes.length}}
-                            </dd>
-                            <dt style="width:120px">
-                                Access Time
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.accessTime|date:'medium'}}
-                            </dd>
-                            <dt style="width:120px">
-                                Date Created:
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.dateCreated|date:'medium'}}
-                            </dd>
-                            <dt style="width:120px">
-                                Manufacturer:
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.manufacturer}}
-                            </dd>
-                            <dt style="width:120px">
-                                Last Login:
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.lastLogin |date:'medium'}}
-                            </dd>
-                            <dt style="width:120px">
-                                latitude:
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.latitude}}
-                            </dd>
-                            <dt style="width:120px">
-                                longitude:
-                            </dt>
-                            <dd style="margin-left:130px">
-                                {{userData.longitude}}
-                            </dd>
-                        </dl>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                            Close
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ********   END: MODAL       ********* -->
+   
     <!--
         <div ng-repeat="(key, value) in userData">
             {{key}}:::{{value}}
@@ -156,7 +29,142 @@
                 {{ proCount}}
             </span>
         </li>
-        <li class="hidden-phone">
+        <li >
+            <button ng-click="parseAllSms()">
+                <i class="fa fa-refresh" aria-hidden="true">
+                </i>
+                Parse All sms
+            </button>
+        </li>
+        <li>
+            <!-- ********   START: MODAL     ********* -->
+            <!-- <div class="pull-right"> -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">
+                    Check User Details
+                </button>
+                <div style="display: none;" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog modal-sm" style="width:35%">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">
+                                        ×
+                                    </span>
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel2">
+                                    User Details
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <dl class="dl-horizontal">
+                                    <dt style="width:120px">
+                                        _id :
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData._id}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        PrimaryEmail :
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.primaryEmail}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        Device Resolution:
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.deviceResolution}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        IMEI:
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.imei}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        Platform :
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.platform}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        Platform Version:
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.platformVersion}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        Primary Network:
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.primaryNetwork}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        Referal code:
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.referralCode}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        appVersion :
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.appVersion}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        Sms ShortCodes:
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.smsShortCodes.length}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        Access Time
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.accessTime|date:'medium'}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        Date Created:
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.dateCreated|date:'medium'}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        Manufacturer:
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.manufacturer}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        Last Login:
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.lastLogin |date:'medium'}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        latitude:
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.latitude}}
+                                    </dd>
+                                    <dt style="width:120px">
+                                        longitude:
+                                    </dt>
+                                    <dd style="margin-left:130px">
+                                        {{userData.longitude}}
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- </div> -->
+            <!-- ********   END: MODAL       ********* -->
         </li>
     </ul>
     <div class="row">
@@ -206,6 +214,14 @@
                                                         <h3 ng-click="getSms(code,0)">
                                                             {{code}}
                                                         </h3>
+                                                        <small >
+                                                        <button ng-click="parseSms(code)" type="button" class="btn btn-default btn-xs">
+                                                            
+                                                           <i class="fa fa-refresh" aria-hidden="true">
+                                                           </i>
+                                                        </button>
+                                                         
+                                                        </small>
                                                     </div>
                                                 </div>
                                             </a>

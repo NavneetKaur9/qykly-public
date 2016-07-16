@@ -23,7 +23,14 @@ angular.module('sbAdminApp').controller('regexCtrl', function($scope, $http, DTO
 	$scope.dtOptions = DTOptionsBuilder.newOptions()
 		.withOption('ajax', {
 			url: url + 'get-regex',
-			type: 'GET'
+			type: 'GET',
+			data: function(aodata) {
+
+				if (aodata.draw == "1") {
+					aodata.order[0].column = "6";
+					aodata.order[0].dir = 'desc';
+				}
+			}
 		})
 		.withDataProp('data')
 		.withOption('processing', true)
@@ -32,6 +39,10 @@ angular.module('sbAdminApp').controller('regexCtrl', function($scope, $http, DTO
 
 
 	$scope.dtColumns = [
+		DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
+		DTColumnBuilder.newColumn(null).withTitle('# ').renderWith(function(data, type, full, meta) {
+			return data = meta.settings._iDisplayStart + meta.row + 1;
+		}).notSortable().withOption('searchable', false).withOption('width', '2%'),
 		DTColumnBuilder.newColumn('address').withTitle('address'),
 		DTColumnBuilder.newColumn('msgType').withTitle('msgType '),
 		DTColumnBuilder.newColumn('msgSubType').withTitle('msgSubType '),

@@ -26,10 +26,10 @@ angular.module('sbAdminApp')
 				type: 'GET',
 				data: function(aodata) {
 
-					// if (aodata.draw == "1") {
-					// 	aodata.order[0].column = "4";
-					// 	aodata.order[0].dir = 'desc';
-					// }
+					if (aodata.draw == "1") {
+						aodata.order[0].column = "4";
+						aodata.order[0].dir = 'desc';
+					}
 				}
 			})
 			.withDataProp('data')
@@ -46,8 +46,7 @@ angular.module('sbAdminApp')
 			.withOption('headerCallback', function(header) {
 				$window.scrollTo(0, 0);
 
-			}).withOption('stateSave', true)
-			.withOption('aaSorting', [4, 'desc']);
+			}).withOption('stateSave', true);
 
 		$scope.dtColumns = [
 			DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),

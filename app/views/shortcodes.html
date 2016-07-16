@@ -51,16 +51,14 @@
                                     Processed Shortcodes
                                 </a>
                             </li>
-                            
-                                <!-- <li role="presentation" class="">
-                                    <a href="userDetail.html#tab_content4" role="tab" id="blacklist-tab" data-toggle="tab" aria-expanded="false" ng-click="reset()">
-                                        <span class="badge bg-green">
-                                            {{blacklisteds.length}}
-                                        </span>
-                                        Blacklisteds Shortcode
-                                    </a>
-                                </li> -->
-                            
+                            <li role="presentation" class="">
+                                <a href="userDetail.html#tab_content4" role="tab" id="blacklist-tab" data-toggle="tab" aria-expanded="false" ng-click="reset()">
+                                   <!--  <span class="badge bg-green">
+                                        {{blacklisteds.length}}
+                                    </span> -->
+                                    Blacklisteds Shortcode
+                                </a>
+                            </li>
                         </ul>
                         <!-- END: tabs -->
                         <div id="myTabContent" class="tab-content">
@@ -77,6 +75,12 @@
                                                         <h3 ng-click="getSms(code,0)">
                                                             {{code}}
                                                         </h3>
+                                                        <small >
+                                                            <button ng-click="parseSms(code)" type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-refresh" aria-hidden="true">
+                                                                </i>
+                                                            </button>
+                                                        </small>
                                                     </div>
                                                 </div>
                                             </a>
@@ -358,14 +362,14 @@
                                 </div>
                             </div>
                             <!-- tab content 4:blacklisteds -->
-                            
-                                <div role="tabpanel" class="tab-pane fade " id="tab_content4" aria-labelledby="blacklist-tab">
-                                    <div class="row">
-                                       <!--  <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-bordered">
-                </table>  -->
-                                    </div>
-                                </div>
-                            
+                            <div role="tabpanel" class="tab-pane fade " id="tab_content4" aria-labelledby="blacklist-tab">
+                                <!-- <div class="row"> -->
+                                    <!-- <div class="col-md-11 x_panel"> -->
+                                        <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-bordered">
+                                        </table>
+                                    <!-- </div> -->
+                                <!-- </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
