@@ -153,8 +153,8 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 		DTColumnBuilder.newColumn('Sender').withTitle('Sender '),
 		DTColumnBuilder.newColumn('Status').withTitle('Status '),
 		DTColumnBuilder.newColumn('saveTime').withTitle('DateModified      ').renderWith(function(data, type, full) {
-			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
-		}).withOption('searchable', false).withOption('width', '100%')
+			return $filter('date')(data, 'd/MM/yy,h:mma'); //date filter 
+		}).withOption('searchable', false).withOption('width', '20%')
 
 	];
 	$scope.parseSms = function(code) {

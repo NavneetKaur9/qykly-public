@@ -2381,13 +2381,13 @@ button,
 }
 
 .mail_list .left {
-    width: 25%;
+    width: 18%;
     float: left;
     margin-right: 3%
 }
 
 .mail_list .right {
-    width: 60%;
+    width: 70%;
     float: left
 }
 
@@ -2395,6 +2395,7 @@ button,
     font-size: 15px;
     font-weight: bold;
     margin: 0px 0 6px;
+    float:left;
 }
 
 .mail_list h3 small {
@@ -3592,7 +3593,7 @@ ul.stats-overview li {
     display: inline-block;
     text-align: center;
     padding: 0 15px;
-    width: 30%;
+    width: 20%;
     font-size: 14px;
     border-right: 1px solid #e8e8e8;
 }
