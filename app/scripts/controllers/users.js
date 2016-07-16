@@ -62,7 +62,7 @@ angular.module('sbAdminApp')
 			}).withOption('searchable', false),
 
 
-			DTColumnBuilder.newColumn('lastLogin').withTitle('lastLogin ').renderWith(function(data, type, full) {
+			DTColumnBuilder.newColumn('lastLogin').withTitle('First Login ').renderWith(function(data, type, full) {
 				return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 			}).withOption('searchable', false),
 
