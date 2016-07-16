@@ -2,7 +2,7 @@
 /**
  *  Shortcodes controller
  */
-angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http, api, $cookieStore, $window) {
+angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http, api, $cookieStore, $window, DTOptionsBuilder, DTColumnBuilder, $filter) {
 	var url = api.addr();
 	$window.scrollTo(0, 0);
 	$scope.alert = '  loading.........';
@@ -83,17 +83,17 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 		$scope.alert = false;
 	};
 
-	$scope.getBlacklisteds = function() {
-		// 
-		api.get('get-blacklisteds', false, false, false, function(err, response) {
-			if (err || response.error) {
-				$scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
-			} else {
-				$scope.blacklisteds = response;
-			}
-		});
-	};
-	$scope.getBlacklisteds();
+	// $scope.getBlacklisteds = function() {
+	// 	// 
+	// 	api.get('get-blacklisteds', false, false, false, function(err, response) {
+	// 		if (err || response.error) {
+	// 			$scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
+	// 		} else {
+	// 			$scope.blacklisteds = response;
+	// 		}
+	// 	});
+	// };
+	// $scope.getBlacklisteds();
 
 	$scope.searchCode = '';
 
@@ -113,5 +113,34 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 		$scope.sortReverse = ($scope.sortType === sortType) ? !$scope.sortReverse : false;
 		$scope.sortType = sortType;
 	};
+
+	// $scope.dtOptions = DTOptionsBuilder.newOptions()
+	// 	.withOption('ajax', {
+	// 		url: url + 'get-blacklisteds',
+	// 		type: 'GET',
+	// 		data: function(aodata) {
+
+	// 			if (aodata.draw == "1") {
+	// 				aodata.order[0].column = "3";
+	// 				aodata.order[0].dir = 'desc';
+	// 			}
+	// 		}
+	// 	})
+	// 	// .withDataProp('data')
+	// 	.withOption('processing', true)
+	// 	.withOption('serverSide', true);
+
+
+
+	// $scope.dtColumns = [
+	// 	DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
+	// 	DTColumnBuilder.newColumn('Sender').withTitle('Sender '),
+	// 	DTColumnBuilder.newColumn('status').withTitle('status '),
+	// 	DTColumnBuilder.newColumn('saveTime').withTitle('dateModified ').renderWith(function(data, type, full) {
+	// 		return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
+
+	// 	}).withOption('searchable', false)
+
+	// ];
 
 });
