@@ -469,7 +469,7 @@
                 {{alert}}
             </div>
                 <div ng-if="parseSmsResult.length">
-                   <div ng-repeat="(key,value) in parseSmsResult" > {{value.count}} messages processed with {{value.Shortcode}}</div>
+                   <div ng-repeat="(key,value) in parseSmsResult" > {{value}} messages processed of {{key}}</div>
                 </div>
         </div>
     </div>

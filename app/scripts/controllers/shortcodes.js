@@ -84,26 +84,14 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 		$scope.alert = false;
 	};
 
-	// $scope.getBlacklisteds = function() {
-	// 	// 
-	// 	api.get('get-blacklisteds', false, false, false, function(err, response) {
-	// 		if (err || response.error) {
-	// 			$scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
-	// 		} else {
-	// 			$scope.blacklisteds = response;
-	// 		}
-	// 	});
-	// };
-	// $scope.getBlacklisteds();
-
 	$scope.searchCode = '';
 
 	$scope.searchShortcode = function() {
-		api.get('short-code', false, false, {
-			sender: $scope.searchCode
+		api.get('Search-code', false, false, {
+			address: $scope.searchCode
 		}, function(err, response) {
-			$scope.ShortcodeSummary = response;
-			console.log(response);
+			$scope.alert = response.message;
+			$scope.searchResult = response.result;
 		})
 	};
 	$scope.currentPage = 1;
@@ -151,7 +139,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 		}).notSortable().withOption('searchable', false).withOption('width', '2%'),
 
 		DTColumnBuilder.newColumn('Sender').withTitle('Sender '),
-		DTColumnBuilder.newColumn('Status').withTitle('Status '),
+		DTColumnBuilder.newColumn('Status').withTitle('Status ').withOption('searchable', false),
 		DTColumnBuilder.newColumn('saveTime').withTitle('DateModified      ').renderWith(function(data, type, full) {
 			return $filter('date')(data, 'd/MM/yy,h:mma'); //date filter 
 		}).withOption('searchable', false).withOption('width', '20%')
