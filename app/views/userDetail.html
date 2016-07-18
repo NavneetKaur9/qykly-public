@@ -300,6 +300,14 @@
                                                         <h3 ng-click="getSms(code,0)">
                                                             {{code}}
                                                         </h3>
+                                                         <small >
+                                                        <button ng-click="parseSms(code)" type="button" class="btn btn-default btn-xs">
+                                                            
+                                                           <i class="fa fa-refresh" aria-hidden="true">
+                                                           </i>
+                                                        </button>
+                                                         
+                                                        </small>
                                                     </div>
                                                 </div>
                                             </a>
@@ -456,13 +464,13 @@
                 <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
                 </span>
             </div>
-            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" >
-                <!--
-                    <span class="glyphicon glyphicon-info-sign">
-                    </span>
-                -->
+            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" ng-hide="parseSmsResult.length">
+                <!-- <img src="assets/images/ajax-loader.gif"/> -->
                 {{alert}}
             </div>
+                <div ng-if="parseSmsResult.length">
+                   <div ng-repeat="(key,value) in parseSmsResult" > {{value.count}} messages processed with {{value.Shortcode}}</div>
+                </div>
         </div>
     </div>
     <back-top scroll-speed=1500 button-theme="dark">

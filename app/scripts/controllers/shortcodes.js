@@ -98,14 +98,14 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 
 	$scope.searchCode = '';
 
-	// $scope.shortcode = function() {
-	// 	api.get('short-code', false, false, {
-	// 		sender: $scope.searchCode
-	// 	}, function(err, response) {
-	// 		$scope.ShortcodeSummary = response;
-	// 		console.log(response);
-	// 	})
-	// };
+	$scope.searchShortcode = function() {
+		api.get('short-code', false, false, {
+			sender: $scope.searchCode
+		}, function(err, response) {
+			$scope.ShortcodeSummary = response;
+			console.log(response);
+		})
+	};
 	$scope.currentPage = 1;
 	$scope.pageSize = 10;
 	$scope.sortType = 'saveTime';
@@ -158,12 +158,14 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 
 	];
 	$scope.parseSms = function(code) {
-		$scope.alert = '  loading.........';
-		api.put('parsesmsbyshortcode', false, false, {
+		// $scope.alert = false;
+		$scope.parseSmsResult = [];
+		$scope.alert = 'loading.........';
+		api.post('parsesmsbyshortcode', false, {
 			shortcode: code
 		}, function(err, response) {
-			$scope.alert = response.count + ' messages parsed with ' + code;
-			// $scope.alert = false;
+			$scope.parseSmsResult = response;
+			// $scope.alert = response.count + ' messages parsed with ' + code;
 		});
 	};
 

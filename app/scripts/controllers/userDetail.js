@@ -129,15 +129,16 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	};
 
 	$scope.parseSms = function(code) {
-		$scope.alert = '  loading.........';
-
-		api.put('parsesmsbyshortcode', false, false, {
+		// $scope.alert = false;
+		$scope.parseSmsResult = [];
+		$scope.alert = 'loading.........';
+		api.post('parsesmsbyshortcode', false, {
 			shortcode: code
 		}, function(err, response) {
-			$scope.alert = response.count + ' messages parsed with ' + code;
+			$scope.parseSmsResult = response;
+			// $scope.alert = response.count + ' messages parsed with ' + code;
 		});
 	};
-
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// $scope.pagination = Pagination.getNew(10);
 	// $scope.pagination.numPages = Math.ceil($scope.unproc.length / $scope.pagination.perPage);
