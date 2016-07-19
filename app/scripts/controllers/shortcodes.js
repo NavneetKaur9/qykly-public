@@ -148,13 +148,16 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 	$scope.parseSms = function(code) {
 		// $scope.alert = false;
 		$scope.parseSmsResult = [];
-		$scope.alert = 'loading.........';
+		$scope.alert = 'processing.........';
 		api.post('parsesmsbyshortcode', false, {
 			shortcode: code
 		}, function(err, response) {
 			$scope.parseSmsResult = response;
-			// $scope.alert = response.count + ' messages parsed with ' + code;
+			$scope.alert = false;
 		});
+	};
+	$scope.closeParseSmsResult = function() {
+		$scope.parseSmsResult = [];
 	};
 
 });

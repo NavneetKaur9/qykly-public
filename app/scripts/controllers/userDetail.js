@@ -119,23 +119,22 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 
 
 	$scope.parseAllSms = function() {
-		$scope.alert = '  loading.........';
+		$scope.alert = '  processing.........';
 
 		api.post('parsesms', false, {
 			deviceId: id
 		}, function(err, response) {
 			if (response.output.length === 0) {
-				$scope.alert = "No data found";
+				return $scope.alert = "No data found";
 			}
 			$scope.parseSmsResult = response;
-			// $scope.alert = response.count + ' messages parsed ';
+			$scope.alert = false;
 		});
 	};
 
 	$scope.parseSms = function(code) {
-		// $scope.alert = false;
 		$scope.parseSmsResult = [];
-		$scope.alert = 'loading.........';
+		$scope.alert = 'processing.........';
 
 		api.post('parsesmsbyshortcode', false, {
 			shortcode: code
@@ -145,25 +144,11 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 				$scope.alert = "No data found";
 			}
 			$scope.parseSmsResult = response;
-			// $scope.alert = response.count + ' messages parsed with ' + code;
+			$scope.alert = false;
 		});
 	};
-	//----------------------------------------------------------------------------------------------------------------------------------------------------------------
-	// $scope.pagination = Pagination.getNew(10);
-	// $scope.pagination.numPages = Math.ceil($scope.unproc.length / $scope.pagination.perPage);
-
-	// $scope.currentPage = 1;
-	// $scope.pageSize = 10;
-
-	// $scope.selectAll = false;
-	// var titleHtml = '<input ng-model="selectAll" ng-click="toggleAll(selectAll)" type="checkbox">';
-
-	// $scope.toggle = function() {
-	// 	var checkboxes = document.getElementsByName('blacklist');
-	// 	for (var i = 0; i < checkboxes.length; i++) {
-	// 		checkboxes[i].checked = $scope.toggleSelection;
-	// 	}
-	// };
-
+	$scope.closeParseSmsResult = function(argument) {
+		$scope.parseSmsResult = [];
+	};
 
 });

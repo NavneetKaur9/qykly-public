@@ -166,6 +166,114 @@
             <!-- ********   END: MODAL       ********* -->
         </li>
     </ul>
+
+  <uib-alert ng-show="parseSmsResult.output.length" close="closeParseSmsResult()" type="success">
+                <div ng-repeat="(key,value) in parseSmsResult.output" >
+                    <div ng-repeat="(key, value) in value">
+                        {{key}} : {{value}}
+                    </div>
+                </div>
+                <a href="" data-toggle="modal" data-target=".bs-example-modal-lg" ng-show="parseSmsResult.smsdata.length" >
+                <!-- ng-show="parseSmsResult.smsdata.length" -->
+                    Click here for more details
+                </a>
+  </uib-alert>
+ <!-- modal for smsdata  starts here -->
+    <div style="display: none;" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="width:70%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            ×
+                        </span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">
+                        Sms Data
+                    </h4>
+                </div>
+               <div class="modal-body">
+                    <!-- modal body goes here -->
+                    <table class="table table-striped jambo_table" >
+                        <thead>
+                            <th>
+                                #
+                            </th>
+                             <th>
+                                <div href ng-click="order('shortcode')" style="cursor:pointer">
+                                    shortcode
+                                    <span ng-show="sortType == 'shortcode' && sortReverse" class="fa fa-caret-down">
+                                    </span>
+                                    <span ng-show="sortType == 'shortcode' && !sortReverse" class="fa fa-caret-up">
+                                    </span>
+                                </div>
+                            </th>
+                            <th>
+                                <div href ng-click="order('smstext')" style="cursor:pointer">
+                                    sms text
+                                    <span ng-show="sortType == 'smstext' && sortReverse" class="fa fa-caret-down">
+                                    </span>
+                                    <span ng-show="sortType == 'smstext' && !sortReverse" class="fa fa-caret-up">
+                                    </span>
+                                </div>
+                            </th>
+                            <th width="20%">
+                                    Pattern
+                                    
+                            </th>
+                            <th width="20%">
+                                <div  ng-click="order('savetime')" style="cursor:pointer">
+                                    Save Time
+                                    <span ng-show="sortType == 'savetime' && sortReverse" class="fa fa-caret-down">
+                                    </span>
+                                    <span ng-show="sortType == 'savetime' && !sortReverse" class="fa fa-caret-up">
+                                    </span>
+                                </div>
+                            </th>
+                            <th width="20%">
+                                <div  ng-click="order('dateModified')" style="cursor:pointer">
+                                    dateModified
+                                    <span ng-show="sortType == 'dateModified' && sortReverse" class="fa fa-caret-down">
+                                    </span>
+                                    <span ng-show="sortType == 'dateModified' && !sortReverse" class="fa fa-caret-up">
+                                    </span>
+                                </div>
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="sms in  parseSmsResult.smsdata |orderBy:sortType:sortReverse">
+                                <td>
+                                    {{$index+1}}
+                                </td>
+                                <td>
+                                    {{sms.shortcode}}
+                                </td>
+                                <td>
+                                    {{sms.smstext }}
+                                </td>
+                                 <td>
+                                    {{sms.pattern }}
+                                </td>
+                                <td>
+                                    {{sms.savetime |date:'MMM d, y h:mm a'}}
+                                </td>
+                                <td>
+                                    {{sms.dateModified |date:'MMM d, y h:mm a'}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal for smsdata ends here -->
     <div class="row">
         <div class="col-md-12 col-xs-12 col-lg-12">
             <div class="x_panel">
@@ -226,6 +334,7 @@
                                     </div>
                                     <!-- unprocessed message detail -->
                                     <div class="col-md-10 col-sm-10 mail_view" ng-show="smses.length">
+
                                         <h4>
                                             {{code}}
                                         </h4>
@@ -463,7 +572,7 @@
                 <!-- <img src="assets/images/ajax-loader.gif"/> -->
                 {{alert}}
             </div>
-            <div ng-if="parseSmsResult.output.length">
+            <!-- <div ng-if="parseSmsResult.output.length">
                 <div ng-repeat="(key,value) in parseSmsResult.output" >
                     <div ng-repeat="(key, value) in value">
                         {{key}} : {{value}}
@@ -472,7 +581,7 @@
                 <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm" ng-show="parseSmsResult.smsdata.length">
                     Click here for more details
                 </button>
-            </div>
+            </div> -->
         </div>
         <back-top scroll-speed=1500 button-theme="dark">
             <i class="fa fa-angle-double-up">
