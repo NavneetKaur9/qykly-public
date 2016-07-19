@@ -7,7 +7,10 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-	.controller('loginCtrl', function($scope, $location, $http, $cookieStore, api) {
+	.controller('loginCtrl', function($scope, $location, $http, $cookieStore, api, $cookies, $window) {
+
+		$cookieStore.remove('c2cCookie');
+		console.log($cookieStore.get('c2cCookie'));
 
 		$scope.login = function() {
 
@@ -17,13 +20,13 @@ angular.module('sbAdminApp')
 			}, function(err, response) {
 				$scope.success = true;
 				$scope.message = response.message;
-
 				if (response.data) {
-					$location.path('/dashboard/users');
+					$location.path('/dashboard/home');
 					$cookieStore.put('c2cCookie', response.data.authToken);
+					console.log('logged in', $cookieStore.get('c2cCookie'));
+
 				}
 			});
-
 
 		};
 	});

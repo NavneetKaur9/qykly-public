@@ -8,7 +8,6 @@
 angular.module('sbAdminApp')
 	.controller('usersCtrl', function($scope, $location, $http, api, DTOptionsBuilder, DTColumnBuilder, $filter, $compile, $state, DTDefaultOptions, $window) {
 
-
 		var url = api.addr();
 
 		var vm = this;

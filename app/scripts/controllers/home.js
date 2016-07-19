@@ -2,7 +2,7 @@
 /**
  * 
  */
-angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api, $sce) {
+angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api, $sce, $window) {
 	var url = api.addr();
 	$scope.alert = '<img src="assets/images/ajax-loader.gif"/>' + ' loading.........';
 	$scope.alerts = $sce.trustAsHtml($scope.alert);

@@ -12,7 +12,12 @@ angular.module('sbAdminApp')
 			templateUrl: 'scripts/directives/header/header.html',
 			restrict: 'E',
 			replace: true,
-			controller: function($scope) {
+			controller: function($scope, api) {
+				api.get('userprofile', false, false, false, function(err, response) {
+					$scope.user = response;
+					// $scope.alert = response.message;
+					// $scope.modusers = response;
+				});
 
 			}
 		}

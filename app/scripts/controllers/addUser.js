@@ -20,6 +20,7 @@ angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, a
 					type: 'error'
 				}];
 			} else {
+				// $scope.alert = response.message;
 				$scope.modusers = response;
 			}
 		});
@@ -58,7 +59,8 @@ angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, a
 		});
 	};
 
-	$scope.closeAlert = function(index) {
-		$scope.alerts.splice(index, 1);
+	$scope.closeAlert = function() {
+		$scope.alert = false;
 	};
+
 });

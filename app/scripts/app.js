@@ -48,7 +48,7 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
       loadMyFiles: function($ocLazyLoad) {
         return $ocLazyLoad.load({
           name: 'sbAdminApp',
-          files: ['scripts/controllers/home.js']
+          files: ['scripts/controllers/home.js', 'scripts/services/restful.js']
         });
       }
     }
@@ -135,7 +135,7 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
       loadMyFile: function($ocLazyLoad) {
         return $ocLazyLoad.load({
           name: 'sbAdminApp',
-          files: ['./assets/plugins/select2/select2.min.css', 'bower_components/angular-xeditable/dist/css/xeditable.css','scripts/controllers/merchants.js', './assets/plugins/select2/select2.full.min.js','bower_components/angular-xeditable/dist/js/xeditable.js']
+          files: ['./assets/plugins/select2/select2.min.css', 'bower_components/angular-xeditable/dist/css/xeditable.css', 'scripts/controllers/merchants.js', './assets/plugins/select2/select2.full.min.js', 'bower_components/angular-xeditable/dist/js/xeditable.js']
         });
       }
     }
@@ -147,7 +147,7 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
       loadMyFile: function($ocLazyLoad) {
         return $ocLazyLoad.load({
           name: 'sbAdminApp',
-          files: ['scripts/controllers/addUser.js']
+          files: ['scripts/controllers/addUser.js', 'scripts/services/restful.js']
         });
       }
     }
