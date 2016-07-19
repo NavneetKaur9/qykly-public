@@ -137,6 +137,9 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		api.post('parsesmsbyshortcode', false, {
 			shortcode: code
 		}, function(err, response) {
+			if (response.output.length === 0) {
+				$scope.alert = "No data found";
+			}
 			$scope.parseSmsResult = response;
 			// $scope.alert = response.count + ' messages parsed with ' + code;
 		});
