@@ -1,7 +1,12 @@
 <div ng-controller="userDetailCtrl">
     <a ui-sref="dashboard.users">
-        back
+        <button type="button" class="btn btn-round btn-default btn-xs">
+            <i class="fa fa-arrow-left" aria-hidden="true">
+            </i>
+            back
+        </button>
     </a>
+   
     <!--
         <div ng-repeat="(key, value) in userData">
             {{key}}:::{{value}}
@@ -10,23 +15,30 @@
     <ul class="stats-overview">
         <li>
             <span class="name">
-                Unprocessed Messages
+                Unprocessed Messages :
             </span>
             <span class="value text-success">
-                {{unproCount}}
+                {{  unproCount}}
             </span>
         </li>
         <li>
             <span class="name">
-                Processed Messages
+                Processed Messages :
             </span>
             <span class="value text-success">
-                {{proCount}}
+                {{ proCount}}
             </span>
         </li>
-        <li class="hidden-phone">
+        <li >
+            <button ng-click="parseAllSms()">
+                <i class="fa fa-refresh" aria-hidden="true">
+                </i>
+                Parse All sms
+            </button>
+        </li>
+        <li>
             <!-- ********   START: MODAL     ********* -->
-            <div class="pull-right">
+            <!-- <div class="pull-right"> -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">
                     Check User Details
                 </button>
@@ -151,7 +163,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
             <!-- ********   END: MODAL       ********* -->
         </li>
     </ul>
@@ -164,26 +176,26 @@
                         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                             <li role="presentation" class="active">
                                 <a href="userDetail.html#tab_content1" id="un_proc-tab" role="tab" data-toggle="tab" aria-expanded="true" ng-click="reset()">
-                                    Unprocessed
                                     <span class="badge bg-green">
                                         {{unproc.length}}
                                     </span>
+                                    Unprocessed Shortcode
                                 </a>
                             </li>
                             <li role="presentation" class="">
                                 <a href="userDetail.html#tab_content2" role="tab" id="new-tab" data-toggle="tab" aria-expanded="false" ng-click="reset()">
-                                    New
                                     <span class="badge bg-green">
                                         {{new.length}}
                                     </span>
+                                    New Shortcode
                                 </a>
                             </li>
                             <li role="presentation" class="">
                                 <a href="userDetail.html#tab_content3" role="tab" id="proc-tab" data-toggle="tab" aria-expanded="false" ng-click="reset()">
-                                    Processed
                                     <span class="badge bg-green">
                                         {{proc.length}}
                                     </span>
+                                    Processed Shortcode
                                 </a>
                             </li>
                         </ul>
@@ -194,7 +206,7 @@
                                 <div class="row">
                                     <!-- left section : UNPROCESSED -->
                                     <div class="col-md-2 col-sm-2 mail_list_column">
-                                        <input ng-model="searchText_unproc" style="width:100%" placeholder="search code"/>
+                                        <input ng-model="searchText_unproc" style="width:100%;margin-bottom:1rem"  placeholder="search code"/>
                                         <div style="overflow:auto;height: 500px;">
                                             <a href="" ng-repeat="code in unproc |filter:searchText_unproc">
                                                 <div class="mail_list">
@@ -202,6 +214,14 @@
                                                         <h3 ng-click="getSms(code,0)">
                                                             {{code}}
                                                         </h3>
+                                                        <small >
+                                                        <button ng-click="parseSms(code)" type="button" class="btn btn-default btn-xs">
+                                                            
+                                                           <i class="fa fa-refresh" aria-hidden="true">
+                                                           </i>
+                                                        </button>
+                                                         
+                                                        </small>
                                                     </div>
                                                 </div>
                                             </a>
@@ -218,14 +238,35 @@
                                                     #
                                                 </th>
                                                 <th>
-                                                    Text
+                                                    <div href ng-click="order('text')" style="cursor:pointer">
+                                                        Text
+                                                        <span ng-show="sortType == 'text' && sortReverse" class="fa fa-caret-down">
+                                                        </span>
+                                                        <span ng-show="sortType == 'text' && !sortReverse" class="fa fa-caret-up">
+                                                        </span>
+                                                    </div>
                                                 </th>
-                                                <th>
-                                                    Time
+                                                <th width="20%">
+                                                    <div  ng-click="order('time')" style="cursor:pointer">
+                                                        Msg Time
+                                                        <span ng-show="sortType == 'time' && sortReverse" class="fa fa-caret-down">
+                                                        </span>
+                                                        <span ng-show="sortType == 'time' && !sortReverse" class="fa fa-caret-up">
+                                                        </span>
+                                                    </div>
+                                                </th>
+                                                <th width="20%">
+                                                    <div  ng-click="order('saveTime')" style="cursor:pointer">
+                                                        Save Time
+                                                        <span ng-show="sortType == 'saveTime' && sortReverse" class="fa fa-caret-down">
+                                                        </span>
+                                                        <span ng-show="sortType == 'saveTime' && !sortReverse" class="fa fa-caret-up">
+                                                        </span>
+                                                    </div>
                                                 </th>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="sms in smses |filter:searchText|orderBy">
+                                                <tr ng-repeat="sms in smses |orderBy:sortType:sortReverse">
                                                     <td>
                                                         {{$index+1}}
                                                     </td>
@@ -234,6 +275,9 @@
                                                     </td>
                                                     <td>
                                                         {{sms.time }}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.saveTime |date:'MMM d, y h:mm a'}}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -245,7 +289,7 @@
                             <div role="tabpanel" class="tab-pane fade " id="tab_content2" aria-labelledby="new-tab">
                                 <div class="row">
                                     <div class="col-md-2 col-sm-2 mail_list_column">
-                                        <input ng-model="searchText_new" style="width:100%" placeholder="search code"/>
+                                        <input ng-model="searchText_new" style="width:100%;margin-bottom:1rem"  placeholder="search code"/>
                                         <div style="overflow:auto;height: 500px;">
                                             <a href="javascript:void(0)" ng-repeat="code in new |filter:searchText_new">
                                                 <div class="mail_list">
@@ -256,11 +300,19 @@
                                                         <h3 ng-click="getSms(code,0)">
                                                             {{code}}
                                                         </h3>
+                                                         <small >
+                                                        <button ng-click="parseSms(code)" type="button" class="btn btn-default btn-xs">
+                                                            
+                                                           <i class="fa fa-refresh" aria-hidden="true">
+                                                           </i>
+                                                        </button>
+                                                         
+                                                        </small>
                                                     </div>
                                                 </div>
                                             </a>
                                         </div>
-                                        <button type="button" class="btn btn-dark btn-xs pull-right" ng-click="blacklist()">
+                                        <button type="button" class="btn btn-dark pull-right" ng-click="blacklist()">
                                             Blacklist
                                         </button>
                                     </div>
@@ -275,14 +327,35 @@
                                                     #
                                                 </th>
                                                 <th>
-                                                    Text
+                                                    <div href ng-click="order('text')" style="cursor:pointer">
+                                                        Text
+                                                        <span ng-show="sortType == 'text' && sortReverse" class="fa fa-caret-down">
+                                                        </span>
+                                                        <span ng-show="sortType == 'text' && !sortReverse" class="fa fa-caret-up">
+                                                        </span>
+                                                    </div>
                                                 </th>
-                                                <th>
-                                                    Time
+                                                <th width="20%">
+                                                    <div  ng-click="order('time')" style="cursor:pointer">
+                                                        Msg Time
+                                                        <span ng-show="sortType == 'time' && sortReverse" class="fa fa-caret-down">
+                                                        </span>
+                                                        <span ng-show="sortType == 'time' && !sortReverse" class="fa fa-caret-up">
+                                                        </span>
+                                                    </div>
+                                                </th>
+                                                <th width="20%">
+                                                    <div  ng-click="order('saveTime')" style="cursor:pointer">
+                                                        Save Time
+                                                        <span ng-show="sortType == 'saveTime' && sortReverse" class="fa fa-caret-down">
+                                                        </span>
+                                                        <span ng-show="sortType == 'saveTime' && !sortReverse" class="fa fa-caret-up">
+                                                        </span>
+                                                    </div>
                                                 </th>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="sms in smses |filter:searchText|orderBy">
+                                                <tr ng-repeat="sms in smses |orderBy:sortType:sortReverse">
                                                     <td>
                                                         {{$index+1}}
                                                     </td>
@@ -291,6 +364,9 @@
                                                     </td>
                                                     <td>
                                                         {{sms.time |date:'medium'}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.saveTime |date:'MMM d, y h:mm a'}}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -303,7 +379,7 @@
                                 <div class="row">
                                     <div class="col-md-2 col-sm-2 mail_list_column">
                                         <div style="overflow:auto;height: 500px;">
-                                            <input ng-model="searchText_proc" style="width:100%" placeholder="search code"/>
+                                            <input ng-model="searchText_proc" style="width:100%;margin-bottom:1rem"  placeholder="search code"/>
                                             <a href="" ng-repeat="code in proc |filter:searchText_proc">
                                                 <div class="mail_list">
                                                     <div class="left">
@@ -329,14 +405,35 @@
                                                     #
                                                 </th>
                                                 <th>
-                                                    Text
+                                                    <div href ng-click="order('text')" style="cursor:pointer">
+                                                        Text
+                                                        <span ng-show="sortType == 'text' && sortReverse" class="fa fa-caret-down">
+                                                        </span>
+                                                        <span ng-show="sortType == 'text' && !sortReverse" class="fa fa-caret-up">
+                                                        </span>
+                                                    </div>
                                                 </th>
-                                                <th>
-                                                    Time
+                                                <th width="20%">
+                                                    <div  ng-click="order('time')" style="cursor:pointer">
+                                                        Msg Time
+                                                        <span ng-show="sortType == 'time' && sortReverse" class="fa fa-caret-down">
+                                                        </span>
+                                                        <span ng-show="sortType == 'time' && !sortReverse" class="fa fa-caret-up">
+                                                        </span>
+                                                    </div>
+                                                </th>
+                                                <th width="20%">
+                                                    <div  ng-click="order('saveTime')" style="cursor:pointer">
+                                                        Save Time
+                                                        <span ng-show="sortType == 'saveTime' && sortReverse" class="fa fa-caret-down">
+                                                        </span>
+                                                        <span ng-show="sortType == 'saveTime' && !sortReverse" class="fa fa-caret-up">
+                                                        </span>
+                                                    </div>
                                                 </th>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="sms in smses |filter:searchText|orderBy">
+                                                <tr ng-repeat="sms in smses |orderBy:sortType:sortReverse">
                                                     <td>
                                                         {{$index+1}}.
                                                     </td>
@@ -345,6 +442,9 @@
                                                     </td>
                                                     <td>
                                                         {{sms.time |date:'medium'}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.saveTime |date:'MMM d, y h:mm a'}}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -364,13 +464,18 @@
                 <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
                 </span>
             </div>
-            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" >
-                <!--
-                    <span class="glyphicon glyphicon-info-sign">
-                    </span>
-                -->
+            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" ng-hide="parseSmsResult.length">
+                <!-- <img src="assets/images/ajax-loader.gif"/> -->
                 {{alert}}
             </div>
+                <div ng-if="parseSmsResult.length">
+                   <div ng-repeat="(key,value) in parseSmsResult" > {{value}} messages processed of {{key}}</div>
+                </div>
         </div>
     </div>
+    <back-top scroll-speed=1500 button-theme="dark">
+        <i class="fa fa-angle-double-up">
+        </i>
+        Scroll Top
+    </back-top>
 </div>

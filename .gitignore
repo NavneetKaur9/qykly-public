@@ -13,7 +13,6 @@ app.log
 node_modules/
 public/lib/
 app/tests/coverage/
-
 .bower-*/
 .idea/
 coverage/

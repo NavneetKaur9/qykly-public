@@ -5,9 +5,10 @@
  * @description
  * Controller of the sbAdminApp
  */
-angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http, $stateParams, api, DTOptionsBuilder, DTColumnBuilder, $filter) {
+angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http, $stateParams, api, DTOptionsBuilder, DTColumnBuilder, $filter, $window) {
 	var id = $stateParams.id;
 	var url = api.addr();
+	$window.scrollTo(0, 0);
 	$scope.getUser = function() {
 		// body...
 		api.get('get-user', id, false, false, function(err, response) {
@@ -61,6 +62,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	};
 	$scope.countStatus();
 	$scope.getSms = function(code, status) {
+		$scope.alert = 'fetching ' + code + ' messages....';
 		$scope.code = code;
 		api.get('get-sms/' + id + '/' + status + '/' + code, false, false, false, function(err, response) {
 			if (err || response.error) {
@@ -70,6 +72,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 				}];
 			} else {
 				$scope.smses = response;
+				$scope.alert = false;
 			}
 		});
 	};
@@ -107,8 +110,35 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	$scope.closeAlert = function(argument) {
 		$scope.alert = false;
 	};
+	$scope.sortType = 'saveTime';
+	$scope.sortReverse = false;
+	$scope.order = function(sortType) {
+		$scope.sortReverse = ($scope.sortType === sortType) ? !$scope.sortReverse : false;
+		$scope.sortType = sortType;
+	};
 
 
+	$scope.parseAllSms = function() {
+		$scope.alert = '  loading.........';
+
+		api.post('parsesms', false, {
+			deviceId: id
+		}, function(err, response) {
+			$scope.alert = response.count + ' messages parsed ';
+		});
+	};
+
+	$scope.parseSms = function(code) {
+		// $scope.alert = false;
+		$scope.parseSmsResult = [];
+		$scope.alert = 'loading.........';
+		api.post('parsesmsbyshortcode', false, {
+			shortcode: code
+		}, function(err, response) {
+			$scope.parseSmsResult = response;
+			// $scope.alert = response.count + ' messages parsed with ' + code;
+		});
+	};
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// $scope.pagination = Pagination.getNew(10);
 	// $scope.pagination.numPages = Math.ceil($scope.unproc.length / $scope.pagination.perPage);

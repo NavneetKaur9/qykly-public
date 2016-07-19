@@ -1,0 +1,34 @@
+{
+  "name": "angular-backtop",
+  "main": [
+    "./dist/angular-backtop.js",
+    "./dist/angular-backtop.css"
+  ],
+  "dependencies": {
+    "angular": "~1.3.15"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.3.15",
+    "angular-scenario": "~1.3.15"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "libs",
+    "test",
+    "karma.conf.js",
+    "Gruntfile",
+    "package.json"
+  ],
+  "homepage": "https://github.com/padsbanger/angular-backtop",
+  "_release": "c9f704bb9b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "c9f704bb9b547f13d7e6f8d1c1f18d719a45322e"
+  },
+  "_source": "https://github.com/padsbanger/angular-backtop.git",
+  "_target": "*",
+  "_originalSource": "angular-backtop",
+  "_direct": true
+}
