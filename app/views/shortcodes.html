@@ -10,6 +10,7 @@
                 </span>
             </div>
         </div>
+        <h4 ng-show="searchResult.length"> Result :{{searchCode}}</h4>
         <div ng-repeat="(key, value) in searchResult">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" ng-if="value.status=='0'">
                 <span class="count_bottom">

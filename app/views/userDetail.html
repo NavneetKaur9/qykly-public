@@ -6,7 +6,6 @@
             back
         </button>
     </a>
-   
     <!--
         <div ng-repeat="(key, value) in userData">
             {{key}}:::{{value}}
@@ -163,7 +162,7 @@
                         </div>
                     </div>
                 </div>
-            <!-- </div> -->
+                <!-- </div> -->
             <!-- ********   END: MODAL       ********* -->
         </li>
     </ul>
@@ -215,12 +214,10 @@
                                                             {{code}}
                                                         </h3>
                                                         <small >
-                                                        <button ng-click="parseSms(code)" type="button" class="btn btn-default btn-xs">
-                                                            
-                                                           <i class="fa fa-refresh" aria-hidden="true">
-                                                           </i>
-                                                        </button>
-                                                         
+                                                            <button ng-click="parseSms(code)" type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-refresh" aria-hidden="true">
+                                                                </i>
+                                                            </button>
                                                         </small>
                                                     </div>
                                                 </div>
@@ -300,13 +297,11 @@
                                                         <h3 ng-click="getSms(code,0)">
                                                             {{code}}
                                                         </h3>
-                                                         <small >
-                                                        <button ng-click="parseSms(code)" type="button" class="btn btn-default btn-xs">
-                                                            
-                                                           <i class="fa fa-refresh" aria-hidden="true">
-                                                           </i>
-                                                        </button>
-                                                         
+                                                        <small >
+                                                            <button ng-click="parseSms(code)" type="button" class="btn btn-default btn-xs">
+                                                                <i class="fa fa-refresh" aria-hidden="true">
+                                                                </i>
+                                                            </button>
                                                         </small>
                                                     </div>
                                                 </div>
@@ -458,8 +453,6 @@
             </div>
         </div>
     </div>
-    
-
     <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
         <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
             <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
@@ -470,21 +463,20 @@
                 <!-- <img src="assets/images/ajax-loader.gif"/> -->
                 {{alert}}
             </div>
-               <div ng-if="parseSmsResult.output.length">
-
-                   <div ng-repeat="(key,value) in parseSmsResult.output.length" > 
-                      <div ng-repeat="(key, value) in value">
+            <div ng-if="parseSmsResult.output.length">
+                <div ng-repeat="(key,value) in parseSmsResult.output" >
+                    <div ng-repeat="(key, value) in value">
                         {{key}} : {{value}}
-                      </div>
-                   </div>
-               </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm" ng-show="parseSmsResult.smsdata.length">
+                    Click here for more details
+                </button>
+            </div>
         </div>
+        <back-top scroll-speed=1500 button-theme="dark">
+            <i class="fa fa-angle-double-up">
+            </i>
+            Scroll Top
+        </back-top>
     </div>
-
-
-    <back-top scroll-speed=1500 button-theme="dark">
-        <i class="fa fa-angle-double-up">
-        </i>
-        Scroll Top
-    </back-top>
-</div>
