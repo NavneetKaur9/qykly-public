@@ -124,6 +124,9 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		api.post('parsesms', false, {
 			deviceId: id
 		}, function(err, response) {
+			if (response.output.length === 0) {
+				$scope.alert = "No data found";
+			}
 			$scope.parseSmsResult = response;
 			// $scope.alert = response.count + ' messages parsed ';
 		});
@@ -137,6 +140,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		api.post('parsesmsbyshortcode', false, {
 			shortcode: code
 		}, function(err, response) {
+			console.log(response.output.length);
 			if (response.output.length === 0) {
 				$scope.alert = "No data found";
 			}
