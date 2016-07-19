@@ -5,7 +5,6 @@
 angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, api) {
 
 	var url = api.addr();
-	console.log('hello');
 
 	function reset() {
 		$scope.name = '';
@@ -41,10 +40,7 @@ angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, a
 				}];
 			}
 
-			$scope.alerts = [{
-				msg: response,
-				type: 'success'
-			}];
+			$scope.alert = response;
 			reset();
 			$scope.getuser();
 		});

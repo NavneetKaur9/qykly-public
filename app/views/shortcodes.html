@@ -1,8 +1,7 @@
 <section ng-controller="shortcodesCtrl">
-    <!-- search box -->
-    <div class="title_left">
-        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-left top_search">
-            <div class="input-group">
+    <div class="row tile_count">
+        <div class="col-md-4">
+            <div class="input-group form-group top_search">
                 <input class="form-control" placeholder="Search for Short Code..." type="text" ng-model="searchCode" ng-enter="searchShortcode()"/>
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-click="searchShortcode()">
@@ -11,34 +10,34 @@
                 </span>
             </div>
         </div>
-    </div>
-    <!-- End :search box -->
-    <div class="title_right">{{searchResult}}
-        <!--
-            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                <button type="button" class="btn btn-round btn-default">
-                    All
-                </button>
+        <div ng-repeat="(key, value) in searchResult">
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" ng-if="value.status=='0'">
+                <span class="count_bottom">
+                    <i class="green">
+                        {{  value.count}}
+                    </i>
+                    Unprocessed Messages
+                </span>
             </div>
-        -->
-        <!-- <ul class="stats-overview">
-            <li>
-                <label>
-                    Sort By:
-                    <div class="btn-group  btn-group-sm">
-                        <button class="btn btn-default" type="button">
-                            date
-                        </button>
-                       
-                        <button class="btn btn-default" type="button">
-                            count
-                        </button>
-                    </div>
-                </label>
-            </li>
-        </ul> -->
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" ng-if="value.status=='3'">
+                <span class="count_bottom">
+                    <i class="green">
+                        {{  value.count}}
+                    </i>
+                    Processed Messages
+                </span>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" ng-if="value.status=='1'">
+                <span class="count_bottom">
+                    <i class="green">
+                        {{  value.count}}
+                    </i>
+                    Blacklisted Messages
+                </span>
+            </div>
+        </div>
     </div>
-    <hr/>
+    <!-- <hr/> -->
     <div class="row">
         <div class="col-md-12 col-xs-12 col-lg-12">
             <div class="x_panel">
@@ -409,15 +408,52 @@
                 <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
                 </span>
             </div>
-            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" ng-hide="parseSmsResult.length">
+            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" ng-hide="parseSmsResult.output.length">
                 <!-- <img src="assets/images/ajax-loader.gif"/> -->
                 {{alert}}
             </div>
-                <div ng-if="parseSmsResult.length">
-                   <div ng-repeat="(key,value) in parseSmsResult" > {{value}} messages processed of {{key}}</div>
+            <div ng-if="parseSmsResult.output.length">
+                <div ng-repeat="(key,value) in parseSmsResult.output" >
+                    <div ng-repeat="(key, value) in value">
+                        {{key}} : {{value}}
+                    </div>
                 </div>
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm" ng-show="parseSmsResult.smsdata.length">
+                    Click here for more details
+                </button>
+            </div>
         </div>
     </div>
+    <!-- modal for smsdata  starts here -->
+    <div style="display: none;" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:35%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            ×
+                        </span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">
+                        Sms Data
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- modal body goes here -->
+                    <div ng-repeat="(key, value) in parseSmsResult.smsdata">
+                        {{key}}.  smsText: {{value.smstext}},
+                       Pattern: {{value.pattern}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal for smsdata ends here -->
     <back-top scroll-speed=1500 button-theme="dark">
         <i class="fa fa-angle-double-up">
         </i>

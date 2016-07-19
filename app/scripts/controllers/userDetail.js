@@ -124,7 +124,8 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		api.post('parsesms', false, {
 			deviceId: id
 		}, function(err, response) {
-			$scope.alert = response.count + ' messages parsed ';
+			$scope.parseSmsResult = response;
+			// $scope.alert = response.count + ' messages parsed ';
 		});
 	};
 
@@ -132,6 +133,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		// $scope.alert = false;
 		$scope.parseSmsResult = [];
 		$scope.alert = 'loading.........';
+
 		api.post('parsesmsbyshortcode', false, {
 			shortcode: code
 		}, function(err, response) {
@@ -155,5 +157,6 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	// 		checkboxes[i].checked = $scope.toggleSelection;
 	// 	}
 	// };
+
 
 });

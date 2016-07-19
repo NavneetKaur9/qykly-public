@@ -19,7 +19,7 @@ angular.module('sbAdminApp')
 				$scope.message = response.message;
 
 				if (response.data) {
-					$location.path('/dashboard/home');
+					$location.path('/dashboard/users');
 					$cookieStore.put('c2cCookie', response.data.authToken);
 				}
 			});

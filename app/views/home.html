@@ -1,22 +1,63 @@
 <div ng-controller="homeCtrl">
-   
-
-
-      Home
-
-      <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
+    Home
+    <!-- custom alert section starts here -->
+    <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
         <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
             <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
                 <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
                 </span>
             </div>
-            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" >
-<!-- <div ng-bind-html="alerts"> -->
+            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" ng-hide="parseSmsResult.output.length">
+                <!-- <img src="assets/images/ajax-loader.gif"/> -->
+                {{alert}}
+            </div>
+            <div ng-if="parseSmsResult.output.length">
+                <div ng-repeat="(key,value) in parseSmsResult.output" >
+                    <div ng-repeat="(key, value) in value">
+                        {{key}} : {{value}}
+                    </div>
+                </div>
+                <!-- modal starts here -->
+                <button type="button" class="btn btn-success btn-xs " data-toggle="modal" data-target=".bs-example-modal-sm">
+                    click here for more details
+                </button>
+                <!-- modal ends here -->
             </div>
         </div>
     </div>
-       <alert ng-model="message"></alert>
-        <back-top scroll-speed=1500 button-theme="dark">
+    <!-- custom alert section begins here -->
+    <div style="display: none;" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:70%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            ×
+                        </span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">
+                        Sms Parse Data
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <!-- modal body goes here -->
+                    <ul ng-repeat="(key, value) in parseSmsResult.smsdata">
+                       <li>
+                         <label>smsText:</label> {{value.smstext}}
+                         <br/>
+                        <label>Pattern:</label> {{value.pattern}}
+                       </li> 
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <back-top scroll-speed=1500 button-theme="dark">
         <i class="fa fa-angle-double-up">
         </i>
         Scroll Top
