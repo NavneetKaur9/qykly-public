@@ -1,18 +1,15 @@
+  
 <div ng-controller="merchantsCtrl">
     <div class="page-title">
         <div class="title_left">
-            <h3>
-                Merchant
-            </h3>
+            <h3>Merchant</h3>
         </div>
     </div>
-    <div class="clearfix">
-    </div>
+    <div class="clearfix"></div>
     <div class="alert alert-success" ng-show="alert">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">
-            &times;
-        </a>
-        {{alert}}
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    {{alert}}
+  
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -24,47 +21,36 @@
                             <div class="col-md-10">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
-                                            Category
-                                            <span class="required">
-                                                *
-                                            </span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Category 
+                                            <span class="required">*</span>
                                         </label>
                                         <div class="col-md-9 col-sm-6 col-xs-12">
-                                            <input type="hidden" ng-model="merchantdata.category" value="{{selected}}"/>
-                                        </input>
-                                        <select id="cat_select" class="form-control" tabindex="-1" ng-model="merchantdata.category" select2 ng-options="x for x in categories">
-                                            <option>
-                                            </option>
-                                        </select>
+                                            <input type="hidden" ng-model="merchantdata.category" value="{{selected}}"></input>
+                                            <select id="cat_select" class="form-control" tabindex="-1" ng-model="merchantdata.category" select2 ng-options="x for x in categories">
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <button type="submit" class="btn btn-success">
-                                    Submit
-                                </button>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel">
-                <div class="x_content">
-                    <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="row-border hover striped table-bordered" dt-instance="dtInstance">
-                    </table>
-                </form>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <table id="merchantTbl" datatable="" dt-options="dtOptions" dt-columns="dtColumns" class="row-border hover striped table-bordered" dt-instance="dtInstance"></table>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-     <back-top scroll-speed=1500 button-theme="dark">
-        <i class="fa fa-angle-double-up">
-        </i>
-        Scroll Top
-    </back-top>
 </div>
-</div>
+
+
