@@ -21,7 +21,7 @@ angular.module('sbAdminApp')
 				$scope.success = true;
 				$scope.message = response.message;
 				if (response.data) {
-					$location.path('/dashboard/home');
+					$location.path('/dashboard/user');
 					$cookieStore.put('c2cCookie', response.data.authToken);
 					console.log('logged in', $cookieStore.get('c2cCookie'));
 
