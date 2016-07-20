@@ -6,23 +6,17 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 	var url = api.addr();
 	$window.scrollTo(0, 0);
 	$scope.alert = '  loading.........';
-
 	$scope.getShortcode = function(status) {
-
 		$scope.alert = '  loading.........';
-
 		api.get('get-codes', status, false, false, function(err, response) {
 			if (err || response.error) {
 				$scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
-
 			} else {
-
 				if (status === '0') {
 					$scope.unproc = response.unprocessed;
 					$scope.new = response.newcode;
 					$scope.getSms($scope.unproc[0], 0);
 					$scope.getShortcode(3);
-
 				} else {
 					$scope.proc = response;
 					$scope.alert = false;
@@ -30,7 +24,6 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 			}
 		});
 	};
-
 	$scope.getShortcode('0');
 	$scope.getSms = function(code, status) {
 		$scope.alert = 'fetching ' + code + ' messages....';
@@ -44,8 +37,6 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 			}
 		});
 	};
-
-
 	$scope.blacklist = function() {
 		$scope.addresses = [];
 		var checkboxes = document.getElementsByName('blacklist');
@@ -64,7 +55,6 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 					type: 'error'
 				}];
 			} else {
-
 				$scope.alert = response.message;
 				$scope.smses = [];
 				$scope.getShortcode('0');
@@ -72,20 +62,14 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 			}
 		});
 	};
-
 	$scope.reset = function(argument) {
 		$scope.smses = [];
 		$scope.code = "";
 	};
-
-
-
 	$scope.closeAlert = function(argument) {
 		$scope.alert = false;
 	};
-
 	$scope.searchCode = '';
-
 	$scope.searchShortcode = function() {
 		api.get('Search-code', false, false, {
 			address: $scope.searchCode
@@ -102,48 +86,34 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 		$scope.sortReverse = ($scope.sortType === sortType) ? !$scope.sortReverse : false;
 		$scope.sortType = sortType;
 	};
-
-	$scope.dtOptions = DTOptionsBuilder.newOptions()
-		.withOption('ajax', {
-			url: url + 'get-blacklisteds',
-			type: 'GET',
-			data: function(aodata) {
-
-				if (aodata.draw == "1") {
-					aodata.order[0].column = "4";
-					aodata.order[0].dir = 'desc';
-				}
+	$scope.dtOptions = DTOptionsBuilder.newOptions().withOption('ajax', {
+		url: url + 'get-blacklisteds',
+		type: 'GET',
+		data: function(aodata) {
+			if (aodata.draw == "1") {
+				aodata.order[0].column = "4";
+				aodata.order[0].dir = 'desc';
 			}
-		})
-		.withDataProp('data')
-		.withOption('processing', true)
-		.withOption('serverSide', true)
-		.withLanguage({
-			'sSearch': 'Search  Blacklisted Shortcode:',
-			'oPaginate': {
-				'sNext': '»',
-				'sPrevious': '«'
-			}
-		})
-		.withOption('headerCallback', function(header) {
-			$window.scrollTo(0, 0);
-
-		});
-
-
+		}
+	}).withDataProp('data').withOption('processing', true).withOption('serverSide', true).withLanguage({
+		'sSearch': 'Search  Blacklisted Shortcode:',
+		'oPaginate': {
+			'sNext': '»',
+			'sPrevious': '«'
+		}
+	}).withOption('headerCallback', function(header) {
+		$window.scrollTo(0, 0);
+	});
 	$scope.dtColumns = [
 		DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
-
 		DTColumnBuilder.newColumn(null).withTitle('# ').renderWith(function(data, type, full, meta) {
 			return data = meta.settings._iDisplayStart + meta.row + 1;
 		}).notSortable().withOption('searchable', false).withOption('width', '2%'),
-
 		DTColumnBuilder.newColumn('Sender').withTitle('Sender '),
 		DTColumnBuilder.newColumn('Status').withTitle('Status ').withOption('searchable', false),
 		DTColumnBuilder.newColumn('saveTime').withTitle('DateModified      ').renderWith(function(data, type, full) {
 			return $filter('date')(data, 'd/MM/yy,h:mma'); //date filter 
 		}).withOption('searchable', false).withOption('width', '20%')
-
 	];
 	$scope.parseSms = function(code) {
 		// $scope.alert = false;
@@ -160,5 +130,25 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 	$scope.closeParseSmsResult = function() {
 		$scope.parseSmsResult = [];
 	};
-
+	$scope.assign = function() {
+		$scope.msgText = [];
+		var checkboxes = document.getElementsByName('assign');
+		for (var i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+				var value = checkboxes[i].value;
+				$scope.msgText.push(value);
+			}
+		}
+		api.put('assign-msg', false, false, {
+			msgText: $scope.msgText,
+			assignTo: $scope.selection.assignTo
+		}, function(err, response) {
+			if (err || response.error) {
+				$scope.alert = response.message;
+			} else {
+				$scope.alert = response.message;
+				$scope.getSms($scope.code, 0);
+			}
+		});
+	};
 });

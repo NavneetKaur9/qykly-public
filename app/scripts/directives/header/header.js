@@ -14,9 +14,12 @@ angular.module('sbAdminApp')
 			replace: true,
 			controller: function($scope, api) {
 				api.get('userprofile', false, false, false, function(err, response) {
-					$scope.user = response;
-					// $scope.alert = response.message;
-					// $scope.modusers = response;
+					if (err) {
+						$scope.alert = response.message
+					} else {
+						$scope.user = response.user;
+						$scope.msgAssigned = response.result;
+					}
 				});
 
 			}

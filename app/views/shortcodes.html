@@ -184,6 +184,7 @@
                                                     <tr dir-paginate="sms in smses |filter:seach_unproc_msg|orderBy:sortType:sortReverse| itemsPerPage: pageSize" current-page="currentPage">
                                                         <td>
                                                             {{$index+1}}
+                                                            <!-- <input type="checkbox" value="{{sms.}}" name="blacklist" /> -->
                                                         </td>
                                                         <td>
                                                             {{sms.text}}
@@ -449,7 +450,10 @@
                 </div>
                <div class="modal-body">
                     <!-- modal body goes here -->
-                    <table class="table table-striped jambo_table" width="90%" >
+                    <div class="row">
+                        <div class="col-md-12">
+                            
+                    <table class="table table-striped jambo_table" >
                         <thead>
                             <th>
                                 #
@@ -518,6 +522,8 @@
                             </tr>
                         </tbody>
                     </table>
+                        </div>
+                    </div>
                     
                 </div>
                 <div class="modal-footer">
