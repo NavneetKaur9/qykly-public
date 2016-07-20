@@ -154,6 +154,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 		}, function(err, response) {
 			$scope.parseSmsResult = response;
 			$scope.alert = false;
+			$scope.getShortcode('0');
 		});
 	};
 	$scope.closeParseSmsResult = function() {
