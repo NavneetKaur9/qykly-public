@@ -15,7 +15,6 @@ angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, a
 		// body...
 		api.get('user', false, false, false, function(err, response) {
 			if (err) {
-				console.log(response.message);
 				$scope.alert = response.message;
 			} else {
 				// $scope.alert = response.message;
