@@ -12,11 +12,8 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	$scope.getUser = function() {
 		// body...
 		api.get('get-user', id, false, false, function(err, response) {
-			if (err || response.error) {
-				$scope.alerts = [{
-					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-					type: 'error'
-				}];
+			if (err) {
+				$scope.alert = response.message;
 			} else {
 				$scope.userData = response.userdata;
 			}
@@ -26,11 +23,8 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	$scope.getShortcode = function() {
 		$scope.alert = '  loading.........';
 		api.get('get-shortcode', id, false, false, function(err, response) {
-			if (err || response.error) {
-				$scope.alerts = [{
-					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-					type: 'error'
-				}];
+			if (err) {
+				$scope.alert = response.message;
 			} else {
 				$scope.new = response.new;
 				$scope.proc = response.processed;
@@ -39,15 +33,11 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 			}
 		});
 	};
-
 	$scope.getShortcode();
 	$scope.countStatus = function() {
 		api.get('get-sms-count-status', id, false, false, function(err, response) {
-			if (err || response.error) {
-				$scope.alerts = [{
-					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-					type: 'error'
-				}];
+			if (err) {
+				$scope.alert = response.message;
 			} else {
 				// $scope.statusCount = response;
 				for (var i = 0; i < response.length; i++) {
@@ -65,18 +55,14 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		$scope.alert = 'fetching ' + code + ' messages....';
 		$scope.code = code;
 		api.get('get-sms/' + id + '/' + status + '/' + code, false, false, false, function(err, response) {
-			if (err || response.error) {
-				$scope.alerts = [{
-					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-					type: 'error'
-				}];
+			if (err) {
+				$scope.alert = response.message;
 			} else {
 				$scope.smses = response;
 				$scope.alert = false;
 			}
 		});
 	};
-
 	$scope.blacklist = function() {
 		$scope.addresses = [];
 		var checkboxes = document.getElementsByName('blacklist');
@@ -89,13 +75,9 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		api.put('blacklist', false, false, {
 			address: $scope.addresses
 		}, function(err, response) {
-			if (err || response.error) {
-				$scope.alerts = [{
-					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-					type: 'error'
-				}];
+			if (err) {
+				$scope.alert = response.message;
 			} else {
-
 				$scope.alert = response.message;
 				$scope.smses = [];
 				$scope.getShortcode();
@@ -116,31 +98,29 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		$scope.sortReverse = ($scope.sortType === sortType) ? !$scope.sortReverse : false;
 		$scope.sortType = sortType;
 	};
-
-
 	$scope.parseAllSms = function() {
 		$scope.alert = '  processing.........';
-
 		api.post('parsesms', false, {
 			deviceId: id
 		}, function(err, response) {
-			if (response.output.length === 0) {
+			if (err) {
+				$scope.alert = response.message;
+			} else if (response.output.length === 0) {
 				return $scope.alert = "No data found";
 			}
 			$scope.parseSmsResult = response;
 			$scope.alert = false;
 		});
 	};
-
 	$scope.parseSms = function(code) {
 		$scope.parseSmsResult = [];
 		$scope.alert = 'processing.........';
-
 		api.post('parsesmsbyshortcode', false, {
 			shortcode: code
 		}, function(err, response) {
-			console.log(response.output.length);
-			if (response.output.length === 0) {
+			if (err) {
+				$scope.alert = response.message;
+			} else if (response.output.length === 0) {
 				$scope.alert = "No data found";
 			}
 			$scope.parseSmsResult = response;
@@ -150,5 +130,4 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	$scope.closeParseSmsResult = function(argument) {
 		$scope.parseSmsResult = [];
 	};
-
 });
