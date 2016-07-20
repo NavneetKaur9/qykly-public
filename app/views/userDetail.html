@@ -6,11 +6,6 @@
             back
         </button>
     </a>
-    <!--
-        <div ng-repeat="(key, value) in userData">
-            {{key}}:::{{value}}
-        </div>
-    -->
     <ul class="stats-overview">
         <li>
             <span class="name">
@@ -166,19 +161,18 @@
             <!-- ********   END: MODAL       ********* -->
         </li>
     </ul>
-
-  <uib-alert ng-show="parseSmsResult.output.length" close="closeParseSmsResult()" type="success">
-                <div ng-repeat="(key,value) in parseSmsResult.output" >
-                    <div ng-repeat="(key, value) in value">
-                        {{key}} : {{value}}
-                    </div>
-                </div>
-                <a href="" data-toggle="modal" data-target=".bs-example-modal-lg" ng-show="parseSmsResult.smsdata.length" >
-                <!-- ng-show="parseSmsResult.smsdata.length" -->
-                    Click here for more details
-                </a>
-  </uib-alert>
- <!-- modal for smsdata  starts here -->
+    <uib-alert ng-show="parseSmsResult.output.length" close="closeParseSmsResult()" type="success">
+        <div ng-repeat="(key,value) in parseSmsResult.output" >
+            <div ng-repeat="(key, value) in value">
+                {{key}} : {{value}}
+            </div>
+        </div>
+        <a href="" data-toggle="modal" data-target=".bs-example-modal-lg" ng-show="parseSmsResult.smsdata.length" >
+            <!-- ng-show="parseSmsResult.smsdata.length" -->
+            Click here for more details
+        </a>
+    </uib-alert>
+    <!-- modal for smsdata  starts here -->
     <div style="display: none;" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" style="width:70%">
             <div class="modal-content">
@@ -192,14 +186,14 @@
                         Sms Data
                     </h4>
                 </div>
-               <div class="modal-body">
-                   <!-- modal body goes here -->
+                <div class="modal-body">
+                    <!-- modal body goes here -->
                     <table class="table table-striped jambo_table" >
                         <thead>
                             <th>
                                 #
                             </th>
-                             <th >
+                            <th >
                                 <div href ng-click="order('shortcode')" style="cursor:pointer">
                                     shortcode
                                     <span ng-show="sortType == 'shortcode' && sortReverse" class="fa fa-caret-down">
@@ -218,12 +212,11 @@
                                 </div>
                             </th>
                             <th >
-                                    Pattern
-                                    
+                                Pattern
                             </th>
                             <th>
                                 <div  ng-click="order('dateModified')" style="cursor:pointer">
-                                     Regex Modified Date
+                                    Regex Modified Date
                                     <span ng-show="sortType == 'dateModified' && sortReverse" class="fa fa-caret-down">
                                     </span>
                                     <span ng-show="sortType == 'dateModified' && !sortReverse" class="fa fa-caret-up">
@@ -232,7 +225,7 @@
                             </th>
                             <th >
                                 <div  ng-click="order('savetime')" style="cursor:pointer">
-                                     Msg Save Time
+                                    Msg Save Time
                                     <span ng-show="sortType == 'savetime' && sortReverse" class="fa fa-caret-down">
                                     </span>
                                     <span ng-show="sortType == 'savetime' && !sortReverse" class="fa fa-caret-up">
@@ -251,7 +244,7 @@
                                 <td>
                                     {{sms.smstext }}
                                 </td>
-                                 <td>
+                                <td>
                                     {{sms.pattern }}
                                 </td>
                                 <td>
@@ -263,7 +256,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -334,7 +326,6 @@
                                     </div>
                                     <!-- unprocessed message detail -->
                                     <div class="col-md-10 col-sm-10 mail_view" ng-show="smses.length">
-
                                         <h4>
                                             {{code}}
                                         </h4>
@@ -572,20 +563,12 @@
                 <!-- <img src="assets/images/ajax-loader.gif"/> -->
                 {{alert}}
             </div>
-            <!-- <div ng-if="parseSmsResult.output.length">
-                <div ng-repeat="(key,value) in parseSmsResult.output" >
-                    <div ng-repeat="(key, value) in value">
-                        {{key}} : {{value}}
-                    </div>
-                </div>
-                <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target=".bs-example-modal-sm" ng-show="parseSmsResult.smsdata.length">
-                    Click here for more details
-                </button>
-            </div> -->
+           
         </div>
-        <back-top scroll-speed=1500 button-theme="dark">
-            <i class="fa fa-angle-double-up">
-            </i>
-            Scroll Top
-        </back-top>
     </div>
+    <back-top scroll-speed=1500 button-theme="dark">
+        <i class="fa fa-angle-double-up">
+        </i>
+        Scroll Top
+    </back-top>
+</div>

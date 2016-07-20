@@ -14,11 +14,9 @@ angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, a
 	$scope.getuser = function() {
 		// body...
 		api.get('user', false, false, false, function(err, response) {
-			if (err || response.error) {
-				$scope.alerts = [{
-					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-					type: 'error'
-				}];
+			if (err) {
+				console.log(response.message);
+				$scope.alert = response.message;
 			} else {
 				// $scope.alert = response.message;
 				$scope.modusers = response;
@@ -34,11 +32,8 @@ angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, a
 			password: $scope.password,
 			role: $scope.role
 		}, function(err, response) {
-			if (err || response.error) {
-				$scope.alerts = [{
-					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-					type: 'error'
-				}];
+			if (err) {
+				$scope.alert = response.message;
 			}
 
 			$scope.alert = response;
@@ -49,11 +44,8 @@ angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, a
 
 	$scope.delete = function(id) {
 		api.delete('user', id, false, function(err, response) {
-			if (err || response.error) {
-				$scope.alerts = [{
-					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-					type: 'error'
-				}];
+			if (err) {
+				$scope.alert = response.message;
 			}
 			$scope.getuser();
 		});

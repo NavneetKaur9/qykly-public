@@ -6,7 +6,7 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-	.controller('usersCtrl', function($scope, $location, $http, api, DTOptionsBuilder, DTColumnBuilder, $filter, $compile, $state, DTDefaultOptions, $window) {
+	.controller('usersCtrl', function($scope, $location, $http, api, DTOptionsBuilder, DTColumnBuilder, $filter, $compile, $state, DTDefaultOptions, $window, $cookieStore) {
 
 		var url = api.addr();
 
@@ -17,12 +17,17 @@ angular.module('sbAdminApp')
 		$scope.message = '';
 		DTDefaultOptions.setDisplayLength(100);
 
-		// DTOptionsBuilder.newOptions().withOption('aaSorting', [3, 'asc'])
-
 		$scope.dtOptions = DTOptionsBuilder.newOptions()
 			.withOption('ajax', {
 				url: url + 'get-user',
 				type: 'GET',
+				headers: {
+					Accept: "application/json",
+					Authorization: $cookieStore.get('c2cCookie')
+				},
+				error: function(err) {
+					$scope.alert = err.responseJSON.message; // body...
+				},
 				data: function(aodata) {
 
 					if (aodata.draw == "1") {
@@ -75,12 +80,10 @@ angular.module('sbAdminApp')
 
 		function rowCallback(nRow, aData, iDisplayIndex, iDisplayIndexFull) {
 			// console.log(aData);
-			// Unbind first in order to avoid any duplicate handler (see https://github.com/l-lin/angular-datatables/issues/87)
 			$('td', nRow).unbind('click');
 			$('td', nRow).bind('click', function() {
 				$scope.$apply(function() {
 					$scope.message = aData._id + ' - ' + aData.primaryEmail;
-					// console.log($scope.message);
 					$state.go('dashboard.moreUserDetail', {
 						id: aData._id
 					});
@@ -88,18 +91,7 @@ angular.module('sbAdminApp')
 			});
 			return nRow;
 		}
-
-		// api.get('totalusercount', false, false, false, function(err, response) {
-		// 	if (err || response.error) {
-		// 		$scope.alerts = [{
-		// 			msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-		// 			type: 'error'
-		// 		}];
-		// 	} else {
-		// 		$scope.usercount = response;
-		// 	}
-		// });
-
-
-
+		$scope.closeAlert = function(argument) {
+			$scope.alert = false;
+		};
 	});
