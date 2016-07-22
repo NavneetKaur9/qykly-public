@@ -15,11 +15,11 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 				if (status === '0') {
 					$scope.unproc = response.unprocessed;
 					$scope.new = response.newcode;
-					$scope.getSms($scope.unproc[0], 0);
 					$scope.getShortcode(3);
 				} else {
 					$scope.proc = response;
-					$scope.alert = false;
+					$scope.getSms($scope.unproc[0], 0);
+					// $scope.alert = false;
 				}
 			}
 		});
@@ -139,9 +139,10 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 				$scope.msgText.push(value);
 			}
 		}
+		console.log($scope.msgText);
 		api.put('assign-msg', false, false, {
 			msgText: $scope.msgText,
-			assignTo: $scope.selection.assignTo
+			assignTo: $scope.assignTo.name
 		}, function(err, response) {
 			if (err || response.error) {
 				$scope.alert = response.message;
@@ -151,4 +152,13 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 			}
 		});
 	};
+
+	// get mod users
+	api.get('user', false, false, false, function(err, response) {
+		if (err) {
+			$scope.alert = response.message;
+		} else {
+			$scope.modusers = response;
+		}
+	});
 });

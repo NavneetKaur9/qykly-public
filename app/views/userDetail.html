@@ -331,14 +331,31 @@
                                     </div>
                                     <!-- unprocessed message detail -->
                                     <div class="col-md-10 col-sm-10 mail_view" ng-show="smses.length">
-                                        <h4>
-                                            {{code}}
-                                        </h4>
+                                         <div class="col-xs-2">
+                                                <h4>
+                                                    {{code}}
+                                                </h4>
+                                            </div>
+                                        <div class="col-md-4 col-md-offset-6 pull-right">
+                                             <label >
+                                                
+                                                 <input type="hidden" ng-model="assignTo" value="{{selected}}"/>
+                                                        <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x.name for x in modusers" placeholder="Assign To" style="width:150px">
+                                                            <option value="">
+                                                            </option>
+                                                        </select>
+                                                        <button type="button" class="btn btn-info btn-sm" ng-click="assign()">
+                                                            <span class="glyphicon glyphicon-ok">
+                                                            </span>
+                                                            Submit
+                                                        </button>
+                                            </label>
+                                            </div>
                                         <table class="table table-striped jambo_table" >
                                             <thead>
                                                 <th>
-                                                    #
-                                                </th>
+                                                        <input type="checkbox" id="check-all" class="flat" ng-model="selected.all"/>
+                                                    </th>
                                                 <th>
                                                     <div href ng-click="order('text')" style="cursor:pointer">
                                                         Text
@@ -369,9 +386,9 @@
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="sms in smses |orderBy:sortType:sortReverse">
-                                                    <td>
-                                                        {{$index+1}}
-                                                    </td>
+                                                    <td class="a-center ">
+                                                            <input type="checkbox" class="flat" name="assign" value="{{sms.text}}" ng-checked="selected.all"/>
+                                                        </td>
                                                     <td>
                                                         {{sms.text}}
                                                     </td>
@@ -417,15 +434,32 @@
                                         </button>
                                     </div>
                                     <div class="col-md-10 col-sm-10 mail_view" ng-show="smses.length">
-                                        <h4>
-                                            {{code}}
-                                        </h4>
-                                        <!-- unprocessed message detail -->
+                                         <div class="col-xs-2">
+                                                <h4>
+                                                    {{code}}
+                                                </h4>
+                                            </div>
+                                            <div class="col-md-4 col-md-offset-6 ">
+                                             <label >
+                                                
+                                                 <input type="hidden" ng-model="assignTo" value="{{selected}}"/>
+                                                        <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x.name for x in modusers" placeholder="Assign To" style="width:150px">
+                                                            <option value="">
+                                                            </option>
+                                                        </select>
+                                                        <button type="button" class="btn btn-info btn-sm" ng-click="assign()">
+                                                            <span class="glyphicon glyphicon-ok">
+                                                            </span>
+                                                            Submit
+                                                        </button>
+                                            </label>
+                                            </div>
+                                        <!-- new message detail -->
                                         <table class="table table-striped jambo_table ">
                                             <thead>
                                                 <th>
-                                                    #
-                                                </th>
+                                                        <input type="checkbox" id="check-all" class="flat" ng-model="selected.all"/>
+                                                    </th>
                                                 <th>
                                                     <div href ng-click="order('text')" style="cursor:pointer">
                                                         Text
@@ -456,9 +490,9 @@
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="sms in smses |orderBy:sortType:sortReverse">
-                                                    <td>
-                                                        {{$index+1}}
-                                                    </td>
+                                                    <td class="a-center ">
+                                                            <input type="checkbox" class="flat" name="assign" value="{{sms.text}}" ng-checked="selected.all"/>
+                                                        </td>
                                                     <td>
                                                         {{sms.text}}
                                                     </td>

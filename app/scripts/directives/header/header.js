@@ -13,6 +13,7 @@ angular.module('sbAdminApp')
 			restrict: 'E',
 			replace: true,
 			controller: function($scope, api) {
+
 				api.get('userprofile', false, false, false, function(err, response) {
 					if (err) {
 						$scope.alert = response.message

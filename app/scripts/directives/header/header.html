@@ -10,19 +10,19 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                         <img src="assets/images/user.png" />
-                         {{user.name}}
+                        <img src="assets/images/user.png" />
+                        {{user.name}}
                         <span class=" fa fa-angle-down">
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        
-                            <li ng-if="user.role=='admin'">
-                                <a ui-sref="dashboard.addUser">
-                                   Add User
-                                </a>
-                            </li>
-                            <!-- <li>
+                        <li ng-if="user.role=='admin'">
+                            <a ui-sref="dashboard.addUser">
+                                Add User
+                            </a>
+                        </li>
+                        <!--
+                            <li>
                                 <a href="javascript:;">
                                     <span class="badge bg-red pull-right">
                                         50%
@@ -31,8 +31,8 @@
                                         Settings
                                     </span>
                                 </a>
-                            </li> -->
-                        
+                            </li>
+                        -->
                         <li>
                             <a ui-sref="login">
                                 <i class="fa fa-sign-out pull-right">
@@ -51,15 +51,31 @@
                         </span>
                     </a>
                     <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu" >
-                        <li ng-repeat="value in msgAssigned">
+                        <li ng-repeat="value in msgAssigned | limitTo: 2"">
+                            
                             <a>
                                 
+                                <span>
+                                    <span>
+                                        {{value.address}}
+                                    </span>
+                                    <!-- <span class="time">
+                                        3 mins ago
+                                    </span> -->
+                                </span>
                                 <span class="message">
-                                   {{value.text}}
+                                    {{value.text}}
                                 </span>
                             </a>
                         </li>
-                       
+                        <li>
+                      <div class="text-center">
+                        <a ui-sref="dashboard.notification">
+                          <strong>See All </strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
                     </ul>
                 </li>
             </ul>

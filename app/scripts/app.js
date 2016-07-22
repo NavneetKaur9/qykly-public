@@ -21,7 +21,7 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
       loadMyDirectives: function($ocLazyLoad) {
         return $ocLazyLoad.load({
             name: 'sbAdminApp',
-            files: ['scripts/services/restful.js', 'scripts/directives/header/header.js', 'scripts/directives/sidebar/sidebar.js']
+            files: ['scripts/services/restful.js', 'scripts/directives/header/header.js', 'scripts/directives/sidebar/sidebar.js', './assets/plugins/select2/select2.min.css', './assets/plugins/select2/select2.full.min.js']
           }),
           $ocLazyLoad.load({
             name: 'ngCookies',
@@ -160,6 +160,18 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
         return $ocLazyLoad.load({
           name: 'sbAdminApp',
           files: ['scripts/controllers/validateRegex.js']
+        });
+      }
+    }
+  }).state('dashboard.notification', {
+    url: '/notification',
+    templateUrl: 'views/notification.html',
+    controller: 'notificationCtrl',
+    resolve: {
+      loadMyFile: function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name: 'sbAdminApp',
+          files: ['scripts/controllers/notification.js']
         });
       }
     }

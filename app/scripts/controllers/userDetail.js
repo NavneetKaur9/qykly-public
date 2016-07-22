@@ -130,4 +130,34 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	$scope.closeParseSmsResult = function(argument) {
 		$scope.parseSmsResult = [];
 	};
+	$scope.assign = function() {
+		$scope.msgText = [];
+		var checkboxes = document.getElementsByName('assign');
+		for (var i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+				var value = checkboxes[i].value;
+				$scope.msgText.push(value);
+			}
+		}
+		api.put('assign-msg', false, false, {
+			msgText: $scope.msgText,
+			assignTo: $scope.assignTo.name
+		}, function(err, response) {
+			if (err || response.error) {
+				$scope.alert = response.message;
+			} else {
+				$scope.alert = response.message;
+				$scope.getSms($scope.code, 0);
+			}
+		});
+	};
+
+	// get mod users
+	api.get('user', false, false, false, function(err, response) {
+		if (err) {
+			$scope.alert = response.message;
+		} else {
+			$scope.modusers = response;
+		}
+	});
 });
