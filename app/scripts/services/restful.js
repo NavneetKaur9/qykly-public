@@ -16,7 +16,7 @@ angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', '$cookieStor
 
 	// var parseUrl="";
 	var token = $cookieStore.get('c2cCookie'); //set Headers for JWTTOKEN
-	console.log('restful', token);
+
 	$http.defaults.headers.common.Authorization = token;
 
 	var parseHeaders = {};
