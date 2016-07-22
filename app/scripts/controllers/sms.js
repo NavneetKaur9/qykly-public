@@ -44,6 +44,8 @@ angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, 
 				return "processed";
 			} else if (data == 1) {
 				return "blacklisted";
+			} else if (data == 5) {
+				return "Assigned";
 			} else {
 				return data;
 			}
