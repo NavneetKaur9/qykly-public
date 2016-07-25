@@ -10,14 +10,14 @@
 angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', '$cookieStore', function($rootScope, $http, $cookieStore) {
 
 
-	// var parseUrl = 'http://localhost:3000/api2';
+	var parseUrl = 'http://localhost:3000/api2';
 	// var parseUrl = 'http://52.66.81.240/api2'; // staging server address
-	var parseUrl = 'http://54.169.236.107/api2'; //  production server address
+	// var parseUrl = 'http://54.169.236.107/api2'; //  production server address
 
 	// var parseUrl="";
-	var token = $cookieStore.get('c2cCookie'); //set Headers for JWTTOKEN
+	// var token = $cookieStore.get('c2cCookie'); //set Headers for JWTTOKEN
 
-	$http.defaults.headers.common.Authorization = token;
+	// $http.defaults.headers.common.Authorization = token;
 
 	var parseHeaders = {};
 
@@ -38,13 +38,15 @@ angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', '$cookieStor
 			return parseUrl + '/';
 		},
 		//Create a db object on server
-		post: function(theClass, object, data, callback) {
+		post: function(theClass, object, token, data, callback) {
 
 			$http.post(
 					GenerateUrl(theClass, object, false),
 
 					data, {
-						headers: parseHeaders
+						headers: {
+							'Authorization': token
+						}
 					}
 				)
 				.success(function(response) {
@@ -57,13 +59,15 @@ angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', '$cookieStor
 					callback(true, response || 'Cannot submit data!');
 				});
 		},
-		put: function(theClass, object, objectId, data, callback) {
+		put: function(theClass, object, token, data, callback) {
 
 			$http.put(
-					GenerateUrl(theClass, object, objectId),
+					GenerateUrl(theClass, object, false),
 
 					data, {
-						headers: parseHeaders
+						headers: {
+							'Authorization': token
+						}
 					}
 				)
 				.success(function(response) {
@@ -76,17 +80,19 @@ angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', '$cookieStor
 				});
 		},
 		//Get a db object by id
-		get: function(theClass, object, objectId, query, callback) {
+		get: function(theClass, object, token, query, callback) {
 
 			var config = {
-				headers: parseHeaders
+				headers: {
+					'Authorization': token
+				}
 			};
 			if (query) {
 				config.params = query;
 			}
 			$http.get(
 
-				GenerateUrl(theClass, object, objectId),
+				GenerateUrl(theClass, object, false),
 
 				config
 			).success(function(response) {
@@ -98,11 +104,13 @@ angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', '$cookieStor
 			});
 		},
 		//Remove a db object
-		delete: function(theClass, object, objectId, callback) {
+		delete: function(theClass, object, token, objectId, callback) {
 
 			$http['delete']( //['delete'] to get around using delete js keyword
 				GenerateUrl(theClass, object, objectId), {
-					headers: parseHeaders
+					headers: {
+						'Authorization': token
+					}
 				}
 			).success(function(response) {
 

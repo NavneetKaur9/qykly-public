@@ -2,9 +2,10 @@
 /**
  * 
  */
-angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, api) {
+angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, api, $cookieStore) {
 
 	var url = api.addr();
+	var token = $cookieStore.get('c2cCookie');
 
 	function reset() {
 		$scope.name = '';
@@ -13,7 +14,7 @@ angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, a
 	}
 	$scope.getuser = function() {
 		// body...
-		api.get('user', false, false, false, function(err, response) {
+		api.get('user', false, token, false, function(err, response) {
 			if (err) {
 				$scope.alert = response.message;
 			} else {
@@ -25,7 +26,7 @@ angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, a
 	$scope.getuser();
 
 	$scope.addUser = function(argument) {
-		api.post('user', false, {
+		api.post('user', false, token, {
 			name: $scope.name,
 			username: $scope.username,
 			password: $scope.password,
@@ -42,7 +43,7 @@ angular.module('sbAdminApp').controller('addUserCtrl', function($scope, $http, a
 	};
 
 	$scope.delete = function(id) {
-		api.delete('user', id, false, function(err, response) {
+		api.delete('user', id, token, false, function(err, response) {
 			if (err) {
 				$scope.alert = response.message;
 			}

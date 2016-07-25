@@ -2,7 +2,7 @@
 /**
  * 
  */
-angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api, $sce, $window) {
+angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api, $sce, $window, $cookieStore) {
 	$scope.yes = function() {
 		console.log('yes');
 		$scope.show = true;

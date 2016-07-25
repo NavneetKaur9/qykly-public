@@ -43,25 +43,20 @@
                     </ul>
                 </li>
                 <li role="presentation" class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <a ui-sref="dashboard.notification" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-bell-o">
                         </i>
                         <span class="badge bg-green">
-                            {{msgAssigned.length}}
+                            {{msgAssigned}}
                         </span>
                     </a>
-                    <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu" >
+                   <!--  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu" >
                         <li ng-repeat="value in msgAssigned | limitTo: 2">
-                            
                             <a>
-                                
                                 <span>
                                     <span>
                                         {{value.address}}
                                     </span>
-                                    <!-- <span class="time">
-                                        3 mins ago
-                                    </span> -->
                                 </span>
                                 <span class="message">
                                     {{value.text}}
@@ -69,14 +64,17 @@
                             </a>
                         </li>
                         <li>
-                      <div class="text-center">
-                        <a ui-sref="dashboard.notification">
-                          <strong>See All </strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                    </ul>
+                            <div class="text-center">
+                                <a ui-sref="dashboard.notification">
+                                    <strong>
+                                        See All
+                                    </strong>
+                                    <i class="fa fa-angle-right">
+                                    </i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul> -->
                 </li>
             </ul>
         </nav>

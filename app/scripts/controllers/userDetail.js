@@ -5,13 +5,14 @@
  * @description
  * Controller of the sbAdminApp
  */
-angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http, $stateParams, api, DTOptionsBuilder, DTColumnBuilder, $filter, $window) {
+angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http, $stateParams, api, DTOptionsBuilder, DTColumnBuilder, $filter, $window, $cookieStore) {
 	var id = $stateParams.id;
 	var url = api.addr();
+	var token = $cookieStore.get('c2cCookie');
 	$window.scrollTo(0, 0);
 	$scope.getUser = function() {
 		// body...
-		api.get('get-user', id, false, false, function(err, response) {
+		api.get('get-user', id, token, false, function(err, response) {
 			if (err) {
 				$scope.alert = response.message;
 			} else {
@@ -22,7 +23,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	$scope.getUser();
 	$scope.getShortcode = function() {
 		$scope.alert = '  loading.........';
-		api.get('get-shortcode', id, false, false, function(err, response) {
+		api.get('get-shortcode', id, token, false, function(err, response) {
 			if (err) {
 				$scope.alert = response.message;
 			} else {
@@ -35,7 +36,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	};
 	$scope.getShortcode();
 	$scope.countStatus = function() {
-		api.get('get-sms-count-status', id, false, false, function(err, response) {
+		api.get('get-sms-count-status', id, token, false, function(err, response) {
 			if (err) {
 				$scope.alert = response.message;
 			} else {
@@ -54,7 +55,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	$scope.getSms = function(code, status) {
 		$scope.alert = 'fetching ' + code + ' messages....';
 		$scope.code = code;
-		api.get('get-sms/' + id + '/' + status + '/' + code, false, false, false, function(err, response) {
+		api.get('get-sms/' + id + '/' + status + '/' + code, false, token, false, function(err, response) {
 			if (err) {
 				$scope.alert = response.message;
 			} else {
@@ -72,7 +73,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 				$scope.addresses.push(value);
 			}
 		}
-		api.put('blacklist', false, false, {
+		api.put('blacklist', false, token, {
 			address: $scope.addresses
 		}, function(err, response) {
 			if (err) {
@@ -100,7 +101,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	};
 	$scope.parseAllSms = function() {
 		$scope.alert = '  processing.........';
-		api.post('parsesms', false, {
+		api.post('parsesms', false, token, {
 			deviceId: id
 		}, function(err, response) {
 			if (err) {
@@ -115,7 +116,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	$scope.parseSms = function(code) {
 		$scope.parseSmsResult = [];
 		$scope.alert = 'processing.........';
-		api.post('parsesmsbyshortcode', false, {
+		api.post('parsesmsbyshortcode', false, token, {
 			shortcode: code
 		}, function(err, response) {
 			if (err) {
@@ -139,7 +140,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 				$scope.msgText.push(value);
 			}
 		}
-		api.put('assign-msg', false, false, {
+		api.put('assign-msg', false, token, {
 			msgText: $scope.msgText,
 			assignTo: $scope.assignTo.name
 		}, function(err, response) {
@@ -151,9 +152,8 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 			}
 		});
 	};
-
 	// get mod users
-	api.get('user', false, false, false, function(err, response) {
+	api.get('user', false, token, false, function(err, response) {
 		if (err) {
 			$scope.alert = response.message;
 		} else {

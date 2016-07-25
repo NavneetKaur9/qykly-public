@@ -2,16 +2,21 @@
 /*
  * merchant module
  */
-
-angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function($scope, $http, DTOptionsBuilder, DTColumnBuilder, $compile, $filter, api, $window) {
+angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function($scope, $http, DTOptionsBuilder, DTColumnBuilder, $compile, $filter, api, $window, $cookieStore) {
     var url = api.addr();
     var cats = [];
     $scope.categories = [];
-
     $scope.allCats = function(argument) {
         $http({
             method: 'GET',
             url: url + 'get-categories',
+            headers: {
+                Accept: "application/json",
+                Authorization: $cookieStore.get('c2cCookie')
+            },
+            error: function(err) {
+                $scope.alert = err.responseJSON.message; // body...
+            }
         }).then(function successCallback(response) {
             $scope.categories = response.data.list;
             angular.forEach($scope.categories, function(value, key) {
@@ -24,7 +29,6 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
             console.log('Oops, Somethings went wrong.');
         });
     };
-
     $scope.allCats();
     $scope.statuses = cats;
     $scope.selected = {};
@@ -36,12 +40,9 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
     $scope.dtInstance = {};
     $scope.reloadData = reloadData;
     $scope.testVar = "";
-
     // var titleHtml = '<input ng-model="selectAll" ng-click="toggleAll(selectAll, selected);" type="checkbox">';
     var titleHtml = '';
-
-    $scope.dtOptions = DTOptionsBuilder.newOptions()
-        .withOption('ajax', {
+    $scope.dtOptions = DTOptionsBuilder.newOptions().withOption('ajax', {
             url: url + 'get-merchants',
             type: 'POST'
                 //         'oColReorder': {
@@ -49,16 +50,12 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
                 // }
         })
         // or here
-        .withDataProp('data')
-        .withOption('processing', true)
-        .withOption('serverSide', true)
-        .withOption('createdRow', function(row, data, dataIndex) {
+        .withDataProp('data').withOption('processing', true).withOption('serverSide', true).withOption('createdRow', function(row, data, dataIndex) {
             $($compile(angular.element(row).contents())($scope)[3]).each(function(index) {
                 $(this).click(function() {
                     $(this).find('button.btn-primary').click(function() {
                         var catName = $(".editable-has-buttons option:selected").text();
                         var merchantId = data._id;
-
                         var req = {
                             method: 'POST',
                             url: url + 'update-merchant-category-once-at-a-time',
@@ -67,34 +64,25 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
                                 category: catName
                             }
                         }
-
-
-                        $http(req).then(
-                            function successCallback(response) {
-                                $scope.alert = response.data.Success
-
-                                reloadData();
-                                console.log(response.data.Success);
-                            },
-                            function errorCallback(response) {
-                                console.log(response);
-                            });
+                        $http(req).then(function successCallback(response) {
+                            $scope.alert = response.data.Success
+                            reloadData();
+                            console.log(response.data.Success);
+                        }, function errorCallback(response) {
+                            console.log(response);
+                        });
                     });
                 });
             });
-        })
-        .withOption('headerCallback', function(header) {
+        }).withOption('headerCallback', function(header) {
             $window.scrollTo(0, 0);
-
             if (!$scope.headerCompiled) {
                 // Use this headerCompiled field to only compile header once
                 $scope.headerCompiled = true;
                 $compile(angular.element(header).contents())($scope);
             }
-        })
-        .withOption('stateSave', true).withOption('aaSorting', [5, 'desc']);
+        }).withOption('stateSave', true).withOption('aaSorting', [5, 'desc']);
     $scope.dtColumns = [
-
         DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
         DTColumnBuilder.newColumn(null).withTitle('#').renderWith(function(data, type, full, meta) {
             return meta.settings._iDisplayStart + meta.row + 1;
@@ -124,7 +112,6 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
         DTColumnBuilder.newColumn(null).withTitle('Category').notSortable().renderWith(function(data, type, full, meta) {
             return '<img ng-src="' + data.icon + '" height="50" width="50" alt=""/>';
         }).withOption('width', '5%')
-
     ];
 
     function toggleAll(selectAll, selectedItems) {
@@ -152,22 +139,18 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
         // $scope.dtInstance.rerender(); 
         window.location.reload();
     }
-
     $scope.changeMerchantCategory = function() {
         var category = angular.isUndefined($scope.merchantdata) ? "" : $scope.merchantdata.category;
         var allMerchants = $scope.selected;
-
         //check empty
         if (category == "") {
             alert('Please select category');
             return;
         }
-
         if (Object.keys(allMerchants).length == 0) {
             alert('Please select merchant');
             return;
         }
-
         var merchants = [];
         var atleastOneSelected = false;
         angular.forEach(allMerchants, function(value, merchant_id) {
@@ -176,7 +159,6 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
                 atleastOneSelected = true;
             }
         }, merchants);
-
         if (atleastOneSelected) {
             var req = {
                 method: 'POST',
@@ -186,21 +168,16 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
                     'category': category
                 }
             }
-
-
-            $http(req).then(
-                function successCallback(response) {
-                    $scope.alert = response.data.Success
-                    $scope.merchantdata.category = '';
-                    reloadData();
-                    console.log(response.data.Success);
-                },
-                function errorCallback(response) {
-                    console.log(response);
-                });
+            $http(req).then(function successCallback(response) {
+                $scope.alert = response.data.Success
+                $scope.merchantdata.category = '';
+                reloadData();
+                console.log(response.data.Success);
+            }, function errorCallback(response) {
+                console.log(response);
+            });
         } else {
             alert("Please select merchant");
         }
-
     }
 });

@@ -2,34 +2,34 @@
 /**
  * 
  */
-angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, DTOptionsBuilder, DTColumnBuilder, $filter, $window) {
+angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, DTOptionsBuilder, DTColumnBuilder, $filter, $window, $cookieStore) {
 	var url = api.addr();
+	var token = $cookieStore.get('c2cCookie');
 	$scope.dtOptions = DTOptionsBuilder.newOptions().withOption('ajax', {
-			url: url + 'get-message',
-			type: 'GET',
-			data: function(aodata) {
-
-				if (aodata.draw == "1") {
-					aodata.order[0].column = "6";
-					aodata.order[0].dir = 'desc';
-				}
+		url: url + 'get-message',
+		type: 'GET',
+		headers: {
+			Accept: "application/json",
+			Authorization: $cookieStore.get('c2cCookie')
+		},
+		error: function(err) {
+			$scope.alert = err.responseJSON.message; // body...
+		},
+		data: function(aodata) {
+			if (aodata.draw == "1") {
+				aodata.order[0].column = "6";
+				aodata.order[0].dir = 'desc';
 			}
-		})
-		.withOption('processing', true)
-		.withDataProp('data')
-		.withOption('serverSide', true)
-		.withLanguage({
-			'sSearch': 'Search Shortcode/message:',
-			'oPaginate': {
-				'sNext': '»',
-				'sPrevious': '«'
-			}
-		})
-		.withOption('headerCallback', function(header) {
-			$window.scrollTo(0, 0);
-
-		});
-
+		}
+	}).withOption('processing', true).withDataProp('data').withOption('serverSide', true).withLanguage({
+		'sSearch': 'Search Shortcode/message:',
+		'oPaginate': {
+			'sNext': '»',
+			'sPrevious': '«'
+		}
+	}).withOption('headerCallback', function(header) {
+		$window.scrollTo(0, 0);
+	});
 	$scope.dtColumns = [
 		DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
 		DTColumnBuilder.newColumn(null).withTitle('# ').renderWith(function(data, type, full, meta) {
@@ -57,8 +57,7 @@ angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, 
 			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 		}).withOption('searchable', false)
 	];
-
-	api.get('summary', false, false, false, function(err, response) {
+	api.get('summary', false, token, false, function(err, response) {
 		if (err || response.error) {
 			$scope.alerts = [{
 				msg: response.userMessage || 'Server error! Are you connected to the internet?.',
@@ -68,7 +67,7 @@ angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, 
 			$scope.summary = response;
 		}
 	});
-	api.get('regex-summary', false, false, false, function(err, response) {
+	api.get('regex-summary', false, token, false, function(err, response) {
 		if (err || response.error) {
 			$scope.alerts = [{
 				msg: response.userMessage || 'Server error! Are you connected to the internet?.',
@@ -78,24 +77,4 @@ angular.module('sbAdminApp').controller('smsCtrl', function($scope, $http, api, 
 			$scope.regexSummary = response;
 		}
 	});
-	$scope.assignMessage = function() {
-		api.post('assign-message', false, {
-			// modusers: 78687,
-			// messages: [{}, {}, ]
-		}, function(err, response) {
-			if (err || response.error) {
-				$scope.alerts = [{
-					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-					type: 'error'
-				}];
-			} else {
-				// response ok
-			}
-		});
-	};
-	$scope.movetoDump = function() {
-		api.put('move-to-dumb', false, false, {
-			// array of msg id
-		}, function(err, response) {});
-	};
 });

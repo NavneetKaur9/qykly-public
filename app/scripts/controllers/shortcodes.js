@@ -4,11 +4,12 @@
  */
 angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http, api, $cookieStore, $window, DTOptionsBuilder, DTColumnBuilder, $filter) {
 	var url = api.addr();
+	var token = $cookieStore.get('c2cCookie');
 	$window.scrollTo(0, 0);
 	$scope.alert = '  loading.........';
 	$scope.getShortcode = function(status) {
 		$scope.alert = '  loading.........';
-		api.get('get-codes', status, false, false, function(err, response) {
+		api.get('get-codes', status, token, false, function(err, response) {
 			if (err || response.error) {
 				$scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
 			} else {
@@ -27,7 +28,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 	$scope.getShortcode('0');
 	$scope.getSms = function(code, status) {
 		$scope.alert = 'fetching ' + code + ' messages....';
-		api.get('get-smss/' + code + '/' + status, false, false, false, function(err, response) {
+		api.get('get-smss/' + code + '/' + status, false, token, false, function(err, response) {
 			if (err || response.error) {
 				$scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
 			} else {
@@ -46,7 +47,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 				$scope.addresses.push(value);
 			}
 		}
-		api.put('blacklist', false, false, {
+		api.put('blacklist', false, token, {
 			address: $scope.addresses
 		}, function(err, response) {
 			if (err || response.error) {
@@ -71,7 +72,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 	};
 	$scope.searchCode = '';
 	$scope.searchShortcode = function() {
-		api.get('Search-code', false, false, {
+		api.get('Search-code', false, token, {
 			address: $scope.searchCode
 		}, function(err, response) {
 			$scope.alert = response.message;
@@ -119,7 +120,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 		// $scope.alert = false;
 		$scope.parseSmsResult = [];
 		$scope.alert = 'processing.........';
-		api.post('parsesmsbyshortcode', false, {
+		api.post('parsesmsbyshortcode', false, token, {
 			shortcode: code
 		}, function(err, response) {
 			$scope.parseSmsResult = response;
@@ -140,7 +141,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 			}
 		}
 		console.log($scope.msgText);
-		api.put('assign-msg', false, false, {
+		api.put('assign-msg', false, token, {
 			msgText: $scope.msgText,
 			assignTo: $scope.assignTo.name
 		}, function(err, response) {
@@ -152,9 +153,8 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 			}
 		});
 	};
-
 	// get mod users
-	api.get('user', false, false, false, function(err, response) {
+	api.get('user', false, token, false, function(err, response) {
 		if (err) {
 			$scope.alert = response.message;
 		} else {

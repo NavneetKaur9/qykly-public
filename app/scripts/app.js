@@ -13,7 +13,6 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
     events: true,
   });
   $urlRouterProvider.otherwise('/login');
-
   $stateProvider.state('dashboard', {
     url: '/dashboard',
     templateUrl: 'views/dashboard/main.html',
@@ -21,7 +20,7 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
       loadMyDirectives: function($ocLazyLoad) {
         return $ocLazyLoad.load({
             name: 'sbAdminApp',
-            files: ['scripts/services/restful.js', 'scripts/directives/header/header.js', 'scripts/directives/sidebar/sidebar.js', './assets/plugins/select2/select2.min.css', './assets/plugins/select2/select2.full.min.js']
+            files: ['scripts/directives/header/header.js', 'scripts/directives/sidebar/sidebar.js', './assets/plugins/select2/select2.min.css', './assets/plugins/select2/select2.full.min.js']
           }),
           $ocLazyLoad.load({
             name: 'ngCookies',
@@ -48,7 +47,7 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
       loadMyFiles: function($ocLazyLoad) {
         return $ocLazyLoad.load({
           name: 'sbAdminApp',
-          files: ['scripts/controllers/home.js', 'scripts/services/restful.js']
+          files: ['scripts/controllers/home.js']
         });
       }
     }
@@ -147,7 +146,7 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
       loadMyFile: function($ocLazyLoad) {
         return $ocLazyLoad.load({
           name: 'sbAdminApp',
-          files: ['scripts/controllers/addUser.js', 'scripts/services/restful.js']
+          files: ['scripts/controllers/addUser.js']
         });
       }
     }
