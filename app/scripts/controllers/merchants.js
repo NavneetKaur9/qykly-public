@@ -102,7 +102,7 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
         DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable().renderWith(function(data, type, full, meta) {
             var merchant_id = JSON.stringify(data._id);
             return "<input ng-model='selected[" + merchant_id + "]' name=chk[] class='multi-check' ng-click='toggleOne(selected)' type='checkbox'>";
-        }),
+        }).withOption('searchable', false),
         DTColumnBuilder.newColumn('name').withTitle('Merchant'),
         DTColumnBuilder.newColumn('Type').withTitle('Type').renderWith(function(data, type, full, meta) {
             $scope.type = {
@@ -119,11 +119,11 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
         DTColumnBuilder.newColumn('dateModified').withTitle('Updated').renderWith(function(data, type, full) {
             return $filter('date')(data, 'medium'); //date filter 
         }).withOption('searchable', false),
-        DTColumnBuilder.newColumn('icon').notVisible(),
-        DTColumnBuilder.newColumn('imageUrl').notVisible(),
+        DTColumnBuilder.newColumn('icon').notVisible().withOption('searchable', false),
+        DTColumnBuilder.newColumn('imageUrl').notVisible().withOption('searchable', false),
         DTColumnBuilder.newColumn(null).withTitle('Category').notSortable().renderWith(function(data, type, full, meta) {
             return '<img ng-src="' + data.icon + '" height="50" width="50" alt=""/>';
-        }).withOption('width', '5%')
+        }).withOption('width', '5%').withOption('searchable', false)
 
     ];
 
