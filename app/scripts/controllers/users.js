@@ -48,7 +48,7 @@ angular.module('sbAdminApp').controller('usersCtrl', function($scope, $location,
 			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 		}).withOption('searchable', false),
 		DTColumnBuilder.newColumn('lastLogin').withTitle('First Login ').renderWith(function(data, type, full) {
-			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
+		return $filter('date')(data, 'd MMM y, h:mm a'); //date filter
 		}).withOption('searchable', false),
 		DTColumnBuilder.newColumn('smsShortCodes').withTitle('Codes ').renderWith(function(data, type, full) {
 			return data = data.length;

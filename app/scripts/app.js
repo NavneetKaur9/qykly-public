@@ -36,6 +36,9 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
           }), $ocLazyLoad.load({
             name: 'angular.backtop',
             files: ['bower_components/angular-backtop/dist/angular-backtop.js', 'bower_components/angular-backtop/dist/angular-backtop.css']
+          }), $ocLazyLoad.load({
+            name: 'xeditable',
+            files: ['bower_components/angular-xeditable/dist/css/xeditable.css', 'bower_components/angular-xeditable/dist/js/xeditable.js']
           });
       }
     }

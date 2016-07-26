@@ -17,7 +17,6 @@ angular.module('sbAdminApp').directive('header', function() {
 					$scope.alert = response.message
 				} else {
 					$scope.user = response.user;
-					console.log(response.result);
 					$scope.msgAssigned = response.result.toString();
 				}
 			});

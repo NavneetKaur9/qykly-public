@@ -5,13 +5,26 @@
 angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $http, api, $cookieStore, DTOptionsBuilder, DTColumnBuilder, $filter, $window) {
 	var token = $cookieStore.get('c2cCookie');
 	var url = api.addr();
+	$scope.update = function() {
+
+		api.post('updateProcessingStatus', false, token, {
+			// msgText: msgtext array,
+			// processingStatus: processingStatus
+		}, function(err, response) {
+			if (err) {
+				$scope.alert = response.message
+			} else {
+				console.log(response);
+			}
+		});
+	};
 	// console.log(token);
-	// api.get('userprofile', false, token, false, function(err, response) {
+	// api.post('assigned-msgs', false, token, false, function(err, response) {
 	// 	if (err) {
 	// 		$scope.alert = response.message
 	// 	} else {
-	// 		$scope.user = response.user;
-	// 		$scope.msgAssigned = response.result;
+	// 		$scope.msgAssigned = response;
+	// 		console.log(response);
 	// 	}
 	// });
 	// $scope.sortType = 'saveTime';
@@ -33,7 +46,7 @@ angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $ht
 				Authorization: token
 			},
 			error: function(err) {
-				$scope.alert = err.responseJSON.message; // body...
+				// $scope.alert = err.responseJSON.message; // body...
 			},
 			data: function(aodata) {
 				// if (aodata.draw == "1") {
@@ -43,7 +56,7 @@ angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $ht
 			}
 		})
 		.withOption('processing', true)
-		.withDataProp('data')
+		// .withDataProp('data')
 		.withOption('serverSide', true)
 		.withLanguage({
 			'sSearch': 'Search :',
@@ -66,8 +79,15 @@ angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $ht
 		}).withOption('searchable', false),
 		DTColumnBuilder.newColumn('saveTime').withTitle('saveTime ').renderWith(function(data, type, full) {
 			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
-		}).withOption('searchable', false)
+		}).withOption('searchable', false),
+		DTColumnBuilder.newColumn('processingStatus').withTitle('processingStatus').renderWith(function(data, type, full, meta) {
+
+			return '<a href="" editable-select="type.catName" e-ng-options="s.value as s.text for s in processingStatuses">' + data + '</a>';
+		})
+
 	];
+
+	$scope.processingStatuses = ["Pending", "Complete", "Exists"];
 
 
 });
