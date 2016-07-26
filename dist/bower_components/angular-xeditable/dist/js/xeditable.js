@@ -377,7 +377,7 @@ angular.module('xeditable').directive('editableSelect', ['editableDirectiveFacto
   function(editableDirectiveFactory) {
     return editableDirectiveFactory({
       directiveName: 'editableSelect',
-      inputTpl: '<select class="form-control"></select>',
+      inputTpl: '<select id="select_box_merchant" class="form-control"></select>',
       render: function() {
         this.parent.render.call(this);
 
@@ -727,7 +727,7 @@ angular.module('xeditable').factory('editableController',
       }
 
       self.inputEl.addClass('editable-input');
-      self.inputEl.attr('ng-model', '$parent.$data');
+      self.inputEl.attr('ng-model', 'selectedOption');
 
       // add directiveName class to editor, e.g. `editable-text`
       self.editorEl.addClass(editableUtils.camelToDash(self.directiveName));
