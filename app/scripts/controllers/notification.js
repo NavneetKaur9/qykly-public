@@ -77,17 +77,20 @@ angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $ht
 		DTColumnBuilder.newColumn('time').withTitle('time ').renderWith(function(data, type, full) {
 			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 		}).withOption('searchable', false),
-		DTColumnBuilder.newColumn('saveTime').withTitle('saveTime ').renderWith(function(data, type, full) {
-			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
-		}).withOption('searchable', false),
+		// DTColumnBuilder.newColumn('saveTime').withTitle('saveTime ').renderWith(function(data, type, full) {
+		// 	return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
+		// }).withOption('searchable', false),
 		DTColumnBuilder.newColumn('saveTime').withTitle('processingStatus').renderWith(function(data, type, full, meta) {
-
+			//console.log();
 			// return '<button ng-dblclick="count = count + 1" ng-init="count=0">Increment (on double click)</button>' +
 			// 	'count: {{count}}';
 
-			return '<button class="btn btn-default" ng-click="edit(' + data + ')">' +
-				'   test' +
-				'</button>&nbsp;';
+			// return '<button class="btn btn-default" ng-click="edit()">' +
+			// 	'   test' +
+			// 	'</button>&nbsp;';
+			// console.log(data);
+			return '<button ng-click="edit()">' + data + '</button>';
+
 
 		})
 
