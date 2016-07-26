@@ -7,6 +7,14 @@ angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api,
 		console.log('yes');
 		$scope.show = true;
 	}
+	api.get('temporary', false, false, false, function(err, response) {
+		if (err) {
+			$scope.alert = response.message;
+		} else {
+			// $scope.alert = response.message;
+			$scope.dataset = response;
+		}
+	});
 
 	// $scope.sortType = 'saveTime';
 	// $scope.sortReverse = false;
