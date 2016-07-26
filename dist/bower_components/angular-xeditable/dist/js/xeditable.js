@@ -377,7 +377,7 @@ angular.module('xeditable').directive('editableSelect', ['editableDirectiveFacto
   function(editableDirectiveFactory) {
     return editableDirectiveFactory({
       directiveName: 'editableSelect',
-      inputTpl: '<select class="form-control"></select>',
+      inputTpl: '<select id="select_box_merchant" class="form-control"></select>',
       render: function() {
         this.parent.render.call(this);
 
@@ -727,7 +727,7 @@ angular.module('xeditable').factory('editableController',
       }
 
       self.inputEl.addClass('editable-input');
-      self.inputEl.attr('ng-model', '$parent.$data');
+      self.inputEl.attr('ng-model', 'selectedOption');
 
       // add directiveName class to editor, e.g. `editable-text`
       self.editorEl.addClass(editableUtils.camelToDash(self.directiveName));
@@ -796,13 +796,13 @@ angular.module('xeditable').factory('editableController',
       $element.removeClass('editable-hide');
 
       // Manually remove the watcher on 'has-error' to prevent a memory leak on it.
-      for (var i = 0, len = $scope.$$watchers.length; i < len; i++) {
-        if ($scope.$$watchers[i] !== undefined && $scope.$$watchers[i].last && $scope.$$watchers[i].last !== undefined &&
-            typeof $scope.$$watchers[i].last === 'object' && "has-error" in $scope.$$watchers[i].last) {
-          $scope.$$watchers.splice(i, 1);
-          break;
-        }
-      }
+      // for (var i = 0, len = $scope.$$watchers.length; i < len; i++) {
+      //   if ($scope.$$watchers[i] !== undefined && $scope.$$watchers[i].last && $scope.$$watchers[i].last !== undefined &&
+      //       typeof $scope.$$watchers[i].last === 'object' && "has-error" in $scope.$$watchers[i].last) {
+      //     $scope.$$watchers.splice(i, 1);
+      //     break;
+      //   }
+      // }
 
       // onhide
       return self.onhide();

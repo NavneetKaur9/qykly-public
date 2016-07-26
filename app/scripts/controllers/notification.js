@@ -80,13 +80,24 @@ angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $ht
 		DTColumnBuilder.newColumn('saveTime').withTitle('saveTime ').renderWith(function(data, type, full) {
 			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 		}).withOption('searchable', false),
-		DTColumnBuilder.newColumn('processingStatus').withTitle('processingStatus').renderWith(function(data, type, full, meta) {
+		DTColumnBuilder.newColumn('saveTime').withTitle('processingStatus').renderWith(function(data, type, full, meta) {
 
-			return '<a href="" editable-select="type.catName" e-ng-options="s.value as s.text for s in processingStatuses">' + data + '</a>';
+			// return '<button ng-dblclick="count = count + 1" ng-init="count=0">Increment (on double click)</button>' +
+			// 	'count: {{count}}';
+
+			return '<button class="btn btn-default" ng-click="edit(' + data + ')">' +
+				'   test' +
+				'</button>&nbsp;';
+
 		})
 
 	];
 
+	$scope.edit = function(data) {
+		alert('hello');
+		console.log('ping');
+		console.log(data);
+	};
 	$scope.processingStatuses = ["Pending", "Complete", "Exists"];
 
 
