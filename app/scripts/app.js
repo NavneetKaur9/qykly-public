@@ -177,5 +177,17 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
         });
       }
     }
+}).state('dashboard.regexCount', {
+    url: '/regexCount',
+    templateUrl: 'views/regexCount.html',
+    controller: 'regexCountCtrl',
+    resolve: {
+      loadMyFile: function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name: 'sbAdminApp',
+          files: ['scripts/controllers/regexCount.js']
+        });
+      }
+    }
   });
 }]);

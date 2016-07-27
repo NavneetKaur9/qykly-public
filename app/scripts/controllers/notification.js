@@ -2,106 +2,133 @@
 /**
  * 
  */
-angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $http, api, $cookieStore, DTOptionsBuilder, DTColumnBuilder, $filter, $window) {
+angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $http, api, $cookieStore, DTOptionsBuilder, DTColumnBuilder, $filter, $window, $compile) {
 	var token = $cookieStore.get('c2cCookie');
 	var url = api.addr();
-	$scope.update = function() {
-
+	$scope.update = function(sms, status) {
+		sms.processingStatus = status;
 		api.post('updateProcessingStatus', false, token, {
-			// msgText: msgtext array,
-			// processingStatus: processingStatus
+			msgText: sms.text,
+			processingStatus: status
 		}, function(err, response) {
 			if (err) {
 				$scope.alert = response.message
 			} else {
-				console.log(response);
+				$scope.alert = response.ok;
 			}
 		});
 	};
-	// console.log(token);
-	// api.post('assigned-msgs', false, token, false, function(err, response) {
-	// 	if (err) {
-	// 		$scope.alert = response.message
-	// 	} else {
-	// 		$scope.msgAssigned = response;
-	// 		console.log(response);
-	// 	}
-	// });
-	// $scope.sortType = 'saveTime';
-	// $scope.sortReverse = false;
-	// $scope.order = function(sortType) {
-	// 	$scope.sortReverse = ($scope.sortType === sortType) ? !$scope.sortReverse : false;
-	// 	$scope.sortType = sortType;
-	// };
-
+	$scope.alert = '  loading.........';
+	api.post('get-assigned-msgs', false, token, {}, function(err, response) {
+		if (err) {
+			$scope.alert = response.message
+		} else {
+			$scope.msgAssigned = response;
+			$scope.alert = false;
+		}
+	});
+	$scope.sortType = 'saveTime';
+	$scope.sortReverse = false;
+	$scope.order = function(sortType) {
+		$scope.sortReverse = ($scope.sortType === sortType) ? !$scope.sortReverse : false;
+		$scope.sortType = sortType;
+	};
+	$scope.editItem = function(sms) {
+		sms.editing = true;
+	};
 	/**************************************
 	 *          datatables
 	 ***************************************/
+	// $scope.dtInstance = {};
+	// $scope.dtOptions = DTOptionsBuilder.newOptions().withOption('ajax', {
+	// 		url: url + 'assigned-msgs',
+	// 		type: 'POST',
+	// 		headers: {
+	// 			Accept: "application/json",
+	// 			Authorization: token
+	// 		},
+	// 		error: function(err) {
+	// 			// $scope.alert = err.responseJSON.message; // body...
+	// 		},
+	// 		data: function(aodata) {
+	// 			// if (aodata.draw == "1") {
+	// 			// 	aodata.order[0].column = "6";
+	// 			// 	aodata.order[0].dir = 'desc';
+	// 			// }
+	// 		}
+	// 	})
+	// 	.withOption('processing', true)
+	// 	// .withDataProp('data')
+	// 	.withOption('serverSide', true)
+	// 	.withLanguage({
+	// 		'sSearch': 'Search :',
+	// 		'oPaginate': {
+	// 			'sNext': '»',
+	// 			'sPrevious': '«'
+	// 		}
+	// 	}).withOption('headerCallback', function(header) {
+	// 		$window.scrollTo(0, 0);
+	// 	}).withOption('createdRow', function(row, data, dataIndex) {
+	// 		// $compile(angular.element(row).contents())($scope);
 
-	$scope.dtOptions = DTOptionsBuilder.newOptions().withOption('ajax', {
-			url: url + 'assigned-msgs',
-			type: 'POST',
-			headers: {
-				Accept: "application/json",
-				Authorization: token
-			},
-			error: function(err) {
-				// $scope.alert = err.responseJSON.message; // body...
-			},
-			data: function(aodata) {
-				// if (aodata.draw == "1") {
-				// 	aodata.order[0].column = "6";
-				// 	aodata.order[0].dir = 'desc';
-				// }
-			}
-		})
-		.withOption('processing', true)
-		// .withDataProp('data')
-		.withOption('serverSide', true)
-		.withLanguage({
-			'sSearch': 'Search :',
-			'oPaginate': {
-				'sNext': '»',
-				'sPrevious': '«'
-			}
-		}).withOption('headerCallback', function(header) {
-			$window.scrollTo(0, 0);
-		});
+	// 		$($compile(angular.element(row).contents())($scope)[3]).each(function(index) {
+	// 			$(this).click(function() {
+	// 				$(this).find('button.btn-primary').click(function() {
+	// 					var selectedStatus = $(".editable-has-buttons option:selected").text();
+	// 					var merchantId = data._id;
+	// 					var req = {
+	// 						method: 'POST',
+	// 						url: url + 'updateProcessingStatus',
+	// 						data: {
+	// 							msgText: data.text,
+	// 							processingStatus: selectedStatus
+	// 						}
+	// 					}
+	// 					$http(req).then(function successCallback(response) {
+	// 						$scope.alert = response.data.Success
+	// 							// reloadData();
+	// 							//hide dropdown here
+	// 					}, function errorCallback(response) {
+	// 						console.log(response);
+	// 					});
+	// 				});
+	// 			});
+	// 		});
+	// 	});
 
-	$scope.dtColumns = [
-		DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
+	// $scope.dtColumns = [
+	// 	DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
 
-		DTColumnBuilder.newColumn('address').withTitle('Address'),
-		DTColumnBuilder.newColumn('text').withTitle('smsText'),
+	// 	DTColumnBuilder.newColumn('address').withTitle('Address'),
+	// 	DTColumnBuilder.newColumn('text').withTitle('smsText'),
 
-		DTColumnBuilder.newColumn('time').withTitle('time ').renderWith(function(data, type, full) {
-			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
-		}).withOption('searchable', false),
-		// DTColumnBuilder.newColumn('saveTime').withTitle('saveTime ').renderWith(function(data, type, full) {
-		// 	return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
-		// }).withOption('searchable', false),
-		DTColumnBuilder.newColumn('saveTime').withTitle('processingStatus').renderWith(function(data, type, full, meta) {
-			//console.log();
-			// return '<button ng-dblclick="count = count + 1" ng-init="count=0">Increment (on double click)</button>' +
-			// 	'count: {{count}}';
-
-			// return '<button class="btn btn-default" ng-click="edit()">' +
-			// 	'   test' +
-			// 	'</button>&nbsp;';
-			// console.log(data);
-			return '<button ng-click="edit()">' + data + '</button>';
+	// 	DTColumnBuilder.newColumn('time').withTitle('time ').renderWith(function(data, type, full) {
+	// 		return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
+	// 	}).withOption('searchable', false),
+	// DTColumnBuilder.newColumn('saveTime').withTitle('saveTime ').renderWith(function(data, type, full) {
+	// 	return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
+	// }).withOption('searchable', false),
+	// 	DTColumnBuilder.newColumn('processingStatus').withTitle('processingStatus').renderWith(function(data, type, full, meta) {
+	// 		return '<a ng-click="edit(\'' + data + '\')" href="#" editable-select="type.catName" e-ng-options="s.value as s.text for s in statuses">' + data + '</a>';
 
 
-		})
 
-	];
+	// 	})
 
-	$scope.edit = function(data) {
-		alert('hello');
-		console.log('ping');
-		console.log(data);
-	};
-	$scope.processingStatuses = ["Pending", "Complete", "Exists"];
+	// ];
 
+	// $scope.edit = function(status) {
+	// 	$scope.selectedOption = status;
+	// };
+	$scope.statuses = [{
+		value: 'Pending',
+		text: 'Pending'
+	}, {
+		value: 'Complete',
+		text: 'Complete'
+	}, {
+		value: 'Exists',
+		text: 'Exists'
+	}];
 
 });
