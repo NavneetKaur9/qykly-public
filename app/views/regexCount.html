@@ -1,5 +1,5 @@
 <div ng-controller="regexCountCtrl">
-	<!-- BLOCK 4: COMMON ALERT -->
+    <!-- BLOCK 4: COMMON ALERT -->
     <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
         <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
             <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
@@ -12,4 +12,66 @@
         </div>
     </div>
     <!-- BLOCK 4: COMMON ALERT -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <h4>
+                <label for="search">
+                    <input ng-model="search" id="search" class="" placeholder="Search" style="width:100%" />
+                </label>
+            </h4>
+            <table class="table table-striped jambo_table bulk_action" icheck>
+                <thead>
+                    <tr class="headings">
+                        <th width="5%">
+                            Merchant
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="even pointer" ng-repeat="(key, value) in dataset|filter:search">
+                        <td class="a-center ">
+                            {{value.merchant}}
+                        </td>
+                        <td>
+                            <table class="table ">
+                                <thead>
+                                    <th class="column-title">
+                                        Address
+                                    </th>
+                                    <th class="column-title">
+                                        count
+                                    </th>
+                                    <th class="column-title">
+                                        msgtype
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="(key, value) in value.data">
+                                        <td>
+                                            {{value.address}}
+                                        </td>
+                                        <td>
+                                            {{value.count}}
+                                        </td>
+                                        <td>
+                                            {{value.msgtype}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <!--
+                            <td ng-repeat="(key, value) in value.data">
+                                {{value.address}}
+                                {{value.count}}
+                                {{value.msgtype}}
+                            </td>
+                        -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

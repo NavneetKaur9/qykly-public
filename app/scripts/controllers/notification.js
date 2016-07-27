@@ -33,8 +33,17 @@ angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $ht
 		$scope.sortReverse = ($scope.sortType === sortType) ? !$scope.sortReverse : false;
 		$scope.sortType = sortType;
 	};
-	$scope.editItem = function(sms) {
-		sms.editing = true;
+	$scope.parse = function(sms) {
+		api.post('parsemessage', false, token, {
+			message: sms.text,
+			shortcode: sms.address
+		}, function(err, response) {
+			if (err) {
+				$scope.alert = response.message
+			} else {
+				$scope.alert = response.count + ' message parsesd with ' + response.shortcode;
+			}
+		});
 	};
 	/**************************************
 	 *          datatables
