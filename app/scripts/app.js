@@ -189,7 +189,7 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
         });
       }
     }
-}).state('dashboard.regexCount', {
+  }).state('dashboard.regexCount', {
     url: '/regexCount',
     templateUrl: 'views/regexCount.html',
     controller: 'regexCountCtrl',
@@ -198,6 +198,18 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
         return $ocLazyLoad.load({
           name: 'sbAdminApp',
           files: ['scripts/controllers/regexCount.js']
+        });
+      }
+    }
+  }).state('dashboard.json_editor', {
+    url: '/json_editor',
+    templateUrl: 'views/json_editor.html',
+    controller: 'jsonEditorCtrl',
+    resolve: {
+      loadMyFile: function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name: 'sbAdminApp',
+          files: ['scripts/controllers/json_editor.js']
         });
       }
     }

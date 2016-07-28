@@ -21,6 +21,13 @@
                                 Add User
                             </a>
                         </li>
+                       
+                        <li ng-if="user.role=='admin'">
+                            <a ui-sref="dashboard.json_editor">
+                              <i class="fa fa-pencil pull-right">
+                                </i>  Json Editor
+                            </a>
+                        </li>
                         <!--
                             <li>
                                 <a href="javascript:;">
