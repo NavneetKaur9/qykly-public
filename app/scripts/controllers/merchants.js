@@ -97,9 +97,6 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
             $scope.type = {
                 catName: data
             };
-            var selectedText = $filter('filter')($scope.statuses, {
-                value: data
-            });
             return '<a ng-click="showSelected(\'' + data + '\')" href="#" editable-select="type.catName" e-ng-options="s.value as s.text for s in statuses">' + data + '</a>';
         }),
         DTColumnBuilder.newColumn('dateCreated').withTitle('Created').renderWith(function(data, type, full) {
@@ -139,7 +136,7 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
     }
 
     function reloadData() {
-        // $scope.dtInstance.rerender(); 
+         //$scope.dtInstance.rerender(); 
         window.location.reload();
     }
     $scope.changeMerchantCategory = function() {
