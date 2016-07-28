@@ -13,7 +13,9 @@ angular.module('sbAdminApp').controller('regexCountCtrl', function($scope, $http
 			$scope.dataset = response;
 		}
 	});
-
+	$scope.closeAlert = function(argument) {
+		$scope.alert = false;
+	};
 	// $scope.sortType = 'saveTime';
 	// $scope.sortReverse = false;
 	// $scope.order = function(sortType) {
