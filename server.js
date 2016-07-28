@@ -12,7 +12,7 @@ var port = 1337;
 
 
 
-app.use('/', express.static('app/'));
+app.use('/', express.static('dist/'));
 
 // start the server
 app.listen(1337);
