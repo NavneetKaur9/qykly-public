@@ -8,7 +8,52 @@ angular.module('sbAdminApp').controller('jsonEditorCtrl', function($scope, $http
 	$scope.closeAlert = function(argument) {
 		$scope.alert = false;
 	};
-	var travel = {};
+
+
+	// var travel = {};
+	$scope.purchase = {
+		address: "AMAZON",
+		msgType: "purchase",
+		msgSubType: "order-delivered",
+		merchantName: "Amazon",
+		pattern: "",
+		orderStatus: "Order Delivered",
+		orderDate: "",
+		dateFormat: "",
+		posProductName: 1,
+		posQuantity: -1,
+		posDeliveryDetails: -1,
+		posAmount: -1,
+		posManageLink: -1,
+		posExpectedDate: -1,
+		posAwbNumber: -1,
+		posDeliveryDate: -1,
+		posDeliveryTime: -1,
+		posShipmentId: -1,
+		posOrderId: -1,
+		posCourierName: -1,
+		posSellerName: -1,
+		posShipmentDate: -1,
+		posReferenceNumber: -1,
+		posPickupDate: -1,
+		posProcessingDays: -1,
+		posInitiationDate: -1,
+		posMerchantName: -1,
+		posProductDetails: -1,
+		posAltExpectedDate: -1,
+		Count: 0,
+		dateModified: new Date(),
+		dateCreated: new Date(),
+		dateLastReprocessed: new Date(),
+		dateReprocessSet: new Date(),
+		regexDate: "",
+		id: "",
+		posReverseOrderPickupTime: -1,
+		posOrderReturnReceiveDate: -1,
+		posDeliveryFailReason: -1,
+	};
+
+
 	$scope.travel = {
 
 		posBookingId: -1,
@@ -93,7 +138,7 @@ angular.module('sbAdminApp').controller('jsonEditorCtrl', function($scope, $http
 		isReturn: false,
 		posSourceTerminal: -1,
 		posDestinationTerminal: -1
-	}
+	};
 
 
 
