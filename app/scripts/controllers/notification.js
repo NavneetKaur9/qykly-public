@@ -18,6 +18,9 @@ angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $ht
 			}
 		});
 	};
+	$scope.closeAlert = function(argument) {
+		$scope.alert = false;
+	};
 	$scope.alert = '  loading.........';
 	api.post('get-assigned-msgs', false, token, {}, function(err, response) {
 		if (err) {
