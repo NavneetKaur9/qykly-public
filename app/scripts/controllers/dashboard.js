@@ -39,12 +39,7 @@ angular.module("sbAdminApp",['googlechart'])
     
     $scope.myChartObject.type = "BarChart";
     
-    $scope.onions = [
-        {v: "Onions"},
-        {v: 3},
-    ];
-
-     $scope.myChartObject.data = {"cols": [
+    $scope.myChartObject.data = {"cols": [
         {id: "t", label: "Sender code", type: "string"},
         {id: "s", label: "Count", type: "number"}
     ], "rows": shortCodesgraphData};

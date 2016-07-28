@@ -52,8 +52,15 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
         // or here
         .withDataProp('data').withOption('processing', true).withOption('serverSide', true)
         .withOption('createdRow', function(row, data, dataIndex) {
+           
             $($compile(angular.element(row).contents())($scope)[3]).each(function(index) {
+
+                var anchor = $(this).children('a');
+
                 $(this).click(function() {
+
+                    var frm = $(this).children('form');
+                
                     $(this).find('button.btn-primary').click(function() {
                         var catName = $(".editable-has-buttons option:selected").text();
                         var merchantId = data._id;
@@ -66,8 +73,13 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
                             }
                         }
                         $http(req).then(function successCallback(response) {
-                            $scope.alert = response.data.Success
-                            reloadData();
+                            // $scope.alert = response.data.Success
+                            // reloadData();
+                            if(response.data.Success){
+                                $(frm).hide(); 
+                                $(anchor).removeClass('editable-hide');
+                                $(anchor).text(catName);
+                            }
                             console.log(response.data.Success);
                         }, function errorCallback(response) {
                             console.log(response);
