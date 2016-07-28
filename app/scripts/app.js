@@ -177,5 +177,17 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
         });
       }
     }
+  }).state('dashboard.index', {
+    url: '/',
+    templateUrl: 'views/index.html',
+    controller: 'dashboardCtrl',
+    resolve: {
+      loadMyFile: function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name: 'sbAdminApp',
+          files: ['scripts/controllers/dashboard.js']
+        });
+      }
+    }
   });
 }]);
