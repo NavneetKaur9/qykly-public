@@ -1,1 +1,1 @@
-"use strict";angular.module("sbAdminApp").controller("homeCtrl",function($scope,$http,api,$sce,$window,$cookieStore){$scope.yes=function(){console.log("yes"),$scope.show=!0},api.get("temporary",!1,!1,!1,function(err,response){err?$scope.alert=response.message:$scope.dataset=response})});
+"use strict";angular.module("sbAdminApp").controller("homeCtrl",function($scope,$http,api,$sce,$window,$cookieStore){$scope.yes=function(){console.log("yes"),$scope.show=!0}});

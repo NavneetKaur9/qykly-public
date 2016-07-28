@@ -1,0 +1,1 @@
+"use strict";angular.module("sbAdminApp").controller("regexCountCtrl",function($scope,$http,api,$sce,$window,$cookieStore){$scope.alert="  Loading Data will take some time.....",api.get("regex-analytics",!1,!1,!1,function(err,response){err?$scope.alert=response.message:($scope.alert=!1,$scope.dataset=response)}),$scope.closeAlert=function(argument){$scope.alert=!1}});

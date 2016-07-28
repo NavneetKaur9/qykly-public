@@ -50,7 +50,8 @@ angular.module('sbAdminApp', ["xeditable"]).controller('merchantsCtrl', function
                 // }
         })
         // or here
-        .withDataProp('data').withOption('processing', true).withOption('serverSide', true).withOption('createdRow', function(row, data, dataIndex) {
+        .withDataProp('data').withOption('processing', true).withOption('serverSide', true)
+        .withOption('createdRow', function(row, data, dataIndex) {
             $($compile(angular.element(row).contents())($scope)[3]).each(function(index) {
                 $(this).click(function() {
                     $(this).find('button.btn-primary').click(function() {

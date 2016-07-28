@@ -177,15 +177,26 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
         });
       }
     }
+<<<<<<< HEAD
   }).state('dashboard.index', {
     url: '/',
     templateUrl: 'views/index.html',
     controller: 'dashboardCtrl',
+=======
+}).state('dashboard.regexCount', {
+    url: '/regexCount',
+    templateUrl: 'views/regexCount.html',
+    controller: 'regexCountCtrl',
+>>>>>>> 48d63ffc0a17525d5ddd68f9ea98a0cfcadb1a0a
     resolve: {
       loadMyFile: function($ocLazyLoad) {
         return $ocLazyLoad.load({
           name: 'sbAdminApp',
+<<<<<<< HEAD
           files: ['scripts/controllers/dashboard.js']
+=======
+          files: ['scripts/controllers/regexCount.js']
+>>>>>>> 48d63ffc0a17525d5ddd68f9ea98a0cfcadb1a0a
         });
       }
     }
