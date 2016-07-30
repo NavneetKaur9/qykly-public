@@ -30,8 +30,14 @@
     </div>
     <!-- BLOCK : CHOOSE CATEGORY -->
 
+
+     <!-- START: BLOCK TESTING  -->
+
+     <!-- END: BLOCK TESTING  -->
+
+
+
      <!-- BLOCK : PURCHASE CATEGORY -->
-     <!--  -->
    
     <div class="row" ng:if="selected.option=='purchase'">
         Purchase
@@ -45,9 +51,6 @@
 
 				<label>posQuantity<label>
 				<input class="form-control" type="number" placeholder="posQuantity" ng-model="purchase.posQuantity">
-
-				<label>posDeliveryDetails<label>
-				<input class="form-control" type="number" placeholder="posDeliveryDetails" ng-model="purchase.posDeliveryDetails">
 
 				<label>posAmount<label>
 				<input class="form-control" type="number" placeholder="posAmount" ng-model="purchase.posAmount">
@@ -73,9 +76,7 @@
 				<label>posOrderId<label>
 				<input class="form-control" type="number" placeholder="posOrderId" ng-model="purchase.posOrderId">
 
-				<label>posCourierName<label>
-				<input class="form-control" type="number" placeholder="posCourierName" ng-model="purchase.posCourierName">
-
+				
 				<label>posSellerName<label>
 				<input class="form-control" type="number" placeholder="posSellerName" ng-model="purchase.posSellerName">
 				<label>posReverseOrderPickupTime</label>
@@ -84,8 +85,7 @@
 				<label>posOrderReturnReceiveDate</label>
 				<input type="number" class="form-control" placeholder="posOrderReturnReceiveDate" ng-model="purchase.posOrderReturnReceiveDate">
 
-				<label>posDeliveryFailReason</label>
-				<input type="number" class="form-control" placeholder="posDeliveryFailReason" ng-model="purchase.posDeliveryFailReason">
+				
             </div>
             <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
 
@@ -96,14 +96,9 @@
 				<label>posShipmentDate</label>
 				<input type="number" class="form-control" placeholder="posShipmentDate" ng-model="purchase.posShipmentDate">
 
-				<label>posReferenceNumber</label>
-				<input type="number" class="form-control" placeholder="posReferenceNumber" ng-model="purchase.posReferenceNumber">
+				
 
-				<label>posPickupDate</label>
-				<input type="number" class="form-control" placeholder="posPickupDate" ng-model="purchase.posPickupDate">
 
-				<label>posProcessingDays</label>
-				<input type="number" class="form-control" placeholder="posProcessingDays" ng-model="purchase.posProcessingDays">
 
 				<label>posInitiationDate</label>
 				<input type="number" class="form-control" placeholder="posInitiationDate" ng-model="purchase.posInitiationDate">
@@ -111,8 +106,6 @@
 				<label>posMerchantName</label>
 				<input type="number" class="form-control" placeholder="posMerchantName" ng-model="purchase.posMerchantName">
 
-				<label>posProductDetails</label>
-				<input type="number" class="form-control" placeholder="posProductDetails" ng-model="purchase.posProductDetails">
 
 				<label>posAltExpectedDate</label>
 				<input type="number" class="form-control" placeholder="posAltExpectedDate" ng-model="purchase.posAltExpectedDate">
@@ -168,9 +161,20 @@
         <!-- FORM COMES HERE -->
         <!-- JSON OUTPUT -->
         <div class="col-md-6">
-            <textarea class="form-control" cols=10 rows=50 id="myTextAreaPurchase	">
+        <div class="x_panel">
+                <div class="x_title">OUTPUT 
+                
+                
+                </div>
+                <div class="x_content" >
+                
+                    <pre id="travel" >{{purchase |json}}</pre>
+                
+                </div>
+            </div>
+            <!-- <textarea class="form-control" cols=10 rows=50 id="myTextAreaPurchase	">
                 {{purchase |json}}
-            </textarea>
+            </textarea> -->
         </div>
         <!-- JSON OUTPUT -->
     </div>
@@ -178,8 +182,10 @@
     <!-- BLOCK : TRAVEL CATEGORY -->
     <!--
     -->
+    <!--  -->
     <div class="row" ng:if="selected.option=='travel'">
-        Travel
+        
+Travel
         <!-- FORM COMES HERE -->
         <div class="col-md-6">
             <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
@@ -188,61 +194,30 @@
                 </label>
                 <input  class="form-control" type="number" placeholder="posBookingId " ng-model="travel.posBookingId" />
                 <label>
-                    posCouponValue
-                </label>
-                <input  class="form-control" type="number" placeholder="posCouponValue " ng-model="travel.posCouponValue" />
-                <label>
-                    posSellerName
-                </label>
-                <input  class="form-control" type="number" placeholder="posSellerName " ng-model="travel.posSellerName" />
-                <label>
-                    posDeliveryDate
-                </label>
-                <input  class="form-control" type="number" placeholder="posDeliveryDate " ng-model="travel.posDeliveryDate" />
-                <label>
-                    posSellerName
-                </label>
-                <input  class="form-control" type="number" placeholder="posSellerName " ng-model="travel.posSellerName" />
-                <label>
                     posLink
                 </label>
                 <input  class="form-control" type="number" placeholder="posLink " ng-model="travel.posLink" />
-                <label>
-                    posProductName
-                </label>
-                <input  class="form-control" type="number" placeholder="posProductName " ng-model="travel.posProductName" />
+                
                 <label>
                     posDestination
                 </label>
                 <input  class="form-control" type="number" placeholder="posDestination " ng-model="travel.posDestination" />
-                <label>
-                    posDeliveryTime
-                </label>
-                <input  class="form-control" type="number" placeholder="posDeliveryTime " ng-model="travel.posDeliveryTime" />
+               
                 <label>
                     posQuantity
                 </label>
                 <input  class="form-control" type="number" placeholder="posQuantity " ng-model="travel.posQuantity" />
-                <label>
-                    posAwbNumber
-                </label>
-                <input  class="form-control" type="number" placeholder="posAwbNumber " ng-model="travel.posAwbNumber" />
+                
                 <label>
                     posClass
                 </label>
                 <input  class="form-control" type="number" placeholder="posClass " ng-model="travel.posClass" />
-                <label>
-                    posFlightId
-                </label>
-                <input  class="form-control" type="number" placeholder="posFlightId " ng-model="travel.posFlightId" />
+               
                 <label>
                     posAmount
                 </label>
                 <input  class="form-control" type="number" placeholder="posAmount " ng-model="travel.posAmount" />
-                <label>
-                    posDeliveryDetails
-                </label>
-                <input  class="form-control" type="number" placeholder="posDeliveryDetails " ng-model="travel.posDeliveryDetails" />
+               
                 <label>
                     posEmailID
                 </label>
@@ -255,10 +230,7 @@
                     posTotalBalance
                 </label>
                 <input  class="form-control" type="number" placeholder="posTotalBalance " ng-model="travel.posTotalBalance" />
-                <label>
-                    posReferenceNumber
-                </label>
-                <input  class="form-control" type="number" placeholder="posReferenceNumber " ng-model="travel.posReferenceNumber" />
+                
                 <label>
                     posPNR
                 </label>
@@ -267,22 +239,8 @@
                     posDate
                 </label>
                 <input  class="form-control" type="number" placeholder="posDate " ng-model="travel.posDate" />
-                <label>
-                    posShipmentId
-                </label>
-                <input  class="form-control" type="number" placeholder="posShipmentId " ng-model="travel.posShipmentId" />
-                <label>
-                    posShipmentDate
-                </label>
-                <input  class="form-control" type="number" placeholder="posShipmentDate " ng-model="travel.posShipmentDate" />
-                <label>
-                    posSurcharge
-                </label>
-                <input  class="form-control" type="number" placeholder="posSurcharge " ng-model="travel.posSurcharge" />
-                <label>
-                    posOrderId
-                </label>
-                <input  class="form-control" type="number" placeholder="posOrderId " ng-model="travel.posOrderId" />
+                
+                
                 <label>
                     posDuration
                 </label>
@@ -291,28 +249,23 @@
                     posCarNumber
                 </label>
                 <input class="form-control" type="number" placeholder="posCarNumber" ng-model="travel.posCarNumber"/>
-                <label>
-                    posCourierName
-                </label>
-                <input class="form-control" type="number" placeholder="posCourierName" ng-model="travel.posCourierName" />
-                <label>
-                    posExpectedDate
-                </label>
-                <input class="form-control" type="number" placeholder="posExpectedDate" ng-model="travel.posExpectedDate" />
-                <label>
-                    posPickupDate
-                </label>
-                <input class="form-control" type="number" placeholder="posPickupDate" ng-model="travel.posPickupDate" />
+                
+               
                 <label>
                     posSource
                 </label>
                 <input class="form-control" type="number" placeholder="posSource" ng-model="travel.posSource" />
+                 <label>
+                    posReturnDestination
+                </label>
+                <input class="form-control" type="number" placeholder="posReturnDestination" ng-model="travel.posReturnDestination" />
+                <label>
+                    posReturnTime
+                </label>
+                <input class="form-control" type="number" placeholder="posReturnTime" ng-model="travel.posReturnTime" />
             </div>
             <div class="col-md-3 col-sm-3 col-xs-12 form-group has-feedback">
-                <label>
-                    posProcessingDays
-                </label>
-                <input class="form-control" type="number" placeholder="posProcessingDays" ng-model="travel.posProcessingDays" />
+               
                 <label>
                     posArrivalTime
                 </label>
@@ -333,18 +286,12 @@
                     posSenderName
                 </label>
                 <input class="form-control" type="number" placeholder="posSenderName" ng-model="travel.posSenderName" />
-                <label>
-                    posCode
-                </label>
-                <input class="form-control" type="number" placeholder="posCode" ng-model="travel.posCode" />
+               
                 <label>
                     posEndDate
                 </label>
                 <input class="form-control" type="number" placeholder="posEndDate" ng-model="travel.posEndDate" />
-                <label>
-                    posInitiationDate
-                </label>
-                <input class="form-control" type="number" placeholder="posInitiationDate" ng-model="travel.posInitiationDate" />
+               
                 <label>
                     posHelpline
                 </label>
@@ -357,10 +304,7 @@
                     posCarrieName
                 </label>
                 <input class="form-control" type="number" placeholder="posCarrieName" ng-model="travel.posCarrieName" />
-                <label>
-                    posManageLink
-                </label>
-                <input class="form-control" type="number" placeholder="posManageLink" ng-model="travel.posManageLink" />
+            
                 <label>
                     posCRN
                 </label>
@@ -369,14 +313,7 @@
                     posLandMark
                 </label>
                 <input class="form-control" type="number" placeholder="posLandMark" ng-model="travel.posLandMark" />
-                <label>
-                    posAccountId
-                </label>
-                <input class="form-control" type="number" placeholder="posAccountId" ng-model="travel.posAccountId" />
-                <label>
-                    posOrderDate
-                </label>
-                <input class="form-control" type="number" placeholder="posOrderDate" ng-model="travel.posOrderDate" />
+                
                 <label>
                     posGateNo
                 </label>
@@ -401,52 +338,18 @@
                     posReturnSource
                 </label>
                 <input class="form-control" type="number" placeholder="posReturnSource" ng-model="travel.posReturnSource" />
-                <label>
-                    posReturnDestination
-                </label>
-                <input class="form-control" type="number" placeholder="posReturnDestination" ng-model="travel.posReturnDestination" />
-                <label>
-                    posReturnTime
-                </label>
-                <input class="form-control" type="number" placeholder="posReturnTime" ng-model="travel.posReturnTime" />
-                <label>
-                    posReturnArrivalTime
-                </label>
-                <input class="form-control" type="number" placeholder="posReturnArrivalTime" ng-model="travel.posReturnArrivalTime" />
-                <label>
-                    posSourceTerminal
-                </label>
-                <input class="form-control" type="number" placeholder="posSourceTerminal" ng-model="travel.posSourceTerminal" />
-                <label>
-                    posDestinationTerminal
-                </label>
-                <input class="form-control" type="number" placeholder="posDestinationTerminal" ng-model="travel.posDestinationTerminal" />
-                <label>
-                    posReturnOrderReceiveDate
-                </label>
-                <input class="form-control" type="number" placeholder="posReturnOrderReceiveDate" ng-model="travel.posReturnOrderReceiveDate" />
-                <label>
-                    posReverseOrderPickupTime
-                </label>
-                <input  class="form-control" type="number" placeholder="posReverseOrderPickupTime " ng-model="travel.posReverseOrderPickupTime" />
-                <label>
-                    posDeliveryFailReason
-                </label>
-                <input  class="form-control" type="number" placeholder="posDeliveryFailReason " ng-model="travel.posDeliveryFailReason" />
-                <label>
-                    posProductDescription
-                </label>
-                <input class="form-control" type="number" placeholder="posProductDescription" ng-model="travel.posProductDescription" />
+               
+                
+               
+                
+                
             </div>
             <div class="col-md-6">
                 <label>
                     pattern
                 </label>
                 <input class="form-control" type="text" placeholder="pattern" ng-model="travel.pattern" />
-                <label >
-                    dateModified
-                </label>
-                <input  class="form-control" type="text" placeholder="dateModified " ng-model="travel.dateModified" />
+               
                 <label >
                     bookingType
                 </label>
@@ -467,10 +370,7 @@
                     msgType
                 </label>
                 <input  class="form-control" type="text" placeholder="msgType " ng-model="travel.msgType" />
-                <label>
-                    dateCreated
-                </label>
-                <input class="form-control" type="text" placeholder="dateCreated" ng-model="travel.dateCreated" />
+          
                 <label>
                     accountType
                 </label>
@@ -487,34 +387,18 @@
                     msgSubType
                 </label>
                 <input class="form-control" type="text" placeholder="msgSubType" ng-model="travel.msgSubType" />
-                <label>
-                    paymentType
-                </label>
-                <input class="form-control" type="text" placeholder="paymentType" ng-model="travel.paymentType" />
-                <label>
-                    txnType
-                </label>
-                <input class="form-control" type="text" placeholder="txnType" ng-model="travel.txnType" />
+               
+               
                 <label>
                     ignoreMsg
                 </label>
                 <input class="form-control" type="text" placeholder="ignoreMsg" ng-model="travel.ignoreMsg" />
-                <label>
-                    dateLastReprocessed
-                </label>
-                <input class="form-control" type="text" placeholder="dateLastReprocessed" ng-model="travel.dateLastReprocessed" />
-                <label>
-                    dateReprocessSet
-                </label>
-                <input class="form-control" type="text" placeholder="dateReprocessSet" ng-model="travel.dateReprocessSet" />
+               
                 <label>
                     Count
                 </label>
                 <input class="form-control" type="text" placeholder="Count" ng-model="travel.Count" />
-                <label>
-                    regexDate
-                </label>
-                <input class="form-control" type="text" placeholder="regexDate" ng-model="travel.regexDate" />
+               
                 <label>
                     isReturn
                 </label>
@@ -523,14 +407,40 @@
                     id
                 </label>
                 <input class="form-control" type="text" placeholder="id" ng-model="travel.id" />
+                <label>
+                    posReturnArrivalTime
+                </label>
+                <input class="form-control" type="number" placeholder="posReturnArrivalTime" ng-model="travel.posReturnArrivalTime" />
+                <label>
+                    posSourceTerminal
+                </label>
+                <input class="form-control" type="number" placeholder="posSourceTerminal" ng-model="travel.posSourceTerminal" />
+                <label>
+                    posDestinationTerminal
+                </label>
+                <input class="form-control" type="number" placeholder="posDestinationTerminal" ng-model="travel.posDestinationTerminal" />
             </div>
         </div>
         <!-- FORM COMES HERE -->
         <!-- JSON OUTPUT -->
+
         <div class="col-md-6">
-            <textarea class="form-control" cols=10 rows=50 id="myTextArea">
+        <!-- {{travel |json}} -->
+       
+	        <div class="x_panel">
+                <div class="x_title">OUTPUT 
+                
+                
+                </div>
+                <div class="x_content" >
+                
+                	<pre id="travel" >{{travel |json}}</pre>
+                
+                </div>
+	        </div>
+           <!--  <textarea class="form-control" cols=10 rows=50 id="myTextArea">
                 {{travel |json}}
-            </textarea>
+            </textarea> -->
         </div>
         <!-- JSON OUTPUT -->
     </div>
