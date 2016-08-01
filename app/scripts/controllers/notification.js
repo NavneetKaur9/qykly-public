@@ -26,6 +26,7 @@ angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $ht
 		if (err) {
 			$scope.alert = response.message
 		} else {
+			console.log(response);
 			$scope.msgAssigned = response;
 			$scope.alert = false;
 		}
