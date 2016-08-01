@@ -38,6 +38,7 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 	$scope.pageno = 1; // initialize page no to 1
 	$scope.total_count = 0;
 	$scope.itemsPerPage = 100; //this could be a dynamic value from a drop down
+	$scope.currentPage = 1;
 
 	$scope.assignedTextsList = function(pageno) { // This would fetch the data on page change.
 		//In practice this should be in a factory.
@@ -54,6 +55,7 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 			$scope.assignedTexts = response.data; //ajax request to fetch data into vm.data
 			$scope.total_count = response.total_count;
 		});
+		$scope.currentPage = pageno;
 	};
 	$scope.assignedTextsList($scope.pageno); // Call the function to fetch initial data on page load.
 

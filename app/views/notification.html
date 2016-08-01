@@ -59,7 +59,7 @@
                     <tr ng-show="assignedTexts.length <= 0"><td colspan="7" style="text-align:center;">Loading new data!!</td></tr>
                     <tr dir-paginate="sms in assignedTexts|itemsPerPage:itemsPerPage" total-items="total_count">
                         <td>
-                            {{$index+1}}.
+                            {{itemsPerPage *(currentPage-1)+$index+1}}
                         </td>
                         <td>
                             {{sms.address}}
