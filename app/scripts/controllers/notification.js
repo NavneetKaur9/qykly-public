@@ -2,7 +2,7 @@
 /**
  * 
  */
-angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $http, api, $cookieStore, DTOptionsBuilder, DTColumnBuilder, $filter, $window, $compile) {
+angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controller('notificationCtrl', function($scope, $http, api, $cookieStore, DTOptionsBuilder, DTColumnBuilder, $filter, $window, $compile) {
 	var token = $cookieStore.get('c2cCookie');
 	var url = api.addr();
 	$scope.update = function(sms, status) {
@@ -21,16 +21,44 @@ angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $ht
 	$scope.closeAlert = function(argument) {
 		$scope.alert = false;
 	};
-	$scope.alert = '  loading.........';
-	api.post('get-assigned-msgs', false, token, {}, function(err, response) {
-		if (err) {
-			$scope.alert = response.message
-		} else {
-			console.log(response);
-			$scope.msgAssigned = response;
-			$scope.alert = false;
+	// $scope.alert = '  loading.........';
+	// api.post('get-assigned-msgs', false, token, {}, function(err, response) {
+	// 	if (err) {
+	// 		$scope.alert = response.message
+	// 	} else {
+	// 		console.log(response);
+	// 		$scope.msgAssigned = response;
+	// 		$scope.alert = false;
+	// 	}
+	// });
+
+	/*** assigned messages listing for regex creation ****/
+	
+	$scope.assignedTexts = []; //declare an empty array
+	$scope.pageno = 1; // initialize page no to 1
+	$scope.total_count = 0;
+	$scope.itemsPerPage = 100; //this could be a dynamic value from a drop down
+
+	$scope.assignedTextsList = function(pageno) { // This would fetch the data on page change.
+		//In practice this should be in a factory.
+		$scope.assignedTexts = [];
+		var req = {
+			method: 'get',
+			url: url + "get-assigned-msgs/" + $scope.itemsPerPage + "/" + pageno,
+			headers: {
+				// Accept: "application/json",
+				Authorization: $cookieStore.get('c2cCookie')
+			},
 		}
-	});
+		$http(req).success(function(response) {
+			$scope.assignedTexts = response.data; //ajax request to fetch data into vm.data
+			$scope.total_count = response.total_count;
+		});
+	};
+	$scope.assignedTextsList($scope.pageno); // Call the function to fetch initial data on page load.
+
+	/*** end assigned messages listing for regex creation ****/
+
 	$scope.sortType = 'saveTime';
 	$scope.sortReverse = false;
 	$scope.order = function(sortType) {

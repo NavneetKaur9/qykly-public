@@ -56,7 +56,8 @@
                     </th>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="sms in msgAssigned |orderBy:sortType:sortReverse|filter:search">
+                    <tr ng-show="assignedTexts.length <= 0"><td colspan="7" style="text-align:center;">Loading new data!!</td></tr>
+                    <tr dir-paginate="sms in assignedTexts|itemsPerPage:itemsPerPage" total-items="total_count">
                         <td>
                             {{$index+1}}.
                         </td>
@@ -97,6 +98,8 @@
                     </tr>
                 </tbody>
             </table>
+            <dir-pagination-controls boundary-links="true" on-page-change="assignedTextsList(newPageNumber)" >
+            </dir-pagination-controls>
         </div>
     </div>
      <!-- BLOCK : DROPDOWN -->
