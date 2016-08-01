@@ -24,10 +24,10 @@ angular.module('sbAdminApp').controller('usersCtrl', function($scope, $location,
 			$scope.alert = err.responseJSON.message; // body...
 		},
 		data: function(aodata) {
-			if (aodata.draw == "1") {
-				aodata.order[0].column = "4";
-				aodata.order[0].dir = 'desc';
-			}
+			// if (aodata.draw == "1") {
+			aodata.order[0].column = "4";
+			aodata.order[0].dir = 'desc';
+			// }
 		}
 	}).withDataProp('data').withOption('processing', true).withOption('serverSide', true).withOption('rowCallback', rowCallback).withLanguage({
 		'sSearch': 'Search user:',
@@ -40,16 +40,21 @@ angular.module('sbAdminApp').controller('usersCtrl', function($scope, $location,
 	}).withOption('stateSave', true);
 	$scope.dtColumns = [
 		DTColumnBuilder.newColumn('_id').notVisible().withOption('searchable', false),
+
 		DTColumnBuilder.newColumn(null).withTitle('# ').renderWith(function(data, type, full, meta) {
 			return data = meta.settings._iDisplayStart + meta.row + 1;
 		}).notSortable().withOption('searchable', false).withOption('width', '2%'),
+
 		DTColumnBuilder.newColumn('primaryEmail').withTitle('Email ').withClass('emailpointer'),
+
 		DTColumnBuilder.newColumn('accessTime').withTitle('Access Time ').renderWith(function(data, type, full) {
 			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter 
 		}).withOption('searchable', false),
+
 		DTColumnBuilder.newColumn('lastLogin').withTitle('First Login ').renderWith(function(data, type, full) {
-		return $filter('date')(data, 'd MMM y, h:mm a'); //date filter
+			return $filter('date')(data, 'd MMM y, h:mm a'); //date filter
 		}).withOption('searchable', false),
+
 		DTColumnBuilder.newColumn('smsShortCodes').withTitle('Codes ').renderWith(function(data, type, full) {
 			return data = data.length;
 		}).notSortable().withOption('searchable', false)

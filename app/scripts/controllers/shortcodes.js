@@ -161,4 +161,28 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 			$scope.modusers = response;
 		}
 	});
+
+
+	$scope.moveToDump = function() {
+		$scope.msgText = [];
+		var checkboxes = document.getElementsByName('assign');
+		for (var i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+				var value = checkboxes[i].value;
+				$scope.msgText.push(value);
+			}
+		}
+		console.log($scope.msgText);
+		api.put('move-to-dumb', false, token, {
+			msgText: $scope.msgText
+		}, function(err, response) {
+			if (err || response.error) {
+				$scope.alert = response.message;
+			} else {
+				$scope.alert = response.message;
+				$scope.getSms($scope.code, 0);
+			}
+		});
+
+	};
 });

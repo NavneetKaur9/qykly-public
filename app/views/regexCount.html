@@ -19,13 +19,20 @@
                     <input ng-model="search" id="search" class="" placeholder="Search" style="width:100%" />
                 </label>
             </h4>
-            <table class="table table-striped jambo_table bulk_action" icheck>
+            <table class="table  jambo_table bulk_action" ng-show="dataset">  
                 <thead>
                     <tr class="headings">
                         <th width="5%">
-                            Merchant
+                            Merchant Name / Bank Name
                         </th>
-                        <th>
+                        <th class="column-title" >
+                            Address
+                        </th>
+                        <th class="column-title">
+                            msgtype
+                        </th>
+                        <th class="column-title">
+                            count
                         </th>
                     </tr>
                 </thead>
@@ -36,27 +43,24 @@
                         </td>
                         <td>
                             <table class="table ">
-                                <thead>
-                                    <th class="column-title">
-                                        Address
-                                    </th>
-                                    <th class="column-title">
-                                        count
-                                    </th>
-                                    <th class="column-title">
-                                        msgtype
-                                    </th>
-                                </thead>
                                 <tbody>
                                     <tr ng-repeat="(key, value) in value.data">
                                         <td>
                                             {{value.address}}
                                         </td>
                                         <td>
-                                            {{value.count}}
-                                        </td>
-                                        <td>
-                                            {{value.msgtype}}
+                                            <table class="table ">
+                                                <tbody>
+                                                    <tr ng-repeat="(key, value) in value.aData">
+                                                        <td>
+                                                            {{value.msgtype}}
+                                                        </td>
+                                                        <td>
+                                                            {{value.count}}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </td>
                                     </tr>
                                 </tbody>

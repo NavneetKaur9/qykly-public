@@ -153,19 +153,18 @@
                                                 </label>
                                             </div>
                                             <div class="col-md-4 col-md-offset-2 pull-right">
-                                             <label >
-                                                
-                                                 <input type="hidden" ng-model="assignTo" value="{{selected}}"/>
-                                                        <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x.name for x in modusers" placeholder="Assign To" style="width:150px">
-                                                            <option value="">
-                                                            </option>
-                                                        </select>
-                                                        <button type="button" class="btn btn-info btn-sm" ng-click="assign()">
-                                                            <span class="glyphicon glyphicon-ok">
-                                                            </span>
-                                                            Submit
-                                                        </button>
-                                            </label>
+                                                <label >
+                                                    <input type="hidden" ng-model="assignTo" value="{{selected}}"/>
+                                                    <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x.name for x in modusers" placeholder="Assign To" style="width:150px">
+                                                        <option value="">
+                                                        </option>
+                                                    </select>
+                                                    <button type="button" class="btn btn-info btn-sm" ng-click="assign()">
+                                                        <span class="glyphicon glyphicon-ok">
+                                                        </span>
+                                                        Submit
+                                                    </button>
+                                                </label>
                                             </div>
                                         </div>
                                         <table class="table table-striped jambo_table bulk_action" icheck>
@@ -181,8 +180,10 @@
                                                             </span>
                                                             <span ng-show="sortType == 'text' && !sortReverse" class="fa fa-caret-up">
                                                             </span>
+                                                            <button type="button" class="btn btn-default btn-xs pull-right" ng-click="moveToDump()">
+                                                                 Move To Dump
+                                                            </button>
                                                         </div>
-
                                                     </th>
                                                     <th class="column-title">
                                                         <div  ng-click="order('time')" style="cursor:pointer">
@@ -203,27 +204,22 @@
                                                         </div>
                                                     </th>
                                                 </tr>
-                                                
                                             </thead>
                                             <tbody >
-                                               
-                                                
-                                                    <tr class="even pointer" ng-repeat="sms in smses |filter:seach_unproc_msg|orderBy:sortType:sortReverse| itemsPerPage: pageSize" current-page="currentPage">
-                                                        <td class="a-center ">
-                                                            <input type="checkbox" class="flat" name="assign" value="{{sms.text}}" ng-checked="selected.all"/>
-                                                        </td>
-                                                        <td>
-
-                                                            {{sms.text}}
-                                                        </td>
-                                                        <td>
-                                                            {{sms.time | date:'MMM'}}
-                                                        </td>
-                                                        <td>
-                                                            {{sms.saveTime |date:'MMM d, y h:mm a'}}
-                                                        </td>
-                                                    </tr>
-                                                
+                                                <tr class="even pointer" ng-repeat="sms in smses |filter:seach_unproc_msg|orderBy:sortType:sortReverse| itemsPerPage: pageSize" current-page="currentPage">
+                                                    <td class="a-center ">
+                                                        <input type="checkbox" class="flat" name="assign" value="{{sms.text}}" ng-checked="selected.all"/>
+                                                    </td>
+                                                    <td>
+                                                        {{sms.text}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.time | date:'MMM'}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.saveTime |date:'MMM d, y h:mm a'}}
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                         <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" >
@@ -283,19 +279,18 @@
                                                 </label>
                                             </div>
                                             <div class="col-md-4 col-md-offset-2 pull-right">
-                                             <label >
-                                                
-                                                 <input type="hidden" ng-model="assignTo" value="{{selected}}"/>
-                                                        <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x.name for x in modusers" placeholder="Assign To" style="width:150px">
-                                                            <option value="">
-                                                            </option>
-                                                        </select>
-                                                        <button type="button" class="btn btn-info btn-sm" ng-click="assign()">
-                                                            <span class="glyphicon glyphicon-ok">
-                                                            </span>
-                                                            Submit
-                                                        </button>
-                                            </label>
+                                                <label >
+                                                    <input type="hidden" ng-model="assignTo" value="{{selected}}"/>
+                                                    <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x.name for x in modusers" placeholder="Assign To" style="width:150px">
+                                                        <option value="">
+                                                        </option>
+                                                    </select>
+                                                    <button type="button" class="btn btn-info btn-sm" ng-click="assign()">
+                                                        <span class="glyphicon glyphicon-ok">
+                                                        </span>
+                                                        Submit
+                                                    </button>
+                                                </label>
                                             </div>
                                         </div>
                                         <!--
@@ -306,8 +301,8 @@
                                         <table class="table table-striped jambo_table ">
                                             <thead>
                                                 <th>
-                                                        <input type="checkbox" id="check-all" class="flat" ng-model="selected.all"/>
-                                                    </th>
+                                                    <input type="checkbox" id="check-all" class="flat" ng-model="selected.all"/>
+                                                </th>
                                                 <th>
                                                     <div href ng-click="order('text')" style="cursor:pointer">
                                                         Text
@@ -339,8 +334,8 @@
                                             <tbody>
                                                 <tr dir-paginate="sms in smses |filter:seach_new_msg|orderBy:sortType:sortReverse| itemsPerPage: pageSize" current-page="currentPage">
                                                     <td class="a-center ">
-                                                            <input type="checkbox" class="flat" name="assign" value="{{sms.text}}" ng-checked="selected.all"/>
-                                                        </td>   
+                                                        <input type="checkbox" class="flat" name="assign" value="{{sms.text}}" ng-checked="selected.all"/>
+                                                    </td>
                                                     <td>
                                                         {{sms.text}}
                                                     </td>
@@ -397,7 +392,6 @@
                                                     <input ng-model="q" id="search" class="" placeholder="Filter Messages" style="width:100%" />
                                                 </label>
                                             </div>
-                                            
                                         </div>
                                         <table class="table table-striped jambo_table ">
                                             <thead>
