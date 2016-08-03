@@ -67,7 +67,7 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 					$(anchor).click(function() {
 						var btn = $(this).closest('td').find('button.btn-primary');
 						var frm = $(this).closest('td').children('form');
-						console.log(frm);
+
 						$(btn).click(function() {
 							var selectedStatus = $(".editable-has-buttons option:selected").text();
 							var text = $scope.assignedTexts[index]._id;
@@ -83,8 +83,11 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 							$http(req).then(function successCallback(response) {
 								if (response.data) {
 									if (index !== -1) {
-						            	//return $scope.assignedTexts.splice(index, 1);
-					            	 	 window.location.reload();
+										$scope.assignedTexts.splice(index, 1);
+										$(frm).hide(); 
+		                                $(anchor).removeClass('editable-hide');
+		                                $(anchor).removeClass('editable-empty');
+		                                $(anchor).text(selectedStatus);
 						        	}
 								}
 							}, function errorCallback(response) {
