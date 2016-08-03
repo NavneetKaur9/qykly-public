@@ -41,28 +41,29 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 	$scope.currentPage = 1;
 
 	$scope.assignedTextsList = function(pageno) { // This would fetch the data on page change.
-		//In practice this should be in a factory.
-		var searchParams = angular.isUndefined($scope.searchStr) ? "" : $scope.searchStr;
+	var searchParams = angular.isUndefined($scope.searchStr) ? "" : $scope.searchStr;
 
-		$scope.assignedTexts = [];
-		var req = {
-			method: 'get',
-			url: url + "get-assigned-msgs/" + $scope.itemsPerPage + "/" + pageno,
-			headers: {
-				// Accept: "application/json",
-				Authorization: $cookieStore.get('c2cCookie')
-			}
-			// params: {
-   //                  searchParams: searchParams,
-   //              }
+	$scope.assignedTexts = [];
+	var req = {
+		method: 'get',
+		url: url + "get-assigned-msgs/" + $scope.itemsPerPage + "/" + pageno,
+		headers: {
+			// Accept: "application/json",
+			Authorization: $cookieStore.get('c2cCookie')
 		}
-		$http(req).success(function(response) {
-			$scope.assignedTexts = response.data; //ajax request to fetch data into vm.data
-			$scope.total_count = response.total_count;
+		// params: {
+		//                  searchParams: searchParams,
+		//              }
+	}
+	$http(req).success(function(response) {
+		$scope.assignedTexts = response.data; //ajax request to fetch data into vm.data
+		$scope.total_count = response.total_count;
+		$scope.currentPage = pageno;
 
-			//xeditable update status
-			if ($scope.assignedTexts.length > 0) {
-				$("tbody").find('td.anchor_xeditable').each(function(index) {
+		//xeditable update status
+		if ($scope.assignedTexts.length > 0) {
+			setTimeout(function() {
+				$("#notification_tbl").find('td.anchor_xeditable').each(function(index) {
 					var anchor = $(this).children('a');
 					$(anchor).click(function() {
 						var btn = $(this).closest('td').find('button.btn-primary');
@@ -83,12 +84,12 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 							$http(req).then(function successCallback(response) {
 								if (response.data) {
 									if (index !== -1) {
-										$scope.assignedTexts.splice(index, 1);
-										$(frm).hide(); 
-		                                $(anchor).removeClass('editable-hide');
-		                                $(anchor).removeClass('editable-empty');
-		                                $(anchor).text(selectedStatus);
-						        	}
+										// $scope.assignedTexts.splice(index, 1);
+										$(frm).hide();
+										$(anchor).removeClass('editable-hide');
+										$(anchor).removeClass('editable-empty');
+										$(anchor).text(selectedStatus);
+									}
 								}
 							}, function errorCallback(response) {
 								console.log(response);
@@ -96,10 +97,12 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 						}); //close btn
 					}); //close click
 				}); //close each
-	}//close if
-		});
-		$scope.currentPage = pageno;
-	};
+			}, 3000);
+
+		} //close if
+	});
+
+};
 	$scope.assignedTextsList($scope.pageno); // Call the function to fetch initial data on page load.
 
 	/*** end assigned messages listing for regex creation ****/
