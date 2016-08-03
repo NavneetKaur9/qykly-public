@@ -1,4 +1,34 @@
-<div ng-controller="notificationCtrl"> <div class="row"> <div class="col-md-12 col-sm-12"> <h4> <label for="search"> <input ng-model="search" id="search" class="" placeholder="Search" style="width:100%"> </label> </h4> <table class="table table-striped jambo_table" ng-show="msgAssigned.length"> <thead> <th> #  <th> <div href ng-click="order('address')" style="cursor:pointer"> Address <span class="fa fa-caret-down" ng-show="sortType == 'address' && sortReverse"> </span> <span class="fa fa-caret-up" ng-show="sortType == 'address' && !sortReverse"> </span> </div>  <th> <div href ng-click="order('text')" style="cursor:pointer"> Text <span class="fa fa-caret-down" ng-show="sortType == 'text' && sortReverse"> </span> <span class="fa fa-caret-up" ng-show="sortType == 'text' && !sortReverse"> </span> </div>  <th width="10%"> <div ng-click="order('time')" style="cursor:pointer"> Msg Time <span class="fa fa-caret-down" ng-show="sortType == 'time' && sortReverse"> </span> <span class="fa fa-caret-up" ng-show="sortType == 'time' && !sortReverse"> </span> </div>  <th width="10%"> <div ng-click="order('saveTime')" style="cursor:pointer"> Save Time <span class="fa fa-caret-down" ng-show="sortType == 'saveTime' && sortReverse"> </span> <span class="fa fa-caret-up" ng-show="sortType == 'saveTime' && !sortReverse"> </span> </div>  <th> Processing Status  <th width="15%"> Change Status   <tbody> <tr ng-show="assignedTexts.length <= 0"><td colspan="7" style="text-align:center">Loading new data!! <tr dir-paginate="sms in assignedTexts|itemsPerPage:itemsPerPage" total-items="total_count"> <td> {{itemsPerPage *(currentPage-1)+$index+1}}  <td> {{sms.address}}  <td> {{sms._id}}  <td> {{sms.time |date:'medium'}}  <td> {{sms.saveTime |date:'MMM d, y h:mm a'}}  <td> <span ng-dblclick="editItem(sms)"> {{sms.processingStatus}} </span>  <td> <div> <button ng-click="update(sms,'Exists')"> E </button> <button ng-click="update(sms,'Complete')"> C </button> <button ng-click="update(sms,'Pending')"> P </button> <button ng-click="parse(sms)"> Parse message </button> </div>    </table> <dir-pagination-controls boundary-links="true" on-page-change="assignedTextsList(newPageNumber)"> </dir-pagination-controls> </div> </div> <!-- BLOCK : DROPDOWN --> <!--     <div class="row">
+<div ng-controller="notificationCtrl"> <div class="row"> <div class="col-md-12 col-sm-12"> <!-- <h4>
+                <label for="search">
+                   
+                    <input ng-model="search" id="search" class="" placeholder="Search" style="width:100%" />
+                </label>
+            </h4> --> <!--   <div class="title_left">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <form ng-submit=assignedTextsList(pageno)>
+                  <div class="input-group">
+                    <input type="text" ng-model="searchStr" placeholder="Search for..." class="form-control">
+                    <span class="input-group-btn">
+                      <button type="submit" class="btn btn-default">Go!</button>
+                    </span>
+                  </div>
+                  </form>
+                </div>
+              </div> --> <table id="notification_tbl" class="table table-striped jambo_table" ng-show="msgAssigned.length"> <thead> <th> #  <th> <div href ng-click="order('address')" style="cursor:pointer"> Address <span class="fa fa-caret-down" ng-show="sortType == 'address' && sortReverse"> </span> <span class="fa fa-caret-up" ng-show="sortType == 'address' && !sortReverse"> </span> </div>  <th> <div href ng-click="order('text')" style="cursor:pointer"> Text <span class="fa fa-caret-down" ng-show="sortType == 'text' && sortReverse"> </span> <span class="fa fa-caret-up" ng-show="sortType == 'text' && !sortReverse"> </span> </div>  <th width="10%"> <div ng-click="order('time')" style="cursor:pointer"> Msg Time <span class="fa fa-caret-down" ng-show="sortType == 'time' && sortReverse"> </span> <span class="fa fa-caret-up" ng-show="sortType == 'time' && !sortReverse"> </span> </div>  <th width="10%"> <div ng-click="order('saveTime')" style="cursor:pointer"> Save Time <span class="fa fa-caret-down" ng-show="sortType == 'saveTime' && sortReverse"> </span> <span class="fa fa-caret-up" ng-show="sortType == 'saveTime' && !sortReverse"> </span> </div>  <!-- <th>
+                        Processing Status
+                    </th> --> <th width="15%"> Change Status  <th width="15%">Status <th width="5%">Action  <tbody> <tr ng-show="assignedTexts.length <= 0"><td colspan="7" style="text-align:center">Loading new data!! <tr dir-paginate="sms in assignedTexts|itemsPerPage:itemsPerPage|filter:search" total-items="total_count"> <td> {{itemsPerPage *(currentPage-1)+$index+1}}  <td> {{sms.address}}  <td> {{sms._id}}  <td> {{sms.time |date:'medium'}}  <td> {{sms.saveTime |date:'MMM d, y h:mm a'}}  <!--   <td>
+                            <span  ng-dblclick="editItem(sms)">
+                                {{sms.processingStatus}}
+                            </span>
+                        </td> --> <td> <div> <!--  <button ng-click="update(sms,'Exists')">
+                                    E
+                                </button>
+                                <button ng-click="update(sms,'Complete')">
+                                    C
+                                </button>
+                                <button ng-click="update(sms,'Pending')">
+                                    P
+                                </button> --> <button ng-click="parse(sms)"> Parse message </button> </div>  <td class="anchor_xeditable"><a ng-click="showSelected(sms.processingStatus)" href="#" editable-select="user.status" e-ng-options="s.value as s.text for s in statuses"> {{sms.processingStatus}} </a> <td><button class="btn-xs btn-danger" ng-click="removeAssignedMessages(sms._id,$index)"><i class="glyphicon glyphicon-remove"></i></button>   </table> <dir-pagination-controls boundary-links="true" on-page-change="assignedTextsList(newPageNumber)"> </dir-pagination-controls> </div> </div> <!-- BLOCK : DROPDOWN --> <!--     <div class="row">
         <div class="col-md-12">
             <div class="x_panel">
                 <div class="x_content">
