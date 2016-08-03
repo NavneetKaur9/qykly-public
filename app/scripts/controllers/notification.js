@@ -33,7 +33,7 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 	// });
 
 	/*** assigned messages listing for regex creation ****/
-	
+	$scope.alert = "";
 	$scope.assignedTexts = []; //declare an empty array
 	$scope.pageno = 1; // initialize page no to 1
 	$scope.total_count = 0;
@@ -90,6 +90,9 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 										$(anchor).removeClass('editable-empty');
 										$(anchor).text(selectedStatus);
 									}
+
+									$scope.alert = "Status updated successfully.";
+									$('.alert-success').delay(3000).fadeOut();
 								}
 							}, function errorCallback(response) {
 								console.log(response);
@@ -227,25 +230,33 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
     };
 	//shweta
 	//remove promotional messages
-	$scope.removeAssignedMessages = function(text,index) {
-		var req = {
-			method: 'POST',
-			url: url + 'updateProcessingStatus',
-			data: {
-				selectedStatus: "Promotional",
-				text: text,
-				token: token
+	$scope.removeAssignedMessages = function(text, index) {
+		var checkstr = confirm('are you sure you want to delete this?');
+
+		if (checkstr == true) {
+			var req = {
+				method: 'POST',
+				url: url + 'updateProcessingStatus',
+				data: {
+					selectedStatus: "Promotional",
+					text: text,
+					token: token
+				}
 			}
+			$http(req).then(function successCallback(response) {
+				if (response.data) {
+					if (index !== -1) {
+						$scope.assignedTexts.splice(index, 1);
+					}
+					$scope.alert = "Deleted successfully.";
+					$('.alert-success').delay(3000).fadeOut();
+				}
+			}, function errorCallback(response) {
+				console.log(response);
+			});
+		} else {
+			return false;
 		}
-		$http(req).then(function successCallback(response) {
-			if (response.data) {
-				if (index !== -1) {
-	            	$scope.assignedTexts.splice(index, 1);
-	        	}
-			}
-		}, function errorCallback(response) {
-			console.log(response);
-		});
 	};
 	//end remove promotional messages
 });

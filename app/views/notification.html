@@ -7,7 +7,11 @@
                     <input ng-model="search" id="search" class="" placeholder="Search" style="width:100%" />
                 </label>
             </h4> -->
-          <!--   <div class="title_left">
+            <div class="page-title">
+                   <div class="title_left">
+            <h3>Assigned Messages</h3>
+        </div>
+           <!--  <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <form ng-submit=assignedTextsList(pageno)>
                   <div class="input-group">
@@ -19,6 +23,12 @@
                   </form>
                 </div>
               </div> -->
+            </div>
+            <div class="clearfix"></div>
+    <div class="alert alert-success" ng-show="alert">
+    {{alert}}
+    </div>
+       
             <table id="notification_tbl" class="table table-striped jambo_table " ng-show="msgAssigned.length">
                 <thead>
                     <th>
@@ -112,7 +122,7 @@
                         <td class="anchor_xeditable"><a ng-click="showSelected(sms.processingStatus)" href="#" editable-select="user.status" e-ng-options="s.value as s.text for s in statuses">
                             {{sms.processingStatus}}
                           </a></td>
-                        <td><button class="btn-xs btn-danger" ng-click="removeAssignedMessages(sms._id,$index)"><i class=" glyphicon glyphicon-remove"></i></button></td>
+                        <td><button ng-confirm-click class="btn-xs btn-danger" ng-click="removeAssignedMessages(sms._id,$index)"><i class=" glyphicon glyphicon-remove"></i></button></td>
                     </tr>
                 </tbody>
             </table>
@@ -152,7 +162,7 @@
     </div> -->
     <!-- BLOCK : DATATABLE -->
     <!-- BLOCK 4: COMMON ALERT -->
-    <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
+   <!--  <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
         <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
             <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
                 <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
@@ -162,6 +172,6 @@
                 {{alert}}
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- BLOCK 4: COMMON ALERT -->
 </div>
