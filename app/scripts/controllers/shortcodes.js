@@ -8,6 +8,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 	$window.scrollTo(0, 0);
 	$scope.alert = '  loading.........';
 	$scope.getShortcode = function(status) {
+		console.log('status',status);
 		$scope.alert = '  loading.........';
 		api.get('get-codes', status, token, false, function(err, response) {
 			if (err || response.error) {
@@ -17,7 +18,8 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 					$scope.unproc = response.unprocessed;
 					$scope.new = response.newcode;
 					$scope.getShortcode(3);
-				}else if(status === '5'){
+				}else if(status === 5){
+					console.log('response',response);
 					$scope.reset();
 					$scope.assignedShortcodes=response;
 					$scope.getSms($scope.assignedShortcodes[0], 5);
