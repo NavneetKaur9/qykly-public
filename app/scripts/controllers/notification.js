@@ -5,22 +5,22 @@
 angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controller('notificationCtrl', function($scope, $http, api, $cookieStore, DTOptionsBuilder, DTColumnBuilder, $filter, $window, $compile) {
 	var token = $cookieStore.get('c2cCookie');
 	var url = api.addr();
-	$scope.update = function(sms, status) {
-		sms.processingStatus = status;
-		api.post('updateProcessingStatus', false, token, {
-			msgText: sms.text,
-			processingStatus: status
-		}, function(err, response) {
-			if (err) {
-				$scope.alert = response.message
-			} else {
-				$scope.alert = response.ok;
-			}
-		});
-	};
-	$scope.closeAlert = function(argument) {
-		$scope.alert = false;
-	};
+	// $scope.update = function(sms, status) {
+	// 	sms.processingStatus = status;
+	// 	api.post('updateProcessingStatus', false, token, {
+	// 		msgText: sms.text,
+	// 		processingStatus: status
+	// 	}, function(err, response) {
+	// 		if (err) {
+	// 			$scope.alert = response.message
+	// 		} else {
+	// 			$scope.alert = response.ok;
+	// 		}
+	// 	});
+	// };
+	// $scope.closeAlert = function(argument) {
+	// 	$scope.alert = false;
+	// };
 	// $scope.alert = '  loading.........';
 	// api.post('get-assigned-msgs', false, token, {}, function(err, response) {
 	// 	if (err) {
@@ -33,7 +33,7 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 	// });
 
 	/*** assigned messages listing for regex creation ****/
-	
+	$scope.alert = "";
 	$scope.assignedTexts = []; //declare an empty array
 	$scope.pageno = 1; // initialize page no to 1
 	$scope.total_count = 0;
@@ -41,22 +41,71 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 	$scope.currentPage = 1;
 
 	$scope.assignedTextsList = function(pageno) { // This would fetch the data on page change.
-		//In practice this should be in a factory.
-		$scope.assignedTexts = [];
-		var req = {
-			method: 'get',
-			url: url + "get-assigned-msgs/" + $scope.itemsPerPage + "/" + pageno,
-			headers: {
-				// Accept: "application/json",
-				Authorization: $cookieStore.get('c2cCookie')
-			},
+	var searchParams = angular.isUndefined($scope.searchStr) ? "" : $scope.searchStr;
+
+	$scope.assignedTexts = [];
+	var req = {
+		method: 'get',
+		url: url + "get-assigned-msgs/" + $scope.itemsPerPage + "/" + pageno,
+		headers: {
+			// Accept: "application/json",
+			Authorization: $cookieStore.get('c2cCookie')
 		}
-		$http(req).success(function(response) {
-			$scope.assignedTexts = response.data; //ajax request to fetch data into vm.data
-			$scope.total_count = response.total_count;
-		});
+		// params: {
+		//                  searchParams: searchParams,
+		//              }
+	}
+	$http(req).success(function(response) {
+		$scope.assignedTexts = response.data; //ajax request to fetch data into vm.data
+		$scope.total_count = response.total_count;
 		$scope.currentPage = pageno;
-	};
+
+		//xeditable update status
+		if ($scope.assignedTexts.length > 0) {
+			setTimeout(function() {
+				$("#notification_tbl").find('td.anchor_xeditable').each(function(index) {
+					var anchor = $(this).children('a');
+					$(anchor).click(function() {
+						var btn = $(this).closest('td').find('button.btn-primary');
+						var frm = $(this).closest('td').children('form');
+
+						$(btn).click(function() {
+							var selectedStatus = $(".editable-has-buttons option:selected").text();
+							var text = $scope.assignedTexts[index]._id;
+							var req = {
+								method: 'POST',
+								url: url + 'updateProcessingStatus',
+								data: {
+									selectedStatus: selectedStatus,
+									text: text,
+									token: token
+								}
+							}
+							$http(req).then(function successCallback(response) {
+								if (response.data) {
+									if (index !== -1) {
+										// $scope.assignedTexts.splice(index, 1);
+										$(frm).hide();
+										$(anchor).removeClass('editable-hide');
+										$(anchor).removeClass('editable-empty');
+										$(anchor).text(selectedStatus);
+									}
+
+									$scope.alert = "Status updated successfully.";
+									$('.alert-success').delay(3000).fadeOut();
+								}
+							}, function errorCallback(response) {
+								console.log(response);
+							});
+						}); //close btn
+					}); //close click
+				}); //close each
+			}, 3000);
+
+		} //close if
+	});
+
+};
 	$scope.assignedTextsList($scope.pageno); // Call the function to fetch initial data on page load.
 
 	/*** end assigned messages listing for regex creation ****/
@@ -174,4 +223,40 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 		text: 'Exists'
 	}];
 
+	//2 aug shweta
+  //shows selected option 
+ $scope.showSelected = function(selectedStatus) {
+        $scope.selectedOption = selectedStatus;
+    };
+	//shweta
+	//remove promotional messages
+	$scope.removeAssignedMessages = function(text, index) {
+		var checkstr = confirm('are you sure you want to delete this?');
+
+		if (checkstr == true) {
+			var req = {
+				method: 'POST',
+				url: url + 'updateProcessingStatus',
+				data: {
+					selectedStatus: "Promotional",
+					text: text,
+					token: token
+				}
+			}
+			$http(req).then(function successCallback(response) {
+				if (response.data) {
+					if (index !== -1) {
+						$scope.assignedTexts.splice(index, 1);
+					}
+					$scope.alert = "Deleted successfully.";
+					$('.alert-success').delay(3000).fadeOut();
+				}
+			}, function errorCallback(response) {
+				console.log(response);
+			});
+		} else {
+			return false;
+		}
+	};
+	//end remove promotional messages
 });
