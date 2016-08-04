@@ -1,4 +1,4 @@
-// Generated on 2015-01-21 using generator-angular 0.9.2
+ // Generated on 2015-01-21 using generator-angular 0.9.2
 'use strict';
 
 // # Globbing
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['app/scripts/*/*.js','app/scripts/app.js','app/scripts/*/*/*.js'],
         // tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'

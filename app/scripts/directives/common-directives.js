@@ -22,7 +22,7 @@ angular.module('sbAdminApp')
                     $('body').toggleClass('nav-md nav-sm');
 
                 });
-
+ 
             }
         };
     });
