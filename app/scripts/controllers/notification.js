@@ -216,8 +216,8 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 		value: 'Pending',
 		text: 'Pending'
 	}, {
-		value: 'Complete',
-		text: 'Complete'
+		value: 'Regex Made',
+		text: 'Regex Made'
 	}, {
 		value: 'Exists',
 		text: 'Exists'
