@@ -117,8 +117,9 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 		$scope.sortType = sortType;
 	};
 	$scope.parse = function(sms) {
+		console.log(sms);
 		api.post('parsemessage', false, token, {
-			message: sms.text,
+			message: sms._id,
 			shortcode: sms.address
 		}, function(err, response) {
 			if (err) {
@@ -216,8 +217,8 @@ angular.module('sbAdminApp',['angularUtils.directives.dirPagination']).controlle
 		value: 'Pending',
 		text: 'Pending'
 	}, {
-		value: 'Regex Made',
-		text: 'Regex Made'
+		value: 'Complete',
+		text: 'Complete'
 	}, {
 		value: 'Exists',
 		text: 'Exists'
