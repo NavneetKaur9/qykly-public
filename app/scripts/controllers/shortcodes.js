@@ -201,8 +201,11 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 				$scope.addresses.push(value);
 			}
 		}
+		// var type=typeOf($scope.addresses);
+		console.log('type of',$scope.addresses);
+
 		api.put('later-use', false, token, {
-			address: $scope.addresses
+			shortcode: $scope.addresses
 		}, function(err, response) {
 			if (err || response.error) {
 				$scope.alerts = [{
