@@ -119,16 +119,34 @@
                                 <div class="row">
                                     <!-- LEFT : UNPROCESSED -->
                                     <div class="col-md-2 col-sm-2 mail_list_column">
-                                        <input ng-model="search_unproc" style="width:100%;margin-bottom:1rem" placeholder="search code"/>
+
+                                        <!--search-->
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" ng-model="search_unprocessedCodes" placeholder="search code">
+                                            <span class="input-group-btn">
+                                              <button type="button" class="btn btn-primary" ng-click="getUnprocessedCodes()">Go!</button>
+                                          </span>
+                                        </div>
+                                        <!--/search-->
+
+                                        <div class="ln_solid"></div>
+
+                                        <!--sortby -->
+
+                                        <!-- /sortby-->
+                                        
+
+
                                         <div style="overflow:auto;height: 500px;">
-                                            <a href="" ng-repeat="code in unproc |filter:search_unproc">
+                                            <a href="" ng-repeat="code in unprocessedCodes">
                                                 <div class="mail_list">
                                                     <div class="right">
-                                                        <h3 ng-click="getSms(code,0)">
-                                                            {{code}}
+                                                            {{code.count}}
+                                                        <h3 ng-click="getSms(code._id,0)">
+                                                            {{code._id}}
                                                         </h3>
                                                         <small >
-                                                            <button ng-click="parseSms(code)" type="button" class="btn btn-default btn-xs">
+                                                            <button ng-click="parseSms(code._id)" type="button" class="btn btn-default btn-xs">
                                                                 <i class="fa fa-refresh" aria-hidden="true">
                                                                 </i>
                                                             </button>
@@ -136,6 +154,7 @@
                                                     </div>
                                                 </div>
                                             </a>
+                                            <button ng-click="ShowMoreUnprocessedCodes()">Show more</button>
                                         </div>
                                     </div>
                                     <!-- RIGHT : UNPROCESSED -->
