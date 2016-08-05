@@ -42,7 +42,7 @@ angular.module("sbAdminApp",['googlechart'])
     
     $scope.myChartObject.data = {"cols": [
         {id: "t", label: "Sender code", type: "string"},
-        {id: "s", label: "Count", type: "number"}
+        {id: "s", label: "Frequency", type: "number"}
     ], "rows": shortCodesgraphData};
     $scope.myChartObject.options = {
         'title': 'Top 10 sender codes'
@@ -80,8 +80,8 @@ angular.module("sbAdminApp",['googlechart'])
     $scope.merchantChartObject.type = "ColumnChart";
 
     $scope.merchantChartObject.data = {"cols": [
-        {id: "t", label: "Sender code", type: "string"},
-        {id: "s", label: "Count", type: "number"}
+        {id: "t", label: "Merchnat", type: "string"},
+        {id: "s", label: "User", type: "number"}
     ], "rows": merchantGraphData};
     $scope.merchantChartObject.options = {
         'title': 'Top 10 merchants'
