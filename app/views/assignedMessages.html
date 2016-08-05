@@ -1,0 +1,148 @@
+  
+<div ng-controller="assignedMessagesCtrl">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="page-title">
+                   <div class="title_left">
+            <h3>Assigned Messages</h3>
+        </div>
+            </div>
+            <div class="clearfix"></div>
+    <div class="alert alert-success" ng-show="alert">
+    {{alert}}
+    </div>
+
+     <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content">
+                <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-2" ng-repeat="(key,value) in assignedMsgData">
+
+                    <div ng-repeat="(key,value) in value">
+                        <ul class="list-group">
+                            <li class="list-group-item active">
+                                {{key}}
+                            </li>
+                            <li class="list-group-item" ng-repeat="(key,value) in value">
+                                <span class="badge">{{value.count}}</span>
+                                {{value._id}}
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                
+                    </div>
+                </div>
+            </div>
+        </div><!--- /row -->
+       
+            <table id="notification_tbl" class="table table-striped jambo_table " ng-show="msgAssigned.length">
+                <thead>
+                    <th>
+                        #
+                    </th>
+                     <th width="10%">
+                        <div href ng-click="order('address')" style="cursor:pointer">
+                            Assinee Name
+                            <span  class="fa fa-caret-down" ng-show="sortType == 'address' && sortReverse">
+                            </span>
+                            <span  class="fa fa-caret-up" ng-show="sortType == 'address' && !sortReverse">
+                            </span>
+                        </div>
+                    </th>
+                    <th>
+                        <div href ng-click="order('address')" style="cursor:pointer">
+                            Address
+                            <span  class="fa fa-caret-down" ng-show="sortType == 'address' && sortReverse">
+                            </span>
+                            <span  class="fa fa-caret-up" ng-show="sortType == 'address' && !sortReverse">
+                            </span>
+                        </div>
+                    </th>
+                    <th>
+                        <div href ng-click="order('text')" style="cursor:pointer">
+                            Text
+                            <span  class="fa fa-caret-down" ng-show="sortType == 'text' && sortReverse">
+                            </span>
+                            <span  class="fa fa-caret-up" ng-show="sortType == 'text' && !sortReverse">
+                            </span>
+                        </div>
+                    </th>
+                    <th width="10%">
+                        <div  ng-click="order('saveTime')" style="cursor:pointer">
+                            Assign Time
+                            <span  class="fa fa-caret-down" ng-show="sortType == 'saveTime' && sortReverse">
+                            </span>
+                            <span  class="fa fa-caret-up" ng-show="sortType == 'saveTime' && !sortReverse">
+                            </span>
+                        </div>
+                    </th>
+                    <th width="10%">
+                        <div  ng-click="order('saveTime')" style="cursor:pointer">
+                            Status
+                            <span  class="fa fa-caret-down" ng-show="sortType == 'saveTime' && sortReverse">
+                            </span>
+                            <span  class="fa fa-caret-up" ng-show="sortType == 'saveTime' && !sortReverse">
+                            </span>
+                        </div>
+                    </th>
+                </thead>
+                <tbody>
+                    <tr ng-show="assignedTexts.length <= 0"><td colspan="7" style="text-align:center;">Loading new data!!</td></tr>
+                    <tr dir-paginate="sms in assignedTexts|itemsPerPage:itemsPerPage|filter:search" total-items="total_count">
+                        <td>
+                            {{itemsPerPage *(currentPage-1)+$index+1}}
+                        </td>
+                        <td>
+                            {{sms.assignedTo}}
+                        </td>
+                        <td>
+                            {{sms.address}}
+                        </td>
+                        <td>
+                            {{sms._id}}
+                        </td>
+                        <td>
+                            {{sms.assignTime |date:'medium'}}
+                        </td>
+                       <!--  <td>
+                            {{sms.saveTime |date:'MMM d, y h:mm a'}}
+                        </td> -->
+                     <!--    <td>
+                            <div >
+                                <button ng-click="parse(sms)">
+                                    Parse message
+                                </button>
+
+                            </div>
+                        </td> -->
+                        <td>
+                            <div ng-switch="sms.processingStatus">
+                              <div ng-switch-when="Complete">
+                                 <span class="label label-success">{{sms.processingStatus}}</span>
+                              </div>
+                              <div ng-switch-when="Pending">
+                                <span class="label label-warning">{{sms.processingStatus}}</span>
+                              </div>
+                              <div ng-switch-when="Exists">
+                                <span class="label label-default">{{sms.processingStatus}}</span>
+                              </div>
+                              <div ng-switch-when="Promotional">
+                                <span class="label label-info">{{sms.processingStatus}}</span>
+                              </div>
+                            </div>
+                         </td>
+                    </tr>
+                </tbody>
+            </table>
+            <dir-pagination-controls boundary-links="true" on-page-change="assignedTextsList(newPageNumber)" >
+            </dir-pagination-controls>
+        </div>
+    </div>
+</div>
+
+
