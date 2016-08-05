@@ -1,4 +1,4 @@
-// Generated on 2015-01-21 using generator-angular 0.9.2
+ // Generated on 2015-01-21 using generator-angular 0.9.2
 'use strict';
 
 // # Globbing
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: ['app/scripts/*/*.js','app/scripts/app.js','app/scripts/*/*/*.js'],
         // tasks: ['newer:jshint:all'],
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -66,10 +66,10 @@ module.exports = function(grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000,
+        port: 8080,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
-        livereload: 35729
+        livereload: true
       },
       livereload: {
         options: {

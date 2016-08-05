@@ -8,6 +8,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 	$window.scrollTo(0, 0);
 	$scope.alert = '  loading.........';
 	$scope.getShortcode = function(status) {
+		console.log('status',status);
 		$scope.alert = '  loading.........';
 		api.get('get-codes', status, token, false, function(err, response) {
 			if (err || response.error) {
@@ -17,7 +18,13 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 					$scope.unproc = response.unprocessed;
 					$scope.new = response.newcode;
 					$scope.getShortcode(3);
-				} else {
+				}else if(status === 5){
+					console.log('response',response);
+					$scope.reset();
+					$scope.assignedShortcodes=response;
+					$scope.getSms($scope.assignedShortcodes[0], 5);
+				} 
+				else {
 					$scope.proc = response;
 					$scope.getSms($scope.unproc[0], 0);
 					// $scope.alert = false;
@@ -63,11 +70,11 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 			}
 		});
 	};
-	$scope.reset = function(argument) {
+	$scope.reset = function() {
 		$scope.smses = [];
 		$scope.code = "";
 	};
-	$scope.closeAlert = function(argument) {
+	$scope.closeAlert = function() {
 		$scope.alert = false;
 	};
 	$scope.searchCode = '';
@@ -184,5 +191,33 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 			}
 		});
 
+	};
+	$scope.laterUse=function () {
+		$scope.addresses = [];
+		var checkboxes = document.getElementsByName('blacklist');
+		for (var i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+				var value = checkboxes[i].value;
+				$scope.addresses.push(value);
+			}
+		}
+		// var type=typeOf($scope.addresses);
+		console.log('type of',$scope.addresses);
+
+		api.put('later-use', false, token, {
+			shortcode: $scope.addresses
+		}, function(err, response) {
+			if (err || response.error) {
+				$scope.alerts = [{
+					msg: response.userMessage || 'Server error! Are you connected to the internet?.',
+					type: 'error'
+				}];
+			} else {
+				$scope.alert = response.message;
+				$scope.smses = [];
+				$scope.getShortcode('0');
+				// $scope.getBlacklisteds();
+			}
+		});
 	};
 });

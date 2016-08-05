@@ -17,8 +17,11 @@ app/tests/coverage/
 .bower-*/
 .idea/
 coverage/
+
 app/scripts/services
 dist/scripts/services
+
+
 
 
 
