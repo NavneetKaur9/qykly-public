@@ -2,7 +2,7 @@
 /**
  * 
  */
-angular.module('sbAdminApp', ['angularUtils.directives.dirPagination']).controller('notificationCtrl', function($scope, $http, api, $cookieStore, DTOptionsBuilder, DTColumnBuilder, $filter, $window, $compile) {
+angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $http, api, $cookieStore, DTOptionsBuilder, DTColumnBuilder, $filter, $window, $compile) {
     var token = $cookieStore.get('c2cCookie');
     var url = api.addr();
     // $scope.update = function(sms, status) {
@@ -37,10 +37,12 @@ angular.module('sbAdminApp', ['angularUtils.directives.dirPagination']).controll
     $scope.assignedTexts = []; //declare an empty array
     $scope.pageno = 1; // initialize page no to 1
     $scope.total_count = 0;
-    $scope.itemsPerPage = 100; //this could be a dynamic value from a drop down
+    $scope.itemsPerPage = 10; //this could be a dynamic value from a drop down
     $scope.currentPage = 1;
 
     $scope.assignedTextsList = function(pageno) { // This would fetch the data on page change.
+        
+    console.log(pageno);
         var searchParams = angular.isUndefined($scope.searchStr) ? "" : $scope.searchStr;
 
         $scope.assignedTexts = [];
