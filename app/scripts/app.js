@@ -213,5 +213,17 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
         });
       }
     }
+  }).state('dashboard.assignedMessages', {
+    url: '/assignedMessages',
+    templateUrl: 'views/assignedMessages.html',
+    controller: 'assignedMessagesCtrl',
+    resolve: {
+      loadMyFile: function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name: 'sbAdminApp',
+          files: ['scripts/controllers/assignedMessages.js']
+        });
+      }
+    }
   });
 }]);
