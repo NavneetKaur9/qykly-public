@@ -299,10 +299,12 @@
                                         </div>
                                         <!-- /sortby-->
                                         <div style="overflow:auto;height: 500px;">
-                                            <a ng-repeat="code in new.codes">
+                                            <a ng-repeat="code in new.codes" href="javascript:void(0)">
                                                 <div class="mail_list">
                                                     <div class="left">
-                                                        <input type="checkbox" value="{{code._id}}" name="blacklist" />
+                                                        <!-- <input type="checkbox"> -->
+                                                        <input type="checkbox" value="{{code._id}}" name="blacklist"  />
+                                                    
                                                     </div>
                                                     <span class="">  {{code.count}}</span>
                                                     <div class="right" style="cursor:pointer;">
@@ -394,7 +396,7 @@
                                                 <tr ng-repeat="sms in new.messages">
                                                   <td>{{itemsPerPage *(currentPage-1)+$index+1}}</td>
                                                     <td class="a-center ">
-                                                        <input type="checkbox" class="flat" name="assign" value="{{sms.text}}" ng-checked="selected.all" />
+                                                        <input type="checkbox" class="flat" name="assign" value="{{sms._id}}" ng-checked="selected.all" />
                                                     </td>
                                                     <td>
                                                         {{sms._id}}

@@ -8,24 +8,25 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
     var token = $cookieStore.get('c2cCookie');
     $window.scrollTo(0, 0);
 
-    $scope.checkArray=[];
-    $scope.check=function(value){
-        
-        var index=$scope.checkArray.indexOf(value);
-        function reset(){
-            $scope.currentPage=1;
-            $scope.unProc.messages=[];
-            $scope.new.messages=[];
-            $scope.proc.messages=[];
+    $scope.checkArray = [];
+    $scope.check = function(value) {
+
+        var index = $scope.checkArray.indexOf(value);
+
+        function reset() {
+            $scope.currentPage = 1;
+            $scope.unProc.messages = [];
+            $scope.new.messages = [];
+            $scope.proc.messages = [];
         }
         reset();
-       if ((index===-1) && (value==='new')){
-            
-            $scope.new.getcodes();             
-             $scope.checkArray.push(value);
-        }else if ((index===-1) && (value==='proc')){
-            
-            $scope.proc.getcodes();             
+        if ((index === -1) && (value === 'new')) {
+
+            $scope.new.getcodes();
+            $scope.checkArray.push(value);
+        } else if ((index === -1) && (value === 'proc')) {
+
+            $scope.proc.getcodes();
             $scope.checkArray.push(value);
         }
     };
@@ -175,16 +176,17 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 
     /************** GET SMS ********************/
     $scope.start = 1;
-    $scope.currentPage=1;
-    $scope.length=10;
-    $scope.itemsPerPage=50;
+    $scope.currentPage = 1;
+    $scope.length = 10;
+    $scope.itemsPerPage = 50;
 
-    $scope.getSms = function(code, status,start,tab) {
+    $scope.getSms = function(code, status, start, tab) {
 
-        if(code!==$scope.code){
-            $scope.currentPage=1;
+        if (code !== $scope.code) {
+            $scope.currentPage = 1;
         }
-        $scope.loadingMsg = true ;
+        $scope.alert = 'loading............';
+        $scope.loadingMsg=true;
         api.get('get-messages', false, token, {
             address: code,
             status: status,
@@ -195,29 +197,30 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
                 $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
             } else {
                 $scope.code = code;
-                $scope.start=start;
-                $scope.status=status;
-                $scope.tab=tab;
-                if (tab==='unProc') {
-                   $scope.unProc.messages=response.data;
-                   // $scope.unproc.totalCount=response.totalCount;
-                } else if(tab==='new') {
-                   $scope.new.messages=response.data;
-                   // $scope.new.totalCount=response.totalCount;
-                }else if(tab ==='proc'){
-                   $scope.proc.messages=response.data;
-                   // $scope.proc.totalCount=response.totalCount;
+                $scope.start = start;
+                $scope.status = status;
+                $scope.tab = tab;
+                if (tab === 'unProc') {
+                    $scope.unProc.messages = response.data;
+                    // $scope.unproc.totalCount=response.totalCount;
+                } else if (tab === 'new') {
+                    $scope.new.messages = response.data;
+                    // $scope.new.totalCount=response.totalCount;
+                } else if (tab === 'proc') {
+                    $scope.proc.messages = response.data;
+                    // $scope.proc.totalCount=response.totalCount;
                 }
                 // $scope.messages = response.data;
                 $scope.totalCount = response.totalCount;
 
                 $scope.loadingMsg = false;
+                $scope.alert=false;
             }
         });
     };
     //***********pagination on change ************//
     $scope.pageChanged = function(newPage) {
-        $scope.getSms($scope.code,$scope.status,newPage,$scope.tab);
+        $scope.getSms($scope.code, $scope.status, newPage, $scope.tab);
     };
 
 
@@ -256,30 +259,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
     ];
     // ***************************** GET BLACKLIST  *********************//
 
-    $scope.blacklist = function() {
-        $scope.addresses = [];
-        var checkboxes = document.getElementsByName('blacklist');
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
-                var value = checkboxes[i].value;
-                $scope.addresses.push(value);
-            }
-        }
-        api.put('blacklist', false, token, {
-            address: $scope.addresses
-        }, function(err, response) {
-            if (err || response.error) {
-                $scope.alerts = [{
-                    msg: response.userMessage || 'Server error! Are you connected to the internet?.',
-                    type: 'error'
-                }];
-            } else {
-                $scope.alert = response.message;
-                $scope.smses = [];
-                //remove shortcode from list of shortcodes
-            }
-        });
-    };
+
 
     $scope.assign = function() {
         $scope.msgText = [];
@@ -298,8 +278,8 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
                 $scope.alert = response.message;
             } else {
                 $scope.alert = response.message;
-               $scope.getSms($scope.code,$scope.status,$scope.start,$scope.tab);
-                  
+                $scope.getSms($scope.code, $scope.status, $scope.start, $scope.tab);
+
             }
         });
     };
@@ -332,7 +312,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
     $scope.closeParseSmsResult = function() {
         $scope.parseSmsResult = [];
     };
-   
+
 
     // get mod users
     api.get('user', false, token, false, function(err, response) {
@@ -360,8 +340,8 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
                 $scope.alert = response.message;
             } else {
                 $scope.alert = response.message;
-               //remove from list that msg
-               $scope.getSms($scope.code,$scope.status,$scope.start,$scope.tab);
+                //remove from list that msg
+                $scope.getSms($scope.code, $scope.status, $scope.start, $scope.tab);
             }
         });
 
@@ -387,10 +367,41 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
                 }];
             } else {
                 $scope.alert = response.message;
+                $scope.new.messages = [];
+                $scope.new.codes = [];
+                $scope.new.getcodes();
+
+
             }
         });
     };
+    $scope.blacklist = function() {
+        $scope.addresses = [];
+        var checkboxes = document.getElementsByName('blacklist');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                var value = checkboxes[i].value;
+                $scope.addresses.push(value);
 
+            }
+        }
+        api.put('blacklist', false, token, {
+            address: $scope.addresses
+        }, function(err, response) {
+            if (err || response.error) {
+                $scope.alerts = [{
+                    msg: response.userMessage || 'Server error! Are you connected to the internet?.',
+                    type: 'error'
+                }];
+            } else {
+                $scope.alert = response.message;
+                $scope.new.messages = [];
+                $scope.new.codes = [];
+                $scope.new.getcodes();
+                //remove shortcode from list of shortcodes
+            }
+        });
+    };
 
 
 
