@@ -1,289 +1,107 @@
 <div ng-controller="homeCtrl">
-    <!-- <div class="row">
-        <div class="col-md-6">
-            <table class="table table-striped jambo_table bulk_action">
-                <tr>
-                    <th>
-                        Address
-                    </th>
-                    <th>
-                        count
-                    </th>
-                    <th>
-                        Msgtype
-                    </th>
-                </tr>
-                <tr ng-repeat="(key, value) in dataset">
-                    <th>
-                        {{value.address}}
-                    </th>
-                    <th>
-                        {{value.count}}
-                    </th>
-                    <th>
-                        {{value.msgtype}}
-                    </th>
-                </tr>
-            </table>
-        </div>
-    </div>
-    Home
-    <br/>
-    {{show}}
-    <input type="checkbox" name="" />
-    <input type="checkbox" name="" />
-    <input type="checkbox" name="" />
-    <input type="checkbox" name="" />
-    <input type="checkbox" name="" />
-    <input type="checkbox" name="" />
-    <div ng-show="show">
-        hello
-    </div> -->
-   <!--  <table class="table table-striped jambo_table bulk_action" icheck>
-        <thead>
-            <tr class="headings">
-                <th>
-                    <input type="checkbox" id="check-all" class="flat"/>
-                </th>
-                <th class="column-title">
-                    Invoice
-                </th>
-                <th class="column-title">
-                    Invoice Date
-                </th>
-                <th class="column-title">
-                    Order
-                </th>
-                <th class="column-title">
-                    Bill to Name
-                </th>
-                <th class="column-title">
-                    Status
-                </th>
-                <th class="column-title">
-                    Amount
-                </th>
-                <th class="column-title no-link last">
-                    <span class="nobr">
-                        Action
-                    </span>
-                </th>
-                <th class="bulk-actions" colspan="7">
-                    <a class="antoo" style="color:#fff; font-weight:500;">
-                        Bulk Actions (
-                        <span class="action-cnt">
-                        </span>
-                        )
-                        <i class="fa fa-chevron-down">
-                        </i>
-                    </a>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="even pointer">
-                <td class="a-center ">
-                    <input type="checkbox" class="flat" name="table_records"/>
-                </td>
-                <td class=" ">
-                    121000040
-                </td>
-                <td class=" ">
-                    May 23, 2014 11:47:56 PM
-                </td>
-                <td class=" ">
-                    121000210
-                    <i class="success fa fa-long-arrow-up">
-                    </i>
-                </td>
-            </tr>
-            <tr class="odd pointer">
-                <td class="a-center ">
-                    <input type="checkbox" class="flat" name="table_records"/>
-                </td>
-                <td class=" ">
-                    121000039
-                </td>
-                <td class=" ">
-                    May 23, 2014 11:30:12 PM
-                </td>
-                <td class=" ">
-                    121000208
-                    <i class="success fa fa-long-arrow-up">
-                    </i>
-                </td>
-                <td class=" ">
-                    John Blank L
-                </td>
-                <td class=" ">
-                    Paid
-                </td>
-                <td class="a-right a-right ">
-                    $741.20
-                </td>
-                <td class=" last">
-                    <a href="#">
-                        View
-                    </a>
-                </td>
-            </tr>
-            <tr class="even pointer">
-                <td class="a-center ">
-                    <input type="checkbox" class="flat" name="table_records"/>
-                </td>
-                <td class=" ">
-                    121000038
-                </td>
-                <td class=" ">
-                    May 24, 2014 10:55:33 PM
-                </td>
-                <td class=" ">
-                    121000203
-                    <i class="success fa fa-long-arrow-up">
-                    </i>
-                </td>
-                <td class=" ">
-                    Mike Smith
-                </td>
-                <td class=" ">
-                    Paid
-                </td>
-                <td class="a-right a-right ">
-                    $432.26
-                </td>
-                <td class=" last">
-                    <a href="#">
-                        View
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table> -->
-    <!-- custom alert section starts here -->
-    <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
-        <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
-            <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
-                <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
-                </span>
-            </div>
-            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" ng-hide="parseSmsResult.output.length">
-                <!-- <img src="assets/images/ajax-loader.gif"/> -->
-                {{alert}}
-            </div>
-            <div ng-if="parseSmsResult.output.length">
-                <div ng-repeat="(key,value) in parseSmsResult.output" >
-                    <div ng-repeat="(key, value) in value">
-                        {{key}} : {{value}}
-                    </div>
+    
+
+     <div class="well">
+         <div class="row">
+             <div class="col-md-2">
+            <!-- select category -->
+                 <label> Select Category
+                    <input type="hidden" ng-model="assignTo" value="{{selected}}" />
+                    <select id="cat_select" class="form-control" tabindex="-1" ng-model="category" select2 ng-options="x for x in categories" placeholder="" style="width:150px" ng-change="getMerchants()">
+                        <option value="">
+                        </option>
+                    </select>
+                   
+                </label>
+             <!-- /Select category -->
+             </div>
+             <div class="col-md-3">
+                 <!-- range -->
+                   <label>Range:</label>
+                <div class="input-group input-group-sm">
+                  <label class="input-group-addon" for="dataX">Start</label>
+                  <input class="form-control" id="dataX" placeholder="start" type="number" ng-model="start">
+                <!-- </div>
+                <div class="input-group input-group-sm"> -->
+                   <label class="input-group-addon" for="dataX">End</label>
+                  <input class="form-control" id="dataX" placeholder="end" type="number" ng-model="end">
                 </div>
-                <!-- modal starts here -->
-                <button type="button" class="btn btn-success btn-xs " data-toggle="modal" data-target=".bs-example-modal-sm">
-                    click here for more details
-                </button>
-                <!-- modal ends here -->
-            </div>
-        </div>
-    </div>
-    <!-- custom alert section begins here -->
-    <div style="display: none;" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-sm" style="width:90%">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">
-                            ×
-                        </span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel2">
-                        Sms Parse Data
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <!-- modal body goes here -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table class="table table-bordered" >
-                                <thead>
-                                    <th>
-                                        #
-                                    </th>
-                                    <th >
-                                        <div href ng-click="order('shortcode')" style="cursor:pointer">
-                                            shortcode
-                                            <span ng-show="sortType == 'shortcode' && sortReverse" class="fa fa-caret-down">
-                                            </span>
-                                            <span ng-show="sortType == 'shortcode' && !sortReverse" class="fa fa-caret-up">
-                                            </span>
-                                        </div>
-                                    </th>
-                                    <th  >
-                                        <div href ng-click="order('smstext')" style="cursor:pointer">
-                                            sms text
-                                            <span ng-show="sortType == 'smstext' && sortReverse" class="fa fa-caret-down">
-                                            </span>
-                                            <span ng-show="sortType == 'smstext' && !sortReverse" class="fa fa-caret-up">
-                                            </span>
-                                        </div>
-                                    </th>
-                                    <th >
-                                        Pattern
-                                    </th>
-                                    <th>
-                                        <div  ng-click="order('dateModified')" style="cursor:pointer">
-                                            Regex Modified Date
-                                            <span ng-show="sortType == 'dateModified' && sortReverse" class="fa fa-caret-down">
-                                            </span>
-                                            <span ng-show="sortType == 'dateModified' && !sortReverse" class="fa fa-caret-up">
-                                            </span>
-                                        </div>
-                                    </th>
-                                    <th >
-                                        <div  ng-click="order('savetime')" style="cursor:pointer">
-                                            Msg Save Time
-                                            <span ng-show="sortType == 'savetime' && sortReverse" class="fa fa-caret-down">
-                                            </span>
-                                            <span ng-show="sortType == 'savetime' && !sortReverse" class="fa fa-caret-up">
-                                            </span>
-                                        </div>
-                                    </th>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="sms in  parseSmsResult.smsdata |orderBy:sortType:sortReverse">
-                                        <td>
-                                            {{$index+1}}
-                                        </td>
-                                        <td>
-                                            {{sms.shortcode}}
-                                        </td>
-                                        <td>
-                                            {{sms.smstext }}
-                                        </td>
-                                        <td>
-                                            {{sms.pattern }}
-                                        </td>
-                                        <td>
-                                            {{sms.dateModified |date:'MMM d, y h:mm a'}}
-                                        </td>
-                                        <td>
-                                            {{sms.savetime |date:'MMM d, y h:mm a'}}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                 <!-- /range -->
+
+             </div>
+                 <!-- calender -->
+              <div class="col-md-3">
+              <label>From :</label> 
+                <p class="input-group">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                  <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="dt1" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                  
+                </p>
+              </div>
+
+              <div class="col-md-3">
+              <label>To :</label> 
+                    <p class="input-group">
+                               <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                  <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="dt2" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                 </p>
+              </div>
+                 <!-- /calender -->
+
+             <div class="col-md-1"><label></label>
+                 <button class="" ng-click="getUserCount()">Submit</button>
+             </div>
+         </div>
+     </div>
+
+
+    <div class="row">
+        <div class="col-md-2" >
+             <!-- MERCHANT LIST -->
+             <div ng-show="showLoader1">
+                <img src="assets/images/ajax-loader.gif" /> Processing
+             </div>
+              <label ng-show="merchantName.length">Choose One or More Merchants :</label>
+              <div style="overflow:auto;height: 500px;">
+                <a ng-repeat="(key,value) in merchantName track by $index" href="javascript:void(0)">
+                    <div class="mail_list">
+                        <div class="left">
+                           <input type="checkbox" value="{{value}}" name="merchantCheckbox"  />
                         </div>
+                        <div class="right" >
+                            
+                                {{value}}
+                        </div>
+                        
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        Close
-                    </button>
-                </div>
+                </a>
+             </div>
+             <!-- /MERCHANT LIST -->
+        </div>
+        <div class="col-md-10">
+            <!-- DATE -->
+            <div ng-show="showLoader2" style="text-align:center">
+                <img src="assets/images/ajax-loader1.gif" /> Loading
             </div>
+            <ul ng-repeat="(key, value) in users">
+               {{key}} <li>{{value}}</li>
+            </ul>
+
         </div>
     </div>
+
+
+
+    <!-- BLOCK : SCROLL TOP -->
     <back-top scroll-speed=1500 button-theme="dark">
         <i class="fa fa-angle-double-up">
-        </i>
-        Scroll Top
+        </i> 
     </back-top>
+    <!-- BLOCK : SCROLL TOP -->
+
 </div>
+

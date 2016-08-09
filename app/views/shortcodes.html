@@ -74,25 +74,25 @@
                         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                             <li role="presentation" class="active">
                                 <a href="userDetail.html#tab_content1" id="un_proc-tab" role="tab" data-toggle="tab" aria-expanded="true"">
-                                    <!-- <span class="badge bg-green">
-                                        {{unproc.length}}
-                                    </span>  -->
+                                    <span class="badge bg-green">
+                                        {{count.unprocessed}}
+                                    </span> 
                                     Unprocessed Shortcodes
                                 </a>
                             </li>
                             <li role="presentation" class="">
                                 <a href="userDetail.html#tab_content2" role="tab" id="new-tab" data-toggle="tab" aria-expanded="false" ng-click="check('new')">
-                                    <!-- <span class="badge bg-green">
-                                        {{new.length}}
-                                    </span> -->
+                                    <span class="badge bg-green">
+                                        {{count.new}}
+                                    </span>
                                     New Shortcodes
                                 </a>
                             </li>
                             <li role="presentation" class="">
                                 <a href="userDetail.html#tab_content3" role="tab" id="proc-tab" data-toggle="tab" aria-expanded="false" ng-click="check('proc')">
-                                    <!-- <span class="badge bg-green">
-                                        {{proc.length}}
-                                    </span> -->
+                                    <span class="badge bg-green">
+                                        {{count.processed}}
+                                    </span>
                                     Processed Shortcodes
                                 </a>
                             </li>
@@ -106,12 +106,14 @@
                                     Blacklisted Shortcode
                                 </a>
                             </li>
-                            <!-- <li role="presentation" class="">
-                                <a href="userDetail.html#tab_content5" role="tab" id="assigned-tab" data-toggle="tab" aria-expanded="false" ng-click="getShortcode(5)">
-                                   
-                                    Assigned / Pending
+                            <li role="presentation" class="">
+                                <a href="userDetail.html#tab_content5" role="tab" id="laterUse-tab" data-toggle="tab" aria-expanded="false" ng-click="check('laterUse')">
+                                    <span class="badge bg-green">
+                                        {{count.laterUse}}
+                                    </span>
+                                    Later Use Shortcodes
                                 </a>
-                            </li> -->
+                            </li>
                         </ul>
                         <!-- END: TABS -->
                         <!-- START : TAB CONTENT -->
@@ -168,6 +170,7 @@
                                             <button ng-click="unProc.showMore()" ng-hide="showLoader"> Show more
                                             </button>
                                         </div>
+                                        Showing {{unProc.codes.length}} Codes
                                     </div>
 
 
@@ -326,7 +329,10 @@
                                             <button ng-click="new.showMore()" ng-hide="showLoader"> Show more
                                             </button>
                                         </div>
-                                        <button type="button" class="btn btn-dark btn-xs " ng-click="laterUse()">
+                                        Showing {{new.codes.length}} Codes
+
+                                        <button type="button" class="btn btn-dark btn-xs " ng-click="useLater
+                                        ()">
                                             Use Later
                                         </button>
                                         <button type="button" class="btn btn-dark btn-xs pull-right" ng-click="blacklist()">
@@ -462,8 +468,10 @@
                                             </div>
                                             <button ng-click="proc.showMore()" ng-hide="showLoader"> Show more
                                             </button>
-
+                      
                                         </div>
+                                        Showing {{proc.codes.length}} Codes
+
                                     </div>
                                     
                                     <!-- RIGHT : Processed message detail -->
@@ -522,6 +530,8 @@
                                 </div>
                             </div>
                             <!-- TAB CONTENT 3 : PROCESSED -->
+
+
                             <!-- TAB CONTENT 4 : BLACKLISTEDS -->
                             <div role="tabpanel" class="tab-pane fade " id="tab_content4" aria-labelledby="blacklist-tab">
                                 <div class="row">
@@ -532,57 +542,108 @@
                                 </div>
                             </div>
                             <!-- TAB CONTENT 4 : BLACKLISTEDS -->
-                            <!-- TABC CONTENT 5 : ASSIGNED DATA OR PENDING FOR REGEX CREATION DATA -->
-                            <div role="tabpanel" class="tab-pane fade " id="tab_content5" aria-labelledby="assigned-tab">
-                                <div class="row">
-                                    <!-- LEFT : ASSIGNED DATA OR PENDING FOR REGEX CREATION DATA -->
+
+
+                            <!-- TABC CONTENT 5 : LATER USE -->
+                            <div role="tabpanel" class="tab-pane fade " id="tab_content5" aria-labelledby="laterUse-tab"> 
+                            <div class="row">
+                                    
+                                    <!-- LEFT : LATER USE -->
                                     <div class="col-md-2 col-sm-2 mail_list_column">
-                                        <input ng-model="search_assigned" style="width:100%;margin-bottom:1rem" placeholder="search code" /> sort by :
+                                        <!--search-->
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" ng-model="laterUse.searchCode" placeholder="search code">
+                                            <span class="input-group-btn">
+                                              <button type="button" class="btn btn-primary" ng-click="laterUse.search()">Go!</button>
+                                          </span>
+                                        </div>
+                                        <!--/search-->
+                                        <!--sortby -->
+                                        sort by: {{laterUse.sortby}}
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" ng-model="laterUse.sortby" value="count" ng-change='laterUse.sort()'> Count
+                                            </label>
+                                            <label>
+                                                <input type="radio" ng-model="laterUse.sortby" value="address" ng-change='laterUse.sort()'> Alphabetic
+                                            </label>
+                                        </div>
+                                        <!-- /sortby-->
+                                       
                                         <div style="overflow:auto;height: 500px;">
-                                            <a href="" ng-repeat="code in assignedShortcodes |filter:search_assigned">
+                                            <a ng-repeat="code in laterUse.codes">
                                                 <div class="mail_list">
-                                                    <div class="right">
-                                                        <div class="left">
-                                                            {{code.count}}
-                                                        </div>
-                                                        <h3 ng-click="getSms(code._id,5)">
+                                                    <span class="">  {{code.count}}</span>
+                                                    <div class="right" style="cursor:pointer;">
+                                                        <h3 ng-click="getSms(code._id,8,1,'laterUse')">
                                                             {{code._id}}
                                                         </h3>
-                                                        <small>
-                                                            <button ng-click="parseSms(code._id)" type="button" class="btn btn-default btn-xs">
-                                                                <i class="fa fa-refresh" aria-hidden="true">
-                                                                </i>
-                                                            </button>
-                                                            <!-- <span class="badge"> -->
-                                                            <!-- </span> -->
-                                                        </small>
                                                     </div>
                                                 </div>
                                             </a>
+                                            <div ng-show="showLoader">
+                                                <img src="assets/images/ajax-loader.gif" /> Processing
+                                            </div>
+                                            <button ng-click="laterUse.showMore()" ng-hide="showLoader"> Show more
+                                            </button>
+                      
                                         </div>
+                                        Showing {{laterUse.codes.length}} Codes
+
                                     </div>
-                                    <!-- RIGHT : ASSIGNED DATA OR PENDING FOR REGEX CREATION DATA -->
-                                    <div class="col-md-10 col-sm-10 mail_view" ng-show="smses.length">
+                                    
+                                    <!-- RIGHT : LATER USE message detail -->
+                                    <div class="col-md-10 col-sm-10 mail_view" ng-show="laterUse.messages.length">
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-2">
                                                 <h4>
                                                     {{code}}
                                                 </h4>
                                             </div>
-                                            <div class="col-md-2">
-                                                <label for="search">
-                                                    items per page:
-                                                    <input type="number" min="1" max="1000" class="form-control" ng-model="pageSize" />
-                                                </label>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label for="search">
-                                                    Search:
-                                                    <input ng-model="seach_assigned_msg" id="seach_assigned_msg" class="" placeholder="Filter Messages" style="width:100%" />
-                                                </label>
-                                            </div>
+                                            
                                         </div>
-                                        
+                                        <table class="table table-striped jambo_table ">
+                                            <thead>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>
+                                                        Text
+                                                </th>
+                                                <th width="20%">
+                                                        Msg Time
+                                                </th>
+                                                <th width="20%">
+                                                        Save Time
+                                                        
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                             <tr ng-if="laterUse.messages.length <= 0">
+                                                <td colspan="7" style="text-align:center;">No More Messages!!</td>
+                                            </tr>
+                                            <tr ng-show="loadingMsg">
+                                                <td colspan="7" style="text-align:center;">Loading Messages!!</td>
+                                            </tr>
+                                            <tr ng-repeat="sms in laterUse.messages">
+                                                <td>
+                                                    {{itemsPerPage *(currentPage-1)+$index+1}}
+                                                </td>
+                                                                           
+                                                                               <td>
+                                                    {{sms._id}}
+                                                </td>
+                                                <td>
+                                                    {{sms.time | date:'MMM'}}
+                                                </td>
+                                                <td>
+                                                    {{sms.saveTime |date:'MMM d, y h:mm a'}}
+                                                </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <ul uib-pagination ng-model="currentPage" total-items="totalCount" max-size="length" force-ellipses="true" boundary-links="true" ng-change="pageChanged(currentPage)">
+                                         </ul>
                                     </div>
                                 </div>
                             </div>
