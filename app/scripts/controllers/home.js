@@ -3,7 +3,10 @@
  * 
  */
 angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api, $window, $cookieStore) {
-
+    $window.scrollTo(0, 0);
+$scope.closeAlert = function() {
+        $scope.alert = false;
+    };
     api.get('get-category', false, false, false, function(err, response) {
         if (err) {
             $scope.alert = response.message;
@@ -13,7 +16,10 @@ angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api,
     });
 
     $scope.getMerchants = function() {
+        $scope.users=[];
+        $scope.merchantName=[];
         $scope.showLoader1=true;
+
         api.get('get-merchants', false, false, {
             category: $scope.category
         }, function(err, response) {
@@ -26,21 +32,31 @@ angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api,
         });
     };
     $scope.getUserCount = function(merchant) {
-        $scope.showLoader2=true;
-
-        var merchants = [];
         var checkboxes = document.getElementsByName('merchantCheckbox');
+        var merchants = [];
         for (var i = 0; i < checkboxes.length; i++) {
             if (checkboxes[i].checked) {
                 var value = checkboxes[i].value;
                 merchants.push(value);
             }
         }
+        if (merchants.length===0) {
+            $scope.alert='Please Choose one or more merchant';
+            return
+        }else if(($scope.start===undefined)||($scope.end===undefined)){
+            $scope.alert=' Range field is undefined '
+        }else if($scope.dt1===undefined){
+            $scope.alert=' From Field Is empty '
+        }
+
+        
+        
         var dt1=($scope.dt1).getTime();
         var dt2=($scope.dt2).getTime();
 
 
-        console.log(dt1,dt2);
+        $scope.showLoader2=true;
+        $scope.users=[];
         api.post('get-user-count', false, false, {
             category: $scope.category,
             merchant: merchants,
@@ -83,35 +99,6 @@ angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api,
         opened: false
     };
 
-    // var tomorrow = new Date();
-    // tomorrow.setDate(tomorrow.getDate() + 1);
-    // var afterTomorrow = new Date();
-    // afterTomorrow.setDate(tomorrow.getDate() + 1);
-    // $scope.events = [{
-    //     date: tomorrow,
-    //     status: 'full'
-    // }, {
-    //     date: afterTomorrow,
-    //     status: 'partially'
-    // }];
-
-    // function getDayClass(data) {
-    //     var date = data.date,
-    //         mode = data.mode;
-    //     if (mode === 'day') {
-    //         var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
-
-    //         for (var i = 0; i < $scope.events.length; i++) {
-    //             var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
-
-    //             if (dayToCheck === currentDay) {
-    //                 return $scope.events[i].status;
-    //             }
-    //         }
-    //     }
-
-    //     return '';
-    // }
     //date
 
 });

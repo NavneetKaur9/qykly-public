@@ -17,7 +17,7 @@
              </div>
              <div class="col-md-3">
                  <!-- range -->
-                   <label>Range:</label>
+                   <label>No.of tickets/orders:</label>
                 <div class="input-group input-group-sm">
                   <label class="input-group-addon" for="dataX">Start</label>
                   <input class="form-control" id="dataX" placeholder="start" type="number" ng-model="start">
@@ -82,16 +82,39 @@
              </div>
              <!-- /MERCHANT LIST -->
         </div>
-        <div class="col-md-10">
-            <!-- DATE -->
+        <div class="col-md-5">
+            
             <div ng-show="showLoader2" style="text-align:center">
                 <img src="assets/images/ajax-loader1.gif" /> Loading
             </div>
-            <ul ng-repeat="(key, value) in users">
-               {{key}} <li>{{value}}</li>
-            </ul>
+            <!-- Data -->
+            <table class="table table-bordered" ng-show="users.length">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Merchant</th>
+                          <th>No. Of Users</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="(key, value) in users">
+                          <th scope="row">{{$index+1}}</th>
+                          <td>{{value.merchantname}}</td>
+                          <td>{{value.count}}</td>
+                          
+                        </tr>
+                        
+                        
+                      </tbody>
+                    </table>
+            <!-- /Data -->
+            
 
         </div>
+        <!-- <div class="col-md-5">
+            Graphical representation
+        </div> -->
     </div>
 
 
@@ -102,6 +125,19 @@
         </i> 
     </back-top>
     <!-- BLOCK : SCROLL TOP -->
+      <!-- BLOCK 4: COMMON ALERT -->
+    <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
+        <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
+            <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
+                <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
+                </span>
+            </div>
+            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" ng-hide="parseSmsResult.output.length">
+                {{alert}}
+            </div>
+        </div>
+    </div>
+    <!-- BLOCK 4: COMMON ALERT -->
 
 </div>
 
