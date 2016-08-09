@@ -259,4 +259,79 @@ $scope.bankByCreditCard();
     };
 $scope.bank();
 
+//debit-transaction
+  var debitTemp = [];
+  var debitCols = [];
+  var debitRows = [];
+
+$scope.bankBydebiitTransaction = function(){
+   $http({
+            method: 'GET',
+            url: url + 'get-bank-by-debit-transaction',
+            headers: {
+                  Accept: "application/json",
+                  Authorization: $cookieStore.get('c2cCookie')
+            },
+            error: function(err) {
+                $scope.alert = err.responseJSON.message; // body...
+            }
+        }).then(function successCallback(response) {
+             var log = [];
+   debitCols.push( {"id": "month","label": "Month","type": "string","p": {}});
+   angular.forEach(response.data.data[0], function(value, key) {
+      for (var i = value.length - 1; i >= 0; i--) {
+                  var tempArr = [];
+                  var newTempArrLocal = {};
+                //cols
+                if(debitCols.length < 10){  
+
+                debitCols.push({'id':"laptop-id","label": value[i]._id,"type": "number","p": {}});
+
+                 }
+                 //rows
+                   debitTemp.push({'v':value[i].count});
+                  if(debitTemp.length == value.length){
+                    debitTemp.splice(0, 0, {'v':key})
+                    newTempArrLocal['c'] = debitTemp;
+                    debitRows.push(newTempArrLocal);
+
+                    debitTemp = [];
+                    continue;
+                  }
+      }
+       
+    }, log);
+     
+        }, function errorCallback(response) {
+            console.log('Oops, Somethings went wrong.');
+        });
+
+    };
+ 
+$scope.bankBydebiitTransaction();
+ $scope.bankDebitTransactionObj = {
+  "type": "LineChart",
+  "displayed": false,
+  "data": {
+     "cols":debitCols,
+     "rows":debitRows
+  },
+  "options": {
+    "title": "Debit transactions",
+    "isStacked": "true",
+    "fill": 20,
+    "displayExactValues": true,
+    "vAxis": {
+      "title": "Debit transactions",
+      "gridlines": {
+        "count": 10
+      }
+    },
+    "hAxis": {
+      "title": "Amount"
+    }
+  },
+  "formatters": {}
+}
+
 });
