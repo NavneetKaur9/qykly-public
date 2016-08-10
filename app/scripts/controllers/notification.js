@@ -41,8 +41,9 @@ angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $ht
     $scope.currentPage = 1;
 
     $scope.assignedTextsList = function(pageno) { // This would fetch the data on page change.
-        
-    console.log(pageno);
+        //uncheck header checkbox 
+        $scope.selectAll = false;
+
         var searchParams = angular.isUndefined($scope.searchStr) ? "" : $scope.searchStr;
 
         $scope.assignedTexts = [];
@@ -261,4 +262,46 @@ angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $ht
         }
     };
     //end remove promotional messages
+
+    //all checked
+    $scope.checkAll = function () {
+        var checkedBoolVal = document.getElementById("selectAll").checked;
+        $('#selectAll').closest('table').find('td input:checkbox').prop('checked', checkedBoolVal);
+    };   
+
+    //update multiple status
+    $scope.updateMultipleSmsStatus = function(){
+        var selectedStatus = angular.isUndefined($scope.selectedStatus) ? "" : $scope.selectedStatus;
+        var texts = [];
+            if (selectedStatus == "") {
+                alert('Please select a status');
+                return;
+            }
+           $.each($(".messageCheckbox:checked"), function(index,value){
+                texts.push($(this).val());            
+            });
+
+           if(texts.length == 0){
+                alert("Please select sms");
+                return;
+           }
+                            var req = {
+                method: 'POST',
+                url: url + 'updateMultipleProcessingStatus',
+                data: {
+                    selectedStatus: selectedStatus,
+                    text: texts,
+                    token: token
+                }
+            }
+            $http(req).then(function successCallback(response) {
+                if (response.data) {
+                    $scope.alert = "Status updated successfully.";
+                    $('.alert-success').delay(3000).fadeOut();
+                    window.location.reload();
+                }
+            }, function errorCallback(response) {
+                console.log(response);
+            });
+    };
 });

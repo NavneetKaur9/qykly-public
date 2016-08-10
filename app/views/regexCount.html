@@ -12,6 +12,50 @@
         </div>
     </div>
     <!-- BLOCK 4: COMMON ALERT -->
+
+
+<!-- MERCHANTS -->
+    <div class="row">
+        <div class="col-md-2">
+              <div style="overflow:auto;height: 500px;">
+                    <a ng-repeat="(key,value) in merchants track by $index">
+                        <div class="mail_list">
+                            <div class="right" style="cursor:pointer;">
+                                <h3 ng-click="getData(value)">
+                                    {{value}}
+                                </h3>
+                            </div>
+                            
+                        </div>
+                    </a>
+                    
+                </div>
+        </div>
+    </div>
+<!-- MERCHANTS -->
+
+<!-- MSGTYPE -->
+    <div class="row">
+        <div class="col-md-2">
+             <div style="overflow:auto;height: 500px;">
+                    <a ng-repeat="(key,value) in msgtypes">
+                        <div class="mail_list">
+                            <div class="right" style="cursor:pointer;">
+                                <h3 ng-click="getData(value)">
+                                    {{value}}
+                                </h3>
+                            </div>
+                            
+                        </div>
+                    </a>
+                    
+                </div>
+        </div>
+    </div>
+<!-- MSGTYPE -->
+
+    <hr/>
+    <!-- ALL -->
     <div class="row">
         <div class="col-md-12 col-sm-12 ">
             <h4>
@@ -19,13 +63,13 @@
                     <input ng-model="search" id="search" class="" placeholder="Search" style="width:100%" />
                 </label>
             </h4>
-            <table class="table  jambo_table bulk_action" ng-show="dataset">  
+            <table class="table  jambo_table bulk_action" ng-show="dataset">
                 <thead>
                     <tr class="headings">
                         <th width="5%">
                             Merchant Name / Bank Name
                         </th>
-                        <th class="column-title" >
+                        <th class="column-title">
                             Address
                         </th>
                         <th class="column-title">
@@ -78,4 +122,5 @@
             </table>
         </div>
     </div>
+    <!-- ALL -->
 </div>

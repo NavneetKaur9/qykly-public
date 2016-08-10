@@ -5,8 +5,9 @@
  * @description
  * # loginCtrl
  * Controller of the sbAdminApp
- */
+ */ 
 angular.module('sbAdminApp').controller('loginCtrl', function($scope, $location, $http, $cookieStore, api) {
+	
 	$scope.login = function() {
 		if (!$scope.username) {
 			$scope.message = "please enter username";

@@ -28,8 +28,23 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 
             $scope.proc.getcodes();
             $scope.checkArray.push(value);
+        } else if ((index === -1) && (value === 'laterUse')) {
+
+            $scope.laterUse.getcodes();
+            $scope.checkArray.push(value);
+
         }
     };
+
+
+
+        api.get('get-codeCount', false, token, {}, function(err, response) {
+            if (err || response.error) {
+                $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
+            } else {
+                $scope.count = response;
+            }
+        });
 
     /*************************************************
                START :    UNPROCESSESD 
@@ -72,6 +87,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
             });
         }
     };
+    
     $scope.unProc.getcodes();
     /*************************************************
                 START :    NEWCODES 
@@ -158,20 +174,46 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
         }
     };
     /*************************************************
-                    START :    PENDING  
+                    START :    LATER USE
     *************************************************/
-    $scope.getPendingCodes = function() {
-        api.get('get-newCodes', false, token, {
-            start: start,
-            search: $scope.search_pendingCodes,
-            sortby: $scope.sortby
-        }, function(err, response) {
-            if (err || response.error) {
-                $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
-            } else {
-                $scope.pendingCodes = $scope.pendingCodes.concat(response);
-            }
-        });
+    $scope.laterUse = {
+        codes: [],
+        start: 0,
+        sortby: 'count',
+        searchCode: '',
+        getcodes: function() {
+            $scope.showLoader = true;
+            api.get('get-laterUseCodes', false, token, {
+                start: $scope.laterUse.start,
+                search: $scope.laterUse.searchCode,
+                sortby: $scope.laterUse.sortby
+            }, function(err, response) {
+                if (err || response.error) {
+                    $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
+                } else {
+                    $scope.showLoader = false;
+                    $scope.laterUse.codes = $scope.laterUse.codes.concat(response);
+                }
+            });
+        },
+        search: function() {
+            $scope.laterUse.codes = [];
+            $scope.laterUse.start = 0;
+            $scope.laterUse.getcodes();
+        },
+        showMore: function() {
+            $scope.laterUse.start++;
+            $scope.laterUse.getcodes();
+        },
+        sort: function() {
+            $scope.$watch('laterUse.sortby', function(value) {
+                $scope.laterUse.codes = [];
+                $scope.laterUse.sortby = value;
+                $scope.laterUse.start = 0;
+                $scope.laterUse.getcodes();
+
+            });
+        }
     };
 
     /************** GET SMS ********************/
@@ -186,7 +228,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
             $scope.currentPage = 1;
         }
         $scope.alert = 'loading............';
-        $scope.loadingMsg=true;
+        $scope.loadingMsg = true;
         api.get('get-messages', false, token, {
             address: code,
             status: status,
@@ -202,19 +244,16 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
                 $scope.tab = tab;
                 if (tab === 'unProc') {
                     $scope.unProc.messages = response.data;
-                    // $scope.unproc.totalCount=response.totalCount;
                 } else if (tab === 'new') {
                     $scope.new.messages = response.data;
-                    // $scope.new.totalCount=response.totalCount;
                 } else if (tab === 'proc') {
                     $scope.proc.messages = response.data;
-                    // $scope.proc.totalCount=response.totalCount;
+                } else if (tab === 'laterUse') {
+                    $scope.laterUse.messages = response.data;
                 }
-                // $scope.messages = response.data;
                 $scope.totalCount = response.totalCount;
-
                 $scope.loadingMsg = false;
-                $scope.alert=false;
+                $scope.alert = false;
             }
         });
     };
@@ -346,7 +385,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
         });
 
     };
-    $scope.laterUse = function() {
+    $scope.useLater = function() {
         $scope.addresses = [];
         var checkboxes = document.getElementsByName('blacklist');
         for (var i = 0; i < checkboxes.length; i++) {
