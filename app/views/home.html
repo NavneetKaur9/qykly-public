@@ -1,131 +1,133 @@
 <div ng-controller="homeCtrl">
-    
-
-     <div class="well">
-         <div class="row">
-             <div class="col-md-2">
-            <!-- select category -->
-                 <label> Select Category
+    <div class="well">
+        <div class="row">
+            <div class="col-md-2">
+                <!-- select category -->
+                <label> Select Category
                     <input type="hidden" ng-model="assignTo" value="{{selected}}" />
                     <select id="cat_select" class="form-control" tabindex="-1" ng-model="category" select2 ng-options="x for x in categories" placeholder="" style="width:150px" ng-change="getMerchants()">
                         <option value="">
                         </option>
                     </select>
-                   
                 </label>
-             <!-- /Select category -->
-             </div>
-             <div class="col-md-3">
-                 <!-- range -->
-                   <label>No.of tickets/orders:</label>
-                <div class="input-group input-group-sm">
-                  <label class="input-group-addon" for="dataX">Start</label>
-                  <input class="form-control" id="dataX" placeholder="start" type="number" ng-model="start">
-                <!-- </div>
+                <!-- /Select category -->
+            </div>
+            <div class="col-md-3">
+                <!-- range -->
+                <label ng-if="category==='travel' " >No.of tickets</label>
+                <label ng-if="category==='purchases'">No.of Orders</label>
+                <label ng-if="category==='credit-transaction' || category==='debit-transaction'">Amount Range</label>
+                <div class="input-group input-group-sm" ng-show="merchantName.length">
+                    <label class="input-group-addon" for="dataX">Start</label>
+                    <input class="form-control" id="dataX" placeholder="start" type="number" ng-model="start">
+                    <!-- </div>
                 <div class="input-group input-group-sm"> -->
-                   <label class="input-group-addon" for="dataX">End</label>
-                  <input class="form-control" id="dataX" placeholder="end" type="number" ng-model="end">
+                    <label class="input-group-addon" for="dataX">End</label>
+                    <input class="form-control" id="dataX" placeholder="end" type="number" ng-model="end">
                 </div>
-                 <!-- /range -->
-
-             </div>
-                 <!-- calender -->
-              <div class="col-md-3">
-              <label>From :</label> 
+                <!-- /range -->
+            </div>
+            <!-- calender -->
+            <div class="col-md-3">
+                <label>From :</label>
                 <p class="input-group">
-                <span class="input-group-btn">
+                    <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                   </span>
-                  <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="dt1" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                  
+                    <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="dt1" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                 </p>
-              </div>
-
-              <div class="col-md-3">
-              <label>To :</label> 
-                    <p class="input-group">
-                               <span class="input-group-btn">
+            </div>
+            <div class="col-md-3">
+                <label>To :</label>
+                <p class="input-group">
+                    <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                   </span>
-                  <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="dt2" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-                 </p>
-              </div>
-                 <!-- /calender -->
-
-             <div class="col-md-1"><label></label>
-                 <button class="" ng-click="getUserCount()">Submit</button>
-             </div>
-         </div>
-     </div>
-
-
+                    <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="dt2" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                </p>
+            </div>
+            <!-- /calender -->
+            <div class="col-md-1">
+                <label></label>
+                <button class="" ng-click="getUserCount()">Submit</button>
+            </div>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-md-2" >
-             <!-- MERCHANT LIST -->
-             <div ng-show="showLoader1">
+        <div class="col-md-2">
+            <!-- MERCHANT LIST -->
+            <div ng-show="showLoader1">
                 <img src="assets/images/ajax-loader.gif" /> Processing
-             </div>
-              <label ng-show="merchantName.length">Choose One or More Merchants :</label>
-              <div style="overflow:auto;height: 500px;">
-                <a ng-repeat="(key,value) in merchantName track by $index" href="javascript:void(0)">
+            </div>
+            <label ng-show="merchantName.length">Choose One or More Merchants :</label>
+            <!-- <input type="text" ng-model="q" placeholder="Search"> -->
+            <div style="overflow:auto;height: 500px;">
+                <a ng-repeat="(key,value) in merchantName |filter:q" href="javascript:void(0)">
                     <div class="mail_list">
                         <div class="left">
-                           <input type="checkbox" value="{{value}}" name="merchantCheckbox"  />
+                            <input type="checkbox" value="{{value}}" name="merchantCheckbox" />
                         </div>
-                        <div class="right" >
-                            
-                                {{value}}
+                        <div class="right">
+                            {{value}}
                         </div>
-                        
                     </div>
                 </a>
-             </div>
-             <!-- /MERCHANT LIST -->
+            </div>
+            <!-- /MERCHANT LIST -->
         </div>
         <div class="col-md-5">
-            
             <div ng-show="showLoader2" style="text-align:center">
                 <img src="assets/images/ajax-loader1.gif" /> Loading
             </div>
             <!-- Data -->
             <table class="table table-bordered" ng-show="users.length">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Merchant</th>
-                          <th>No. Of Users</th>
-                          
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr ng-repeat="(key, value) in users">
-                          <th scope="row">{{$index+1}}</th>
-                          <td>{{value.merchantname}}</td>
-                          <td>{{value.count}}</td>
-                          
-                        </tr>
-                        
-                        
-                      </tbody>
-                    </table>
-            <!-- /Data -->
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Merchant</th>
+                        <th>No. Of Users</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(key, value) in users">
+                        <th scope="row">{{$index+1}}</th>
+                        <td>{{value.merchantname}}</td>
+                        <td>{{value.count}}</td>
+                    </tr>
+                </tbody>
+            </table>
             
-
+             <table class="table table-bordered" ng-show="bankUsers.length">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Merchant</th>
+                        <th>No. Of Users</th>
+                        <th>No. of transactions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(key, value) in bankUsers">
+                        <th scope="row">{{$index+1}}</th>
+                        <td>{{value.merchantname}}</td>
+                        <td>{{value.user}}</td>
+                        <td>{{value.count}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- /Data -->
         </div>
         <!-- <div class="col-md-5">
             Graphical representation
         </div> -->
     </div>
-
-
-
     <!-- BLOCK : SCROLL TOP -->
     <back-top scroll-speed=1500 button-theme="dark">
         <i class="fa fa-angle-double-up">
-        </i> 
+        </i>
     </back-top>
     <!-- BLOCK : SCROLL TOP -->
-      <!-- BLOCK 4: COMMON ALERT -->
+    <!-- BLOCK 4: COMMON ALERT -->
     <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
         <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
             <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
@@ -138,6 +140,4 @@
         </div>
     </div>
     <!-- BLOCK 4: COMMON ALERT -->
-
 </div>
-

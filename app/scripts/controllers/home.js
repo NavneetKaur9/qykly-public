@@ -4,16 +4,18 @@
  */
 angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api, $window, $cookieStore) {
     $window.scrollTo(0, 0);
-$scope.closeAlert = function() {
+    
+    $scope.closeAlert = function() {
         $scope.alert = false;
     };
-    api.get('get-category', false, false, false, function(err, response) {
-        if (err) {
-            $scope.alert = response.message;
-        } else {
-            $scope.categories = response.category;
-        }
-    });
+    $scope.categories=['travel','purchases','credit-transaction','debit-transaction'];
+    // api.get('get-category', false, false, false, function(err, response) {
+    //     if (err) {
+    //         $scope.alert = response.message;
+    //     } else {
+    //         $scope.categories = response.category;
+    //     }
+    // });
 
     $scope.getMerchants = function() {
         $scope.users=[];
@@ -62,14 +64,18 @@ $scope.closeAlert = function() {
             merchant: merchants,
             range: [$scope.start, $scope.end],
             date: [dt1, dt2]
-
         }, function(err, response) {
+
             if (err) {
                 $scope.alert = response.message;
-            } else {
+            } else if(($scope.category==="travel")||($scope.category==="purchases")){
+
                 $scope.users = response.result;
                 $scope.showLoader2=false;
                 
+            }else if(($scope.category==="credit-transaction")||($scope.category==="debit-transaction")){
+$scope.bankUsers = response.result;
+                $scope.showLoader2=false;
             }
         });
     };

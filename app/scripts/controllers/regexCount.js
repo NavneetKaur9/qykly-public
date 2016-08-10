@@ -19,15 +19,7 @@ angular.module('sbAdminApp').controller('regexCountCtrl', function($scope, $http
 		$scope.alert = false;
 	};
 	
-	// $scope.sortType = 'saveTime';
-	// $scope.sortReverse = false;
-	// $scope.order = function(sortType) {
-	// 	$scope.sortReverse = ($scope.sortType === sortType) ? !$scope.sortReverse : false;
-	// 	$scope.sortType = sortType;
-	// };
-
-	// app.route('/api2/get-msgtype')
-		// .get(regexes.getMsgType);
+	
 	api.get('get-msgtype', false, false, false, function(err, response) {
 		if (err) {
 			$scope.alert = response.message;
@@ -36,14 +28,19 @@ angular.module('sbAdminApp').controller('regexCountCtrl', function($scope, $http
 			$scope.msgtypes = response;
 		}
 	});
-	// app.route('/api2/get-merchantName')
-		// .get(regexes.getMerchantOrBankName);
 	api.get('get-merchantName', false, false, false, function(err, response) {
 		if (err) {
 			$scope.alert = response.message;
 		} else {
 			$scope.alert = false;
-			$scope.merchants = response;
+			$scope.merchants = response[1];
+			$scope.banks = response[0];
+
 		}
 	});
+	$scope.getData=function (value) {
+		console.log(value);
+	// http://localhost:3000/api2/get-data-of-merchant?bankName=ICICI
+	};
+
 });
