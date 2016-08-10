@@ -2,7 +2,7 @@
 /**
  * 
  */
-angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $http, api, $cookieStore, DTOptionsBuilder, DTColumnBuilder, $filter, $window, $compile) {
+angular.module('sbAdminApp',['ngAnimate', 'ui.bootstrap']).controller('notificationCtrl', function($scope, $http, api, $cookieStore, DTOptionsBuilder, DTColumnBuilder, $filter, $window, $compile,$timeout) {
     var token = $cookieStore.get('c2cCookie');
     var url = api.addr();
     // $scope.update = function(sms, status) {
@@ -304,4 +304,22 @@ angular.module('sbAdminApp').controller('notificationCtrl', function($scope, $ht
                 console.log(response);
             });
     };
+    //loader
+     $("#parseMsgProgressBar").hide();
+    // $scope.parse = function(){
+    //     $scope.max = 100;
+    //     $scope.data = { progress : 0 };
+
+    //      (function progress(){
+    //     if($scope.data.progress < 100){
+    //         $timeout(function(){
+    //             $scope.data.progress += 1;
+    //             progress();
+    //         },200);
+    //     }
+    //     })();
+
+    //     $("#parseMsgProgressBar").show();
+    // };
+    //loader
 });

@@ -5,6 +5,15 @@
                    <div class="title_left">
             <h3>Assigned Messages</h3>
         </div>
+
+
+<!--progress bar -->
+
+    <div class="row" id="parseMsgProgressBar">
+        <div class="col-sm-12"><uib-progressbar class="progress-striped active" max="max" value="data.progress" type="success"><i>{{data.progress}} / {{max}}</i></uib-progressbar></div>
+    </div>
+
+<!--progress bar -->
            <!--  <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <form ng-submit=assignedTextsList(pageno)>
