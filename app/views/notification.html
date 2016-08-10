@@ -1,16 +1,19 @@
 <div ng-controller="notificationCtrl">
     <div class="row">
-        <div class="col-md-12 col-sm-12 ">
-            <!-- <h4>
-                <label for="search">
-                   
-                    <input ng-model="search" id="search" class="" placeholder="Search" style="width:100%" />
-                </label>
-            </h4> -->
-            <div class="page-title">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="page-title">
                    <div class="title_left">
             <h3>Assigned Messages</h3>
         </div>
+
+
+<!--progress bar -->
+
+    <div class="row" id="parseMsgProgressBar">
+        <div class="col-sm-12"><uib-progressbar class="progress-striped active" max="max" value="data.progress" type="success"><i>{{data.progress}} / {{max}}</i></uib-progressbar></div>
+    </div>
+
+<!--progress bar -->
            <!--  <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <form ng-submit=assignedTextsList(pageno)>
@@ -24,6 +27,43 @@
                 </div>
               </div> -->
             </div>
+            <div class="x_panel">
+                <div class="x_content">
+                    <br />
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" class="form-inline" ng-submit="updateMultipleSmsStatus()">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Status 
+<!--                                             <span class="required">*</span>
+ -->                                        </label>
+                                        <div class="col-md-9 col-sm-5 col-xs-12">                            
+                                            <select class="form-control" ng-model="selectedStatus">
+                                                <option ng-repeat="status in statuses" value="{{status.value}}">{{status.text}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <!-- <h4>
+                <label for="search">
+                   
+                    <input ng-model="search" id="search" class="" placeholder="Search" style="width:100%" />
+                </label>
+            </h4> -->
+            
             <div class="clearfix"></div>
     <div class="alert alert-success" ng-show="alert">
     {{alert}}
@@ -34,6 +74,7 @@
                     <th>
                         #
                     </th>
+                    <th><input type="checkbox" ng-model="selectAll" id="selectAll" ng-click="checkAll()" /></th>
                     <th>
                         <div href ng-click="order('address')" style="cursor:pointer">
                             Address
@@ -85,6 +126,7 @@
                         <td>
                             {{itemsPerPage *(currentPage-1)+$index+1}}
                         </td>
+                        <td><input type="checkbox" value="{{sms._id}}" class="messageCheckbox"></td>
                         <td>
                             {{sms.address}}
                         </td>
