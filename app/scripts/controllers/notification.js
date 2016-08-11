@@ -322,7 +322,7 @@ angular.module('sbAdminApp',['ngAnimate', 'ui.bootstrap']).controller('notificat
                 }
             }
             $scope.alert = response.count + ' message parsesd with ' + response.shortcode;
-            $('.alert-warning').delay(3000).fadeOut();
+            $('.alert-success').delay(2000).fadeOut();
         }
     });
 

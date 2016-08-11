@@ -121,7 +121,7 @@
                     <th width=5%>Action</th>
                 </thead>
                 <tbody>
-                    <tr ng-show="assignedTexts.length <= 0"><td colspan="7" style="text-align:center;">Loading new data!!</td></tr>
+                    <tr ng-show="assignedTexts.length <= 0"><td colspan="8" style="text-align:center;">Loading new data!!</td></tr>
                     <tr dir-paginate="sms in assignedTexts|itemsPerPage:itemsPerPage|filter:search" total-items="total_count">
                         <td>
                             {{itemsPerPage *(currentPage-1)+$index+1}}
