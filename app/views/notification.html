@@ -67,6 +67,10 @@
             <div class="clearfix"></div>
     <div class="alert alert-success" ng-show="alert">
     {{alert}}
+    <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
+                <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
+                </span>
+            </div>
     </div>
        
             <table id="notification_tbl" class="table table-striped jambo_table " ng-show="msgAssigned.length">

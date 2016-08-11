@@ -18,9 +18,9 @@ angular.module('sbAdminApp',['ngAnimate', 'ui.bootstrap']).controller('notificat
     // 		}
     // 	});
     // };
-    // $scope.closeAlert = function(argument) {
-    // 	$scope.alert = false;
-    // };
+    $scope.closeAlert = function(argument) {
+    	$scope.alert = false;
+    };
     // $scope.alert = '  loading.........';
     // api.post('get-assigned-msgs', false, token, {}, function(err, response) {
     // 	if (err) {
@@ -322,7 +322,7 @@ angular.module('sbAdminApp',['ngAnimate', 'ui.bootstrap']).controller('notificat
                 }
             }
             $scope.alert = response.count + ' message parsesd with ' + response.shortcode;
-            $('.alert-success').delay(2000).fadeOut();
+            // $('.alert-success').delay(2000).fadeOut();
         }
     });
 
