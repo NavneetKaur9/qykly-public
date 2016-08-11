@@ -12,115 +12,141 @@
         </div>
     </div>
     <!-- BLOCK 4: COMMON ALERT -->
-
-
-<!-- MERCHANTS -->
     <div class="row">
-        <div class="col-md-2">
-              <div style="overflow:auto;height: 500px;">
+        <!-- BANKNAME -->
+        <div class="col-md-4">
+            Bank Name :
+            <input type="hidden" ng-model="assignTo" value="{{selected}}" />
+            <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x for x in banks" placeholder="Assign To" style="width:150px">
+                <option value="">
+                </option>
+            </select>
+        </div>
+        <!-- BANKNAME -->
+        <!-- MERCHANTS -->
+        <div class="col-md-4">
+            Merchant Name :
+            <input type="hidden" ng-model="assignTo" value="{{selected}}" />
+            <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x for x in merchants" placeholder="Assign To" style="width:150px">
+                <option value="">
+                </option>
+            </select>
+            <!-- <div style="overflow:auto;height: 500px;">
                     <a ng-repeat="(key,value) in merchants track by $index">
                         <div class="mail_list">
                             <div class="right" style="cursor:pointer;">
                                 <h3 ng-click="getData(value)">
                                     {{value}}
                                 </h3>
+                                <h3 ng-click="getData(value)" ng-if="(value===' ')||(value==='')">
+                                    Undefined
+                                </h3>
+
                             </div>
                             
                         </div>
                     </a>
                     
-                </div>
+                </div> -->
         </div>
-    </div>
-<!-- MERCHANTS -->
-
-<!-- MSGTYPE -->
-    <div class="row">
-        <div class="col-md-2">
-             <div style="overflow:auto;height: 500px;">
+        <!-- MERCHANTS -->
+        <!-- MSGTYPE -->
+        <div class="col-md-4">
+            MsgType :
+            <input type="hidden" ng-model="assignTo" value="{{selected}}" />
+            <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x for x in msgtypes" placeholder="Assign To" style="width:150px">
+                <option value="">
+                </option>
+            </select>
+            <!--  <div style="overflow:auto;height: 500px;">
                     <a ng-repeat="(key,value) in msgtypes">
                         <div class="mail_list">
                             <div class="right" style="cursor:pointer;">
                                 <h3 ng-click="getData(value)">
                                     {{value}}
                                 </h3>
+                                <h3 ng-click="getData(value)" ng-if="(value===' ')||(value==='')">
+                                    Undefined
+                                </h3>
                             </div>
                             
                         </div>
                     </a>
                     
-                </div>
+                </div> -->
         </div>
+        <!-- MSGTYPE -->
     </div>
-<!-- MSGTYPE -->
 
-    <hr/>
-    <!-- ALL -->
-    <div class="row">
-        <div class="col-md-12 col-sm-12 ">
-            <h4>
+
+
+    <hr>
+        <!-- ALL -->
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <h4>
                 <label for="search">
                     <input ng-model="search" id="search" class="" placeholder="Search" style="width:100%" />
                 </label>
             </h4>
-            <table class="table  jambo_table bulk_action" ng-show="dataset">
-                <thead>
-                    <tr class="headings">
-                        <th width="5%">
-                            Merchant Name / Bank Name
-                        </th>
-                        <th class="column-title">
-                            Address
-                        </th>
-                        <th class="column-title">
-                            msgtype
-                        </th>
-                        <th class="column-title">
-                            count
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="even pointer" ng-repeat="(key, value) in dataset|filter:search">
-                        <td class="a-center ">
-                            {{value.merchant}}
-                        </td>
-                        <td>
-                            <table class="table ">
-                                <tbody>
-                                    <tr ng-repeat="(key, value) in value.data">
-                                        <td>
-                                            {{value.address}}
-                                        </td>
-                                        <td>
-                                            <table class="table ">
-                                                <tbody>
-                                                    <tr ng-repeat="(key, value) in value.aData">
-                                                        <td>
-                                                            {{value.msgtype}}
-                                                        </td>
-                                                        <td>
-                                                            {{value.count}}
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </td>
-                        <!--
+                <table class="table  jambo_table bulk_action" ng-show="dataset">
+                    <thead>
+                        <tr class="headings">
+                            <th width="5%">
+                                Merchant Name / Bank Name
+                            </th>
+                            <th class="column-title">
+                                Address
+                            </th>
+                            <th class="column-title">
+                                msgtype
+                            </th>
+                            <th class="column-title">
+                                count
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="even pointer" ng-repeat="(key, value) in dataset|filter:search">
+                            <td class="a-center ">
+                                {{value.merchant}}
+                            </td>
+                            <td>
+                                <table class="table ">
+                                    <tbody>
+                                        <tr ng-repeat="(key, value) in value.data">
+                                            <td>
+                                                {{value.address}}
+                                            </td>
+                                            <td>
+                                                <table class="table ">
+                                                    <tbody>
+                                                        <tr ng-repeat="(key, value) in value.aData">
+                                                            <td>
+                                                                {{value.msgtype}}
+                                                            </td>
+                                                            <td>
+                                                                {{value.count}}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <!--
                             <td ng-repeat="(key, value) in value.data">
                                 {{value.address}}
                                 {{value.count}}
                                 {{value.msgtype}}
                             </td>
                         -->
-                    </tr>
-                </tbody>
-            </table>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <!-- ALL -->
     </div>
-    <!-- ALL -->
-</div>
