@@ -18,8 +18,7 @@ app/tests/coverage/
 .idea/
 coverage/
 
-app/scripts/services/
-dist/scripts/services/
+
 
 
 
