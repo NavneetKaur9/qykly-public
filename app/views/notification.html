@@ -10,7 +10,7 @@
 <!--progress bar -->
 
     <div class="row" id="parseMsgProgressBar">
-        <div class="col-sm-12"><uib-progressbar class="progress-striped active" max="max" value="data.progress" type="success"><i>{{data.progress}} / {{max}}</i></uib-progressbar></div>
+        <div class="col-sm-12"><uib-progressbar class="progress-striped active" max="max" value="data.progress" type="success"><i>{{data.progress}}%</i></uib-progressbar></div>
     </div>
 
 <!--progress bar -->
@@ -155,7 +155,7 @@
                                 <button ng-click="update(sms,'Pending')">
                                     P
                                 </button> -->
-                                <button ng-click="parse(sms)">
+                                <button ng-click="parse(sms,$index)">
                                     Parse message
                                 </button>
 

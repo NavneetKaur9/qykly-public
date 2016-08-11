@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 /**
  * 
  */
@@ -119,18 +119,18 @@ angular.module('sbAdminApp',['ngAnimate', 'ui.bootstrap']).controller('notificat
         $scope.sortReverse = ($scope.sortType === sortType) ? !$scope.sortReverse : false;
         $scope.sortType = sortType;
     };
-    $scope.parse = function(sms) {
-        api.post('parsemessage', false, token, {
-            message: sms._id,
-            shortcode: sms.address
-        }, function(err, response) {
-            if (err) {
-                $scope.alert = response.message
-            } else {
-                $scope.alert = response.count + ' message parsesd with ' + response.shortcode;
-            }
-        });
-    };
+    // $scope.parse = function(sms) {
+    //     api.post('parsemessage', false, token, {
+    //         message: sms._id,
+    //         shortcode: sms.address
+    //     }, function(err, response) {
+    //         if (err) {
+    //             $scope.alert = response.message
+    //         } else {
+    //             $scope.alert = response.count + ' message parsesd with ' + response.shortcode;
+    //         }
+    //     });
+    // };
     /**************************************
      *          datatables
      ***************************************/
@@ -306,20 +306,41 @@ angular.module('sbAdminApp',['ngAnimate', 'ui.bootstrap']).controller('notificat
     };
     //loader
      $("#parseMsgProgressBar").hide();
-    // $scope.parse = function(){
-    //     $scope.max = 100;
-    //     $scope.data = { progress : 0 };
+    $scope.parse = function(sms, index) {
 
-    //      (function progress(){
-    //     if($scope.data.progress < 100){
-    //         $timeout(function(){
-    //             $scope.data.progress += 1;
-    //             progress();
-    //         },200);
-    //     }
-    //     })();
+    api.post('parsemessage', false, token, {
+        message: sms._id,
+        shortcode: sms.address
+    }, function(err, response) {
+        if (err) {
+            $scope.alert = response.message
+        } else {
+            $("#parseMsgProgressBar").hide();
+            if (response.count === 1) {
+                if (index !== -1) {
+                    $scope.assignedTexts.splice(index, 1);
+                }
+            }
+            $scope.alert = response.count + ' message parsesd with ' + response.shortcode;
+            $('.alert-warning').delay(3000).fadeOut();
+        }
+    });
 
-    //     $("#parseMsgProgressBar").show();
-    // };
+    $scope.max = 100;
+    $scope.data = {
+        progress: 0
+    };
+
+    (function progress() {
+        if ($scope.data.progress < 100) {
+            $timeout(function() {
+                $scope.data.progress += 1;
+                progress();
+            }, 100);
+        }
+    })();
+
+    $("#parseMsgProgressBar").show();
+ };
     //loader
 });
