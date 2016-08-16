@@ -18,9 +18,9 @@ angular.module('sbAdminApp',['ngAnimate', 'ui.bootstrap']).controller('notificat
     // 		}
     // 	});
     // };
-    // $scope.closeAlert = function(argument) {
-    // 	$scope.alert = false;
-    // };
+    $scope.closeAlert = function(argument) {
+    	$scope.alert = false;
+    };
     // $scope.alert = '  loading.........';
     // api.post('get-assigned-msgs', false, token, {}, function(err, response) {
     // 	if (err) {
@@ -43,7 +43,7 @@ angular.module('sbAdminApp',['ngAnimate', 'ui.bootstrap']).controller('notificat
     $scope.assignedTextsList = function(pageno) { // This would fetch the data on page change.
         //uncheck header checkbox 
         $scope.selectAll = false;
-
+        $scope.showLoadMsg = true;
         var searchParams = angular.isUndefined($scope.searchStr) ? "" : $scope.searchStr;
 
         $scope.assignedTexts = [];
@@ -53,18 +53,24 @@ angular.module('sbAdminApp',['ngAnimate', 'ui.bootstrap']).controller('notificat
             headers: {
                 // Accept: "application/json",
                 Authorization: $cookieStore.get('c2cCookie')
-            }
-            // params: {
-            //                  searchParams: searchParams,
-            //              }
+            },
+            params: {
+                             searchParams: searchParams,
+                         }
         }
         $http(req).success(function(response) {
             $scope.assignedTexts = response.data; //ajax request to fetch data into vm.data
             $scope.total_count = response.total_count;
             $scope.currentPage = pageno;
 
+            if($scope.total_count == 0){
+                $scope.showLoadMsg = false;
+                $scope.showNoData = true;
+            }
+
             //xeditable update status
             if ($scope.assignedTexts.length > 0) {
+                $scope.showLoadMsg = false;
                 setTimeout(function() {
                     $("#notification_tbl").find('td.anchor_xeditable').each(function(index) {
                         var anchor = $(this).children('a');
@@ -322,7 +328,7 @@ angular.module('sbAdminApp',['ngAnimate', 'ui.bootstrap']).controller('notificat
                 }
             }
             $scope.alert = response.count + ' message parsesd with ' + response.shortcode;
-            $('.alert-warning').delay(3000).fadeOut();
+            // $('.alert-success').delay(2000).fadeOut();
         }
     });
 

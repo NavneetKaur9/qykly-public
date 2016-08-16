@@ -14,18 +14,18 @@
     </div>
 
 <!--progress bar -->
-           <!--  <div class="title_right">
+            <div class="title_right">
                 <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
                 <form ng-submit=assignedTextsList(pageno)>
                   <div class="input-group">
-                    <input type="text" ng-model="searchStr" placeholder="Search for..." class="form-control">
+                    <input type="text" ng-model="searchStr" placeholder="Search..." class="form-control">
                     <span class="input-group-btn">
                       <button type="submit" class="btn btn-default">Go!</button>
                     </span>
                   </div>
                   </form>
                 </div>
-              </div> -->
+              </div>
             </div>
             <div class="x_panel">
                 <div class="x_content">
@@ -67,6 +67,10 @@
             <div class="clearfix"></div>
     <div class="alert alert-success" ng-show="alert">
     {{alert}}
+    <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
+                <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
+                </span>
+            </div>
     </div>
        
             <table id="notification_tbl" class="table table-striped jambo_table " ng-show="msgAssigned.length">
@@ -121,7 +125,8 @@
                     <th width=5%>Action</th>
                 </thead>
                 <tbody>
-                    <tr ng-show="assignedTexts.length <= 0"><td colspan="7" style="text-align:center;">Loading new data!!</td></tr>
+                    <tr ng-show="showLoadMsg"><td colspan="8" style="text-align:center;">Loading new data!!</td></tr>
+                    <tr ng-show="showNoData"><td colspan="8" style="text-align:center;">No data!!</td></tr>
                     <tr dir-paginate="sms in assignedTexts|itemsPerPage:itemsPerPage|filter:search" total-items="total_count">
                         <td>
                             {{itemsPerPage *(currentPage-1)+$index+1}}
