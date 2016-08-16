@@ -1,0 +1,78 @@
+<div ng-controller="todayCtrl">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>App Users</h2>
+                </div>
+                <div class="x_content">
+
+                    <div class="row">
+                        <!-- calender -->
+                        <div class="col-md-4">
+
+                            <label>From :  </label>
+                            <p class="input-group">
+                                    <span class="input-group-btn">
+                                       <button type="button" class="btn btn-default" ng-click="open1()">
+                                           <i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                    <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy"
+                                           ng-model="dt1" is-open="popup1.opened" datepicker-options="dateOptions"
+                                           ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
+
+
+                                </p>
+                        </div>
+                        <div class="col-md-4">
+                            <label>To :</label>
+                            <p class="input-group">
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open2()"><i
+                            class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                                <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy"
+                                       ng-model="dt2" is-open="popup2.opened" datepicker-options="dateOptions"
+                                       ng-required="true" close-text="Close"/>
+                            </p>
+                        </div>
+                        <!-- /calender -->
+                        <div class="col-md-1">
+                            <label></label>
+                            <button class="" ng-click="getTodaysUser()">Submit</button>
+                        </div>
+                    </div>
+                    <div ng-show="showLoader" style="text-align:center;">
+                            <img src="assets/images/ajax-loader.gif"/> Loading data.....
+                    </div>
+                    <div ng-show="appUsers.length<=0 && !showLoader" style="text-align:center;">
+                        No users Found
+                    </div>
+                    <table class="table table-bordered" ng-show="appUsers.length">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>User Email</th>
+                            <th>Unprocessed Codes</th>
+                            <th>New Code</th>
+                            <th>Processed Codes</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        <tr ng-repeat="(key,value) in appUsers">
+                            <th scope="row">{{$index+1}}</th>
+                            <td>{{value.user}}</td>
+                            <td>{{value.userUnprocessedCodes}}</td>
+                            <td>{{value.newCodes}}</td>
+                            <td>{{value.userProcessedCodes}}</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
