@@ -236,7 +236,7 @@ $scope.bankByCreditCard();
                 var tempArr = [];
                 var newTempArr = {};
 
-                tempArr.push({'v':bankData[i]._id},{'v':bankData[i].count});
+                tempArr.push({'v':bankData[i]._id},{'v':bankData[i].count},{v:'#e2431e'});
                 newTempArr['c'] = tempArr;
                 allBankGraphData.push(newTempArr);
             }
@@ -252,7 +252,8 @@ $scope.bankByCreditCard();
 
     $scope.chartObjectThree.data = {"cols": [
         {id: "t", label: "Bank", type: "string"},
-        {id: "s", label: "No of users", type: "number"}
+        {id: "s", label: "No of users", type: "number"},
+        {role: "style", type: "string"}
     ], "rows": allBankGraphData};
     $scope.chartObjectThree.options = {
         'title': 'Bank accounts'

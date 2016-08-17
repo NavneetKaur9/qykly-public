@@ -39,54 +39,65 @@
                 </div>
             </div>
         </div><!--- /row -->
-       
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <form ng-submit=assignedTextsList(pageno)>
+                  <div class="input-group">
+                    <input type="text" ng-model="searchStr" placeholder="Search..." class="form-control">
+                    <span class="input-group-btn">
+                      <button type="submit" class="btn btn-default">Go!</button>
+                    </span>
+                  </div>
+                  </form>
+                </div>
+              </div>
             <table id="notification_tbl" class="table table-striped jambo_table " ng-show="msgAssigned.length">
                 <thead>
                     <th>
                         #
                     </th>
                      <th width="10%">
-                        <div href ng-click="order('address')" style="cursor:pointer">
+                        <div href ng-click="order('assignedTo')" style="cursor:pointer">
                             Assinee Name
-                            <span  class="fa fa-caret-down" ng-show="sortType == 'address' && sortReverse">
+                            <span  class="glyphicon glyphicon-triangle-bottom" ng-show="sortBy == 'assignedTo' && sortReverse">
                             </span>
-                            <span  class="fa fa-caret-up" ng-show="sortType == 'address' && !sortReverse">
+                            <span  class="glyphicon glyphicon-triangle-top" ng-show="sortBy == 'assignedTo' && !sortReverse">
                             </span>
                         </div>
                     </th>
-                    <th>
+                    <th width="10%">
                         <div href ng-click="order('address')" style="cursor:pointer">
                             Address
-                            <span  class="fa fa-caret-down" ng-show="sortType == 'address' && sortReverse">
+                            <span  class="glyphicon glyphicon-triangle-bottom" ng-show="sortBy == 'address' && sortReverse">
                             </span>
-                            <span  class="fa fa-caret-up" ng-show="sortType == 'address' && !sortReverse">
+                            <span  class="glyphicon glyphicon-triangle-top" ng-show="sortBy == 'address' && !sortReverse">
                             </span>
                         </div>
                     </th>
                     <th>
-                        <div href ng-click="order('text')" style="cursor:pointer">
-                            Text
-                            <span  class="fa fa-caret-down" ng-show="sortType == 'text' && sortReverse">
+<!--                         <div href ng-click="order('text')" style="cursor:pointer">
+ -->                            Text
+                           <!--  <span  class="glyphicon glyphicon-triangle-bottom" ng-show="sortBy == 'text' && sortReverse">
                             </span>
-                            <span  class="fa fa-caret-up" ng-show="sortType == 'text' && !sortReverse">
+                            <span  class="glyphicon glyphicon-triangle-top" ng-show="sortBy == 'text' && !sortReverse">
+                            </span>
+                        </div> -->
+                    </th>
+                    <th width="10%">
+                        <div  ng-click="order('saveTime')" style="cursor:pointer">
+                            Save Time
+                            <span  class="glyphicon glyphicon-triangle-bottom" ng-show="sortBy == 'saveTime' && sortReverse">
+                            </span>
+                            <span  class="glyphicon glyphicon-triangle-top" ng-show="sortBy == 'saveTime' && !sortReverse">
                             </span>
                         </div>
                     </th>
                     <th width="10%">
-                        <div  ng-click="order('saveTime')" style="cursor:pointer">
-                            Assign Time
-                            <span  class="fa fa-caret-down" ng-show="sortType == 'saveTime' && sortReverse">
-                            </span>
-                            <span  class="fa fa-caret-up" ng-show="sortType == 'saveTime' && !sortReverse">
-                            </span>
-                        </div>
-                    </th>
-                    <th width="10%">
-                        <div  ng-click="order('saveTime')" style="cursor:pointer">
+                        <div  ng-click="order('processingStatus')" style="cursor:pointer">
                             Status
-                            <span  class="fa fa-caret-down" ng-show="sortType == 'saveTime' && sortReverse">
+                            <span  class="glyphicon glyphicon-triangle-bottom" ng-show="sortBy == 'processingStatus' && sortReverse">
                             </span>
-                            <span  class="fa fa-caret-up" ng-show="sortType == 'saveTime' && !sortReverse">
+                            <span  class="glyphicon glyphicon-triangle-top" ng-show="sortBy == 'processingStatus' && !sortReverse">
                             </span>
                         </div>
                     </th>
@@ -107,7 +118,7 @@
                             {{sms._id}}
                         </td>
                         <td>
-                            {{sms.assignTime |date:'medium'}}
+                            {{sms.saveTime |date:'medium'}}
                         </td>
                        <!--  <td>
                             {{sms.saveTime |date:'MMM d, y h:mm a'}}

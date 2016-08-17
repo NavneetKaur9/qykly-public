@@ -80,38 +80,32 @@
                     </th>
                     <th><input type="checkbox" ng-model="selectAll" id="selectAll" ng-click="checkAll()" /></th>
                     <th>
-                        <div href ng-click="order('address')" style="cursor:pointer">
+                         <div href ng-click="order('address')" style="cursor:pointer">
                             Address
-                            <span  class="fa fa-caret-down" ng-show="sortType == 'address' && sortReverse">
+                            <span  class="glyphicon glyphicon-triangle-bottom" ng-show="sortBy == 'address' && sortReverse">
                             </span>
-                            <span  class="fa fa-caret-up" ng-show="sortType == 'address' && !sortReverse">
+                            <span  class="glyphicon glyphicon-triangle-top" ng-show="sortBy == 'address' && !sortReverse">
                             </span>
                         </div>
                     </th>
                     <th>
-                        <div href ng-click="order('text')" style="cursor:pointer">
-                            Text
-                            <span  class="fa fa-caret-down" ng-show="sortType == 'text' && sortReverse">
+<!--                         <div href ng-click="order('text')" style="cursor:pointer">
+ -->                            Text
+<!--                             <span  class="fa fa-caret-down" ng-show="sortType == 'text' && sortReverse">
                             </span>
                             <span  class="fa fa-caret-up" ng-show="sortType == 'text' && !sortReverse">
                             </span>
-                        </div>
+                        </div> -->
                     </th>
                     <th width="10%">
-                        <div  ng-click="order('time')" style="cursor:pointer">
                             Msg Time
-                            <span  class="fa fa-caret-down" ng-show="sortType == 'time' && sortReverse">
-                            </span>
-                            <span  class="fa fa-caret-up" ng-show="sortType == 'time' && !sortReverse">
-                            </span>
-                        </div>
                     </th>
-                    <th width="10%">
+                   <th width="10%">
                         <div  ng-click="order('saveTime')" style="cursor:pointer">
                             Save Time
-                            <span  class="fa fa-caret-down" ng-show="sortType == 'saveTime' && sortReverse">
+                            <span  class="glyphicon glyphicon-triangle-bottom" ng-show="sortBy == 'saveTime' && sortReverse">
                             </span>
-                            <span  class="fa fa-caret-up" ng-show="sortType == 'saveTime' && !sortReverse">
+                            <span  class="glyphicon glyphicon-triangle-top" ng-show="sortBy == 'saveTime' && !sortReverse">
                             </span>
                         </div>
                     </th>
