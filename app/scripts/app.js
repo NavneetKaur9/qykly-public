@@ -225,5 +225,17 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
         });
       }
     }
+  }).state('dashboard.today', {
+    url: '/today',
+    templateUrl: 'views/today.html',
+    controller: 'todayCtrl',
+    resolve: {
+      loadMyFile: function($ocLazyLoad) {
+        return $ocLazyLoad.load({
+          name: 'sbAdminApp',
+          files: ['scripts/controllers/today.js']
+        });
+      }
+    }
   });
 }]);
