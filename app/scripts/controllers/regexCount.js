@@ -4,15 +4,17 @@
  */
 angular.module('sbAdminApp').controller('regexCountCtrl', function($scope, $http, api, $sce, $window, $cookieStore) {
 	$scope.alert = "  Loading Data will take some time.....";
+  $scope.getRegexAnalytics=function () {
 
-	api.get('regex-analytics', false, false, false, function(err, response) {
-		if (err) {
-			$scope.alert = response.message;
-		} else {
-			$scope.alert = false;
-			$scope.dataset = response;
-		}
-	});
+	  api.get('regex-analytics', false, false, false, function(err, response) {
+		  if (err) {
+			  $scope.alert = response.message;
+		  } else {
+			  $scope.alert = false;
+			  $scope.dataset = response;
+		  }
+	  });
+  };
 	$scope.closeAlert = function(argument) {
 		$scope.alert = false;
 	};

@@ -33,8 +33,9 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
 
     // $scope.getTodaysUser();
     //date
+    // $scope.dt1=new Date();
     $scope.dt2=new Date();
-
+// $scope.getTodaysUser();
     $scope.dateOptions = {
         formatYear: 'yy',
         maxDate: new Date(),
