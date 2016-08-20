@@ -137,14 +137,27 @@
                                         </div>
                                         <!--/search-->
                                         <!--sortby -->
-                                        sort by: {{unProc.sortby}}
+
                                         <div class="radio">
-                                            <label>
-                                                <input type="radio" ng-model="unProc.sortby" value="count" ng-change='unProc.sort()'> Count
-                                            </label>
-                                            <label>
-                                                <input type="radio" ng-model="unProc.sortby" value="address" ng-change='unProc.sort()'> Alphabetic
-                                            </label>
+                                            <h6>sort by:</h6>
+                                            <label><ul class="list-unstyled project_files">
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" ng-model="unProc.sortby" value="count" ng-change='unProc.sort()'> Count
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" ng-model="unProc.sortby" value="address" ng-change='unProc.sort()'> Alphabetic
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" ng-model="unProc.sortby" value="Time" ng-change='unProc.sort()'> Time
+                                                    </label>
+                                                </li>
+                                            </ul></label>
+
                                         </div>
                                         <!-- /sortby-->
                                         <div style="overflow:auto;height: 500px;">
@@ -155,6 +168,7 @@
                                                         <h3 ng-click="getSms(code._id,0,1,'unProc')">
                                                             {{code._id}}
                                                         </h3>
+                                                        <p> {{code.saveTime |date:'dd-MMM-yy'}}</p>
                                                     </div>
                                                     <small>
                                                             <button ng-click="parseSms(code._id)" type="button" class="btn btn-default btn-xs">
@@ -209,7 +223,9 @@
                                                     </th>
                                                     <th class="column-title">
                                                             Text
-                                                           
+                                                        <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="moveAllToDump()">
+                                                            Move All to Dump
+                                                        </button>
                                                             <button type="button" class="btn btn-default btn-xs pull-right" ng-click="moveToDump()">
                                                                 Move To Dump
                                                             </button>
@@ -291,13 +307,26 @@
                                         </div>
                                         <!--/search-->
                                         <!--sortby -->
-                                        sort by: {{new.sortby}}
                                         <div class="radio">
+                                            <h6>Sort by:</h6>
                                             <label>
-                                                <input type="radio" ng-model="new.sortby" value="count" ng-change='new.sort()'> Count
-                                            </label>
-                                            <label>
-                                                <input type="radio" ng-model="new.sortby" value="address" ng-change='new.sort()'> Alphabetic
+                                                <ul class="list-unstyled project_files">
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" ng-model="new.sortby" value="count" ng-change='new.sort()'> Count
+                                                    </label>
+                                                </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" ng-model="new.sortby" value="address" ng-change='new.sort()'> Alphabetic
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" ng-model="new.sortby" value="Time" ng-change='new.sort()'> Time
+                                                        </label>
+                                                    </li>
+                                               </ul>
                                             </label>
                                         </div>
                                         <!-- /sortby-->
@@ -314,6 +343,8 @@
                                                         <h3 ng-click="getSms(code._id,0,1,'new')">
                                                             {{code._id}}
                                                         </h3>
+                                                        <p> {{code.saveTime |date:'dd-MMM-yy'}}</p>
+
                                                     </div>
                                                     <small>
                                                             <button ng-click="parseSms(code._id)" type="button" class="btn btn-default btn-xs">
@@ -441,14 +472,21 @@
                                         </div>
                                         <!--/search-->
                                         <!--sortby -->
-                                        sort by: {{proc.sortby}}
                                         <div class="radio">
+                                            <h6>Sort by:</h6>
                                             <label>
-                                                <input type="radio" ng-model="proc.sortby" value="count" ng-change='proc.sort()'> Count
+                                                <ul class="list-unstyled project_files">
+                                                    <li><label>
+                                                        <input type="radio" ng-model="proc.sortby" value="count" ng-change='proc.sort()'> Count
+                                                    </label></li>
+                                                    <li> <label>
+                                                        <input type="radio" ng-model="proc.sortby" value="address" ng-change='proc.sort()'> Alphabetic
+                                                    </label></li>
+                                                </ul>
+
                                             </label>
-                                            <label>
-                                                <input type="radio" ng-model="proc.sortby" value="address" ng-change='proc.sort()'> Alphabetic
-                                            </label>
+
+
                                         </div>
                                         <!-- /sortby-->
                                        
@@ -559,14 +597,22 @@
                                         </div>
                                         <!--/search-->
                                         <!--sortby -->
-                                        sort by: {{laterUse.sortby}}
                                         <div class="radio">
+                                            <h6>
+                                                Sort by :
+                                            </h6>
                                             <label>
-                                                <input type="radio" ng-model="laterUse.sortby" value="count" ng-change='laterUse.sort()'> Count
+                                                <ul class="list-unstyled project_files">
+                                                    <li> <label>
+                                                        <input type="radio" ng-model="laterUse.sortby" value="count" ng-change='laterUse.sort()'> Count
+                                                    </label></li>
+                                                    <li><label>
+                                                        <input type="radio" ng-model="laterUse.sortby" value="address" ng-change='laterUse.sort()'> Alphabetic
+                                                    </label></li>
+                                                </ul>
                                             </label>
-                                            <label>
-                                                <input type="radio" ng-model="laterUse.sortby" value="address" ng-change='laterUse.sort()'> Alphabetic
-                                            </label>
+
+
                                         </div>
                                         <!-- /sortby-->
                                        

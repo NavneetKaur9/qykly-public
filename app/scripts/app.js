@@ -39,7 +39,10 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
           }), $ocLazyLoad.load({
             name: 'xeditable',
             files: ['bower_components/angular-xeditable/dist/css/xeditable.css', 'bower_components/angular-xeditable/dist/js/xeditable.js']
-          });
+          }),$ocLazyLoad.load({
+          name: 'googlechart',
+          files: ['bower_components/angular-google-chart/ng-google-chart.js']
+        });
       }
     }
   }).state('dashboard.home', {

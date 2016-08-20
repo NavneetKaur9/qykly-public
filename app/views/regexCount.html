@@ -1,152 +1,261 @@
 <div ng-controller="regexCountCtrl">
     <!-- BLOCK 4: COMMON ALERT -->
-    <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
+    <div aria-role="alertdialog" aria-live="assertive"
+         style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;"
+         class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move"
+         ng-show="alert">
         <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
-            <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
+            <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button"
+                 class="ui-pnotify-closer pull-right">
                 <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
                 </span>
             </div>
-            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" ng-hide="parseSmsResult.output.length">
+            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000"
+                 ng-hide="parseSmsResult.output.length">
                 {{alert}}
             </div>
         </div>
     </div>
     <!-- BLOCK 4: COMMON ALERT -->
-    <div class="row">
-        <!-- BANKNAME -->
-        <div class="col-md-4">
-            Bank Name :
-            <input type="hidden" ng-model="assignTo" value="{{selected}}" />
-            <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x for x in banks" placeholder="Assign To" style="width:150px">
-                <option value="">
-                </option>
-            </select>
-        </div>
-        <!-- BANKNAME -->
-        <!-- MERCHANTS -->
-        <div class="col-md-4">
-            Merchant Name :
-            <input type="hidden" ng-model="assignTo" value="{{selected}}" />
-            <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x for x in merchants" placeholder="Assign To" style="width:150px">
-                <option value="">
-                </option>
-            </select>
-            <!-- <div style="overflow:auto;height: 500px;">
-                    <a ng-repeat="(key,value) in merchants track by $index">
-                        <div class="mail_list">
-                            <div class="right" style="cursor:pointer;">
-                                <h3 ng-click="getData(value)">
-                                    {{value}}
-                                </h3>
-                                <h3 ng-click="getData(value)" ng-if="(value===' ')||(value==='')">
-                                    Undefined
-                                </h3>
+    <div class="x_panel">
 
+        <div class="x_content">
+
+            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab1" class="nav nav-tabs bar_tabs right" role="tablist">
+                    <li role="presentation" class="active"><a href="regexCount.html#tab_content11" id="home-tabb" role="tab"
+                                                              data-toggle="tab" aria-controls="home"
+                                                              aria-expanded="true">Section One</a>
+                    </li>
+                    <li role="presentation" class=""><a href="regexCount.html#tab_content22" role="tab" id="profile-tabb"
+                                                        data-toggle="tab" aria-controls="profile" aria-expanded="false">Section Two</a>
+                    </li>
+
+                </ul>
+                <div id="myTabContent2" class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade active in" id="tab_content11" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="x_panel">
+                                    <!-- BANKNAME -->
+                                    <label class="control-label">Select (Any one):</label>
+                                    <ul class="list-unstyled project_files">
+                                        <li>Bank Name :
+                                            <input type="hidden" ng-model="q" value="{{selected}}"/>
+                                            <select id="cat_select" class="form-control" tabindex="-1" ng-model="q"
+                                                    select2
+                                                    ng-options="x for x in banks" placeholder="Select"
+                                                    style="width:150px"
+                                                    ng-change="getCount('bankName')">
+                                                <option value="">
+                                                </option>
+                                            </select>
+                                        </li>
+                                        <li>
+                                            Merchant Name :
+                                            <input type="hidden" ng-model="q" value="{{selected}}"/>
+                                            <select id="cat_select" class="form-control" tabindex="-1" ng-model="q"
+                                                    select2
+                                                    ng-options="x for x in merchants" placeholder="Select"
+                                                    style="width:150px"
+                                                    ng-change="getCount('merchantName')">
+                                                <option value="">
+                                                </option>
+                                            </select>
+                                        </li>
+                                        <li>
+                                            MsgType :
+                                            <input type="hidden" ng-model="q" value="{{selected}}"/>
+                                            <select id="cat_select" class="form-control" tabindex="-1" ng-model="q"
+                                                    select2
+                                                    ng-options="x for x in msgtypes" placeholder="Select"
+                                                    style="width:150px"
+                                                    ng-change="getCount('msgType')">
+                                                <option value="">
+                                                </option>
+                                            </select>
+                                        </li>
+
+                                    </ul>
+                                </div>
                             </div>
-                            
-                        </div>
-                    </a>
-                    
-                </div> -->
-        </div>
-        <!-- MERCHANTS -->
-        <!-- MSGTYPE -->
-        <div class="col-md-4">
-            MsgType :
-            <input type="hidden" ng-model="assignTo" value="{{selected}}" />
-            <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x for x in msgtypes" placeholder="Assign To" style="width:150px">
-                <option value="">
-                </option>
-            </select>
-            <!--  <div style="overflow:auto;height: 500px;">
-                    <a ng-repeat="(key,value) in msgtypes">
-                        <div class="mail_list">
-                            <div class="right" style="cursor:pointer;">
-                                <h3 ng-click="getData(value)">
-                                    {{value}}
-                                </h3>
-                                <h3 ng-click="getData(value)" ng-if="(value===' ')||(value==='')">
-                                    Undefined
-                                </h3>
-                            </div>
-                            
-                        </div>
-                    </a>
-                    
-                </div> -->
-        </div>
-        <!-- MSGTYPE -->
-    </div>
+                            <div class="col-md-8">
+                                <div ng-show="merchantLoader" style="text-align:center;">
+                                    <img src="assets/images/ajax-loader.gif"/> Loading data.....
+                                </div>
+                                <div class="x_panel" ng-show="data.result.length">
+                                    <div class="x_title">
+                                        <label>Merchant :</label> {{data.dataOf}}
+                                    </div>
+                                    <div class="x_content">
+                                        <table class="table  ">
+                                            <thead>
+                                            <tr class="headings">
 
-
-
-    <hr>
-        <!-- ALL -->
-        <div class="row">
-            <div class="col-md-12 col-sm-12 ">
-                <h4>
-                <label for="search">
-                    <input ng-model="search" id="search" class="" placeholder="Search" style="width:100%" />
-                </label>
-            </h4>
-                <table class="table  jambo_table bulk_action" ng-show="dataset">
-                    <thead>
-                        <tr class="headings">
-                            <th width="5%">
-                                Merchant Name / Bank Name
-                            </th>
-                            <th class="column-title">
-                                Address
-                            </th>
-                            <th class="column-title">
-                                msgtype
-                            </th>
-                            <th class="column-title">
-                                count
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="even pointer" ng-repeat="(key, value) in dataset|filter:search">
-                            <td class="a-center ">
-                                {{value.merchant}}
-                            </td>
-                            <td>
-                                <table class="table ">
-                                    <tbody>
-                                        <tr ng-repeat="(key, value) in value.data">
-                                            <td>
-                                                {{value.address}}
-                                            </td>
-                                            <td>
-                                                <table class="table ">
-                                                    <tbody>
-                                                        <tr ng-repeat="(key, value) in value.aData">
-                                                            <td>
-                                                                {{value.msgtype}}
-                                                            </td>
-                                                            <td>
-                                                                {{value.count}}
-                                                            </td>
+                                                <th class="column-title">
+                                                    Address
+                                                </th>
+                                                <th class="column-title">
+                                                    msgtype
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="even pointer" ng-repeat="(key, value) in data.result">
+                                                <td class="a-center ">
+                                                    {{value.address}}
+                                                </td>
+                                                <td>
+                                                    <table class="table ">
+                                                        <tbody>
+                                                        <tr ng-repeat="(key, value) in value.metadata">
+                                                            <td>{{value._id}}</td>
+                                                            <td>{{value.count}}</td>
                                                         </tr>
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <div class="x_panel" ng-show="msgTypeData.result.length">
+                                    <div class="x_title">
+                                        <label>msgType :</label> {{msgTypeData.dataOf}}
+                                    </div>
+                                    <div class="x_content">
+                                        <table class="table  ">
+                                            <thead>
+                                            <tr class="headings">
+
+                                                <th class="column-title">
+
+                                                    <div href ng-click="order('_id')" style="cursor:pointer">
+                                                        Shortcode
+                                                        <span ng-show="sortType == '_id' && sortReverse"
+                                                              class="fa fa-caret-down">
+                                    </span>
+                                                        <span ng-show="sortType == '_id' && !sortReverse"
+                                                              class="fa fa-caret-up">
+                                    </span>
+                                                    </div>
+                                                </th>
+                                                <th class="column-title">
+
+                                                    <div href ng-click="order('count')" style="cursor:pointer">
+                                                        Count
+                                                        <span ng-show="sortType == 'count' && sortReverse"
+                                                              class="fa fa-caret-down">
+                                    </span>
+                                                        <span ng-show="sortType == 'count' && !sortReverse"
+                                                              class="fa fa-caret-up">
+                                    </span>
+                                                    </div>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="even pointer"
+                                                ng-repeat="(key, value) in msgTypeData.result|orderBy:sortType:sortReverse">
+                                                <td class="a-center ">
+                                                    {{value._id}}
+                                                </td>
+                                                <td>
+                                                    {{value.count}}
+                                                </td>
+
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="tab_content22" aria-labelledby="profile-tab">
+                        <!-- ALL -->
+                        <div class="row" ng-show="dataset">
+                            <div class="col-md-12 col-sm-12 ">
+                                <h4>
+                                    <label for="search">
+                                        <input ng-model="search" id="search" class="" placeholder="Search"
+                                               style="width:100%"/>
+                                    </label>
+                                </h4>
+                                <table class="table  ">
+                                    <thead>
+                                    <tr class="headings">
+                                        <th width="5%">
+                                            Merchant Name / Bank Name
+                                        </th>
+                                        <th class="column-title">
+                                            Address
+                                        </th>
+                                        <th class="column-title">
+                                            msgtype
+                                        </th>
+                                        <th class="column-title">
+                                            count
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="even pointer" ng-repeat="(key, value) in dataset|filter:search">
+                                        <td class="a-center ">
+                                            {{value.merchant}}
+                                        </td>
+                                        <td>
+                                            <table class="table ">
+                                                <tbody>
+                                                <tr ng-repeat="(key, value) in value.data">
+                                                    <td>
+                                                        {{value.address}}
+                                                    </td>
+                                                    <td>
+                                                        <table class="table ">
+                                                            <tbody>
+                                                            <tr ng-repeat="(key, value) in value.aData">
+                                                                <td>
+                                                                    {{value.msgtype}}
+                                                                </td>
+                                                                <td>
+                                                                    {{value.count}}
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                        <!--
+                                        <td ng-repeat="(key, value) in value.data">
+                                            {{value.address}}
+                                            {{value.count}}
+                                            {{value.msgtype}}
+                                        </td>
+                                    -->
+                                    </tr>
                                     </tbody>
                                 </table>
-                            </td>
-                            <!--
-                            <td ng-repeat="(key, value) in value.data">
-                                {{value.address}}
-                                {{value.count}}
-                                {{value.msgtype}}
-                            </td>
-                        -->
-                        </tr>
-                    </tbody>
-                </table>
+                            </div>
+                        </div>
+                        <!-- ALL -->
+                    </div>
+
+                </div>
             </div>
+
         </div>
-        <!-- ALL -->
     </div>
+
+
+</div>

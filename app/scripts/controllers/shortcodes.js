@@ -52,7 +52,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
     $scope.unProc = {
         codes: [],
         start: 0,
-        sortby: 'count',
+        sortby: 'Time',
         searchCode: '',
         getcodes: function() {
             $scope.showLoader = true;
@@ -95,7 +95,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
     $scope.new = {
         codes: [],
         start: 0,
-        sortby: 'count',
+        sortby: 'Time',
         searchCode: '',
         getcodes: function() {
             $scope.showLoader = true;
@@ -442,6 +442,26 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
         });
     };
 
+
+   $scope.moveAllToDump=function () {
+       if (confirm("Are you sure you want to move all the messages of "+$scope.code+" to Dump!!!") == true) {
+           api.put('move-all-to-dump', false, token, {
+               address: $scope.code
+           }, function(err, response) {
+               if (err || response.error) {
+                   $scope.alerts = [{
+                       msg: response.userMessage || 'Server error! Are you connected to the internet?.',
+                       type: 'error'
+                   }];
+               } else {
+                   $scope.alert = response.message;
+                   $scope.unProc.messages = [];
+                   $scope.unProc.codes=[];
+                   $scope.unProc.getcodes();
+               }
+           });
+       }
+   };
 
 
 
