@@ -56,6 +56,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
         searchCode: '',
         getcodes: function() {
             $scope.showLoader = true;
+            console.log('get codes00');
             api.get('get-unprocessedCodes', false, token, {
                 start: $scope.unProc.start,
                 search: $scope.unProc.searchCode,
@@ -79,12 +80,10 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
             $scope.unProc.getcodes();
         },
         sort: function() {
-            $scope.$watch('unProc.sortby', function(value) {
                 $scope.unProc.codes = [];
-                $scope.unProc.sortby = value;
+                $scope.unProc.sortby = $scope.unProc.sortby;
                 $scope.unProc.start = 0;
                 $scope.unProc.getcodes();
-            });
         }
     };
     
@@ -122,13 +121,10 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
             $scope.new.getcodes();
         },
         sort: function() {
-            $scope.$watch('new.sortby', function(value) {
                 $scope.new.codes = [];
-                $scope.new.sortby = value;
+                $scope.new.sortby = $scope.new.sortby;
                 $scope.new.start = 0;
                 $scope.new.getcodes();
-
-            });
         }
     };
     /*************************************************
@@ -164,13 +160,10 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
             $scope.proc.getcodes();
         },
         sort: function() {
-            $scope.$watch('proc.sortby', function(value) {
                 $scope.proc.codes = [];
-                $scope.proc.sortby = value;
+                $scope.proc.sortby = $scope.proc.sortby;
                 $scope.proc.start = 0;
                 $scope.proc.getcodes();
-
-            });
         }
     };
     /*************************************************
@@ -206,13 +199,10 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
             $scope.laterUse.getcodes();
         },
         sort: function() {
-            $scope.$watch('laterUse.sortby', function(value) {
                 $scope.laterUse.codes = [];
-                $scope.laterUse.sortby = value;
+                $scope.laterUse.sortby = $scope.laterUse.sortby;
                 $scope.laterUse.start = 0;
                 $scope.laterUse.getcodes();
-
-            });
         }
     };
 
