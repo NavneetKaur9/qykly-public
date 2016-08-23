@@ -22,18 +22,22 @@
         <div class="x_content">
 
             <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                <!--tabs starts here-->
                 <ul id="myTab1" class="nav nav-tabs bar_tabs right" role="tablist">
-                    <li role="presentation" class="active"><a href="regexCount.html#tab_content11" id="home-tabb" role="tab"
+                    <li role="presentation" class="active"><a href="regexCount.html#tab_content11" id="home-tabb"
+                                                              role="tab"
                                                               data-toggle="tab" aria-controls="home"
                                                               aria-expanded="true">Section One</a>
                     </li>
                     <li role="presentation" class="">
                         <a href="regexCount.html#tab_content22" role="tab" id="profile-tabb"
-                                                        data-toggle="tab" aria-controls="profile" aria-expanded="false" ng-click="getRegexAnalytics()">All Regexes Count</a>
+                           data-toggle="tab" aria-controls="profile" aria-expanded="false"
+                           ng-click="getRegexAnalytics()">All Regexes Count</a>
                     </li>
-
                 </ul>
+                <!--tabs ends here-->
                 <div id="myTabContent2" class="tab-content">
+                    <!--tab one-->
                     <div role="tabpanel" class="tab-pane fade active in" id="tab_content11" aria-labelledby="home-tab">
                         <div class="row">
                             <div class="col-md-4">
@@ -180,9 +184,13 @@
 
                         </div>
                     </div>
+                    <!--tab two-->
                     <div role="tabpanel" class="tab-pane fade" id="tab_content22" aria-labelledby="profile-tab">
                         <!-- ALL -->
-                        <div class="row" ng-show="dataset">
+                        <div ng-hide="dataset.length" style="text-align:center">
+                            <img src="assets/images/ajax-loader1.gif" />
+                        </div>
+                        <div class="row" ng-show="dataset.length">
                             <div class="col-md-12 col-sm-12 ">
                                 <h4>
                                     <label for="search">

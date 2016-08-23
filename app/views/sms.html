@@ -29,7 +29,7 @@
         </div>
     </div> -->
     <div class="row">
-        <div class="col-md-8 col-md-offset-4">
+        <div class="col-md-12 ">
             <div class="">
                 <!-- <div class="x_title">
                     <h2>
@@ -98,6 +98,22 @@
                             <a class="pull-left date" ng-if="sum.status=='5'">
                                 <p class="month">
                                     Pending for regex
+                                </p>
+                                <p class="day">
+                                    {{sum.count}}
+                                </p>
+                            </a>
+                            <a class="pull-left date" ng-if="sum.status=='6'">
+                                <p class="month">
+                                    Processed by us
+                                </p>
+                                <p class="day">
+                                    {{sum.count}}
+                                </p>
+                            </a>
+                            <a class="pull-left date" ng-if="sum.status=='8'">
+                                <p class="month">
+                                   Use Later
                                 </p>
                                 <p class="day">
                                     {{sum.count}}

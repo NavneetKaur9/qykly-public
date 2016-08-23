@@ -123,4 +123,5 @@ angular.module('sbAdminApp').controller('homeCtrl', function ($scope, $http, api
             ], "rows": shortCodesgraphData
         };
     }
+    //google chart ends here
 });

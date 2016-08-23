@@ -10,54 +10,160 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
     $scope.closeAlert = function() {
         $scope.alert = false;
     };
-
+var page=0;
     $scope.getTodaysUser = function() {
 
-        var dt1=($scope.dt1).getTime();
-        var dt2=($scope.dt2).getTime();
-        $scope.showLoader=true;
-// $scope.appUsers=[];
-        api.post('user-shortcode-count', false, token, {
-            startTime:dt1,
-            endTime:dt2
+        $scope.showProcessing=true;
+        api.get('user-shortcode-count', false, token, {
+            page:page
         }, function(err, response) {
             if (!err) {
                 $scope.appUsers = response.result;
 
-                $scope.showLoader=false;
+                $scope.showProcessing=false;
             } else {
                 $scope.alert = response.message;
             }
         });
     };
+    $scope.getTodaysUser();
+    $scope.moreUsers=function () {
+        page++;
+        $scope.getTodaysUser();
+    };
+    var d = new Date();
+    d.setHours(0, 0, 0, 0);
+    console.log(+d);
+    var time=+d;
 
-    // $scope.getTodaysUser();
-    //date
-    // $scope.dt1=new Date();
-    $scope.dt2=new Date();
-// $scope.getTodaysUser();
-    $scope.dateOptions = {
-        formatYear: 'yy',
-        maxDate: new Date(),
-        startingDay: 1
+    /*************************************************
+     START :    UNPROCESSESD
+     *************************************************/
+    $scope.unProc = {
+        codes: [],
+        start: 0,
+        sortby: 'count',
+        searchCode: '',
+        getcodes: function() {
+            $scope.showLoader = true;
+            console.log('get codes00');
+            api.get('get-unprocessedCodes', false, token, {
+                start: $scope.unProc.start,
+                search: $scope.unProc.searchCode,
+                sortby: $scope.unProc.sortby,
+                time:time
+            }, function(err, response) {
+                if (err || response.error) {
+                    $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
+                } else {
+                    $scope.showLoader = false;
+                    $scope.unProc.codes = $scope.unProc.codes.concat(response);
+                }
+            });
+        },
+        search: function() {
+            $scope.unProc.codes = [];
+            $scope.unProc.start = 0;
+            $scope.unProc.getcodes();
+        },
+        showMore: function() {
+            $scope.unProc.start++;
+            $scope.unProc.getcodes();
+        },
+        sort: function() {
+            $scope.unProc.codes = [];
+            $scope.unProc.sortby = $scope.unProc.sortby;
+            $scope.unProc.start = 0;
+            $scope.unProc.getcodes();
+        }
     };
 
-    $scope.open1 = function() {
-        $scope.popup1.opened = true;
-    };
+    $scope.unProc.getcodes();
 
-    $scope.open2 = function() {
-        $scope.popup2.opened = true;
+    /*************************************************
+     START :    NEWCODES
+     *************************************************/
+    $scope.new = {
+        codes: [],
+        start: 0,
+        sortby: 'count',
+        searchCode: '',
+        getcodes: function() {
+            $scope.showLoader = true;
+            api.get('get-newCodes', false, token, {
+                start: $scope.new.start,
+                search: $scope.new.searchCode,
+                sortby: $scope.new.sortby,
+                time:time
+            }, function(err, response) {
+                if (err || response.error) {
+                    $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
+                } else {
+                    $scope.showLoader = false;
+                    $scope.new.codes = $scope.new.codes.concat(response);
+                }
+            });
+        },
+        search: function() {
+            $scope.new.codes = [];
+            $scope.new.start = 0;
+            $scope.new.getcodes();
+        },
+        showMore: function() {
+            $scope.new.start++;
+            $scope.new.getcodes();
+        },
+        sort: function() {
+            $scope.new.codes = [];
+            $scope.new.sortby = $scope.new.sortby;
+            $scope.new.start = 0;
+            $scope.new.getcodes();
+        }
     };
-
-    $scope.altInputFormats = ['M!/d!/yyyy'];
-    $scope.popup1 = {
-        opened: false
+    $scope.new.getcodes();
+    /*************************************************
+     START :    PROCESSED
+     *************************************************/
+    $scope.proc = {
+        codes: [],
+        start: 0,
+        sortby: 'count',
+        searchCode: '',
+        getcodes: function() {
+            $scope.showLoader = true;
+            api.get('get-processedCodes', false, token, {
+                start: $scope.proc.start,
+                search: $scope.proc.searchCode,
+                sortby: $scope.proc.sortby,
+                time:time
+            }, function(err, response) {
+                if (err || response.error) {
+                    $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
+                } else {
+                    $scope.showLoader = false;
+                    $scope.proc.codes = $scope.proc.codes.concat(response);
+                }
+            });
+        },
+        search: function() {
+            $scope.proc.codes = [];
+            $scope.proc.start = 0;
+            $scope.proc.getcodes();
+        },
+        showMore: function() {
+            $scope.proc.start++;
+            $scope.proc.getcodes();
+        },
+        sort: function() {
+            $scope.proc.codes = [];
+            $scope.proc.sortby = $scope.proc.sortby;
+            $scope.proc.start = 0;
+            $scope.proc.getcodes();
+        }
     };
-    $scope.popup2 = {
-        opened: false
-    };
+    $scope.proc.getcodes();
 
-    //date
-
+    /*************************************************
+     START :    LATER USE
+     *************************************************/
 });

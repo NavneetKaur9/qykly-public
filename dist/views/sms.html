@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-    </div> --> <div class="row"> <div class="col-md-8 col-md-offset-4"> <div class=""> <!-- <div class="x_title">
+    </div> --> <div class="row"> <div class="col-md-12"> <div class=""> <!-- <div class="x_title">
                     <h2>
                         Summary                        
                     </h2>
@@ -43,7 +43,7 @@
                     </ul>
                     <div class="clearfix">
                     </div>
-                </div> --> <div class="x_content"> <article class="media event"> <a class="pull-left date"> <p class="month"> Total Regex </p> <p class="day"> {{regexSummary}} </p> </a> <div ng-repeat="sum in summary"> <a class="pull-left date" ng-if="sum.status=='3'"> <p class="month"> Processed </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='0'"> <p class="month"> UnProcessed </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='1'"> <p class="month"> Blacklisted </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='4'"> <p class="month"> Dump </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='5'"> <p class="month"> Pending for regex </p> <p class="day"> {{sum.count}} </p> </a> </div> </article> </div> </div> </div> </div> <hr> <!--
+                </div> --> <div class="x_content"> <article class="media event"> <a class="pull-left date"> <p class="month"> Total Regex </p> <p class="day"> {{regexSummary}} </p> </a> <div ng-repeat="sum in summary"> <a class="pull-left date" ng-if="sum.status=='3'"> <p class="month"> Processed </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='0'"> <p class="month"> UnProcessed </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='1'"> <p class="month"> Blacklisted </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='4'"> <p class="month"> Dump </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='5'"> <p class="month"> Pending for regex </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='6'"> <p class="month"> Processed by us </p> <p class="day"> {{sum.count}} </p> </a> <a class="pull-left date" ng-if="sum.status=='8'"> <p class="month"> Use Later </p> <p class="day"> {{sum.count}} </p> </a> </div> </article> </div> </div> </div> </div> <hr> <!--
         <div class="row">
             <div class="col-md-5">
                 <label for="status">

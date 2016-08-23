@@ -10,7 +10,9 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	var url = api.addr();
 	var token = $cookieStore.get('c2cCookie');
 	$window.scrollTo(0, 0);
-	$scope.getUser = function() {
+	$scope.code={};
+	$scope.sms={};
+	function getUser() {
 		// body...
 		api.get('get-user', id, token, false, function(err, response) {
 			if (err) {
@@ -20,22 +22,46 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 			}
 		});
 	};
-	$scope.getUser();
-	$scope.getShortcode = function() {
+
+	function getShortcode(codeType) {
 		$scope.alert = '  loading.........';
-		api.get('get-shortcode', id, token, false, function(err, response) {
+		api.get('get-users-shortcode', false, token, {
+			get_code_typ:codeType,
+			id:id
+		}, function(err, response) {
 			if (err) {
 				$scope.alert = response.message;
 			} else {
-				$scope.new = response.new;
-				$scope.proc = response.processed;
-				$scope.unproc = response.unprocessed;
+				console.log(codeType);
 				$scope.alert = false;
+				if(codeType==='new')
+				{
+					$scope.new=response;
+				}
+				else if(codeType==='proc')
+				{
+					$scope.proc = response;
+				}
+				else{
+					$scope.unproc = response;
+				}
 			}
 		});
 	};
-	$scope.getShortcode();
-	$scope.countStatus = function() {
+	getShortcode('unproc');
+	$scope.checkArray = [];
+	$scope.check = function(value) {
+		var index = $scope.checkArray.indexOf(value);
+		if ((index === -1) && (value === 'new')) {
+			getShortcode('new');
+			$scope.checkArray.push(value);
+		} else if ((index === -1) && (value === 'proc')) {
+			getShortcode('proc');
+			$scope.checkArray.push(value);
+		}
+	};
+
+	function countStatus() {
 		api.get('get-sms-count-status', id, token, false, function(err, response) {
 			if (err) {
 				$scope.alert = response.message;
@@ -48,49 +74,74 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 						$scope.proCount = response[i].count;
 					}
 				}
+				getUser();
 			}
 		});
 	};
-	$scope.countStatus();
-	$scope.getSms = function(code, status) {
+
+	function countShortcode() {
+
+		api.get('get-shortcode', id, token, false, function(err, response) {
+			if (err) {
+				$scope.alert = response.message;
+			} else {
+
+			  console.log(response);
+			}
+		});
+	}
+	// countShortcode();
+	countStatus();
+	$scope.getSms = function(code, status,codeType) {
 		$scope.alert = 'fetching ' + code + ' messages....';
 		$scope.code = code;
 		api.get('get-sms/' + id + '/' + status + '/' + code, false, token, false, function(err, response) {
 			if (err) {
 				$scope.alert = response.message;
 			} else {
-				$scope.smses = response;
 				$scope.alert = false;
+				console.log(codeType);
+				if(codeType==='new')
+				{
+					$scope.code_new=code;
+					$scope.sms_new = response;
+				}
+				else if(codeType==='proc')
+				{
+                    $scope.code_proc=code;
+					$scope.sms_proc = response;
+				}
+				else if(codeType==='unproc')
+				{
+                    $scope.code_unproc=code;
+					$scope.sms_unproc = response;
+				}
 			}
 		});
 	};
 	$scope.blacklist = function() {
-		$scope.addresses = [];
+		var addresses = [];
 		var checkboxes = document.getElementsByName('blacklist');
 		for (var i = 0; i < checkboxes.length; i++) {
 			if (checkboxes[i].checked) {
 				var value = checkboxes[i].value;
-				$scope.addresses.push(value);
+				addresses.push(value);
 			}
 		}
 		api.put('blacklist', false, token, {
-			address: $scope.addresses
+			address: addresses
 		}, function(err, response) {
 			if (err) {
 				$scope.alert = response.message;
 			} else {
 				$scope.alert = response.message;
-				$scope.smses = [];
-				$scope.getShortcode();
-				$scope.countStatus();
+				$scope.sms.new = [];
+				getShortcode('new');
+				countStatus();
 			}
 		});
 	};
-	$scope.reset = function(argument) {
-		$scope.smses = [];
-		$scope.code = "";
-	};
-	$scope.closeAlert = function(argument) {
+	$scope.closeAlert = function() {
 		$scope.alert = false;
 	};
 	$scope.sortType = 'saveTime';
@@ -131,24 +182,24 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 	$scope.closeParseSmsResult = function(argument) {
 		$scope.parseSmsResult = [];
 	};
-	$scope.assign = function() {
-		$scope.msgText = [];
+	$scope.assign = function(codeType) {
+		var msgText = [];
 		var checkboxes = document.getElementsByName('assign');
 		for (var i = 0; i < checkboxes.length; i++) {
 			if (checkboxes[i].checked) {
 				var value = checkboxes[i].value;
-				$scope.msgText.push(value);
+				msgText.push(value);
 			}
 		}
 		api.put('assign-msg', false, token, {
-			msgText: $scope.msgText,
+			msgText: msgText,
 			assignTo: $scope.assignTo.name
 		}, function(err, response) {
 			if (err || response.error) {
 				$scope.alert = response.message;
 			} else {
 				$scope.alert = response.message;
-				$scope.getSms($scope.code, 0);
+				$scope.getSms($scope.code, 0,codeType);
 			}
 		});
 	};
@@ -161,23 +212,23 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http
 		}
 	});
 	$scope.moveToDump = function() {
-		$scope.msgText = [];
+		var msgText = [];
 		var checkboxes = document.getElementsByName('assign');
 		for (var i = 0; i < checkboxes.length; i++) {
 			if (checkboxes[i].checked) {
 				var value = checkboxes[i].value;
-				$scope.msgText.push(value);
+				msgText.push(value);
 			}
 		}
-		console.log($scope.msgText);
+
 		api.put('move-to-dumb', false, token, {
-			msgText: $scope.msgText
+			msgText: msgText
 		}, function(err, response) {
 			if (err || response.error) {
 				$scope.alert = response.message;
 			} else {
 				$scope.alert = response.message;
-				$scope.getSms($scope.code, 0);
+				$scope.getSms($scope.code, 0,'unproc');
 			}
 		});
 
