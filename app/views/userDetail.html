@@ -284,8 +284,8 @@
                             <li role="presentation" class="active">
                                 <a href="userDetail.html#tab_content1" id="un_proc-tab" role="tab" data-toggle="tab"
                                    aria-expanded="true">
-                                    <span class="badge bg-green">
-                                        {{unproc.length}}
+                                    <span class="badge bg-green" ng-show="count">
+                                        {{count1}}
                                     </span>
                                     Unprocessed Shortcode
                                 </a>
@@ -293,8 +293,8 @@
                             <li role="presentation" class="">
                                 <a href="userDetail.html#tab_content2" role="tab" id="new-tab" data-toggle="tab"
                                    aria-expanded="false" ng-click="check('new')">
-                                    <span class="badge bg-green">
-                                        {{new.length}}
+                                    <span class="badge bg-green" ng-show="count">
+                                        {{count2}}
                                     </span>
                                     New Shortcode
                                 </a>
@@ -302,8 +302,8 @@
                             <li role="presentation" class="">
                                 <a href="userDetail.html#tab_content3" role="tab" id="proc-tab" data-toggle="tab"
                                    aria-expanded="false" ng-click="check('proc')">
-                                    <span class="badge bg-green">
-                                        {{proc.length}}
+                                    <span class="badge bg-green" ng-show="count">
+                                        {{count3}}
                                     </span>
                                     Processed Shortcode
                                 </a>

@@ -4,44 +4,17 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>App Users</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link" ng-click="isCollapsed = !isCollapsed">
+                                <i class="fa fa-chevron-up"></i>
+                                <i class="fa fa-chevron-up" ng-show=""></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
-
-                    <!--<div class="row">-->
-                        <!--&lt;!&ndash; calender &ndash;&gt;-->
-                        <!--<div class="col-md-4">-->
-
-                            <!--<label>From :  </label>-->
-                            <!--<p class="input-group">-->
-                                    <!--<span class="input-group-btn">-->
-                                       <!--<button type="button" class="btn btn-default" ng-click="open1()">-->
-                                           <!--<i class="glyphicon glyphicon-calendar"></i></button>-->
-                                    <!--</span>-->
-                                    <!--<input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy"-->
-                                           <!--ng-model="dt1" is-open="popup1.opened" datepicker-options="dateOptions"-->
-                                           <!--ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>-->
-
-
-                                <!--</p>-->
-                        <!--</div>-->
-                        <!--<div class="col-md-4">-->
-                            <!--<label>To :</label>-->
-                            <!--<p class="input-group">-->
-                    <!--<span class="input-group-btn">-->
-                    <!--<button type="button" class="btn btn-default" ng-click="open2()"><i-->
-                            <!--class="glyphicon glyphicon-calendar"></i></button>-->
-                  <!--</span>-->
-                                <!--<input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy"-->
-                                       <!--ng-model="dt2" is-open="popup2.opened" datepicker-options="dateOptions"-->
-                                       <!--ng-required="true" close-text="Close"/>-->
-                            <!--</p>-->
-                        <!--</div>-->
-                        <!--&lt;!&ndash; /calender &ndash;&gt;-->
-                        <!--<div class="col-md-1">-->
-                            <!--<label></label>-->
-                            <!--<button class="" ng-click="getTodaysUser()">Submit</button>-->
-                        <!--</div>-->
-                    <!--</div>-->
+                <div class="x_content" uib-collapse="isCollapsed">
                     <div ng-show="showProcessing" style="text-align:center;">
                             <img src="assets/images/ajax-loader.gif"/> Loading data.....
                     </div>
@@ -77,11 +50,14 @@
             <div class="x_panel">
                 <div class="x_title">
                     Shortcodes
+                    <div class="navbar-right panel_toolbox" ng-show="showLoader" style="text-align: center">
+                        <img src="assets/images/ajax-loader.gif" /> Processing
+                    </div>
                 </div>
                 <div class="x_content">
                      <div class="row">
                          <!-- LEFT : NEW -->
-                         <div class="col-md-2 col-sm-2 mail_list_column">
+                         <div class="col-md-4 col-sm-4 mail_list_column">
                             NEW
                              <!--sortby -->
                              <div class="radio">
@@ -102,7 +78,7 @@
                                  </label>
                              </div>
                              <!-- /sortby-->
-                             <div style="overflow:auto;height: 500px;">
+                             <div style="overflow:auto;height: 250px;">
                                  <a ng-repeat="code in new.codes" href="javascript:void(0)">
                                      <div class="mail_list">
                                          <div class="left">
@@ -142,7 +118,7 @@
                          </div>
 
                          <!--unprocessed codes-->
-                         <div class="col-md-2 col-sm-2 mail_list_column">
+                         <div class="col-md-4 col-sm-4 mail_list_column">
                            UNPROCESSED
                              <!--sortby -->
                              <div class="radio">
@@ -162,7 +138,7 @@
 
                              </div>
                              <!-- /sortby-->
-                             <div style="overflow:auto;height: 500px;">
+                             <div style="overflow:auto;height: 250px;">
                                  <a ng-repeat="code in unProc.codes">
                                      <div class="mail_list">
                                          <span class="">  {{code.count}}</span>
@@ -188,7 +164,7 @@
                          </div>
 
                          <!-- LEFT : PROCESSED -->
-                         <div class="col-md-2 col-sm-2 mail_list_column">
+                         <div class="col-md-4 col-sm-4 mail_list_column">
                              PROCESSED
                              <!--sortby -->
                              <div class="radio">
@@ -209,7 +185,7 @@
                              </div>
                              <!-- /sortby-->
 
-                             <div style="overflow:auto;height: 500px;">
+                             <div style="overflow:auto;height: 250px;">
                                  <a ng-repeat="code in proc.codes">
                                      <div class="mail_list">
                                          <span class="">  {{code.count}}</span>
@@ -229,13 +205,65 @@
 
                          </div>
 
-                         <div class="col-md-2 col-sm-2 mail_list_column">
-                             <div ng-show="showLoader">
-                                 <img src="assets/images/ajax-loader.gif" /> Processing
-                             </div>
-                         </div>
+
 
                      </div>
+                </div>
+            </div>
+
+            <div class="x_panel" ng-show="messages.length">
+                <div class="x_content">
+                    <div class="col-md-12 col-sm-12 mail_view" >
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <h4>
+                                    {{code}}
+                                </h4>
+                            </div>
+                        </div>
+                        <table class="table table-striped jambo_table ">
+                            <thead>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                Text
+                            </th>
+                            <th width="20%">
+                                Msg Time
+                            </th>
+                            <th width="20%">
+                                Save Time
+                            </th>
+                            </thead>
+                            <tbody>
+                            <tr ng-if="messages.length <= 0">
+                                <td colspan="7" style="text-align:center;">No More Messages!!</td>
+                            </tr>
+                            <tr ng-show="loadingMsg">
+                                <td colspan="7" style="text-align:center;">Loading Messages!!</td>
+                            </tr>
+                            <tr ng-repeat="sms in messages">
+                                <td>
+                                    {{itemsPerPage *(currentPage-1)+$index+1}}
+                                </td>
+
+                                <td>
+                                    {{sms._id}}
+                                </td>
+                                <td>
+                                    {{sms.time | date:'MMM'}}
+                                </td>
+                                <td>
+                                    {{sms.saveTime |date:'MMM d, y h:mm a'}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <ul uib-pagination   items-per-page="itemsPerPage" ng-model="currentPage" total-items="totalCount" max-size="length" force-ellipses="true" boundary-links="true" ng-change="pageChanged(currentPage)">
+                        </ul>
+                    </div>
+
                 </div>
             </div>
         </div>

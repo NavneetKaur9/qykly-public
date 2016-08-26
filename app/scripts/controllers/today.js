@@ -10,11 +10,11 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
     $scope.closeAlert = function() {
         $scope.alert = false;
     };
-var page=0;
+    var page=0;
     $scope.getTodaysUser = function() {
 
         $scope.showProcessing=true;
-        api.get('user-shortcode-count', false, token, {
+        api.get('todays-users', false, token, {
             page:page
         }, function(err, response) {
             if (!err) {
@@ -26,7 +26,7 @@ var page=0;
             }
         });
     };
-    $scope.getTodaysUser();
+    // $scope.getTodaysUser();
     $scope.moreUsers=function () {
         page++;
         $scope.getTodaysUser();
@@ -47,7 +47,7 @@ var page=0;
         getcodes: function() {
             $scope.showLoader = true;
             console.log('get codes00');
-            api.get('get-unprocessedCodes', false, token, {
+            api.get('get-unprocessedCodes-today', false, token, {
                 start: $scope.unProc.start,
                 search: $scope.unProc.searchCode,
                 sortby: $scope.unProc.sortby,
@@ -77,7 +77,6 @@ var page=0;
             $scope.unProc.getcodes();
         }
     };
-
     $scope.unProc.getcodes();
 
     /*************************************************
@@ -90,7 +89,7 @@ var page=0;
         searchCode: '',
         getcodes: function() {
             $scope.showLoader = true;
-            api.get('get-newCodes', false, token, {
+            api.get('get-newCodes-today', false, token, {
                 start: $scope.new.start,
                 search: $scope.new.searchCode,
                 sortby: $scope.new.sortby,
@@ -120,7 +119,7 @@ var page=0;
             $scope.new.getcodes();
         }
     };
-    $scope.new.getcodes();
+    // $scope.new.getcodes();
     /*************************************************
      START :    PROCESSED
      *************************************************/
@@ -131,7 +130,7 @@ var page=0;
         searchCode: '',
         getcodes: function() {
             $scope.showLoader = true;
-            api.get('get-processedCodes', false, token, {
+            api.get('get-processedCodes-today', false, token, {
                 start: $scope.proc.start,
                 search: $scope.proc.searchCode,
                 sortby: $scope.proc.sortby,
@@ -161,9 +160,161 @@ var page=0;
             $scope.proc.getcodes();
         }
     };
-    $scope.proc.getcodes();
+    // $scope.proc.getcodes();
 
     /*************************************************
      START :    LATER USE
      *************************************************/
+
+    /************** GET SMS ********************/
+    $scope.start = 1;
+    $scope.currentPage = 1;
+    $scope.length = 10;
+    $scope.itemsPerPage = 50;
+
+    $scope.getSms = function(code, status, start, tab) {
+        if (code !== $scope.code) {
+            $scope.currentPage = 1;
+        }
+        $scope.alert = 'loading............';
+        $scope.loadingMsg = true;
+        api.get('get-messages-today', false, token, {
+            address: code,
+            status: status,
+            start: start,
+            length: 50,
+            time:time
+        }, function(err, response) {
+            if (err || response.error) {
+                $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
+            } else {
+                $scope.messages=response.data;
+                // $scope.code = code;
+                // $scope.start = start;
+                // $scope.status = status;
+                // $scope.tab = tab;
+                // if (tab === 'unProc') {
+                //     $scope.unProc.messages = response.data;
+                // } else if (tab === 'new') {
+                //     $scope.new.messages = response.data;
+                // } else if (tab === 'proc') {
+                //     $scope.proc.messages = response.data;
+                // } else if (tab === 'laterUse') {
+                //     $scope.laterUse.messages = response.data;
+                // }
+                // $scope.totalCount = response.totalCount;
+                // $scope.loadingMsg = false;
+                // $scope.alert = false;
+            }
+        });
+    };
+    //***********pagination on change ************//
+    $scope.pageChanged = function(newPage) {
+        $scope.getSms($scope.code, $scope.status, newPage, $scope.tab);
+    };
+
+
+
+    $scope.assign = function() {
+        $scope.msgText = [];
+        var checkboxes = document.getElementsByName('assign');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                var value = checkboxes[i].value;
+                $scope.msgText.push(value);
+            }
+        }
+        api.put('assign-msg', false, token, {
+            msgText: $scope.msgText,
+            assignTo: $scope.assignTo.name
+        }, function(err, response) {
+            if (err || response.error) {
+                $scope.alert = response.message;
+            } else {
+                $scope.alert = response.message;
+                $scope.getSms($scope.code, $scope.status, $scope.start, $scope.tab);
+
+            }
+        });
+    };
+
+    $scope.moveToDump = function() {
+        $scope.msgText = [];
+        var checkboxes = document.getElementsByName('assign');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                var value = checkboxes[i].value;
+                $scope.msgText.push(value);
+            }
+        }
+        api.put('move-to-dumb', false, token, {
+            msgText: $scope.msgText
+        }, function(err, response) {
+            if (err || response.error) {
+                $scope.alert = response.message;
+            } else {
+                $scope.alert = response.message;
+                //remove from list that msg
+                $scope.getSms($scope.code, $scope.status, $scope.start, $scope.tab);
+            }
+        });
+
+    };
+    $scope.useLater = function() {
+        $scope.addresses = [];
+        var checkboxes = document.getElementsByName('blacklist');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                var value = checkboxes[i].value;
+                $scope.addresses.push(value);
+            }
+        }
+        // var type=typeOf($scope.addresses);
+
+        api.put('later-use', false, token, {
+            shortcode: $scope.addresses
+        }, function(err, response) {
+            if (err || response.error) {
+                $scope.alerts = [{
+                    msg: response.userMessage || 'Server error! Are you connected to the internet?.',
+                    type: 'error'
+                }];
+            } else {
+                $scope.alert = response.message;
+                $scope.new.messages = [];
+                $scope.new.codes = [];
+                $scope.new.getcodes();
+
+
+            }
+        });
+    };
+    $scope.blacklist = function() {
+        $scope.addresses = [];
+        var checkboxes = document.getElementsByName('blacklist');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                var value = checkboxes[i].value;
+                $scope.addresses.push(value);
+
+            }
+        }
+        api.put('blacklist', false, token, {
+            address: $scope.addresses
+        }, function(err, response) {
+            if (err || response.error) {
+                $scope.alerts = [{
+                    msg: response.userMessage || 'Server error! Are you connected to the internet?.',
+                    type: 'error'
+                }];
+            } else {
+                $scope.alert = response.message;
+                $scope.new.messages = [];
+                $scope.new.codes = [];
+                $scope.new.getcodes();
+                //remove shortcode from list of shortcodes
+            }
+        });
+    };
+
 });
