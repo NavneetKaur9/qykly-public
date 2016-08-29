@@ -11,21 +11,21 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
         $scope.alert = false;
     };
     var page=0;
-    $scope.appUsers=[];
+    // $scope.appUsers=[];
     $scope.getTodaysUser = function() {
         $scope.showProcessing=true;
         api.get('todays-users', false, token, {
             page:page
         }, function(err, response) {
             if (!err) {
-                $scope.appUsers.push(response.result);
+                $scope.appUsers=response.result;
                 $scope.showProcessing=false;
             } else {
                 $scope.alert = response.message;
             }
         });
     };
-    // $scope.getTodaysUser();
+    $scope.getTodaysUser();
     $scope.moreUsers=function () {
         page++;
         $scope.getTodaysUser();
