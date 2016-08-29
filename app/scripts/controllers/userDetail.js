@@ -31,13 +31,13 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
                 $scope.count2=response.new;
                 $scope.count3=response.processed;
                 $scope.count=true;
-                console.log('dd', response);
             }
         });
     };
     getUserCount();
     function getShortcode(codeType) {
-        $scope.alert = '  loading ' + codeType + ' Shortcodes.........';
+        $scope.showLoader=true;
+        // $scope.alert = '  loading ' + codeType + ' Shortcodes.........';
         api.get('get-users-shortcode', false, token, {
             get_code_typ: codeType,
             id: id
@@ -45,8 +45,8 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
             if (err) {
                 $scope.alert = response.message;
             } else {
-                console.log(codeType);
-                $scope.alert = false;
+                // $scope.alert = false;
+                $scope.showLoader=false;
                 if (codeType === 'new') {
                     $scope.new = response;
                 }
@@ -105,6 +105,8 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
     // countShortcode();
     countStatus();
     $scope.getSms = function (code, status, codeType) {
+        $scope.selected_all=false;
+
         $scope.alert = 'fetching ' + code + ' messages....';
         $scope.code = code;
         api.get('get-sms/' + id + '/' + status + '/' + code, false, token, false, function (err, response) {
@@ -112,7 +114,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
                 $scope.alert = response.message;
             } else {
                 $scope.alert = false;
-                console.log(codeType);
+
                 if (codeType === 'new') {
                     $scope.code_new = code;
                     $scope.sms_new = response;

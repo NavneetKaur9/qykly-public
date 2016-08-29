@@ -218,16 +218,16 @@
                                                 <tr class="headings">
                                                 <th>#</th>
                                                     <th>
-                                                        <input type="checkbox" id="check-all" class="flat" ng-model="selected.all" />
+                                                        <input type="checkbox" id="check-all" class="flat" ng-model="selected_all" />
                                                     </th>
                                                     <th class="column-title">
                                                             Text
                                                         <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="moveAllToDump()">
                                                             Move All to Dump
                                                         </button>
-                                                            <button type="button" class="btn btn-default btn-xs pull-right" ng-click="moveToDump()">
-                                                                Move To Dump
-                                                            </button>
+                                                        <button type="button" class="btn btn-default btn-xs pull-right" ng-click="moveToDump()">
+                                                            Move To Dump
+                                                        </button>
                                                     </th>
                                                     <th class="column-title">
                                                             Msg Time
@@ -253,7 +253,7 @@
                                                     {{itemsPerPage *(currentPage-1)+$index+1}}
                                                 </td>
                                                     <td class="a-center ">
-                                                        <input type="checkbox" class="flat" name="assign" value="{{sms._id}}" ng-checked="selected.all" />
+                                                        <input type="checkbox" class="flat" name="assign" value="{{sms._id}}" ng-checked="selected_all" />
                                                     </td>
                                                     <td>
                                                         {{sms._id}}
@@ -404,7 +404,7 @@
                                             <thead>
                                             <th>#</th>
                                                 <th>
-                                                    <input type="checkbox" id="check-all" class="flat" ng-model="selected.all" />
+                                                    <input type="checkbox" id="check-all" class="flat" ng-model="selected_all" />
                                                 </th>
                                                 <th>
                                                         Text
@@ -433,7 +433,7 @@
                                                 <tr ng-repeat="sms in new.messages">
                                                   <td>{{itemsPerPage *(currentPage-1)+$index+1}}</td>
                                                     <td class="a-center ">
-                                                        <input type="checkbox" class="flat" name="assign" value="{{sms._id}}" ng-checked="selected.all" />
+                                                        <input type="checkbox" class="flat" name="assign" value="{{sms._id}}" ng-checked="selected_all" />
                                                     </td>
                                                     <td>
                                                         {{sms._id}}

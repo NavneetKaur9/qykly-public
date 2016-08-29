@@ -249,6 +249,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
     };
     //***********pagination on change ************//
     $scope.pageChanged = function(newPage) {
+        $scope.selected_all=false;
         $scope.getSms($scope.code, $scope.status, newPage, $scope.tab);
     };
 

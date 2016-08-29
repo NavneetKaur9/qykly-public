@@ -11,15 +11,14 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
         $scope.alert = false;
     };
     var page=0;
+    $scope.appUsers=[];
     $scope.getTodaysUser = function() {
-
         $scope.showProcessing=true;
         api.get('todays-users', false, token, {
             page:page
         }, function(err, response) {
             if (!err) {
-                $scope.appUsers = response.result;
-
+                $scope.appUsers.push(response.result);
                 $scope.showProcessing=false;
             } else {
                 $scope.alert = response.message;
@@ -33,7 +32,6 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
     };
     var d = new Date();
     d.setHours(0, 0, 0, 0);
-    console.log(+d);
     var time=+d;
 
     /*************************************************
@@ -45,7 +43,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
         sortby: 'count',
         searchCode: '',
         getcodes: function() {
-            $scope.showLoader = true;
+            $scope.showLoaderunProc = true;
             console.log('get codes00');
             api.get('get-unprocessedCodes-today', false, token, {
                 start: $scope.unProc.start,
@@ -56,7 +54,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
                 if (err || response.error) {
                     $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
                 } else {
-                    $scope.showLoader = false;
+                    $scope.showLoaderunProc = false;
                     $scope.unProc.codes = $scope.unProc.codes.concat(response);
                 }
             });
@@ -88,7 +86,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
         sortby: 'count',
         searchCode: '',
         getcodes: function() {
-            $scope.showLoader = true;
+            $scope.showLoaderNew = true;
             api.get('get-newCodes-today', false, token, {
                 start: $scope.new.start,
                 search: $scope.new.searchCode,
@@ -98,7 +96,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
                 if (err || response.error) {
                     $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
                 } else {
-                    $scope.showLoader = false;
+                    $scope.showLoaderNew = false;
                     $scope.new.codes = $scope.new.codes.concat(response);
                 }
             });
@@ -119,7 +117,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
             $scope.new.getcodes();
         }
     };
-    // $scope.new.getcodes();
+    $scope.new.getcodes();
     /*************************************************
      START :    PROCESSED
      *************************************************/
@@ -129,7 +127,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
         sortby: 'count',
         searchCode: '',
         getcodes: function() {
-            $scope.showLoader = true;
+            $scope.showLoaderProc = true;
             api.get('get-processedCodes-today', false, token, {
                 start: $scope.proc.start,
                 search: $scope.proc.searchCode,
@@ -139,7 +137,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
                 if (err || response.error) {
                     $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
                 } else {
-                    $scope.showLoader = false;
+                    $scope.showLoaderProc = false;
                     $scope.proc.codes = $scope.proc.codes.concat(response);
                 }
             });
@@ -160,7 +158,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
             $scope.proc.getcodes();
         }
     };
-    // $scope.proc.getcodes();
+    $scope.proc.getcodes();
 
     /*************************************************
      START :    LATER USE
@@ -176,8 +174,11 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
         if (code !== $scope.code) {
             $scope.currentPage = 1;
         }
-        $scope.alert = 'loading............';
+        console.log(tab);
+        $scope.showLoaderMessages = true;
         $scope.loadingMsg = true;
+        $scope.selected_all=false;
+        $scope.code = code;
         api.get('get-messages-today', false, token, {
             address: code,
             status: status,
@@ -189,10 +190,10 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
                 $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
             } else {
                 $scope.messages=response.data;
-                // $scope.code = code;
+
                 // $scope.start = start;
-                // $scope.status = status;
-                // $scope.tab = tab;
+                $scope.status = status;
+                $scope.tab = tab;
                 // if (tab === 'unProc') {
                 //     $scope.unProc.messages = response.data;
                 // } else if (tab === 'new') {
@@ -202,14 +203,16 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
                 // } else if (tab === 'laterUse') {
                 //     $scope.laterUse.messages = response.data;
                 // }
-                // $scope.totalCount = response.totalCount;
-                // $scope.loadingMsg = false;
-                // $scope.alert = false;
+                $scope.totalCount = response.totalCount;
+                $scope.loadingMsg = false;
+                $scope.showLoaderMessages = false;
             }
         });
     };
     //***********pagination on change ************//
     $scope.pageChanged = function(newPage) {
+        $scope.selected_all=false;
+        console.log($scope.code,$scope.status,newPage);
         $scope.getSms($scope.code, $scope.status, newPage, $scope.tab);
     };
 

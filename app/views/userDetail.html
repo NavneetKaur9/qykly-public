@@ -339,6 +339,9 @@
 
                                                 </div>
                                             </a>
+                                            <div ng-show="showLoader">
+                                                <img src="assets/images/ajax-loader.gif" /> Processing
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- unprocessed message detail -->
@@ -371,7 +374,7 @@
                                             <thead>
                                             <th>
                                                 <input type="checkbox" id="check-all" class="flat"
-                                                       ng-model="selected.all"/>
+                                                       ng-model="selected_all"/>
                                             </th>
                                             <th>
                                                 <div href ng-click="order('text')" style="cursor:pointer">
@@ -415,7 +418,7 @@
                                             <tr ng-repeat="sms in sms_unproc |orderBy:sortType:sortReverse">
                                                 <td class="a-center ">
                                                     <input type="checkbox" class="flat" name="assign"
-                                                           value="{{sms.text}}" ng-checked="selected.all"/>
+                                                           value="{{sms.text}}" ng-checked="selected_all"/>
                                                 </td>
                                                 <td>
                                                     {{sms.text}}
@@ -432,9 +435,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                             <!-- tab content 2 :new -->
                             <div role="tabpanel" class="tab-pane fade " id="tab_content2" aria-labelledby="new-tab">
                                 <div class="row">
@@ -465,6 +465,9 @@
 
                                                 </div>
                                             </a>
+                                            <div ng-show="showLoader">
+                                                <img src="assets/images/ajax-loader.gif" /> Processing
+                                            </div>
                                         </div>
                                         <button type="button" class="btn btn-dark pull-right" ng-click="blacklist()">
                                             Blacklist
@@ -500,7 +503,7 @@
                                             <thead>
                                             <th>
                                                 <input type="checkbox" id="check-all" class="flat"
-                                                       ng-model="selected.all"/>
+                                                       ng-model="selected_all"/>
                                             </th>
                                             <th>
                                                 <div href ng-click="order('text')" style="cursor:pointer">
@@ -540,7 +543,7 @@
                                             <tr ng-repeat="sms in sms_new |orderBy:sortType:sortReverse">
                                                 <td class="a-center ">
                                                     <input type="checkbox" class="flat" name="assign"
-                                                           value="{{sms.text}}" ng-checked="selected.all"/>
+                                                           value="{{sms.text}}" ng-checked="selected_all"/>
                                                 </td>
                                                 <td>
                                                     {{sms.text}}
@@ -579,6 +582,9 @@
                                                     </div>
                                                 </div>
                                             </a>
+                                            <div ng-show="showLoader">
+                                                <img src="assets/images/ajax-loader.gif" /> Processing
+                                            </div>
                                         </div>
                                     </div>
                                     <!--right section:processed-->
