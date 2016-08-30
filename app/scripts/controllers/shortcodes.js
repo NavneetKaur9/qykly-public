@@ -38,13 +38,13 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 
 
 
-        // api.get('get-codeCount', false, token, {}, function(err, response) {
-        //     if (err || response.error) {
-        //         $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
-        //     } else {
-        //         $scope.count = response;
-        //     }
-        // });
+        api.get('get-codeCount', false, token, {}, function(err, response) {
+            if (err || response.error) {
+                $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
+            } else {
+                $scope.count = response;
+            }
+        });
 
     /*************************************************
                START :    UNPROCESSESD 
