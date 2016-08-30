@@ -373,18 +373,19 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
                 $scope.alert = response.message;
                 //remove from list that msg
                 $scope.getSms($scope.code, $scope.status, $scope.start, $scope.tab);
-                // test();
+                decreaseCount();
             }
         });
 
     };
-    function test() {
-       var index= $scope.unProc.codes.indexOf($scope.code);
-        console.log('index',index,$scope.unProc.codes[index]);
-        console.log('count before',$scope.unProc.codes[index].count);
-
-        $scope.unProc.codes[index].count-=$scope.msgText.length;
-        console.log('count after',$scope.unProc.codes[index].count);
+    function decreaseCount() {
+        var index = -1;
+        for(var i = 0, len =  $scope.unProc.codes.length; i < len; i++) {
+            if ($scope.unProc.codes[i]._id === $scope.code) {
+                $scope.unProc.codes[i].count-=$scope.msgText.length;
+                break;
+            }
+        }
     };
     $scope.useLater = function() {
         $scope.addresses = [];
