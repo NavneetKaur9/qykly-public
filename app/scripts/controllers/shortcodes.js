@@ -38,13 +38,13 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 
 
 
-        api.get('get-codeCount', false, token, {}, function(err, response) {
-            if (err || response.error) {
-                $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
-            } else {
-                $scope.count = response;
-            }
-        });
+        // api.get('get-codeCount', false, token, {}, function(err, response) {
+        //     if (err || response.error) {
+        //         $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
+        //     } else {
+        //         $scope.count = response;
+        //     }
+        // });
 
     /*************************************************
                START :    UNPROCESSESD 
@@ -355,6 +355,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
 
 
     $scope.moveToDump = function() {
+        $scope.selected_all=false;
         $scope.msgText = [];
         var checkboxes = document.getElementsByName('assign');
         for (var i = 0; i < checkboxes.length; i++) {
@@ -372,9 +373,18 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
                 $scope.alert = response.message;
                 //remove from list that msg
                 $scope.getSms($scope.code, $scope.status, $scope.start, $scope.tab);
+                // test();
             }
         });
 
+    };
+    function test() {
+       var index= $scope.unProc.codes.indexOf($scope.code);
+        console.log('index',index,$scope.unProc.codes[index]);
+        console.log('count before',$scope.unProc.codes[index].count);
+
+        $scope.unProc.codes[index].count-=$scope.msgText.length;
+        console.log('count after',$scope.unProc.codes[index].count);
     };
     $scope.useLater = function() {
         $scope.addresses = [];

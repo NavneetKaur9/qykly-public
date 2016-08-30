@@ -33,7 +33,6 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
     var d = new Date();
     d.setHours(0, 0, 0, 0);
     var time=+d;
-
     /*************************************************
      START :    UNPROCESSESD
      *************************************************/
