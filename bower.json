@@ -25,7 +25,8 @@
     "angular-datatables": "^0.5.4",
     "angular-resource": "^1.5.7",
     "angular-backtop": "*",
-    "angular-google-chart": "^0.1.0"
+    "angular-google-chart": "^0.1.0",
+    "ngclipboard": "^1.1.1"
   },
   "resolutions": {
     "angular": "^1.5.7"

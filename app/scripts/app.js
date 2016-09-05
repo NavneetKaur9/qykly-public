@@ -213,6 +213,9 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
         return $ocLazyLoad.load({
           name: 'sbAdminApp',
           files: ['scripts/controllers/json_editor.js']
+        }),$ocLazyLoad.load({
+          name: 'ngclipboard',
+          files: ['bower_components/ngclipboard/dist/ngclipboard.min.js']
         });
       }
     }

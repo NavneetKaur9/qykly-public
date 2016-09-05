@@ -2,6 +2,7 @@
     <h3>
         Json editor
     </h3>
+
     <!-- BLOCK : CHOOSE CATEGORY -->
     <div class="row">
         <div class="col-md-12 col-xs-12">
@@ -123,11 +124,21 @@
             <button ng-click="bill.saveChanges()" ng-show="savechanges">Save changes</button>
         </div>
 
-        <div class="col-md-10">
+        <div class="col-md-10" ng-show="bill.regex.length">
             <div class="x_panel">
-                <div class="x_title">OUTPUT</div>
+                <div class="x_title">
+                    OUTPUT
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <button class="btn btn-default" ngclipboard data-clipboard-action="copy" data-clipboard-target="#bill">
+                                <i class="fa fa-copy"></i> Copy
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
                 <div class="x_content">
-                    <pre>{{bill.regex |json}}</pre>
+                    <pre id="bill">{{bill.regex |json}}</pre>
                 </div>
             </div>
         </div>
@@ -320,11 +331,21 @@
         </div>
         <!-- FORM COMES HERE -->
         <!-- JSON OUTPUT -->
-        <div class="col-md-10">
+        <div class="col-md-10" ng-show="purchase.regex.length">
             <div class="x_panel">
-                <div class="x_title">OUTPUT</div>
+                <div class="x_title">
+                    OUTPUT
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <button class="btn btn-default" ngclipboard data-clipboard-action="copy" data-clipboard-target="#purchase">
+                                <i class="fa fa-copy"></i> Copy
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
                 <div class="x_content">
-                    <pre id="travel">{{purchase.regex |json}}</pre>
+                    <pre id="purchase">{{purchase.regex |json}}</pre>
                 </div>
             </div>
         </div>
@@ -706,13 +727,19 @@
         <!-- FORM COMES HERE -->
         <!-- JSON OUTPUT -->
 
-        <div class="col-md-10">
+        <div class="col-md-10" ng-show="travel.regex.length">
             <!-- {{travel |json}} -->
 
             <div class="x_panel">
                 <div class="x_title">OUTPUT
-
-
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <button class="btn btn-default" ngclipboard data-clipboard-action="copy" data-clipboard-target="#travel">
+                                <i class="fa fa-copy"></i> Copy
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
 
