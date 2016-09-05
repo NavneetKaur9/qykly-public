@@ -3,25 +3,15 @@
  *
  */
 angular.module('sbAdminApp').controller('jsonEditorCtrl',
-	function($scope, $http, api, $sce, $window, $cookieStore) {
+    function ($scope, $http, api, $sce, $window, $cookieStore) {
 
-		$scope.closeAlert = function() {
-			$scope.alert = true;
-		};
-
-		//test
-        $scope.test={
-            regex:[],
-            ele:{f1:'f1',f2:2},
-            add:function () {
-                // $scope.test
-            }
+        $scope.closeAlert = function () {
+            $scope.alert = true;
         };
-        //test
 
-        $scope.bill={
-            regex:[],
-            ele:{
+        $scope.bill = {
+            regex: [],
+            ele: {
                 id: '',
                 merchantName: '',
                 pattern: '',
@@ -31,46 +21,46 @@ angular.module('sbAdminApp').controller('jsonEditorCtrl',
                 runawayCount: 1,
                 posMerchantAccountId: -1,
                 posAmount: -1,
-                posDate:-1,
-                posDueDate:-1,
+                posDate: -1,
+                posDueDate: -1,
                 dateFormat: 'dd-MMM-yyyy',
-                altDateFormat:'dd/MM/yy'
+                altDateFormat: 'dd/MM/yy'
             },
-            add:function () {
+            add: function () {
                 $scope.bill.regex.push({
-                    id:$scope.bill.ele.id,
-                    merchantName:$scope.bill.ele.merchantName,
-                    pattern:$scope.bill.ele.pattern,
-                    msgType:$scope.bill.ele.msgType,
-                    address:$scope.bill.ele.address,
-                    msgSubType:$scope.bill.ele.msgSubType,
-                    runawayCount:$scope.bill.ele.runawayCount,
-                    posMerchantAccountId:$scope.bill.ele.posMerchantAccountId,
-                    posAmount:$scope.bill.ele.posAmount,
-                    posDate:$scope.bill.ele.posDate,
-                    posDueDate:$scope.bill.ele.posDueDate,
-                    dateFormat:$scope.bill.ele.dateFormat,
-                    altDateFormat:$scope.bill.ele.altDateFormat
+                    id: $scope.bill.ele.id,
+                    merchantName: $scope.bill.ele.merchantName,
+                    pattern: $scope.bill.ele.pattern,
+                    msgType: $scope.bill.ele.msgType,
+                    address: $scope.bill.ele.address,
+                    msgSubType: $scope.bill.ele.msgSubType,
+                    runawayCount: $scope.bill.ele.runawayCount,
+                    posMerchantAccountId: $scope.bill.ele.posMerchantAccountId,
+                    posAmount: $scope.bill.ele.posAmount,
+                    posDate: $scope.bill.ele.posDate,
+                    posDueDate: $scope.bill.ele.posDueDate,
+                    dateFormat: $scope.bill.ele.dateFormat,
+                    altDateFormat: $scope.bill.ele.altDateFormat
                 });
             },
-            edit:function (regex) {
-                var _ele=regex;
-                $scope.bill.ele=_ele;
-                $scope.savechanges=true;
+            edit: function (regex) {
+                var _ele = regex;
+                $scope.bill.ele = _ele;
+                $scope.savechanges = true;
             },
-            saveChanges:function () {
-                var index=$scope.bill.regex.indexOf($scope.bill.ele);
+            saveChanges: function () {
+                var index = $scope.bill.regex.indexOf($scope.bill.ele);
                 console.log(index);
-                $scope.bill.regex[index]=$scope.bill.ele;
-                $scope.savechanges=false;
+                $scope.bill.regex[index] = $scope.bill.ele;
+                $scope.savechanges = false;
                 // $scope.bill.ele={};
             },
-            remove:function (index) {
-                $scope.bill.regex.splice(index,1);
+            remove: function (index) {
+                $scope.bill.regex.splice(index, 1);
             }
         };
-		$scope.purchase = {
-		    regex:[],
+        $scope.purchase = {
+            regex: [],
             ele: {
                 id: "",
                 address: "AMAZON",
@@ -112,7 +102,7 @@ angular.module('sbAdminApp').controller('jsonEditorCtrl',
                 posOrderReturnReceiveDate: -1,
                 posDeliveryFailReason: -1
             },
-            add:function () {
+            add: function () {
                 $scope.purchase.regex.push({
                     id: $scope.purchase.ele.id,
                     address: $scope.purchase.ele.address,
@@ -155,12 +145,12 @@ angular.module('sbAdminApp').controller('jsonEditorCtrl',
                     posDeliveryFailReason: $scope.purchase.ele.posDeliveryFailReason
                 });
             },
-            remove:function (index) {
-                $scope.purchase.regex.splice(index,1);
+            remove: function (index) {
+                $scope.purchase.regex.splice(index, 1);
             }
-		};
-		$scope.travel = {
-		    regex:[],
+        };
+        $scope.travel = {
+            regex: [],
             ele: {
                 id: "",
                 posBookingId: -1,
@@ -214,7 +204,7 @@ angular.module('sbAdminApp').controller('jsonEditorCtrl',
                 isReturn: false
 
             },
-            add:function () {
+            add: function () {
                 $scope.travel.regex.push({
                     id: $scope.travel.ele.id,
                     posBookingId: $scope.travel.ele.posBookingId,
@@ -269,12 +259,9 @@ angular.module('sbAdminApp').controller('jsonEditorCtrl',
 
                 });
             },
-            remove:function (index) {
-                $scope.travel.regex.splice(index,1);
+            remove: function (index) {
+                $scope.travel.regex.splice(index, 1);
             }
 
-		};
-
-
-
-	});
+        };
+    });
