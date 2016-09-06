@@ -7,8 +7,8 @@
 //
 angular.module('sbAdminApp').factory('api', ['$rootScope', '$http', '$cookieStore', function($rootScope, $http, $cookieStore) {
 
-	 // var parseUrl = 'http://localhost:3000/api2';
-	var parseUrl='/api2';
+	  var parseUrl = 'http://localhost:3000/api2';
+	// var parseUrl='/api2';
 	// var parseUrl = 'http://52.66.81.240/api2'; // staging server address
 	//  var parseUrl = 'http://54.255.175.65/api2'; //  production server address
 	var parseHeaders = {};
