@@ -319,7 +319,7 @@
                                     <div class="col-md-2 col-sm-2 mail_list_column">
                                         <input ng-model="searchText_unproc" style="width:100%;margin-bottom:1rem"
                                                placeholder="search code"/>
-                                        <div style="overflow:auto;height: 500px;">
+                                       <!--  <div style="overflow:auto;height: 500px;">
                                             <a href="" ng-repeat="code in unproc |filter:searchText_unproc">
                                                 <div class="mail_list">
                                                     <span class="">  {{code.count}}</span>
@@ -339,6 +339,29 @@
 
                                                 </div>
                                             </a>
+                                            <div ng-show="showLoader">
+                                                <img src="assets/images/ajax-loader.gif" /> Processing
+                                            </div>
+                                        </div> -->
+
+
+                                        <div style="overflow-x:hidden;height: 500px;">
+                                            <div ng-repeat="code in unproc |filter:searchText_unproc">
+                                                <div class="mail_list" style="height: 40px; padding-left: 4px;" ng-class="{activeClass : (activeMenu == code._id)}">
+                                                    <div class="row">
+                                                        <div class="col-md-5" ng-click="getSms(code._id,0,'unproc')" style="cursor: pointer;">{{code._id}}</div>
+                                                        <div class="col-md-5">
+                                                            <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <button class="btn btn-default btn-xs" type="button" ng-click="parseSms(code._id)">
+                                                                <i aria-hidden="true" class="fa fa-refresh">
+                                                                </i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div ng-show="showLoader">
                                                 <img src="assets/images/ajax-loader.gif" /> Processing
                                             </div>
@@ -442,7 +465,7 @@
                                     <div class="col-md-2 col-sm-2 mail_list_column">
                                         <input ng-model="searchText_new" style="width:100%;margin-bottom:1rem"
                                                placeholder="search code"/>
-                                        <div style="overflow:auto;height: 500px;">
+                                        <!-- <div style="overflow:auto;height: 500px;">
                                             <a href="javascript:void(0)" ng-repeat="code in new |filter:searchText_new">
                                                 <div class="mail_list">
                                                     <span class="">  {{code.count}}</span>
@@ -465,6 +488,29 @@
 
                                                 </div>
                                             </a>
+                                            <div ng-show="showLoader">
+                                                <img src="assets/images/ajax-loader.gif" /> Processing
+                                            </div>
+                                        </div> -->
+
+                                        <div style="overflow-x:hidden;height: 500px;">
+                                            <div ng-repeat="code in new |filter:searchText_new">
+                                                <div class="mail_list" style="height: 40px; padding-left: 4px;" ng-class="{activeClass : (activeMenu == code._id)}">
+                                                    <div class="row">
+                                                        <div class="col-md-2"><input type="checkbox" value="{{code._id}}" name="blacklist"/></div>
+                                                        <div class="col-md-4" ng-click="getSms(code._id,0,'new')" style="cursor: pointer;">{{code._id}}</div>
+                                                        <div class="col-md-4">
+                                                            <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <button class="btn btn-default btn-xs" type="button" ng-click="parseSms(code._id)">
+                                                                <i aria-hidden="true" class="fa fa-refresh">
+                                                                </i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div ng-show="showLoader">
                                                 <img src="assets/images/ajax-loader.gif" /> Processing
                                             </div>
@@ -565,7 +611,7 @@
                                 <div class="row">
                                     <!--left section:processed-->
                                     <div class="col-md-2 col-sm-2 mail_list_column">
-                                        <div style="overflow:auto;height: 500px;">
+                                        <!-- <div style="overflow:auto;height: 500px;">
                                             <input ng-model="searchText_proc" style="width:100%;margin-bottom:1rem"
                                                    placeholder="search code"/>
                                             <a href="" ng-repeat="code in proc |filter:searchText_proc">
@@ -574,7 +620,7 @@
 
                                                     <div class="left">
                                                         <!-- <input type="checkbox" value="{{code}}" name="blacklist" /> -->
-                                                    </div>
+                                                    <!-- </div>
                                                     <div class="right">
                                                         <h3 ng-click="getSms(code._id,3,'proc')">
                                                             {{code._id}}
@@ -582,6 +628,24 @@
                                                     </div>
                                                 </div>
                                             </a>
+                                            <div ng-show="showLoader">
+                                                <img src="assets/images/ajax-loader.gif" /> Processing
+                                            </div>
+                                        </div -->
+
+                                        <div style="overflow-x:hidden;height: 500px;">
+                                        <input ng-model="searchText_proc" style="width:100%;margin-bottom:1rem"
+                                                   placeholder="search code"/>
+                                            <div ng-repeat="code in proc |filter:searchText_proc">
+                                                <div class="mail_list" style="height: 40px; padding-left: 4px;" ng-class="{activeClass : (activeMenu == code._id)}">
+                                                    <div class="row">
+                                                        <div class="col-md-6" ng-click="getSms(code._id,3,'proc')" style="cursor: pointer;">{{code._id}}</div>
+                                                        <div class="col-md-6">
+                                                            <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div ng-show="showLoader">
                                                 <img src="assets/images/ajax-loader.gif" /> Processing
                                             </div>

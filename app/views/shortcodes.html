@@ -460,17 +460,18 @@
                                             </label>
                                         </div>
                                         <!-- /sortby-->
-                                        <div style="overflow:auto;height: 500px;">
-                                            <a ng-repeat="code in proc.codes" href="javascript:void(0)">
-                                                <div class="mail_list" ng-class="{activeClass : (activeMenu == code._id)}">
-                                                    <span class="">  {{code.count}}</span>
-                                                    <div class="right" style="cursor:pointer;">
-                                                        <h3 ng-click="getSms(code._id,3,1,'proc')">
-                                                            {{code._id}}
-                                                        </h3>
+                                        <div style="overflow-x:hidden;height: 500px;">
+                                            <div ng-repeat="code in proc.codes">
+                                                <!-- table -->
+                                                <div class="mail_list" style="height: 40px;"  ng-class="{activeClass : (activeMenu == code._id)}">
+                                                    <div class="row">
+                                                        <div class="col-md-6" ng-click="getSms(code._id,3,1,'proc')" style="cursor: pointer;">{{code._id}}</div>
+                                                        <div class="col-md-6">
+                                                            <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </a>
+                                            </div>
                                             <div ng-show="showLoader">
                                                 <img src="assets/images/ajax-loader.gif" /> Processing
                                             </div>
@@ -576,17 +577,18 @@
                                             </label>
                                         </div>
                                         <!-- /sortby-->
-                                        <div style="overflow:auto;height: 500px;">
-                                            <a ng-repeat="code in laterUse.codes" href="javascript:void(0)">
-                                                <div class="mail_list" ng-class="{activeClass : (activeMenu == code._id)}">
-                                                    <span class="">  {{code.count}}</span>
-                                                    <div class="right" style="cursor:pointer;">
-                                                        <h3 ng-click="getSms(code._id,8,1,'laterUse')">
-                                                            {{code._id}}
-                                                        </h3>
+                                        <div style="overflow-x:hidden;height: 500px;">
+                                            <div ng-repeat="code in laterUse.codes">
+                                                <!-- table -->
+                                                <div class="mail_list" style="height: 40px;"  ng-class="{activeClass : (activeMenu == code._id)}">
+                                                    <div class="row">
+                                                        <div class="col-md-6" ng-click="getSms(code._id,8,1,'laterUse')" style="cursor: pointer;">{{code._id}}</div>
+                                                        <div class="col-md-6">
+                                                            <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </a>
+                                            </div>
                                             <div ng-show="showLoader">
                                                 <img src="assets/images/ajax-loader.gif" /> Processing
                                             </div>
