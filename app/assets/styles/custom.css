@@ -1,5 +1,8 @@
-.red {
-    color: red;
+a.activeClass {
+    background-color: #eee;
+}
+.activeClass {
+    background-color: #eee;
 }
 .nav-sm .container.body .col-md-3.left_col {
     width: 70px;

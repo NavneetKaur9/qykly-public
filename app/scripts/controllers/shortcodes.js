@@ -4,6 +4,8 @@
  */
 angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http, api, $cookieStore, $window, DTOptionsBuilder, DTColumnBuilder, $filter) {
 
+
+
     var url = api.addr();
     var token = $cookieStore.get('c2cCookie');
     $window.scrollTo(0, 0);
@@ -219,6 +221,7 @@ angular.module('sbAdminApp').controller('shortcodesCtrl', function($scope, $http
         }
         $scope.alert = 'loading............';
         $scope.loadingMsg = true;
+        $scope.activeMenu = code;
         api.get('get-messages', false, token, {
             address: code,
             status: status,
