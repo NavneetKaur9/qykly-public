@@ -156,26 +156,26 @@
                                         </div>
                                         <!-- /sortby-->
                                         <div style="overflow-x:hidden;height: 500px;">
-                                            <a ng-repeat="code in unProc.codes" href="javascript:void(0)">
+                                            <div ng-repeat="code in unProc.codes">
                                                 <!-- table -->
                                                 <div class="mail_list" style="height: 60px;"  ng-class="{activeClass : (activeMenu == code._id)}">
                                                     <div class="row">
-                                                        <div class="col-md-6" ng-click="getSms(code._id,0,1,'unProc')">{{code._id}}</div>
+                                                        <div class="col-md-6" ng-click="getSms(code._id,0,1,'unProc')" style="cursor: pointer;">{{code._id}}</div>
                                                         <div class="col-md-6">{{code.saveTime |date:'dd-MMM-yy'}}</div>
                                                     </div>
                                                     <div class="row" style="margin-top: 5px;">
-                                                        <div class="col-md-6" style="cursor:pointer;" >
+                                                        <div class="col-md-6">
                                                             <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <button class="btn btn-default btn-xs" type="button" ng-click="parseSms(code._id)">
+                                                            <button title="parse sms" class="btn btn-default btn-xs" type="button" ng-click="parseSms(code._id)">
                                                                 <i aria-hidden="true" class="fa fa-refresh">
                                                                 </i>
                                                             </button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </a>
+                                            </div>
                                             <div ng-show="showLoader">
                                                 <img src="assets/images/ajax-loader.gif" /> Processing
                                             </div>
@@ -311,18 +311,18 @@
                                         </div>
                                         <!-- /sortby-->
                                         <div style="overflow-x:hidden;height: 500px;">
-                                            <a ng-repeat="code in new.codes" href="javascript:void(0)">
+                                            <div ng-repeat="code in new.codes">
                                                 <div class="mail_list" style="height: 60px; padding-left: 4px;" ng-class="{activeClass : (activeMenu == code._id)}">
                                                     <div class="row">
                                                         <div class="col-md-2">
                                                             <input type="checkbox" value="{{code._id}}" name="blacklist" />
                                                         </div>
-                                                        <div class="col-md-4" ng-click="getSms(code._id,0,1,'new')">{{code._id}}</div>
+                                                        <div class="col-md-4" ng-click="getSms(code._id,0,1,'new')" style="cursor: pointer;">{{code._id}}</div>
                                                         <div class="col-md-6">{{code.saveTime |date:'dd-MMM-yy'}}</div>
                                                     </div>
                                                     <div class="row" style="margin-top: 5px;">
                                                         <div class="col-md-2"></div>
-                                                        <div class="col-md-4" style="cursor:pointer;" >
+                                                        <div class="col-md-4">
                                                             <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
                                                         </div>
                                                         <div class="col-md-6">
@@ -333,7 +333,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </a>
+                                            </div>
                                             <div ng-show="showLoader">
                                                 <img src="assets/images/ajax-loader.gif" /> Processing
                                             </div>
