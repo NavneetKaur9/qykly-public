@@ -2378,8 +2378,8 @@ button,
 .mail_list {
     width: 100%;
     border-bottom: 1px solid #DBDBDB;
-    margin-bottom: 2px;
-    display: inline-block;
+    /*margin-bottom: 2px;*/
+    /*display: inline-block;*/
 }
 
 .mail_list .left {
