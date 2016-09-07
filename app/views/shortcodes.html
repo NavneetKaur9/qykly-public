@@ -159,8 +159,8 @@
                                             <div ng-repeat="code in unProc.codes">
                                                 <!-- table -->
                                                 <div class="mail_list" style="height: 60px;"  ng-class="{activeClass : (activeMenu == code._id)}">
-                                                    <div class="row">
-                                                        <div class="col-md-6" ng-click="getSms(code._id,0,1,'unProc')" style="cursor: pointer;">{{code._id}}</div>
+                                                    <div class="row menu">
+                                                        <a class="col-md-6 link" ng-click="getSms(code._id,0,1,'unProc')">{{code._id}}</a>
                                                         <div class="col-md-6">{{code.saveTime |date:'dd-MMM-yy'}}</div>
                                                     </div>
                                                     <div class="row" style="margin-top: 5px;">
@@ -313,11 +313,11 @@
                                         <div style="overflow-x:hidden;height: 500px;">
                                             <div ng-repeat="code in new.codes">
                                                 <div class="mail_list" style="height: 60px; padding-left: 4px;" ng-class="{activeClass : (activeMenu == code._id)}">
-                                                    <div class="row">
+                                                    <div class="row menu">
                                                         <div class="col-md-2">
                                                             <input type="checkbox" value="{{code._id}}" name="blacklist" />
                                                         </div>
-                                                        <div class="col-md-4" ng-click="getSms(code._id,0,1,'new')" style="cursor: pointer;">{{code._id}}</div>
+                                                        <a class="col-md-4 link" ng-click="getSms(code._id,0,1,'new')" style="cursor: pointer;">{{code._id}}</a>
                                                         <div class="col-md-6">{{code.saveTime |date:'dd-MMM-yy'}}</div>
                                                     </div>
                                                     <div class="row" style="margin-top: 5px;">
@@ -464,8 +464,8 @@
                                             <div ng-repeat="code in proc.codes">
                                                 <!-- table -->
                                                 <div class="mail_list" style="height: 40px;"  ng-class="{activeClass : (activeMenu == code._id)}">
-                                                    <div class="row">
-                                                        <div class="col-md-6" ng-click="getSms(code._id,3,1,'proc')" style="cursor: pointer;">{{code._id}}</div>
+                                                    <div class="row menu">
+                                                        <a class="col-md-6 link" ng-click="getSms(code._id,3,1,'proc')" style="cursor: pointer;">{{code._id}}</a>
                                                         <div class="col-md-6">
                                                             <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
                                                         </div>
@@ -581,8 +581,8 @@
                                             <div ng-repeat="code in laterUse.codes">
                                                 <!-- table -->
                                                 <div class="mail_list" style="height: 40px;"  ng-class="{activeClass : (activeMenu == code._id)}">
-                                                    <div class="row">
-                                                        <div class="col-md-6" ng-click="getSms(code._id,8,1,'laterUse')" style="cursor: pointer;">{{code._id}}</div>
+                                                    <div class="row menu">
+                                                        <a class="col-md-6 link" ng-click="getSms(code._id,8,1,'laterUse')" style="cursor: pointer;">{{code._id}}</a>
                                                         <div class="col-md-6">
                                                             <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
                                                         </div>
