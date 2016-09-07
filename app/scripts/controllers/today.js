@@ -173,7 +173,8 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
         if (code !== $scope.code) {
             $scope.currentPage = 1;
         }
-        console.log(tab);
+                $scope.activeMenu=code;
+    
         $scope.showLoaderMessages = true;
         $scope.loadingMsg = true;
         $scope.selected_all=false;

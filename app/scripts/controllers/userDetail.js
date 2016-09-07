@@ -109,6 +109,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
 
         $scope.alert = 'fetching ' + code + ' messages....';
         $scope.code = code;
+        $scope.activeMenu=code;
         api.get('get-sms/' + id + '/' + status + '/' + code, false, token, false, function (err, response) {
             if (err) {
                 $scope.alert = response.message;
