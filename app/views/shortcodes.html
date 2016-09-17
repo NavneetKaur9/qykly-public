@@ -1,5 +1,4 @@
 <section>
-  
     <!-- BLOCK 1 : SEARCH -->
     <div class="row tile_count">
         <div class="col-md-4">
@@ -75,8 +74,7 @@
                                 <a href="userDetail.html#tab_content1" id="un_proc-tab" role="tab" data-toggle="tab" aria-expanded="true">
                                     <span class="badge bg-green">
                                     {{count.unprocessed}}
-                                    </span> 
-                                    Unprocessed Shortcodes
+                                    </span> Unprocessed Shortcodes
                                 </a>
                             </li>
                             <li role="presentation" class="">
@@ -158,9 +156,9 @@
                                         <div style="overflow-x:hidden;height: 500px;">
                                             <div ng-repeat="code in unProc.codes">
                                                 <!-- table -->
-                                                <div class="mail_list" style="height: 60px;"  ng-class="{activeClass : (activeMenu == code._id)}">
+                                                <div class="mail_list" style="height: 60px;" ng-class="{activeClass : (activeMenu == code.address)}">
                                                     <div class="row menu">
-                                                        <a class="col-md-6 link" ng-click="getSms(code._id,0,1,'unProc')">{{code._id}}</a>
+                                                        <a class="col-md-6 link" ng-click="getSms(code.address,0,1,'unProc')">{{code.address}}</a>
                                                         <div class="col-md-6">{{code.saveTime |date:'dd-MMM-yy'}}</div>
                                                     </div>
                                                     <div class="row" style="margin-top: 5px;">
@@ -463,7 +461,7 @@
                                         <div style="overflow-x:hidden;height: 500px;">
                                             <div ng-repeat="code in proc.codes">
                                                 <!-- table -->
-                                                <div class="mail_list" style="height: 40px;"  ng-class="{activeClass : (activeMenu == code._id)}">
+                                                <div class="mail_list" style="height: 40px;" ng-class="{activeClass : (activeMenu == code._id)}">
                                                     <div class="row menu">
                                                         <a class="col-md-6 link" ng-click="getSms(code._id,3,1,'proc')" style="cursor: pointer;">{{code._id}}</a>
                                                         <div class="col-md-6">
@@ -580,7 +578,7 @@
                                         <div style="overflow-x:hidden;height: 500px;">
                                             <div ng-repeat="code in laterUse.codes">
                                                 <!-- table -->
-                                                <div class="mail_list" style="height: 40px;"  ng-class="{activeClass : (activeMenu == code._id)}">
+                                                <div class="mail_list" style="height: 40px;" ng-class="{activeClass : (activeMenu == code._id)}">
                                                     <div class="row menu">
                                                         <a class="col-md-6 link" ng-click="getSms(code._id,8,1,'laterUse')" style="cursor: pointer;">{{code._id}}</a>
                                                         <div class="col-md-6">

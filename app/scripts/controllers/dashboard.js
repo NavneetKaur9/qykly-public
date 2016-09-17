@@ -182,19 +182,29 @@ angular.module("sbAdminApp", ['googlechart'])
         }
       }).then(function successCallback(response) {
         var bankData = [];
-        for (var i = response.data.resData.length - 1; i >= 0; i--) {
-          angular.forEach(response.data.resData[i], function(value, key) {
-            var newTempArr = {};
-            newTempArr['_id'] = key;
-            newTempArr['count'] = value;
-            bankData.push(newTempArr);
-          }, bankData);
-        }
-        for (var i = bankData.length - 1; i >= 0; i--) {
+        // for (var i = response.data.resData.length - 1; i >= 0; i--) {
+        //   angular.forEach(response.data.resData[i], function(value, key) {
+        //     var newTempArr = {};
+        //     newTempArr['_id'] = key;
+        //     newTempArr['count'] = value;
+        //     bankData.push(newTempArr);
+        //   }, bankData);
+        // }
+        // for (var i = bankData.length - 1; i >= 0; i--) {
+        //   var tempArr = [];
+        //   var newTempArr = {};
+
+        //   tempArr.push({
+        //     'v': bankData[i]._id
+        //   }, { 'v': bankData[i].count });
+        //   newTempArr['c'] = tempArr;
+        //   bankGraphData.push(newTempArr);
+        // }
+        for (var i = response.data.length - 1; i >= 0; i--) {
           var tempArr = [];
           var newTempArr = {};
 
-          tempArr.push({ 'v': bankData[i]._id }, { 'v': bankData[i].count });
+          tempArr.push({ 'v': response.data[i].bankName }, { 'v': response.data[i].count });
           newTempArr['c'] = tempArr;
           bankGraphData.push(newTempArr);
         }
@@ -233,19 +243,28 @@ angular.module("sbAdminApp", ['googlechart'])
         }
       }).then(function successCallback(response) {
         var bankData = [];
-        for (var i = response.data.resData.length - 1; i >= 0; i--) {
-          angular.forEach(response.data.resData[i], function(value, key) {
-            var newTempArr = {};
-            newTempArr['_id'] = key;
-            newTempArr['count'] = value;
-            bankData.push(newTempArr);
-          }, bankData);
-        }
-        for (var i = bankData.length - 1; i >= 0; i--) {
+        // for (var i = response.data.resData.length - 1; i >= 0; i--) {
+        //   angular.forEach(response.data.resData[i], function(value, key) {
+        //     var newTempArr = {};
+        //     newTempArr['_id'] = key;
+        //     newTempArr['count'] = value;
+        //     bankData.push(newTempArr);
+        //   }, bankData);
+        // }
+        // for (var i = bankData.length - 1; i >= 0; i--) {
+        //   var tempArr = [];
+        //   var newTempArr = {};
+
+        //   tempArr.push({ 'v': bankData[i]._id }, { 'v': bankData[i].count }, { v: '#e2431e' });
+        //   newTempArr['c'] = tempArr;
+        //   allBankGraphData.push(newTempArr);
+        // }
+
+        for (var i = response.data.length - 1; i >= 0; i--) {
           var tempArr = [];
           var newTempArr = {};
 
-          tempArr.push({ 'v': bankData[i]._id }, { 'v': bankData[i].count }, { v: '#e2431e' });
+          tempArr.push({ 'v': response.data[i].bankName }, { 'v': response.data[i].count });
           newTempArr['c'] = tempArr;
           allBankGraphData.push(newTempArr);
         }
