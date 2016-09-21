@@ -46,7 +46,6 @@
         searchCode: '',
         getcodes: function () {
             $scope.showLoader = true;
-            console.log('get codes00');
             api.get('get-unprocessedCodes', false, token, {
                 start: $scope.unProc.start,
                 search: $scope.unProc.searchCode,
