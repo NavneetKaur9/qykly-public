@@ -1,801 +1,850 @@
 <section>
-  <!-- BLOCK 1 : SEARCH -->
-  <div class="row tile_count">
-    <div class="col-md-4">
-      <div class="input-group form-group top_search">
-        <input class="form-control" placeholder="Search for Short Code..." type="text" ng-model="searchCode" ng-enter="searchShortcode()" />
-        <span class="input-group-btn">
+    <!-- BLOCK 1 : SEARCH -->
+    <div class="row tile_count">
+        <div class="col-md-4">
+            <div class="input-group form-group top_search">
+                <input class="form-control" placeholder="Search for Short Code..." type="text" ng-model="searchCode" ng-enter="searchShortcode()" />
+                <span class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-click="searchShortcode()">
                         Go!
                     </button>
                 </span>
-      </div>
-    </div>
-    <h4 ng-show="searchResult.length">
+            </div>
+        </div>
+        <h4 ng-show="searchResult.length">
             Result :{{searchCode}}
         </h4>
-    <div ng-repeat="(key, value) in searchResult">
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" ng-if="value.status=='0'">
-        <span class="count_bottom">
+        <div ng-repeat="(key, value) in searchResult">
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" ng-if="value.status=='0'">
+                <span class="count_bottom">
                     <i class="green">
                         {{  value.count}}
                     </i>
                     Unprocessed Messages
                 </span>
-      </div>
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" ng-if="value.status=='3'">
-        <span class="count_bottom">
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" ng-if="value.status=='3'">
+                <span class="count_bottom">
                     <i class="green">
                         {{  value.count}}
                     </i>
                     Processed Messages
                 </span>
-      </div>
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" ng-if="value.status=='1'">
-        <span class="count_bottom">
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" ng-if="value.status=='1'">
+                <span class="count_bottom">
                     <i class="green">
                         {{  value.count}}
                     </i>
                     Blacklisted Messages
                 </span>
-      </div>
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" ng-if="value.status=='6'">
-        <span class="count_bottom">
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" ng-if="value.status=='6'">
+                <span class="count_bottom">
                     <i class="green">
                         {{  value.count}}
                     </i>
                     Processed by mod
                 </span>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- BLOCK 1 : SEARCH -->
-  <!-- BLOCK 2: ALERT FOR PARSE SMS RESULT -->
-  <uib-alert ng-show="parseSmsResult.output.length" close="closeParseSmsResult()" type="success">
-    <div ng-repeat="(key,value) in parseSmsResult.output">
-      <div ng-repeat="(key, value) in value">
-        {{key}} : {{value}}
-      </div>
-    </div>
-    <a href="" data-toggle="modal" data-target=".bs-example-modal-sm" ng-show="parseSmsResult.smsdata.length">
+    <!-- BLOCK 1 : SEARCH -->
+    <!-- BLOCK 2: ALERT FOR PARSE SMS RESULT -->
+    <uib-alert ng-show="parseSmsResult.output.length" close="closeParseSmsResult()" type="success">
+        <div ng-repeat="(key,value) in parseSmsResult.output">
+            <div ng-repeat="(key, value) in value">
+                {{key}} : {{value}}
+            </div>
+        </div>
+        <a href="" data-toggle="modal" data-target=".bs-example-modal-sm" ng-show="parseSmsResult.smsdata.length">
             Click here for more details
         </a>
-  </uib-alert>
-  <!-- BLOCK 2: ALERT FOR PARSE SMS RESULT -->
-  <!-- BLOCK 3 : MAIN TAB SECION -->
-  <div class="row">
-    <div class="col-md-12 col-xs-12 col-lg-12">
-      <div class="x_panel">
-        <div class="x_content">
-          <div class="" role="tabpanel" data-example-id="togglable-tabs">
-            <!-- START:  TABS -->
-            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-              <li role="presentation" class="active">
-                <a href="userDetail.html#tab_content1" id="un_proc-tab" role="tab" data-toggle="tab" aria-expanded="true">
-                  <span class="badge bg-green">
+    </uib-alert>
+    <!-- BLOCK 2: ALERT FOR PARSE SMS RESULT -->
+    <!-- BLOCK 3 : MAIN TAB SECION -->
+    <div class="row">
+        <div class="col-md-12 col-xs-12 col-lg-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <!-- START:  TABS -->
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="userDetail.html#tab_content1" id="un_proc-tab" role="tab" data-toggle="tab" aria-expanded="true">
+                                    <span class="badge bg-green">
                                     {{count.unprocessed}}
                                     </span> Unprocessed Shortcodes
-                </a>
-              </li>
-              <li role="presentation" class="">
-                <a href="userDetail.html#tab_content2" role="tab" id="new-tab" data-toggle="tab" aria-expanded="false" ng-click="check('new')">
-                  <span class="badge bg-green">
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="userDetail.html#tab_content2" role="tab" id="new-tab" data-toggle="tab" aria-expanded="false" ng-click="check('new')">
+                                    <span class="badge bg-green">
                                         {{count.new}}
                                     </span> New Shortcodes
-                </a>
-              </li>
-              <li role="presentation" class="">
-                <a href="userDetail.html#tab_content3" role="tab" id="proc-tab" data-toggle="tab" aria-expanded="false" ng-click="check('proc')">
-                  <span class="badge bg-green">
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="userDetail.html#tab_content3" role="tab" id="proc-tab" data-toggle="tab" aria-expanded="false" ng-click="check('proc')">
+                                    <span class="badge bg-green">
                                         {{count.processed}}
                                     </span> Processed Shortcodes
-                </a>
-              </li>
-              <li role="presentation" class="">
-                <a href="userDetail.html#tab_content4" role="tab" id="blacklist-tab" data-toggle="tab" aria-expanded="false">
-                  <!--
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="userDetail.html#tab_content4" role="tab" id="blacklist-tab" data-toggle="tab" aria-expanded="false">
+                                    <!--
                                         <span class="badge bg-green">
                                             {{blacklisteds.length}}
                                         </span>
                                     -->
-                  Blacklisted Shortcode
-                </a>
-              </li>
-              <li role="presentation" class="">
-                <a href="userDetail.html#tab_content5" role="tab" id="laterUse-tab" data-toggle="tab" aria-expanded="false" ng-click="check('laterUse')">
-                  <span class="badge bg-green">
+                                    Blacklisted Shortcode
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="userDetail.html#tab_content5" role="tab" id="laterUse-tab" data-toggle="tab" aria-expanded="false" ng-click="check('laterUse')">
+                                    <span class="badge bg-green">
                                         {{count.laterUse}}
                                     </span> Later Use Shortcodes
-                </a>
-              </li>
-            </ul>
-            <!-- END: TABS -->
-            <!-- START : TAB CONTENT -->
-            <div id="myTabContent" class="tab-content">
-              <!--  ********************************
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- END: TABS -->
+                        <!-- START : TAB CONTENT -->
+                        <div id="myTabContent" class="tab-content">
+                            <!--  ********************************
                                       
                                       TABC CONTENT 1 : UNPROCESSED
 
                             **************************************-->
-              <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="un_proc-tab">
-                <div class="row">
-                  <!-- LEFT : UNPROCESSED -->
-                  <div class="col-md-2 col-sm-2 mail_list_column">
-                    <!--search-->
-                    <div class="input-group">
-                      <input class="form-control" type="text" ng-model="unProc.searchCode" placeholder="search code">
-                      <span class="input-group-btn">
+                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="un_proc-tab">
+                                <div class="row">
+                                    <!-- LEFT : UNPROCESSED -->
+                                    <div class="col-md-2 col-sm-2 mail_list_column">
+                                        <!--search-->
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" ng-model="unProc.searchCode" placeholder="search code">
+                                            <span class="input-group-btn">
                                               <button type="button" class="btn btn-primary" ng-click="unProc.search()">Go!</button>
                                           </span>
-                    </div>
-                    <!--/search-->
-                    <!--sortby -->
-                    <div class="radio">
-                      <h6>sort by:</h6>
-                      <label>
-                        <ul class="list-unstyled project_files">
-                          <li>
-                            <label>
-                              <input type="radio" ng-model="unProc.sortby" value="count" ng-change='unProc.sort()' ng-disabled="showLoader"> Count
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" ng-model="unProc.sortby" value="address" ng-change='unProc.sort()' ng-disabled="showLoader"> Alphabetic
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" ng-model="unProc.sortby" value="Time" ng-change='unProc.sort()' ng-disabled="showLoader"> Time
-                            </label>
-                          </li>
-                        </ul>
-                      </label>
-                    </div>
-                    <!-- /sortby-->
-                    <div style="overflow-x:hidden;height: 500px;">
-                      <div ng-repeat="code in unProc.codes">
-                        <!-- table -->
-                        <div class="mail_list" style="height: 60px;" ng-class="{activeClass : (activeMenu == code.address)}">
-                          <div class="row">
-                            <div class="col-md-6" ng-click="getSms(code.address,0,1,'unProc')" style="cursor: pointer;">{{code.address}}</div>
-                            <div class="col-md-6">{{code.saveTime |date:'dd-MMM-yy'}}</div>
-                          </div>
-                          <div class="row" style="margin-top: 5px;">
-                            <div class="col-md-6">
-                              <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
-                            </div>
-                            <div class="col-md-6">
-                              <button title="parse sms" class="btn btn-default btn-xs" type="button" ng-click="parseSms(code.address)">
-                                <i aria-hidden="true" class="fa fa-refresh">
+                                        </div>
+                                        <!--/search-->
+                                        <!--sortby -->
+                                        <div class="radio">
+                                            <h6>sort by:</h6>
+                                            <label>
+                                                <ul class="list-unstyled project_files">
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" ng-model="unProc.sortby" value="count" ng-change='unProc.sort()' ng-disabled="showLoader"> Count
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" ng-model="unProc.sortby" value="address" ng-change='unProc.sort()' ng-disabled="showLoader"> Alphabetic
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" ng-model="unProc.sortby" value="Time" ng-change='unProc.sort()' ng-disabled="showLoader"> Time
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </label>
+                                        </div>
+                                        <!-- /sortby-->
+                                        <div style="overflow-x:hidden;height: 500px;">
+                                            <div ng-repeat="code in unProc.codes">
+                                                <!-- table -->
+                                                <div class="mail_list" style="height: 60px;" ng-class="{activeClass : (activeMenu == code.address)}">
+                                                    <div class="row">
+                                                        <div class="col-md-6" ng-click="getSms(code.address,0,1,'unProc')" style="cursor: pointer;">{{code.address}}</div>
+                                                        <div class="col-md-6">{{code.saveTime |date:'dd-MMM-yy'}}</div>
+                                                    </div>
+                                                    <div class="row" style="margin-top: 5px;">
+                                                        <div class="col-md-6">
+                                                            <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button title="parse sms" class="btn btn-default btn-xs" type="button" ng-click="parseSms(code.address)">
+                                                                <i aria-hidden="true" class="fa fa-refresh">
                                                                 </i>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div ng-show="showLoader">
-                        <img src="assets/images/ajax-loader.gif" /> Processing
-                      </div>
-                      <button ng-click="unProc.showMore()" ng-hide="showLoader"> Show more
-                      </button>
-                    </div>
-                    Showing {{unProc.codes.length}} Codes
-                  </div>
-                  <!-- RIGHT : UNPROCESSED -->
-                  <div class="col-md-10 col-sm-10 mail_view" ng-show="unProc.messages.length">
-                    <div class="row">
-                      <div class="col-md-2">
-                        <h4>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div ng-show="showLoader">
+                                                <img src="assets/images/ajax-loader.gif" /> Processing
+                                            </div>
+                                            <button ng-click="unProc.showMore()" ng-hide="showLoader"> Show more
+                                            </button>
+                                        </div>
+                                        Showing {{unProc.codes.length}} Codes
+                                    </div>
+                                    <!-- RIGHT : UNPROCESSED -->
+                                    <div class="col-md-10 col-sm-10 mail_view" ng-show="unProc.messages.length">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <h4>
                                                     {{code}}
                                                 </h4>
-                      </div>
-                      <div class="col-md-4 col-md-offset-2 pull-right">
-                        <label>
-                          <input type="hidden" ng-model="assignTo" value="{{selected}}" />
-                          <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x.name for x in modusers" placeholder="Assign To" style="width:150px">
-                            <option value="">
-                            </option>
-                          </select>
-                          <button type="button" class="btn btn-info btn-sm" ng-click="assign()">
-                            <span class="glyphicon glyphicon-ok">
+                                            </div>
+                                            <div class="col-md-4 col-md-offset-2 pull-right">
+                                                <label>
+                                                    <input type="hidden" ng-model="assignTo" value="{{selected}}" />
+                                                    <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x.name for x in modusers" placeholder="Assign To" style="width:150px">
+                                                        <option value="">
+                                                        </option>
+                                                    </select>
+                                                    <button type="button" class="btn btn-info btn-sm" ng-click="assign()">
+                                                        <span class="glyphicon glyphicon-ok">
                                                         </span> Submit
-                          </button>
-                        </label>
-                      </div>
-                    </div>
-                    Showing {{itemsPerPage *(currentPage-1)+$index+1}}-{{itemsPerPage *(currentPage-1)+$index+unProc.messages.length}} of {{totalCount}} Entries
-                    <!-- table -->
-                    <table class="table table-striped jambo_table bulk_action">
-                      <thead>
-                        <tr class="headings">
-                          <th>#</th>
-                          <th>
-                            <input type="checkbox" id="check-all" class="flat" ng-model="selected_all" />
-                          </th>
-                          <th class="column-title">
-                            Text
-                            <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="moveAllToDump()">
-                              Move All to Dump
-                            </button>
-                            <button type="button" class="btn btn-default btn-xs pull-right" ng-click="moveToDump()">
-                              Move To Dump
-                            </button>
-                          </th>
-                          <th class="column-title">
-                            Msg Time
-                          </th>
-                          <th class="column-title">
-                            Save Time
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr ng-if="unProc.messages.length <= 0">
-                          <td colspan="7" style="text-align:center;">No More Messages!!</td>
-                        </tr>
-                        <tr ng-show="loadingMsg">
-                          <td colspan="7" style="text-align:center;">Loading Messages!!</td>
-                        </tr>
-                        <tr ng-repeat="sms in unProc.messages">
-                          <td>
-                            {{itemsPerPage *(currentPage-1)+$index+1}}
-                          </td>
-                          <td class="a-center ">
-                            <input type="checkbox" class="flat" name="assign" value="{{sms._id}}" ng-checked="selected_all" />
-                          </td>
-                          <td>
-                            {{sms._id}}
-                          </td>
-                          <td>
-                            {{sms.time | date:'MMM'}}
-                          </td>
-                          <td>
-                            {{sms.saveTime |date:'MMM d, y h:mm a'}}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    Showing {{itemsPerPage *(currentPage-1)+$index+1}}-{{itemsPerPage *(currentPage-1)+$index+unProc.messages.length}} of {{totalCount}} Entries
-                    <ul uib-pagination items-per-page="itemsPerPage" ng-model="currentPage" total-items="totalCount" max-size="length" force-ellipses="true" boundary-links="true" ng-change="pageChanged(currentPage)">
-                    </ul>
-                    <!-- /table -->
-                    <div ng-show="showLoaderMsg">
-                      <img src="assets/images/ajax-loader1.gif" /> Loading.......
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- TABC CONTENT 1 : UNPROCESSED -->
-              <!--  ********************************
+                                                    </button>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        Showing {{itemsPerPage *(currentPage-1)+$index+1}}-{{itemsPerPage *(currentPage-1)+$index+unProc.messages.length}} of {{totalCount}} Entries
+                                        <!-- table -->
+                                        <table class="table table-striped jambo_table bulk_action">
+                                            <thead>
+                                                <tr class="headings">
+                                                    <th>#</th>
+                                                    <th>
+                                                        <input type="checkbox" id="check-all" class="flat" ng-model="selected_all" />
+                                                    </th>
+                                                    <th class="column-title">
+                                                        Text
+                                                        <button type="button" class="btn btn-danger btn-xs pull-right" ng-click="moveAllToDump()">
+                                                            Move All to Dump
+                                                        </button>
+                                                        <button type="button" class="btn btn-default btn-xs pull-right" ng-click="moveToDump()">
+                                                            Move To Dump
+                                                        </button>
+                                                    </th>
+                                                    <th class="column-title">
+                                                        Msg Time
+                                                    </th>
+                                                    <th class="column-title">
+                                                        Save Time
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="unProc.messages.length <= 0">
+                                                    <td colspan="7" style="text-align:center;">No More Messages!!</td>
+                                                </tr>
+                                                <tr ng-show="loadingMsg">
+                                                    <td colspan="7" style="text-align:center;">Loading Messages!!</td>
+                                                </tr>
+                                                <tr ng-repeat="sms in unProc.messages">
+                                                    <td>
+                                                        {{itemsPerPage *(currentPage-1)+$index+1}}
+                                                    </td>
+                                                    <td class="a-center ">
+                                                        <input type="checkbox" class="flat" name="assign" value="{{sms._id}}" ng-checked="selected_all" />
+                                                    </td>
+                                                    <td>
+                                                        {{sms._id}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.time | date:'MMM'}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.saveTime |date:'MMM d, y h:mm a'}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        Showing {{itemsPerPage *(currentPage-1)+$index+1}}-{{itemsPerPage *(currentPage-1)+$index+unProc.messages.length}} of {{totalCount}} Entries
+                                        <ul uib-pagination items-per-page="itemsPerPage" ng-model="currentPage" total-items="totalCount" max-size="length" force-ellipses="true" boundary-links="true" ng-change="pageChanged(currentPage)">
+                                        </ul>
+                                        <!-- /table -->
+                                        <div ng-show="showLoaderMsg">
+                                            <img src="assets/images/ajax-loader1.gif" /> Loading.......
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- TABC CONTENT 1 : UNPROCESSED -->
+                            <!--  ********************************
                                       
                                       TABC CONTENT 2: NEW 
 
                             **************************************-->
-              <div role="tabpanel" class="tab-pane fade " id="tab_content2" aria-labelledby="new-tab">
-                <div class="row">
-                  <!-- LEFT : NEW -->
-                  <div class="col-md-2 col-sm-2 mail_list_column">
-                    <!--search-->
-                    <div class="input-group">
-                      <input class="form-control" type="text" ng-model="new.searchCode" placeholder="search code">
-                      <span class="input-group-btn">
+                            <div role="tabpanel" class="tab-pane fade " id="tab_content2" aria-labelledby="new-tab">
+                                <div class="row">
+                                    <!-- LEFT : NEW -->
+                                    <div class="col-md-2 col-sm-2 mail_list_column">
+                                        <!--search-->
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" ng-model="new.searchCode" placeholder="search code">
+                                            <span class="input-group-btn">
                                               <button type="button" class="btn btn-primary" ng-click="new.search()">Go!</button>
                                           </span>
-                    </div>
-                    <!--/search-->
-                    <!--sortby -->
-                    <div class="radio">
-                      <h6>Sort by:</h6>
-                      <label>
-                        <ul class="list-unstyled project_files">
-                          <li>
-                            <label>
-                              <input type="radio" ng-model="new.sortby" value="count" ng-change='new.sort()' ng-disabled="showLoader"> Count
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" ng-model="new.sortby" value="address" ng-change='new.sort()' ng-disabled="showLoader"> Alphabetic
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" ng-model="new.sortby" value="Time" ng-change='new.sort()' ng-disabled="showLoader"> Time
-                            </label>
-                          </li>
-                        </ul>
-                      </label>
-                    </div>
-                    <!-- /sortby-->
-                    <div style="overflow-x:hidden;height: 500px;">
-                      <div ng-repeat="code in new.codes">
-                        <div class="mail_list" style="height: 60px; padding-left: 4px;" ng-class="{activeClass : (activeMenu == code._id)}">
-                          <div class="row">
-                            <div class="col-md-2">
-                              <input type="checkbox" value="{{code._id}}" name="blacklist" />
-                            </div>
-                            <div class="col-md-4" ng-click="getSms(code._id,0,1,'new')" style="cursor: pointer;">{{code._id}}</div>
-                            <div class="col-md-6">{{code.saveTime |date:'dd-MMM-yy'}}</div>
-                          </div>
-                          <div class="row" style="margin-top: 5px;">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-4">
-                              <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
-                            </div>
-                            <div class="col-md-6">
-                              <button class="btn btn-default btn-xs" type="button" ng-click="parseSms(code._id)">
-                                <i aria-hidden="true" class="fa fa-refresh">
+                                        </div>
+                                        <!--/search-->
+                                        <!--sortby -->
+                                        <div class="radio">
+                                            <h6>Sort by:</h6>
+                                            <label>
+                                                <ul class="list-unstyled project_files">
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" ng-model="new.sortby" value="count" ng-change='new.sort()' ng-disabled="showLoader"> Count
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" ng-model="new.sortby" value="address" ng-change='new.sort()' ng-disabled="showLoader"> Alphabetic
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" ng-model="new.sortby" value="Time" ng-change='new.sort()' ng-disabled="showLoader"> Time
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </label>
+                                        </div>
+                                        <!-- /sortby-->
+                                        <div style="overflow-x:hidden;height: 500px;">
+                                            <div ng-repeat="code in new.codes">
+                                                <div class="mail_list" style="height: 60px; padding-left: 4px;" ng-class="{activeClass : (activeMenu == code._id)}">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <input type="checkbox" value="{{code._id}}" name="blacklist" />
+                                                        </div>
+                                                        <div class="col-md-4" ng-click="getSms(code._id,0,1,'new')" style="cursor: pointer;">{{code._id}}</div>
+                                                        <div class="col-md-6">{{code.saveTime |date:'dd-MMM-yy'}}</div>
+                                                    </div>
+                                                    <div class="row" style="margin-top: 5px;">
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-4">
+                                                            <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button class="btn btn-default btn-xs" type="button" ng-click="parseSms(code._id)">
+                                                                <i aria-hidden="true" class="fa fa-refresh">
                                                                 </i>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div ng-show="showLoader">
-                        <img src="assets/images/ajax-loader.gif" /> Processing
-                      </div>
-                      <button ng-click="new.showMore()" ng-hide="showLoader"> Show more
-                      </button>
-                    </div>
-                    Showing {{new.codes.length}} Codes
-                    <button type="button" class="btn btn-dark btn-xs " ng-click="useLater
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div ng-show="showLoader">
+                                                <img src="assets/images/ajax-loader.gif" /> Processing
+                                            </div>
+                                            <button ng-click="new.showMore()" ng-hide="showLoader"> Show more
+                                            </button>
+                                        </div>
+                                        Showing {{new.codes.length}} Codes
+                                        <button type="button" class="btn btn-dark btn-xs " ng-click="useLater
                                         ()">
-                      Use Later
-                    </button>
-                    <button type="button" class="btn btn-dark btn-xs pull-right" ng-click="blacklist()">
-                      Blacklist
-                    </button>
-                  </div>
-                  <!-- RIGHT : new message detail -->
-                  <div class="col-md-10 col-sm-10 mail_view" ng-show="new.messages.length">
-                    <div class="row">
-                      <div class="col-xs-2">
-                        <h4>
+                                            Use Later
+                                        </button>
+                                        <button type="button" class="btn btn-dark btn-xs pull-right" ng-click="blacklist()">
+                                            Blacklist
+                                        </button>
+                                    </div>
+                                    <!-- RIGHT : new message detail -->
+                                    <div class="col-md-10 col-sm-10 mail_view" ng-show="new.messages.length">
+                                        <div class="row">
+                                            <div class="col-xs-2">
+                                                <h4>
                                                     {{code}}
                                                 </h4>
-                      </div>
-                      <div class="col-md-4 col-md-offset-2 pull-right">
-                        <label>
-                          <input type="hidden" ng-model="assignTo" value="{{selected}}" />
-                          <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x.name for x in modusers" placeholder="Assign To" style="width:150px">
-                            <option value="">
-                            </option>
-                          </select>
-                          <button type="button" class="btn btn-info btn-sm" ng-click="assign()">
-                            <span class="glyphicon glyphicon-ok">
+                                            </div>
+                                            <div class="col-md-4 col-md-offset-2 pull-right">
+                                                <label>
+                                                    <input type="hidden" ng-model="assignTo" value="{{selected}}" />
+                                                    <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x.name for x in modusers" placeholder="Assign To" style="width:150px">
+                                                        <option value="">
+                                                        </option>
+                                                    </select>
+                                                    <button type="button" class="btn btn-info btn-sm" ng-click="assign()">
+                                                        <span class="glyphicon glyphicon-ok">
                                                         </span> Submit
-                          </button>
-                        </label>
-                      </div>
-                    </div>
-                    <!--
+                                                    </button>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <!--
                                             <h4>
                                                 {{code}}
                                             </h4>
                                         -->
-                    <table class="table table-striped jambo_table ">
-                      <thead>
-                        <th>#</th>
-                        <th>
-                          <input type="checkbox" id="check-all" class="flat" ng-model="selected_all" />
-                        </th>
-                        <th>
-                          Text
-                        </th>
-                        <th width="20%">
-                          Msg Time
-                        </th>
-                        <th width="20%">
-                          <div ng-click="order('saveTime')" style="cursor:pointer">
-                            Save Time
-                            <span ng-show="sortType == 'saveTime' && sortReverse" class="fa fa-caret-down">
+                                        <table class="table table-striped jambo_table ">
+                                            <thead>
+                                                <th>#</th>
+                                                <th>
+                                                    <input type="checkbox" id="check-all" class="flat" ng-model="selected_all" />
+                                                </th>
+                                                <th>
+                                                    Text
+                                                </th>
+                                                <th width="20%">
+                                                    Msg Time
+                                                </th>
+                                                <th width="20%">
+                                                    <div ng-click="order('saveTime')" style="cursor:pointer">
+                                                        Save Time
+                                                        <span ng-show="sortType == 'saveTime' && sortReverse" class="fa fa-caret-down">
                                                         </span>
-                            <span ng-show="sortType == 'saveTime' && !sortReverse" class="fa fa-caret-up">
+                                                        <span ng-show="sortType == 'saveTime' && !sortReverse" class="fa fa-caret-up">
                                                         </span>
-                          </div>
-                        </th>
-                      </thead>
-                      <tbody>
-                        <tr ng-if="new.messages.length <= 0">
-                          <td colspan="7" style="text-align:center;">No More Messages!!</td>
-                        </tr>
-                        <tr ng-show="loadingMsg">
-                          <td colspan="7" style="text-align:center;">Loading Messages!!</td>
-                        </tr>
-                        <tr ng-repeat="sms in new.messages">
-                          <td>{{itemsPerPage *(currentPage-1)+$index+1}}</td>
-                          <td class="a-center ">
-                            <input type="checkbox" class="flat" name="assign" value="{{sms._id}}" ng-checked="selected_all" />
-                          </td>
-                          <td>
-                            {{sms._id}}
-                          </td>
-                          <td>
-                            {{sms.time | date:'MMM'}}
-                          </td>
-                          <td>
-                            {{sms.saveTime |date:'MMM d, y h:mm a'}}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <ul uib-pagination items-per-page="itemsPerPage" ng-model="currentPage" total-items="totalCount" max-size="length" force-ellipses="true" boundary-links="true" ng-change="pageChanged(currentPage)">
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <!-- TABC CONTENT 2: NEW -->
-              <!-- TAB CONTENT 3 : PROCESSED -->
-              <div role="tabpanel" class="tab-pane fade " id="tab_content3" aria-labelledby="proc-tab">
-                <div class="row">
-                  <!-- LEFT : PROCESSED -->
-                  <div class="col-md-2 col-sm-2 mail_list_column">
-                    <!--search-->
-                    <div class="input-group">
-                      <input class="form-control" type="text" ng-model="proc.searchCode" placeholder="search code">
-                      <span class="input-group-btn">
+                                                    </div>
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="new.messages.length <= 0">
+                                                    <td colspan="7" style="text-align:center;">No More Messages!!</td>
+                                                </tr>
+                                                <tr ng-show="loadingMsg">
+                                                    <td colspan="7" style="text-align:center;">Loading Messages!!</td>
+                                                </tr>
+                                                <tr ng-repeat="sms in new.messages">
+                                                    <td>{{itemsPerPage *(currentPage-1)+$index+1}}</td>
+                                                    <td class="a-center ">
+                                                        <input type="checkbox" class="flat" name="assign" value="{{sms._id}}" ng-checked="selected_all" />
+                                                    </td>
+                                                    <td>
+                                                        {{sms._id}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.time | date:'MMM'}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.saveTime |date:'MMM d, y h:mm a'}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <ul uib-pagination items-per-page="itemsPerPage" ng-model="currentPage" total-items="totalCount" max-size="length" force-ellipses="true" boundary-links="true" ng-change="pageChanged(currentPage)">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- TABC CONTENT 2: NEW -->
+                            <!-- TAB CONTENT 3 : PROCESSED -->
+                            <div role="tabpanel" class="tab-pane fade " id="tab_content3" aria-labelledby="proc-tab">
+                                <div class="row">
+                                    <!-- LEFT : PROCESSED -->
+                                    <div class="col-md-2 col-sm-2 mail_list_column">
+                                        <!--search-->
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" ng-model="proc.searchCode" placeholder="search code">
+                                            <span class="input-group-btn">
                                               <button type="button" class="btn btn-primary" ng-click="proc.search()">Go!</button>
                                           </span>
-                    </div>
-                    <!--/search-->
-                    <!--sortby -->
-                    <div class="radio">
-                      <h6>Sort by:</h6>
-                      <label>
-                        <ul class="list-unstyled project_files">
-                          <li>
-                            <label>
-                              <input type="radio" ng-model="proc.sortby" value="count" ng-change='proc.sort()' ng-disabled="showLoader"> Count
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" ng-model="proc.sortby" value="address" ng-change='proc.sort()' ng-disabled="showLoader"> Alphabetic
-                            </label>
-                          </li>
-                        </ul>
-                      </label>
-                    </div>
-                    <!-- /sortby-->
-                    <div style="overflow-x:hidden;height: 500px;">
-                      <div ng-repeat="code in proc.codes">
-                        <!-- table -->
-                        <div class="mail_list" style="height: 40px;" ng-class="{activeClass : (activeMenu == code._id)}">
-                          <div class="row">
-                            <div class="col-md-6" ng-click="getSms(code._id,3,1,'proc')" style="cursor: pointer;">{{code._id}}</div>
-                            <div class="col-md-6">
-                              <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div ng-show="showLoader">
-                        <img src="assets/images/ajax-loader.gif" /> Processing
-                      </div>
-                      <button ng-click="proc.showMore()" ng-hide="showLoader"> Show more
-                      </button>
-                    </div>
-                    Showing {{proc.codes.length}} Codes
-                  </div>
-                  <!-- RIGHT : Processed message detail -->
-                  <div class="col-md-10 col-sm-10 mail_view" ng-show="proc.messages.length">
-                    <div class="row">
-                      <div class="col-xs-2">
-                        <h4>
+                                        </div>
+                                        <!--/search-->
+                                        <!--sortby -->
+                                        <div class="radio">
+                                            <h6>Sort by:</h6>
+                                            <label>
+                                                <ul class="list-unstyled project_files">
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" ng-model="proc.sortby" value="count" ng-change='proc.sort()' ng-disabled="showLoader"> Count
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" ng-model="proc.sortby" value="address" ng-change='proc.sort()' ng-disabled="showLoader"> Alphabetic
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </label>
+                                        </div>
+                                        <!-- /sortby-->
+                                        <div style="overflow-x:hidden;height: 500px;">
+                                            <div ng-repeat="code in proc.codes">
+                                                <!-- table -->
+                                                <div class="mail_list" style="height: 40px;" ng-class="{activeClass : (activeMenu == code._id)}">
+                                                    <div class="row">
+                                                        <div class="col-md-6" ng-click="getSms(code._id,3,1,'proc')" style="cursor: pointer;">{{code._id}}</div>
+                                                        <div class="col-md-6">
+                                                            <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div ng-show="showLoader">
+                                                <img src="assets/images/ajax-loader.gif" /> Processing
+                                            </div>
+                                            <button ng-click="proc.showMore()" ng-hide="showLoader"> Show more
+                                            </button>
+                                        </div>
+                                        Showing {{proc.codes.length}} Codes
+                                    </div>
+                                    <!-- RIGHT : Processed message detail -->
+                                    <div class="col-md-10 col-sm-10 mail_view" ng-show="proc.messages.length">
+                                        <div class="row">
+                                            <div class="col-xs-2">
+                                                <h4>
                                                     {{code}}
                                                 </h4>
-                      </div>
-                    </div>
-                    <table class="table table-striped jambo_table ">
-                      <thead>
-                        <th>
-                          #
-                        </th>
-                        <th>
-                          Text
-                        </th>
-                        <th width="20%">
-                          Msg Time
-                        </th>
-                        <th width="20%">
-                          Save Time
-                        </th>
-                      </thead>
-                      <tbody>
-                        <tr ng-if="proc.messages.length <= 0">
-                          <td colspan="7" style="text-align:center;">No More Messages!!</td>
-                        </tr>
-                        <tr ng-show="loadingMsg">
-                          <td colspan="7" style="text-align:center;">Loading Messages!!</td>
-                        </tr>
-                        <tr ng-repeat="sms in proc.messages">
-                          <td>
-                            {{itemsPerPage *(currentPage-1)+$index+1}}
-                          </td>
-                          <td>
-                            {{sms._id}}
-                          </td>
-                          <td>
-                            {{sms.time | date:'MMM'}}
-                          </td>
-                          <td>
-                            {{sms.saveTime |date:'MMM d, y h:mm a'}}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <ul uib-pagination items-per-page="itemsPerPage" ng-model="currentPage" total-items="totalCount" max-size="length" force-ellipses="true" boundary-links="true" ng-change="pageChanged(currentPage)">
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <!-- TAB CONTENT 3 : PROCESSED -->
-              <!-- TAB CONTENT 4 : BLACKLISTEDS -->
-              <div role="tabpanel" class="tab-pane fade " id="tab_content4" aria-labelledby="blacklist-tab">
-                <div class="row">
-                  <div class="col-md-11 x_panel">
-                    <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-bordered">
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <!-- TAB CONTENT 4 : BLACKLISTEDS -->
-              <!-- TABC CONTENT 5 : LATER USE -->
-              <div role="tabpanel" class="tab-pane fade " id="tab_content5" aria-labelledby="laterUse-tab">
-                <div class="row">
-                  <!-- LEFT : LATER USE -->
-                  <div class="col-md-2 col-sm-2 mail_list_column">
-                    <!--search-->
-                    <div class="input-group">
-                      <input class="form-control" type="text" ng-model="laterUse.searchCode" placeholder="search code">
-                      <span class="input-group-btn">
+                                            </div>
+                                        </div>
+                                        <table class="table table-striped jambo_table ">
+                                            <thead>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>
+                                                    Text
+                                                </th>
+                                                <th width="20%">
+                                                    Msg Time
+                                                </th>
+                                                <th width="20%">
+                                                    Save Time
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="proc.messages.length <= 0">
+                                                    <td colspan="7" style="text-align:center;">No More Messages!!</td>
+                                                </tr>
+                                                <tr ng-show="loadingMsg">
+                                                    <td colspan="7" style="text-align:center;">Loading Messages!!</td>
+                                                </tr>
+                                                <tr ng-repeat="sms in proc.messages">
+                                                    <td>
+                                                        {{itemsPerPage *(currentPage-1)+$index+1}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms._id}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.time | date:'MMM'}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.saveTime |date:'MMM d, y h:mm a'}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <ul uib-pagination items-per-page="itemsPerPage" ng-model="currentPage" total-items="totalCount" max-size="length" force-ellipses="true" boundary-links="true" ng-change="pageChanged(currentPage)">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- TAB CONTENT 3 : PROCESSED -->
+                            <!-- TAB CONTENT 4 : BLACKLISTEDS -->
+                            <div role="tabpanel" class="tab-pane fade " id="tab_content4" aria-labelledby="blacklist-tab">
+                                <div class="row">
+                                    <div class="col-md-11 x_panel">
+                                        <table datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-instance="dtInstance" class="table table-bordered">
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- TAB CONTENT 4 : BLACKLISTEDS -->
+                            <!-- TABC CONTENT 5 : LATER USE -->
+                            <div role="tabpanel" class="tab-pane fade " id="tab_content5" aria-labelledby="laterUse-tab">
+                                <div class="row">
+                                    <!-- LEFT : LATER USE -->
+                                    <div class="col-md-2 col-sm-2 mail_list_column">
+                                        <!--search-->
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" ng-model="laterUse.searchCode" placeholder="search code">
+                                            <span class="input-group-btn">
                                               <button type="button" class="btn btn-primary" ng-click="laterUse.search()">Go!</button>
                                           </span>
-                    </div>
-                    <!--/search-->
-                    <!--sortby -->
-                    <div class="radio">
-                      <h6>
+                                        </div>
+                                        <!--/search-->
+                                        <!--sortby -->
+                                        <div class="radio">
+                                            <h6>
                                                 Sort by :
                                             </h6>
-                      <label>
-                        <ul class="list-unstyled project_files">
-                          <li>
-                            <label>
-                              <input type="radio" ng-model="laterUse.sortby" value="count" ng-change='laterUse.sort()' ng-disabled="showLoader"> Count
-                            </label>
-                          </li>
-                          <li>
-                            <label>
-                              <input type="radio" ng-model="laterUse.sortby" value="address" ng-change='laterUse.sort()' ng-disabled="showLoader"> Alphabetic
-                            </label>
-                          </li>
-                        </ul>
-                      </label>
-                    </div>
-                    <!-- /sortby-->
-                    <div style="overflow-x:hidden;height: 500px;">
-                      <div ng-repeat="code in laterUse.codes">
-                        <!-- table -->
-                        <div class="mail_list" style="height: 40px;" ng-class="{activeClass : (activeMenu == code._id)}">
-                          <div class="row">
-                            <div class="col-md-6" ng-click="getSms(code._id,8,1,'laterUse')" style="cursor: pointer;">{{code._id}}</div>
-                            <div class="col-md-6">
-                              <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div ng-show="showLoader">
-                        <img src="assets/images/ajax-loader.gif" /> Processing
-                      </div>
-                      <button ng-click="laterUse.showMore()" ng-hide="showLoader"> Show more
-                      </button>
-                    </div>
-                    Showing {{laterUse.codes.length}} Codes
-                  </div>
-                  <!-- RIGHT : LATER USE message detail -->
-                  <div class="col-md-10 col-sm-10 mail_view">
-                    <div class="row">
-                      <div class="input-group">
-                        <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="laterUse.search_msg" placeholder="search " type="text">
-                        <span class="input-group-btn">
+                                            <label>
+                                                <ul class="list-unstyled project_files">
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" ng-model="laterUse.sortby" value="count" ng-change='laterUse.sort()' ng-disabled="showLoader"> Count
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <label>
+                                                            <input type="radio" ng-model="laterUse.sortby" value="address" ng-change='laterUse.sort()' ng-disabled="showLoader"> Alphabetic
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </label>
+                                        </div>
+                                        <!-- /sortby-->
+                                        <div style="overflow-x:hidden;height: 500px;">
+                                            <div ng-repeat="code in laterUse.codes">
+                                                <!-- table -->
+                                                <div class="mail_list" style="height: 40px;" ng-class="{activeClass : (activeMenu == code._id)}">
+                                                    <div class="row">
+                                                        <div class="col-md-6" ng-click="getSms(code._id,8,1,'laterUse')" style="cursor: pointer;">{{code._id}}</div>
+                                                        <div class="col-md-6">
+                                                            <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div ng-show="showLoader">
+                                                <img src="assets/images/ajax-loader.gif" /> Processing
+                                            </div>
+                                            <button ng-click="laterUse.showMore()" ng-hide="showLoader"> Show more
+                                            </button>
+                                        </div>
+                                        Showing {{laterUse.codes.length}} Codes
+                                    </div>
+                                    <!-- RIGHT : LATER USE message detail -->
+                                    <div class="col-md-10 col-sm-10 mail_view">
+                                        <div class="row">
+                                            <div class="input-group">
+                                                <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="laterUse.search_msg" placeholder="search " type="text">
+                                                <span class="input-group-btn">
                           <button type="button" class="btn btn-primary" ng-click="laterUse.searchMessage()">Go!</button>
                       </span>
-                      </div>
-                    </div>
-                    <div class="row" ng-show="laterUse.messages.length">
-                      <div class="col-xs-2">
-                        <h4>{{code}}
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-show="laterUse.messages.length">
+                                            <div class="col-xs-2">
+                                                <h4>{{code}}
                                                 </h4>
-                      </div>
-                      <div class="col-md-4 col-md-offset-2 pull-right">
-                        <label>
-                          <input type="hidden" ng-model="assignTo" value="{{selected}}" />
-                          <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x.name for x in modusers" placeholder="Assign To" style="width:150px">
-                            <option value="">
-                            </option>
-                          </select>
-                          <button type="button" class="btn btn-info btn-sm" ng-click="assign()">
-                            <span class="glyphicon glyphicon-ok">
+                                            </div>
+                                            <div class="col-md-4 col-md-offset-2 pull-right">
+                                                <label>
+                                                    <input type="hidden" ng-model="assignTo" value="{{selected}}" />
+                                                    <select id="cat_select" class="form-control" tabindex="-1" ng-model="assignTo" select2 ng-options="x.name for x in modusers" placeholder="Assign To" style="width:150px">
+                                                        <option value="">
+                                                        </option>
+                                                    </select>
+                                                    <button type="button" class="btn btn-info btn-sm" ng-click="assign()">
+                                                        <span class="glyphicon glyphicon-ok">
                                                         </span> Submit
-                          </button>
-                        </label>
-                      </div>
+                                                    </button>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <table class="table table-striped jambo_table " ng-show="laterUse.messages.length">
+                                            <thead>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>
+                                                    <input type="checkbox" id="check-all" class="flat" ng-model="selected_all" />
+                                                </th>
+                                                <th>
+                                                    Text
+                                                </th>
+                                                <th width="20%">
+                                                    Msg Time
+                                                </th>
+                                                <th width="20%">
+                                                    Save Time
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="laterUse.messages.length <= 0">
+                                                    <td colspan="7" style="text-align:center;">No More Messages!!</td>
+                                                </tr>
+                                                <tr ng-show="loadingMsg">
+                                                    <td colspan="7" style="text-align:center;">Loading Messages!!</td>
+                                                </tr>
+                                                <tr ng-repeat="sms in laterUse.messages">
+                                                    <td>
+                                                        {{itemsPerPage *(currentPage-1)+$index+1}}
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" class="flat" name="assign" value="{{sms._id}}" ng-checked="selected_all" />
+                                                    </td>
+                                                    <td>
+                                                        {{sms._id}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.time | date:'MMM'}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.saveTime |date:'MMM d, y h:mm a'}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- serach start table -->
+                                        <table class="table table-striped jambo_table " ng-show="laterUse.allMessagesBySearch.length">
+                                            <thead>
+                                                <th>
+                                                    #
+                                                </th>
+                                                <th>
+                                                    <input type="checkbox" id="check-all" class="flat" ng-model="selected_all" />
+                                                </th>
+                                                <th>
+                                                    Address
+                                                </th>
+                                                <th>
+                                                    Text
+                                                </th>
+                                                <th width="20%">
+                                                    Save Time
+                                                </th>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-if="laterUse.allMessagesBySearch.length <= 0">
+                                                    <td colspan="7" style="text-align:center;">No More Messages!!</td>
+                                                </tr>
+                                                <tr ng-show="loadingMsg">
+                                                    <td colspan="7" style="text-align:center;">Loading Messages!!</td>
+                                                </tr>
+                                                <tr ng-repeat="sms in laterUse.allMessagesBySearch">
+                                                    <td>
+                                                        {{itemsPerPage *(currentPage-1)+$index+1}}
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" class="flat" name="assign" value="{{sms._id}}" ng-checked="selected_all" />
+                                                    </td>
+                                                    <td>
+                                                        {{sms.address}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms._id}}
+                                                    </td>
+                                                    <td>
+                                                        {{sms.saveTime |date:'MMM d, y h:mm a'}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!---search table end -->
+                                        <ul uib-pagination items-per-page="itemsPerPage" ng-model="currentPage" total-items="totalCount" max-size="length" force-ellipses="true" boundary-links="true" ng-change="pageChanged(currentPage)" ng-show="laterUse.messages.length">
+                                        </ul>
+                                        <!---search table end -->
+                                        <ul uib-pagination items-per-page="itemsPerPage" ng-model="currentPage" total-items="totalCountSearch" max-size="length" force-ellipses="true" boundary-links="true" ng-change="pageChangedSearch(currentPage)" ng-show="laterUse.allMessagesBySearch.length">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END : TAB CONTENT -->
                     </div>
-                    <table class="table table-striped jambo_table " ng-show="laterUse.messages.length">
-                      <thead>
-                        <th>
-                          #
-                        </th>
-                        <th>
-                          <input type="checkbox" id="check-all" class="flat" ng-model="selected_all" />
-                        </th>
-                        <th>
-                          Text
-                        </th>
-                        <th width="20%">
-                          Msg Time
-                        </th>
-                        <th width="20%">
-                          Save Time
-                        </th>
-                      </thead>
-                      <tbody>
-                        <tr ng-if="laterUse.messages.length <= 0">
-                          <td colspan="7" style="text-align:center;">No More Messages!!</td>
-                        </tr>
-                        <tr ng-show="loadingMsg">
-                          <td colspan="7" style="text-align:center;">Loading Messages!!</td>
-                        </tr>
-                        <tr ng-repeat="sms in laterUse.messages">
-                          <td>
-                            {{itemsPerPage *(currentPage-1)+$index+1}}
-                          </td>
-                          <td>
-                            <input type="checkbox" class="flat" name="assign" value="{{sms._id}}" ng-checked="selected_all" />
-                          </td>
-                          <td>
-                            {{sms._id}}
-                          </td>
-                          <td>
-                            {{sms.time | date:'MMM'}}
-                          </td>
-                          <td>
-                            {{sms.saveTime |date:'MMM d, y h:mm a'}}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <ul uib-pagination items-per-page="itemsPerPage" ng-model="currentPage" total-items="totalCount" max-size="length" force-ellipses="true" boundary-links="true" ng-change="pageChanged(currentPage)" ng-show="laterUse.messages.length">
-                    </ul>
-                  </div>
                 </div>
-              </div>
             </div>
-            <!-- END : TAB CONTENT -->
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <!-- BLOCK 3 : MAIN TAB SECION -->
-  <!-- BLOCK 4: COMMON ALERT -->
-  <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
-    <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
-      <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
-        <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
+    <!-- BLOCK 3 : MAIN TAB SECION -->
+    <!-- BLOCK 4: COMMON ALERT -->
+    <div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
+        <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
+            <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
+                <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
                 </span>
-      </div>
-      <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" ng-hide="parseSmsResult.output.length">
-        {{alert}}
-      </div>
+            </div>
+            <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" ng-hide="parseSmsResult.output.length">
+                {{alert}}
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- BLOCK 4: COMMON ALERT -->
-  <!-- BLOCK 5 : MODAL FOR "click here more details" -->
-  <div style="display: none;" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm" style="width:90%">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">
+    <!-- BLOCK 4: COMMON ALERT -->
+    <!-- BLOCK 5 : MODAL FOR "click here more details" -->
+    <div style="display: none;" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:90%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
                             ×
                         </span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel2">
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel2">
                         Sms Data
                     </h4>
-        </div>
-        <div class="modal-body">
-          <!-- modal body goes here -->
-          <div class="row">
-            <div class="col-md-12">
-              <table class="table table-bordered ">
-                <thead>
-                  <th>
-                    #
-                  </th>
-                  <th>
-                    <div href ng-click="order('shortcode')" style="cursor:pointer">
-                      shortcode
-                      <span ng-show="sortType == 'shortcode' && sortReverse" class="fa fa-caret-down">
+                </div>
+                <div class="modal-body">
+                    <!-- modal body goes here -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered ">
+                                <thead>
+                                    <th>
+                                        #
+                                    </th>
+                                    <th>
+                                        <div href ng-click="order('shortcode')" style="cursor:pointer">
+                                            shortcode
+                                            <span ng-show="sortType == 'shortcode' && sortReverse" class="fa fa-caret-down">
                                             </span>
-                      <span ng-show="sortType == 'shortcode' && !sortReverse" class="fa fa-caret-up">
+                                            <span ng-show="sortType == 'shortcode' && !sortReverse" class="fa fa-caret-up">
                                             </span>
+                                        </div>
+                                    </th>
+                                    <th width="50%">
+                                        <div href ng-click="order('smstext')" style="cursor:pointer">
+                                            sms text
+                                            <span ng-show="sortType == 'smstext' && sortReverse" class="fa fa-caret-down">
+                                            </span>
+                                            <span ng-show="sortType == 'smstext' && !sortReverse" class="fa fa-caret-up">
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th width="50%">
+                                        Pattern
+                                    </th>
+                                    <th>
+                                        <div ng-click="order('dateModified')" style="cursor:pointer">
+                                            Regex Modified Date
+                                            <span ng-show="sortType == 'dateModified' && sortReverse" class="fa fa-caret-down">
+                                            </span>
+                                            <span ng-show="sortType == 'dateModified' && !sortReverse" class="fa fa-caret-up">
+                                            </span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div ng-click="order('savetime')" style="cursor:pointer">
+                                            Msg Save Time
+                                            <span ng-show="sortType == 'savetime' && sortReverse" class="fa fa-caret-down">
+                                            </span>
+                                            <span ng-show="sortType == 'savetime' && !sortReverse" class="fa fa-caret-up">
+                                            </span>
+                                        </div>
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="sms in  parseSmsResult.smsdata |orderBy:sortType:sortReverse">
+                                        <td>
+                                            {{$index+1}}
+                                        </td>
+                                        <td>
+                                            {{sms.shortcode}}
+                                        </td>
+                                        <td>
+                                            {{sms.smstext }}
+                                        </td>
+                                        <td>
+                                            {{sms.pattern }}
+                                        </td>
+                                        <td>
+                                            {{sms.dateModified |date:'MMM d, y h:mm a'}}
+                                        </td>
+                                        <td>
+                                            {{sms.saveTime |date:'MMM d, y h:mm a'}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                  </th>
-                  <th width="50%">
-                    <div href ng-click="order('smstext')" style="cursor:pointer">
-                      sms text
-                      <span ng-show="sortType == 'smstext' && sortReverse" class="fa fa-caret-down">
-                                            </span>
-                      <span ng-show="sortType == 'smstext' && !sortReverse" class="fa fa-caret-up">
-                                            </span>
-                    </div>
-                  </th>
-                  <th width="50%">
-                    Pattern
-                  </th>
-                  <th>
-                    <div ng-click="order('dateModified')" style="cursor:pointer">
-                      Regex Modified Date
-                      <span ng-show="sortType == 'dateModified' && sortReverse" class="fa fa-caret-down">
-                                            </span>
-                      <span ng-show="sortType == 'dateModified' && !sortReverse" class="fa fa-caret-up">
-                                            </span>
-                    </div>
-                  </th>
-                  <th>
-                    <div ng-click="order('savetime')" style="cursor:pointer">
-                      Msg Save Time
-                      <span ng-show="sortType == 'savetime' && sortReverse" class="fa fa-caret-down">
-                                            </span>
-                      <span ng-show="sortType == 'savetime' && !sortReverse" class="fa fa-caret-up">
-                                            </span>
-                    </div>
-                  </th>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="sms in  parseSmsResult.smsdata |orderBy:sortType:sortReverse">
-                    <td>
-                      {{$index+1}}
-                    </td>
-                    <td>
-                      {{sms.shortcode}}
-                    </td>
-                    <td>
-                      {{sms.smstext }}
-                    </td>
-                    <td>
-                      {{sms.pattern }}
-                    </td>
-                    <td>
-                      {{sms.dateModified |date:'MMM d, y h:mm a'}}
-                    </td>
-                    <td>
-                      {{sms.saveTime |date:'MMM d, y h:mm a'}}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">
-            Close
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
-  <!-- BLOCK 5 : MODAL FOR "click here more details" -->
-  <!-- BLOCK 6 : SCROLL TOP BUTTON -->
-  <back-top scroll-speed=1500 button-theme="dark">
-    <i class="fa fa-angle-double-up">
+    <!-- BLOCK 5 : MODAL FOR "click here more details" -->
+    <!-- BLOCK 6 : SCROLL TOP BUTTON -->
+    <back-top scroll-speed=1500 button-theme="dark">
+        <i class="fa fa-angle-double-up">
         </i>
-  </back-top>
-  <!-- BLOCK 6 : SCROLL TOP BUTTON -->
+    </back-top>
+    <!-- BLOCK 6 : SCROLL TOP BUTTON -->
 </section>
