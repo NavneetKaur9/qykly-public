@@ -5696,3 +5696,9 @@ ul.notifications {
 
 
 /** /Dropzone.js **/
+
+/**7-sep-2016***/
+.menu:hover .link {
+    text-decoration: underline;
+    cursor: pointer;
+}

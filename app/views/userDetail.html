@@ -348,8 +348,8 @@
                                         <div style="overflow-x:hidden;height: 500px;">
                                             <div ng-repeat="code in unproc |filter:searchText_unproc">
                                                 <div class="mail_list" style="height: 40px; padding-left: 4px;" ng-class="{activeClass : (activeMenu == code._id)}">
-                                                    <div class="row">
-                                                        <div class="col-md-5" ng-click="getSms(code._id,0,'unproc')" style="cursor: pointer;">{{code._id}}</div>
+                                                    <div class="row menu">
+                                                        <a class="col-md-5 link" ng-click="getSms(code._id,0,'unproc')">{{code._id}}</a>
                                                         <div class="col-md-4">
                                                             <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
                                                         </div>
@@ -496,9 +496,9 @@
                                         <div style="overflow-x:hidden;height: 500px;">
                                             <div ng-repeat="code in new |filter:searchText_new">
                                                 <div class="mail_list" style="height: 40px; padding-left: 4px;" ng-class="{activeClass : (activeMenu == code._id)}">
-                                                    <div class="row">
+                                                    <div class="row menu">
                                                         <div class="col-md-2"><input type="checkbox" value="{{code._id}}" name="blacklist"/></div>
-                                                        <div class="col-md-4" ng-click="getSms(code._id,0,'new')" style="cursor: pointer;">{{code._id}}</div>
+                                                        <a class="col-md-4 link" ng-click="getSms(code._id,0,'new')">{{code._id}}</a>
                                                         <div class="col-md-3">
                                                             <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
                                                         </div>
@@ -638,8 +638,8 @@
                                                    placeholder="search code"/>
                                             <div ng-repeat="code in proc |filter:searchText_proc">
                                                 <div class="mail_list" style="height: 40px; padding-left: 4px;" ng-class="{activeClass : (activeMenu == code._id)}">
-                                                    <div class="row">
-                                                        <div class="col-md-6" ng-click="getSms(code._id,3,'proc')" style="cursor: pointer;">{{code._id}}</div>
+                                                    <div class="row menu">
+                                                        <a class="col-md-6 link" ng-click="getSms(code._id,3,'proc')">{{code._id}}</a>
                                                         <div class="col-md-6">
                                                             <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
                                                         </div>
