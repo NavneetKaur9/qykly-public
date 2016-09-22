@@ -109,6 +109,7 @@
        $scope.new.getcodes();
      },
      sort: function() {
+       document.getElementById("selectAll").checked = false;
        $scope.new.codes = [];
        $scope.new.sortby = $scope.new.sortby;
        $scope.new.start = 0;
@@ -193,8 +194,10 @@
        $scope.laterUse.getcodes();
      },
      searchMessage: function(newPage) {
+       $scope.activeMenu = "";
+       $scope.alert = 'loading............';
+       $scope.loadingMsg = true;
        $scope.laterUse.messages = [];
-       console.log($scope.laterUse.search_msg);
        api.get('get-all-messages-by-status', false, token, {
          searchParams: $scope.laterUse.search_msg,
          pageno: (newPage) ? newPage : $scope.start,
@@ -205,7 +208,8 @@
          } else {
            $scope.laterUse.allMessagesBySearch = response.data;
            $scope.totalCountSearch = response.total_count;
-
+           $scope.loadingMsg = false;
+           $scope.alert = false;
          }
        });
      }
@@ -242,6 +246,8 @@
          } else if (tab === 'proc') {
            $scope.proc.messages = response.data;
          } else if (tab === 'laterUse') {
+           $scope.laterUse.allMessagesBySearch = [];
+           $scope.laterUse.search_msg = "";
            $scope.laterUse.messages = response.data;
          }
          $scope.totalCount = response.totalCount;
@@ -451,4 +457,12 @@
        });
      }
    };
+
+   /*** 22 sep checked all checkboxes ***/
+   //all checked
+   $scope.checkAll = function() {
+     var checkedBoolVal = document.getElementById("selectAll").checked;
+     $('.check-box-div').find('input:checkbox').prop('checked', checkedBoolVal);
+   };
+   /*** 22 sep end checked all checkboxes ***/
  });

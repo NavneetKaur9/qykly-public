@@ -309,10 +309,19 @@
                                         </div>
                                         <!-- /sortby-->
                                         <div style="overflow-x:hidden;height: 500px;">
+                                            <div class="row" style="padding-left: 4px;" ng-show="new.codes.length">
+                                                <div class="col-md-2">
+                                                    <input type="checkbox" id="selectAll" ng-click="checkAll()" />
+                                                </div>
+                                                <div class="col-md-10">Check All</div>
+                                            </div>
+                                            <fieldset ng-show="new.codes.length">
+                                                <legend></legend>
+                                            </fieldset>
                                             <div ng-repeat="code in new.codes">
                                                 <div class="mail_list" style="height: 60px; padding-left: 4px;" ng-class="{activeClass : (activeMenu == code._id)}">
                                                     <div class="row">
-                                                        <div class="col-md-2">
+                                                        <div class="col-md-2 check-box-div">
                                                             <input type="checkbox" value="{{code._id}}" name="blacklist" />
                                                         </div>
                                                         <div class="col-md-4" ng-click="getSms(code._id,0,1,'new')" style="cursor: pointer;">{{code._id}}</div>
@@ -596,15 +605,19 @@
                                         Showing {{laterUse.codes.length}} Codes
                                     </div>
                                     <!-- RIGHT : LATER USE message detail -->
-                                    <div class="col-md-10 col-sm-10 mail_view">
-                                        <div class="row">
-                                            <div class="input-group">
-                                                <input class="form-control ng-pristine ng-untouched ng-valid ng-empty" ng-model="laterUse.search_msg" placeholder="search " type="text">
-                                                <span class="input-group-btn">
-                          <button type="button" class="btn btn-primary" ng-click="laterUse.searchMessage()">Go!</button>
-                      </span>
+                                    <div class="col-md-10 col-sm-10">
+                                        <!-- search by text -->
+                                        <div class="title_right">
+                                            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" placeholder="Search messages" ng-model="laterUse.search_msg">
+                                                    <span class="input-group-btn">
+                                                      <button class="btn btn-default" type="submit" ng-click="laterUse.searchMessage()">Go!</button>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
+                                        <!-- /.search by text -->
                                         <div class="row" ng-show="laterUse.messages.length">
                                             <div class="col-xs-2">
                                                 <h4>{{code}}
