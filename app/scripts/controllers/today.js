@@ -402,6 +402,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
 
   /******* 29 sep ********/
   $scope.getUsers = function(time, page) {
+    $scope.msgCount = null;
     $scope.proc.codes = [];
     $scope.unProc.codes = [];
     $scope.new.codes = [];
@@ -449,7 +450,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
     $scope.unProc.codes = [];
     $scope.new.codes = [];
     $scope.currentPage = 1;
-
+    $scope.msgCount = null;
     if (value === 'new') {
       $scope.new.getcodes();
     } else if (value === 'proc') {
