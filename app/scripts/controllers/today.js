@@ -7,6 +7,9 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
   var url = api.addr();
   var token = $cookieStore.get('c2cCookie');
 
+
+
+
   $scope.closeAlert = function() {
     $scope.alert = false;
   };
@@ -25,7 +28,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
       }
     });
   };
-  $scope.getTodaysUser();
+  // $scope.getTodaysUser();
   $scope.moreUsers = function() {
     page++;
     $scope.getTodaysUser();
@@ -36,16 +39,22 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
   /*************************************************
    START :    UNPROCESSESD
    *************************************************/
+
   $scope.unProc = {
     codes: [],
     start: 0,
     sortby: 'count',
     searchCode: '',
     getcodes: function() {
-      $scope.showLoaderunProc = true;
-      console.log('get codes00');
+      if ($scope.currentPage == 1) {
+        $scope.showLoader = true;
+      }
+      if ($scope.currentPage > 1) {
+        $scope.showLoaderUnProc = true;
+      }
       api.get('get-unprocessedCodes-today', false, token, {
-        start: $scope.unProc.start,
+        // start: $scope.unProc.start,
+        start: $scope.currentPage,
         search: $scope.unProc.searchCode,
         sortby: $scope.unProc.sortby,
         time: time
@@ -53,8 +62,11 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
         if (err || response.error) {
           $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
         } else {
-          $scope.showLoaderunProc = false;
-          $scope.unProc.codes = $scope.unProc.codes.concat(response);
+          $scope.showLoader = false;
+          $scope.showLoaderUnProc = false;
+          // $scope.unProc.codes = $scope.unProc.codes.concat(response);
+          $scope.unProc.codes = response.data;
+          $scope.totalItems = response.totalcount;
         }
       });
     },
@@ -74,7 +86,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
       $scope.unProc.getcodes();
     }
   };
-  $scope.unProc.getcodes();
+  // $scope.unProc.getcodes();
 
   /*************************************************
    START :    NEWCODES
@@ -85,9 +97,15 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
     sortby: 'count',
     searchCode: '',
     getcodes: function() {
-      $scope.showLoaderNew = true;
+      if ($scope.currentPage == 1) {
+        $scope.showLoader = true;
+      }
+      if ($scope.currentPage > 1) {
+        $scope.showLoaderNew = true;
+      }
       api.get('get-newCodes-today', false, token, {
-        start: $scope.new.start,
+        // start: $scope.new.start,
+        start: $scope.currentPage,
         search: $scope.new.searchCode,
         sortby: $scope.new.sortby,
         time: time
@@ -95,8 +113,11 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
         if (err || response.error) {
           $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
         } else {
+          $scope.showLoader = false;
           $scope.showLoaderNew = false;
-          $scope.new.codes = $scope.new.codes.concat(response);
+          // $scope.new.codes = $scope.new.codes.concat(response);
+          $scope.new.codes = response.data;
+          $scope.totalItems = response.totalcount;
         }
       });
     },
@@ -116,7 +137,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
       $scope.new.getcodes();
     }
   };
-  $scope.new.getcodes();
+  // $scope.new.getcodes();
   /*************************************************
    START :    PROCESSED
    *************************************************/
@@ -126,9 +147,15 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
     sortby: 'count',
     searchCode: '',
     getcodes: function() {
-      $scope.showLoaderProc = true;
+      if ($scope.currentPage == 1) {
+        $scope.showLoader = true;
+      }
+      if ($scope.currentPage > 1) {
+        $scope.showLoaderProc = true;
+      }
       api.get('get-processedCodes-today', false, token, {
-        start: $scope.proc.start,
+        // start: $scope.proc.start,
+        start: $scope.currentPage,
         search: $scope.proc.searchCode,
         sortby: $scope.proc.sortby,
         time: time
@@ -136,8 +163,11 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
         if (err || response.error) {
           $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
         } else {
+          $scope.showLoader = false;
           $scope.showLoaderProc = false;
-          $scope.proc.codes = $scope.proc.codes.concat(response);
+          // $scope.proc.codes = $scope.proc.codes.concat(response);
+          $scope.proc.codes = response.data;
+          $scope.totalItems = response.totalcount;
         }
       });
     },
@@ -157,7 +187,7 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
       $scope.proc.getcodes();
     }
   };
-  $scope.proc.getcodes();
+  // $scope.proc.getcodes();
 
   /*************************************************
    START :    LATER USE
@@ -212,10 +242,17 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
   //***********pagination on change ************//
   $scope.pageChanged = function(newPage) {
     $scope.selected_all = false;
-    console.log($scope.code, $scope.status, newPage);
-    $scope.getSms($scope.code, $scope.status, newPage, $scope.tab);
+    // $scope.getSms($scope.code, $scope.status, newPage, $scope.tab);
+    $scope.unProc.getcodes();
   };
 
+  $scope.pageChangedProc = function(newPage) {
+    $scope.proc.getcodes();
+  };
+
+  $scope.pageChangedNew = function(newPage) {
+    $scope.new.getcodes();
+  };
 
 
   $scope.assign = function() {
@@ -320,62 +357,120 @@ angular.module('sbAdminApp').controller('todayCtrl', function($scope, $http, api
     });
   };
   /***************  shweta *****************/
-  $scope.todaysUsers = {
+  $scope.Users = {
     users: [],
-    start: 0,
-    sortby: 'Time',
-    searchCode: '',
-    getusers: function() {
-      // $scope.todaysUsers.users = { "length": 81, "data": ["abdulfarook1992@gmail.com", "rajpootneha2@gmail.com", "chrisdeviant1@gmail.com", "m9650454806@gmail.com", "digoindigos@gmail.com", "Hitesh_sh28@yahoo.com", "ggdsekhar@gmail.com", "abdulhafiz9221@gmail.com", "sbi.jitendrajain@gmail.com", "himanshugoyal9193@gmail.com", "aadarsha8888@gmail.com", "anadkatm8@gmail.com", "naresh.kopuri@gmail.com", "gargabhi3000@gmail.com", "indorerajesh@gmail.com", "hdplmanoj@gmail.com", "sureshbabuk23@gmail.com", "amitpatil321@gmail.com", "sram.chathu@gmail.com", "narasimankumar@yahoo.co.in", "g.sudheer2000@gmail.com", "hasithvedula8594@gmail.com", "azeemaman29@gmail.com", "jacqwinjoy@gmail.com", "raginiborkar@gmail.com", "vinodanand237@gmail.com", "jemmallalakshmiprasadgoud@gmail.com", "budharamchaudhary84@gmail.com", "balajimu@yahoo.com", "nirajzrti69@gmail.com", "nppbpublications@gmail.com", "mukeshbaghel784@gmail.com", "drankit2012@gmail.com", "raghavainnocent2009@gmail.com", "assvakhil@gmail.com", "paulsamir78@gmail.com", "ceeveer@gmail.com", "ms@jmdpublicity.com", "baskaran1272@gmail.com", "saurabh74lr@gmail.com", "ashishpsharma@gmail.com", "kamal.kumar@megacarpool.com", "santoshpaivernekar@gmail.com", "khanashraf.380.ak@gmail.com", "s.seenu76@gmail.com", "skshmj@gmail.com", "saurabh.javeri05@gmail.com", "naramnaiduchokkapu@gmail.com", "pillachnaidu@gmail.com", "kumarashok14385@gmail.com", "harsh3006840@gmail.com", "prajapatiraghu32@gmail.com", "bide.ashutosh857@gmail.com", "nikunjsinghal10@gmail.com", "ifar786@gmail.com", "rohitsdongriya@gmail.com", "thamburan12@gmail.com", "anmolvk@gmail.com", "rythms8@gmail.com", "smilnandro@gmail.com", "brajmnk@gmail.com", "sayaramit@gmail.com", "maniyazhagau@gmail.com", "abhi.windows8@gmail.com", "gsmb78621@gmail.com", "makhijagraphics1@gmail.com", "ms0064777@gmail.com", "sanjaygore157@gmail.com", "printofastbly@gmail.com", "rockerofthefuture@gmail.com", "pappukumar199000@gmail.com", "gdkela1@gmail.com", "sgurungsuraj@gmail.com", "mithunlade50@gmail.com", "kmkizhakathil@gmail.com", "samsulknj3875@gmail.com", "khannaz12345@gmail.com", "jannadebbarma@gmail.com", "p.nagar26.pn@gmail.com", "toshar109@gmail.com", "gadevidonreddy@gmail.com"] };
+    getusers: function(time) {
       $scope.showLoader = true;
       api.get('emails-todays-users', false, token, {
-        // start: $scope.todaysUsers.start,
-        // search: $scope.todaysUsers.searchCode,
-        // sortby: $scope.todaysUsers.sortby
-
+        start: $scope.currentPage,
+        filter: time
       }, function(err, response) {
         if (err || response.error) {
           $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
         } else {
           $scope.showLoader = false;
-          $scope.todaysUsers.users = response;
+          $scope.Users.users = response.data;
+          $scope.totalItems = response.length;
         }
       });
 
-    },
-    search: function() {
-      $scope.todaysUsers.users = [];
-      $scope.todaysUsers.start = 0;
-      $scope.todaysUsers.getusers();
-    },
-    showMore: function() {
-      $scope.todaysUsers.start++;
-      $scope.todaysUsers.getusers();
-    },
-    sort: function() {
-      $scope.todaysUsers.users = [];
-      $scope.todaysUsers.sortby = $scope.todaysUsers.sortby;
-      $scope.todaysUsers.start = 0;
-      $scope.todaysUsers.getusers();
     }
   };
-  $scope.todaysUsers.getusers();
+
+  // $scope.todaysUsers.getusers();
 
   $scope.email = "";
   $scope.getCount = function(userEmail) {
-    // console.log(userEmail);
+    $scope.msgCount = null;
     $scope.email = userEmail;
-    // $scope.showLoader = true;
+    $scope.alert = 'loading............';
+    $scope.loadingMsg = true;
     api.get('user-info-by-email/' + userEmail, false, token, {}, function(err, response) {
       if (err || response.error) {
         $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
       } else {
-        // $scope.showLoader = false;
         $scope.msgCount = response.data;
+        $scope.loadingMsg = false;
+        $scope.alert = false;
       }
 
     });
   }
 
   /***************  shweta *****************/
+
+
+  /******* 29 sep ********/
+  $scope.getUsers = function(time, page) {
+    $scope.proc.codes = [];
+    $scope.unProc.codes = [];
+    $scope.new.codes = [];
+    $scope.todayusers = [];
+    $scope.weekusers = [];
+    $scope.yesterdayusers = [];
+    $scope.currentPage = page;
+    if ($scope.currentPage == 1) {
+      $scope.showLoader = true;
+    }
+    if ($scope.currentPage > 1) {
+      $scope.showPageLoader = true;
+    }
+    api.get('emails-todays-users', false, token, {
+      start: page,
+      filter: time
+    }, function(err, response) {
+      if (err || response.error) {
+        $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
+      } else {
+        $scope.showLoader = false;
+        if (time == 'today') {
+          $scope.todayusers = response.data;
+        } else if (time == 'yesterday') {
+          $scope.yesterdayusers = response.data;
+        } else if (time == 'week') {
+          $scope.weekusers = response.data;
+        }
+        $scope.totalItems = response.length;
+        $scope.showPageLoader = false;
+      }
+    });
+  };
+
+  $scope.pageChangedUsers = function(newPage, time) {
+    $scope.getUsers(time, newPage);
+  };
+
+
+  $scope.getShortcodes = function(value) {
+    $scope.yesterdayusers = [];
+    $scope.todayusers = [];
+    $scope.weekusers = [];
+    $scope.proc.codes = [];
+    $scope.unProc.codes = [];
+    $scope.new.codes = [];
+    $scope.currentPage = 1;
+
+    if (value === 'new') {
+      $scope.new.getcodes();
+    } else if (value === 'proc') {
+      $scope.proc.getcodes();
+    } else if (value === 'unProc') {
+      $scope.unProc.getcodes();
+    }
+  };
+
+  $scope.showCounts = function() {
+    $scope.alert = 'loading............';
+    $scope.loadingMsg = true;
+    api.get('todayscount/', false, token, {}, function(err, response) {
+      if (err || response.error) {
+        $scope.alert = response.userMessage || 'Server error! Are you connected to the internet?.';
+      } else {
+        $scope.allCounts = response;
+        $scope.loadingMsg = false;
+        $scope.alert = false;
+      }
+    });
+  };
+  $scope.showCounts();
 });
