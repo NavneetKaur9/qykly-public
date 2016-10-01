@@ -83,7 +83,7 @@
                         <ul class="to_do">
                             <li ng-repeat="code in unProc.codes">
                                 <p>
-                                    <a href="#">{{code._id}} <span class="badge">{{code.count}}</span></a>
+                                    <a href="javascript:void(0)">{{code._id}} <span class="badge">{{code.count}}</span></a>
                                 </p>
                             </li>
                         </ul>
@@ -96,7 +96,7 @@
                         <ul class="to_do">
                             <li ng-repeat="code in proc.codes">
                                 <p>
-                                    <a href="#">{{code._id}} <span class="badge">{{code.count}}</span></a>
+                                    <a href="javascript:void(0)">{{code._id}} <span class="badge">{{code.count}}</span></a>
                                 </p>
                             </li>
                         </ul>
@@ -109,7 +109,7 @@
                         <ul class="to_do">
                             <li ng-repeat="code in new.codes">
                                 <p>
-                                    <a href="#">{{code._id}} <span class="badge">{{code.count}}</span></a>
+                                    <a href="javascript:void(0)">{{code._id}} <span class="badge">{{code.count}}</span></a>
                                 </p>
                             </li>
                         </ul>
@@ -201,7 +201,8 @@
                         <table class="table table-bordered" ng-show="unProc.messages.length">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>#
+</th>
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Username</th>
