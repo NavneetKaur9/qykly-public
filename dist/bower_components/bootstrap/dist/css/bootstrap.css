@@ -85,7 +85,7 @@ mark {
 
 small {
     font-size: 80%;
-    float:right;
+    /*float:right;*/
 }
 
 sub,
@@ -1644,8 +1644,8 @@ p {
 small,
 .small {
     font-size: 85%;
-    float:right;
-    width:15%;
+    /*float:right;*/
+    width: 15%;
 }
 
 mark,

@@ -1,9 +1,11 @@
 a.activeClass {
     background-color: #eee;
 }
+
 .activeClass {
     background-color: #eee;
 }
+
 .nav-sm .container.body .col-md-3.left_col {
     width: 70px;
     padding: 0;
@@ -15,8 +17,9 @@ a.activeClass {
     position: fixed;
     height: 100%;
 }
-.emailpointer{
-cursor:pointer;
+
+.emailpointer {
+    cursor: pointer;
 }
 
 .nav-sm .container.body .col-md-3.left_col .mCSB_container,
@@ -1395,7 +1398,7 @@ table.countries_list td {
 }
 
 .dataTables_paginate a {
-   /* padding: 6px 9px !important;
+    /* padding: 6px 9px !important;
     background: #ddd !important;*/
     border-color: #ddd !important;
 }
@@ -2400,7 +2403,7 @@ button,
     font-size: 15px;
     font-weight: bold;
     margin: 0px 0 6px;
-    float:left;
+    float: left;
 }
 
 .mail_list h3 small {
@@ -5697,8 +5700,58 @@ ul.notifications {
 
 /** /Dropzone.js **/
 
+
 /**7-sep-2016***/
+
 .menu:hover .link {
     text-decoration: underline;
     cursor: pointer;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/**fieldset css **/
+
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow: 0px 0px 0px 0px #000;
+    box-shadow: 0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+    /*font-size: 1.2em !important;*/
+    font-weight: bold !important;
+    text-align: left !important;
+    width: auto;
+    padding: 0 5px;
+    border-bottom: none;
 }
