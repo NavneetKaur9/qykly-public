@@ -39,10 +39,10 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
           }), $ocLazyLoad.load({
             name: 'xeditable',
             files: ['bower_components/angular-xeditable/dist/css/xeditable.css', 'bower_components/angular-xeditable/dist/js/xeditable.js']
-          }),$ocLazyLoad.load({
-          name: 'googlechart',
-          files: ['bower_components/angular-google-chart/ng-google-chart.js']
-        });
+          }), $ocLazyLoad.load({
+            name: 'googlechart',
+            files: ['bower_components/angular-google-chart/ng-google-chart.js']
+          });
       }
     }
   }).state('dashboard.home', {
@@ -182,7 +182,7 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
     }
   }).state('dashboard.index', {
     url: '/',
-    templateUrl: 'views/index.html',
+    templateUrl: 'views/graphs.html',
     controller: 'dashboardCtrl',
     resolve: {
       loadMyFile: function($ocLazyLoad) {
@@ -213,7 +213,7 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
         return $ocLazyLoad.load({
           name: 'sbAdminApp',
           files: ['scripts/controllers/json_editor.js']
-        }),$ocLazyLoad.load({
+        }), $ocLazyLoad.load({
           name: 'ngclipboard',
           files: ['bower_components/ngclipboard/dist/ngclipboard.min.js']
         });

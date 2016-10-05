@@ -61,14 +61,14 @@
                 </div>
                 <div class="col-md-2" style="margin-top: 25px;">
                     <label></label>
-                    <button class="btn btn-sm btn-info" ng-click="getUserCount()">Submit</button>
+                    <button class="btn btn-sm btn-info" ng-click="getUserCount(category)">Submit</button>
                 </div>
             </div>
         </div>
         <div ng-show="showLoader1">
             <img src="assets/images/ajax-loader.gif" /> Loading Merchants
         </div>
-        <fieldset class="scheduler-border" ng-show="merchantName.length">
+        <fieldset class="scheduler-border">
             <legend class="scheduler-border">{{category}}</legend>
             <div class="col-md-2">
                 <ul class="list-group" ng-show="merchantName.length">
@@ -80,9 +80,48 @@
                     </li>
                 </ul>
             </div>
+            {{usersPurchases}}
             <div class="col-md-5">
                 <div ng-show="showLoader2" style="text-align:center">
                     <img src="assets/images/ajax-loader1.gif" /> Filtering Data
+                </div>
+                <div class="" ng-show="usersPurchases.length">
+                    <table class="table table-bordered" ng-show="usersPurchases.length">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Merchant</th>
+                                <th>No. Of Users</th>
+                                <th>No. of Products</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(key, value) in usersPurchases">
+                                <th scope="row">{{$index+1}}</th>
+                                <td>{{value._id}}</td>
+                                <td><a href="" ng-click="getUserList(value.userId)"><h4><span class="label label-info">{{value.userId.length}}</span></h4></a></td>
+                                <td><a href="" ng-click="getUserList(value.userId)"><h4><span class="label label-info">{{value.purchaseId.length}}</span></h4></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered" ng-show="bankUsers.length">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Merchant</th>
+                                <th>No. Of Users</th>
+                                <th>No. of transactions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(key, value) in bankUsers">
+                                <th scope="row">{{$index+1}}</th>
+                                <td>{{value.merchantname}}</td>
+                                <td>{{value.user}}</td>
+                                <td>{{value.count}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="" ng-show="users.length || bankUsers.length">
                     <table class="table table-bordered" ng-show="users.length">
