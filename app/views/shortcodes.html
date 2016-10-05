@@ -133,20 +133,20 @@
                                         <div class="radio">
                                             <h6>sort by:</h6>
                                             <label>
-                                                <ul class="list-unstyled project_files">
-                                                    <li>
+                                                <ul class="list-unstyled project_files row">
+                                                    <li class="col-md-4">
                                                         <label>
-                                                            <input type="radio" ng-model="unProc.sortby" value="count" ng-change='unProc.sort()' ng-disabled="showLoader"> Count
+                                                            <input type="radio" ng-model="unProc.sortby" value="count" ng-change='unProc.sort()' ng-disabled="showLoader"> <u>Count</u>
                                                         </label>
                                                     </li>
-                                                    <li>
+                                                    <li class="col-md-5">
                                                         <label>
-                                                            <input type="radio" ng-model="unProc.sortby" value="address" ng-change='unProc.sort()' ng-disabled="showLoader"> Alphabetic
+                                                            <input type="radio" ng-model="unProc.sortby" value="address" ng-change='unProc.sort()' ng-disabled="showLoader"> <u>Alphabetic</u>
                                                         </label>
                                                     </li>
-                                                    <li>
+                                                    <li class="col-md-3">
                                                         <label>
-                                                            <input type="radio" ng-model="unProc.sortby" value="Time" ng-change='unProc.sort()' ng-disabled="showLoader"> Time
+                                                            <input type="radio" ng-model="unProc.sortby" value="Time" ng-change='unProc.sort()' ng-disabled="showLoader"> <u>Time</u>
                                                         </label>
                                                     </li>
                                                 </ul>
@@ -156,9 +156,9 @@
                                         <div style="overflow-x:hidden;height: 500px;">
                                             <div ng-repeat="code in unProc.codes">
                                                 <!-- table -->
-                                                <div class="mail_list menu" style="height: 60px;" ng-class="{activeClass : (activeMenu == code.address)}">
+                                                <div class="mail_list menu" style="height: 60px;" ng-class="{activeClass : (activeMenu == code._id)}">
                                                     <div class="row">
-                                                        <div class="col-md-6 link" ng-click="getSms(code.address,0,1,'unProc')" style="cursor: pointer;">{{code.address}}</div>
+                                                        <div class="col-md-6 link" ng-click="getSms(code._id,0,1,'unProc')" style="cursor: pointer;">{{code._id}}</div>
                                                         <div class="col-md-6">{{code.saveTime |date:'dd-MMM-yy'}}</div>
                                                     </div>
                                                     <div class="row" style="margin-top: 5px;">
@@ -166,7 +166,7 @@
                                                             <span class="label label-info" style="font-weight: normal; font-size:12px;">  {{code.count}}</span>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <button title="parse sms" class="btn btn-default btn-xs" type="button" ng-click="parseSms(code.address)">
+                                                            <button title="parse sms" class="btn btn-default btn-xs" type="button" ng-click="parseSms(code._id)">
                                                                 <i aria-hidden="true" class="fa fa-refresh">
                                                                 </i>
                                                             </button>
@@ -288,20 +288,20 @@
                                         <div class="radio">
                                             <h6>Sort by:</h6>
                                             <label>
-                                                <ul class="list-unstyled project_files">
-                                                    <li>
+                                                <ul class="list-unstyled project_files row">
+                                                    <li class="col-md-4">
                                                         <label>
-                                                            <input type="radio" ng-model="new.sortby" value="count" ng-change='new.sort()' ng-disabled="showLoader"> Count
+                                                            <input type="radio" ng-model="new.sortby" value="count" ng-change='new.sort()' ng-disabled="showLoader"> <u>Count</u>
                                                         </label>
                                                     </li>
-                                                    <li>
+                                                    <li class="col-md-5">
                                                         <label>
-                                                            <input type="radio" ng-model="new.sortby" value="address" ng-change='new.sort()' ng-disabled="showLoader"> Alphabetic
+                                                            <input type="radio" ng-model="new.sortby" value="address" ng-change='new.sort()' ng-disabled="showLoader"> <u>Alphabetic</u>
                                                         </label>
                                                     </li>
-                                                    <li>
+                                                    <li class="col-md-3">
                                                         <label>
-                                                            <input type="radio" ng-model="new.sortby" value="Time" ng-change='new.sort()' ng-disabled="showLoader"> Time
+                                                            <input type="radio" ng-model="new.sortby" value="Time" ng-change='new.sort()' ng-disabled="showLoader"> <u>Time</u>
                                                         </label>
                                                     </li>
                                                 </ul>
@@ -348,13 +348,18 @@
                                             </button>
                                         </div>
                                         Showing {{new.codes.length}} Codes
-                                        <button type="button" class="btn btn-dark btn-xs " ng-click="useLater
-                                        ()">
-                                            Use Later
-                                        </button>
-                                        <button type="button" class="btn btn-dark btn-xs pull-right" ng-click="blacklist()">
-                                            Blacklist
-                                        </button>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <button type="button" class="btn btn-dark btn-xs " ng-click="useLater()">
+                                                    Use Later
+                                                </button>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <button type="button" class="btn btn-dark btn-xs pull-right" ng-click="blacklist()">
+                                                    Blacklist
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- RIGHT : new message detail -->
                                     <div class="col-md-10 col-sm-10 mail_view" ng-show="new.messages.length">
@@ -452,15 +457,15 @@
                                         <div class="radio">
                                             <h6>Sort by:</h6>
                                             <label>
-                                                <ul class="list-unstyled project_files">
-                                                    <li>
+                                                <ul class="list-unstyled project_files row">
+                                                    <li class="col-md-5">
                                                         <label>
-                                                            <input type="radio" ng-model="proc.sortby" value="count" ng-change='proc.sort()' ng-disabled="showLoader"> Count
+                                                            <input type="radio" ng-model="proc.sortby" value="count" ng-change='proc.sort()' ng-disabled="showLoader"> <u>Count</u>
                                                         </label>
                                                     </li>
-                                                    <li>
+                                                    <li class="col-md-7">
                                                         <label>
-                                                            <input type="radio" ng-model="proc.sortby" value="address" ng-change='proc.sort()' ng-disabled="showLoader"> Alphabetic
+                                                            <input type="radio" ng-model="proc.sortby" value="address" ng-change='proc.sort()' ng-disabled="showLoader"> <u>Alphabetic</u>
                                                         </label>
                                                     </li>
                                                 </ul>
@@ -569,15 +574,15 @@
                                                 Sort by :
                                             </h6>
                                             <label>
-                                                <ul class="list-unstyled project_files">
-                                                    <li>
+                                                <ul class="list-unstyled project_files row">
+                                                    <li class="col-md-5">
                                                         <label>
-                                                            <input type="radio" ng-model="laterUse.sortby" value="count" ng-change='laterUse.sort()' ng-disabled="showLoader"> Count
+                                                            <input type="radio" ng-model="laterUse.sortby" value="count" ng-change='laterUse.sort()' ng-disabled="showLoader"> <u>Count</u>
                                                         </label>
                                                     </li>
-                                                    <li>
+                                                    <li class="col-md-7">
                                                         <label>
-                                                            <input type="radio" ng-model="laterUse.sortby" value="address" ng-change='laterUse.sort()' ng-disabled="showLoader"> Alphabetic
+                                                            <input type="radio" ng-model="laterUse.sortby" value="address" ng-change='laterUse.sort()' ng-disabled="showLoader"> <u>Alphabetic</u>
                                                         </label>
                                                     </li>
                                                 </ul>
