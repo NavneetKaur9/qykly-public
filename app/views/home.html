@@ -29,7 +29,7 @@
                 <div class="col-md-4">
                     <!-- range -->
                     <label ng-if="category==='travel' " ng-show="merchantName.length">No.of tickets</label>
-                    <label ng-if="category==='purchases'" ng-show="merchantName.length">No.of Orders</label>
+                    <label ng-if="category==='purchases'" ng-show="merchantName.length">No.of Users</label>
                     <label ng-if="category==='credit-transaction' || category==='debit-transaction'" ng-show="merchantName.length">Amount Range</label>
                     <div class="input-group input-group-sm" ng-show="merchantName.length">
                         <label class="input-group-addon" for="dataX">Start</label>
@@ -68,7 +68,7 @@
         <div ng-show="showLoader1">
             <img src="assets/images/ajax-loader.gif" /> Loading Merchants
         </div>
-        <fieldset class="scheduler-border">
+        <fieldset class="scheduler-border" ng-show="merchantName.length">
             <legend class="scheduler-border">{{category}}</legend>
             <div class="col-md-2">
                 <ul class="list-group" ng-show="merchantName.length">
@@ -80,7 +80,6 @@
                     </li>
                 </ul>
             </div>
-            {{usersPurchases}}
             <div class="col-md-5">
                 <div ng-show="showLoader2" style="text-align:center">
                     <img src="assets/images/ajax-loader1.gif" /> Filtering Data
@@ -92,15 +91,15 @@
                                 <th>#</th>
                                 <th>Merchant</th>
                                 <th>No. Of Users</th>
-                                <th>No. of Products</th>
+                                <th>No. of Purchases</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="(key, value) in usersPurchases">
                                 <th scope="row">{{$index+1}}</th>
-                                <td>{{value._id}}</td>
-                                <td><a href="" ng-click="getUserList(value.userId)"><h4><span class="label label-info">{{value.userId.length}}</span></h4></a></td>
-                                <td><a href="" ng-click="getUserList(value.userId)"><h4><span class="label label-info">{{value.purchaseId.length}}</span></h4></a></td>
+                                <td>{{value.merchantName}}</td>
+                                <td><a href="" ng-click="getUserList(value.userId)"><h4><span class="label label-info">{{value.users}}</span></h4></a></td>
+                                <td><a href="" ng-click="getUserList(value.userId)"><h4><span class="label label-success">{{value.purchases}}</span></h4></a></td>
                             </tr>
                         </tbody>
                     </table>
