@@ -5,16 +5,17 @@
  * @description
  * Controller of the sbAdminApp
  */
-angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $http, $stateParams, api, DTOptionsBuilder, DTColumnBuilder, $filter, $window, $cookieStore) {
+angular.module('sbAdminApp').controller('userDetailCtrl', function($scope, $http, $stateParams, api, DTOptionsBuilder, DTColumnBuilder, $filter, $window, $cookieStore) {
     var id = $stateParams.id;
     var url = api.addr();
     var token = $cookieStore.get('c2cCookie');
     $window.scrollTo(0, 0);
     $scope.code = {};
     $scope.sms = {};
+
     function getUser() {
         // body...
-        api.get('get-user', id, token, false, function (err, response) {
+        api.get('get-user', id, token, false, function(err, response) {
             if (err) {
                 $scope.alert = response.message;
             } else {
@@ -22,38 +23,38 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
             }
         });
     };
+
     function getUserCount() {
-        api.get('user-shortcode-count', false, token, {id: id}, function (err, response) {
+        api.get('user-shortcode-count', false, token, { id: id }, function(err, response) {
             if (err) {
                 $scope.alert = response.message;
             } else {
                 $scope.count1 = response.unprocessed;
-                $scope.count2=response.new;
-                $scope.count3=response.processed;
-                $scope.count=true;
+                $scope.count2 = response.new;
+                $scope.count3 = response.processed;
+                $scope.count = true;
             }
         });
     };
     getUserCount();
+
     function getShortcode(codeType) {
-        $scope.showLoader=true;
+        $scope.showLoader = true;
         // $scope.alert = '  loading ' + codeType + ' Shortcodes.........';
         api.get('get-users-shortcode', false, token, {
             get_code_typ: codeType,
             id: id
-        }, function (err, response) {
+        }, function(err, response) {
             if (err) {
                 $scope.alert = response.message;
             } else {
                 // $scope.alert = false;
-                $scope.showLoader=false;
+                $scope.showLoader = false;
                 if (codeType === 'new') {
                     $scope.new = response;
-                }
-                else if (codeType === 'proc') {
+                } else if (codeType === 'proc') {
                     $scope.proc = response;
-                }
-                else {
+                } else {
                     $scope.unproc = response;
                 }
             }
@@ -61,7 +62,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
     };
     getShortcode('unproc');
     $scope.checkArray = [];
-    $scope.check = function (value) {
+    $scope.check = function(value) {
         var index = $scope.checkArray.indexOf(value);
         if ((index === -1) && (value === 'new')) {
             getShortcode('new');
@@ -73,7 +74,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
     };
 
     function countStatus() {
-        api.get('get-sms-count-status', id, token, false, function (err, response) {
+        api.get('get-sms-count-status', id, token, false, function(err, response) {
             if (err) {
                 $scope.alert = response.message;
             } else {
@@ -92,7 +93,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
 
     function countShortcode() {
 
-        api.get('get-shortcode', id, token, false, function (err, response) {
+        api.get('get-shortcode', id, token, false, function(err, response) {
             if (err) {
                 $scope.alert = response.message;
             } else {
@@ -104,13 +105,13 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
 
     // countShortcode();
     countStatus();
-    $scope.getSms = function (code, status, codeType) {
-        $scope.selected_all=false;
+    $scope.getSms = function(code, status, codeType) {
+        $scope.selected_all = false;
 
         $scope.alert = 'fetching ' + code + ' messages....';
         $scope.code = code;
-        $scope.activeMenu=code;
-        api.get('get-sms/' + id + '/' + status + '/' + code, false, token, false, function (err, response) {
+        $scope.activeMenu = code;
+        api.get('get-sms/' + id + '/' + status + '/' + code, false, token, false, function(err, response) {
             if (err) {
                 $scope.alert = response.message;
             } else {
@@ -119,19 +120,17 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
                 if (codeType === 'new') {
                     $scope.code_new = code;
                     $scope.sms_new = response;
-                }
-                else if (codeType === 'proc') {
+                } else if (codeType === 'proc') {
                     $scope.code_proc = code;
                     $scope.sms_proc = response;
-                }
-                else if (codeType === 'unproc') {
+                } else if (codeType === 'unproc') {
                     $scope.code_unproc = code;
                     $scope.sms_unproc = response;
                 }
             }
         });
     };
-    $scope.blacklist = function () {
+    $scope.blacklist = function() {
         var addresses = [];
         var checkboxes = document.getElementsByName('blacklist');
         for (var i = 0; i < checkboxes.length; i++) {
@@ -142,7 +141,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
         }
         api.put('blacklist', false, token, {
             address: addresses
-        }, function (err, response) {
+        }, function(err, response) {
             if (err) {
                 $scope.alert = response.message;
             } else {
@@ -153,20 +152,20 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
             }
         });
     };
-    $scope.closeAlert = function () {
+    $scope.closeAlert = function() {
         $scope.alert = false;
     };
     $scope.sortType = 'saveTime';
     $scope.sortReverse = false;
-    $scope.order = function (sortType) {
+    $scope.order = function(sortType) {
         $scope.sortReverse = ($scope.sortType === sortType) ? !$scope.sortReverse : false;
         $scope.sortType = sortType;
     };
-    $scope.parseAllSms = function () {
+    $scope.parseAllSms = function() {
         $scope.alert = '  processing.........';
         api.post('parsesms', false, token, {
             deviceId: id
-        }, function (err, response) {
+        }, function(err, response) {
             if (err) {
                 $scope.alert = response.message;
             } else if (response.output.length === 0) {
@@ -176,12 +175,12 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
             $scope.alert = false;
         });
     };
-    $scope.parseSms = function (code) {
+    $scope.parseSms = function(code) {
         $scope.parseSmsResult = [];
         $scope.alert = 'processing.........';
         api.post('parsesmsbyshortcode', false, token, {
             shortcode: code
-        }, function (err, response) {
+        }, function(err, response) {
             if (err) {
                 $scope.alert = response.message;
             } else if (response.output.length === 0) {
@@ -191,10 +190,10 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
             $scope.alert = false;
         });
     };
-    $scope.closeParseSmsResult = function (argument) {
+    $scope.closeParseSmsResult = function(argument) {
         $scope.parseSmsResult = [];
     };
-    $scope.assign = function (codeType) {
+    $scope.assign = function(codeType) {
         var msgText = [];
         var checkboxes = document.getElementsByName('assign');
         for (var i = 0; i < checkboxes.length; i++) {
@@ -206,7 +205,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
         api.put('assign-msg', false, token, {
             msgText: msgText,
             assignTo: $scope.assignTo.name
-        }, function (err, response) {
+        }, function(err, response) {
             if (err || response.error) {
                 $scope.alert = response.message;
             } else {
@@ -216,14 +215,14 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
         });
     };
     // get mod users
-    api.get('user', false, token, false, function (err, response) {
+    api.get('user', false, token, false, function(err, response) {
         if (err) {
             $scope.alert = response.message;
         } else {
             $scope.modusers = response;
         }
     });
-    $scope.moveToDump = function () {
+    $scope.moveToDump = function() {
         var msgText = [];
         var checkboxes = document.getElementsByName('assign');
         for (var i = 0; i < checkboxes.length; i++) {
@@ -235,7 +234,7 @@ angular.module('sbAdminApp').controller('userDetailCtrl', function ($scope, $htt
 
         api.put('move-to-dumb', false, token, {
             msgText: msgText
-        }, function (err, response) {
+        }, function(err, response) {
             if (err || response.error) {
                 $scope.alert = response.message;
             } else {

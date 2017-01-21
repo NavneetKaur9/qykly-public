@@ -1,0 +1,124 @@
+<style>
+div>table>tbody>tr:nth-child(4n+1) {
+    background-color: #dcdcdc;
+}
+
+div>table>tbody>tr:nth-child(even)>td {
+    border: none;
+    padding: 0;
+}
+</style>
+<!-- <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Form Design <small>different form elements</small></h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <br>
+            <form class="form-horizontal form-label-left">
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                    <input class="form-control" id="inputSuccess2" placeholder="First Name" type="text">
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                    <input class="form-control" id="inputSuccess3" placeholder="Last Name" type="text">
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                    <input class="form-control" id="inputSuccess4" placeholder="Email" type="text">
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                    <input class="form-control" id="inputSuccess5" placeholder="Phone" type="text">
+                </div>
+                <div class="ln-solid"></div>
+                <div class="form-group">
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <button type="submit" class="btn btn-primary">Cancel</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div> -->
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>User Account Details</h2>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="table-responsive">
+                <table class="table table-striped jambo_table">
+                    <thead>
+                        <tr>
+                            <th>
+                                &nbsp;
+                                <!-- <button type="button" ng-click="ctrl.expandAll(allExpanded = !allExpanded)">
+                                    <span ng-bind="allExpanded ? '-' : '+'"></span>
+                                </button> -->
+                            </th>
+                            <th>User Id</th>
+                            <!-- <th>Address</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>ZIP Code</th> -->
+                        </tr>
+                    </thead>
+                    {{dealer.incomeDetails}}
+                    <tbody>
+                        <tr ng-repeat-start="dealer in dealers" total-items="total_count">
+                            <td>
+                                <button ng-click="expanded = !expanded" expand>
+                                    <span ng-bind="expanded ? '-' : '+'"></span>
+                                </button>
+                            </td>
+                            <td ng-bind="dealer.userId"></td>
+                            <!-- <td ng-bind="dealer.Address"></td>
+                            <td ng-bind="dealer.City"></td>
+                            <td ng-bind="dealer.State"></td>
+                            <td ng-bind="dealer['ZIP Code']"></td> -->
+                        </tr>
+                        <tr ng-repeat-end ng-show="expanded">
+                            <td></td>
+                            <td colspan="6">
+                                <table class="table table-condensed table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:15%;">Account No.</th>
+                                            <th style="width:15%;">Account Balance</th>
+                                            <th style="width:15%;">Bank Name</th>
+                                            <th style="width:15%;">Credit Card Transaction</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="brand in dealer.incomeDetails">
+                                            <td ng-bind="brand.creditTransactionAccountNumber"></td>
+                                            <td style="width:15%;" ng-bind="brand.creditTransactionBalance"></td>
+                                            <td style="width:15%;" ng-bind="brand.creditTransactionBankName"></td>
+                                            <td style="width:15%;" ng-bind="brand.creditTransactionAmount"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul uib-pagination items-per-page="itemsPerPage" ng-model="currentPage" total-items="total_count" max-size="length" force-ellipses="true" boundary-links="true" ng-change="pageChanged(currentPage)">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- BLOCK 4: COMMON ALERT -->
+<div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
+    <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
+        <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
+            <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
+                </span>
+        </div>
+        <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" ng-hide="parseSmsResult.output.length">
+            {{alert}}
+        </div>
+    </div>
+</div>
+<!-- BLOCK 4: COMMON ALERT -->
