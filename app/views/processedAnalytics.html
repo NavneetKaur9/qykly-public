@@ -85,17 +85,17 @@ div>table>tbody>tr:nth-child(even)>td {
                                     <thead>
                                         <tr>
                                             <th style="width:15%;">Account No.</th>
-                                            <th style="width:15%;">Account Balance</th>
-                                            <th style="width:15%;">Bank Name</th>
                                             <th style="width:15%;">Credit Transaction</th>
+                                            <th style="width:15%;">Bank Name</th>
+                                            <th style="width:15%;">Account Balance</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="brand in dealer.incomeDetails">
                                             <td ng-bind="brand.creditTransactionAccountNumber"></td>
-                                            <td style="width:15%;" ng-bind="brand.creditTransactionBalance"></td>
-                                            <td style="width:15%;" ng-bind="brand.creditTransactionBankName"></td>
                                             <td style="width:15%;" ng-bind="brand.creditTransactionAmount"></td>
+                                            <td style="width:15%;" ng-bind="brand.creditTransactionBankName"></td>
+                                            <td style="width:15%;" ng-bind="brand.creditTransactionBalance"></td>
                                         </tr>
                                     </tbody>
                                 </table>
