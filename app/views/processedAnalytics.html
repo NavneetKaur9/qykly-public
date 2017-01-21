@@ -65,11 +65,10 @@ div>table>tbody>tr:nth-child(even)>td {
                             <th>ZIP Code</th> -->
                         </tr>
                     </thead>
-                    {{dealer.incomeDetails}}
                     <tbody>
-                        <tr ng-repeat-start="dealer in dealers" total-items="total_count">
+                        <tr ng-repeat-start="dealer in dealers">
                             <td>
-                                <button ng-click="expanded = !expanded" expand>
+                                <button ng-click="expanded = !expanded">
                                     <span ng-bind="expanded ? '-' : '+'"></span>
                                 </button>
                             </td>
@@ -88,7 +87,7 @@ div>table>tbody>tr:nth-child(even)>td {
                                             <th style="width:15%;">Account No.</th>
                                             <th style="width:15%;">Account Balance</th>
                                             <th style="width:15%;">Bank Name</th>
-                                            <th style="width:15%;">Credit Card Transaction</th>
+                                            <th style="width:15%;">Credit Transaction</th>
                                         </tr>
                                     </thead>
                                     <tbody>
