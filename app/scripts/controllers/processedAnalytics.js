@@ -38,6 +38,26 @@ angular.module('sbAdminApp').controller('processedAnalyticsCtrl', function($scop
         $scope.$broadcast('onExpandAll', { expanded: expanded });
     };
 
+    $scope.test = function(expanded, index) {
+        console.log('expanded', expanded);
+        $scope.dayDataCollapse = [];
+        for (var i = 0; i < $scope.dealers.length; i += 1) {
+            if (expanded && i == index) {
+                console.log('if satisfy condition');
+                $scope.expanded = false;
+                $scope.dayDataCollapse.push(true);
+            } else if (!expanded && i == index) {
+                console.log('satisfy condition');
+                $scope.dayDataCollapse.push(false);
+            } else {
+                $scope.dayDataCollapse.push(false);
+            }
+        }
+        console.log('bool', $scope.dayDataCollapse);
+    }
+
+
+
 }).directive('expand', function() {
     return {
         restrict: 'A',

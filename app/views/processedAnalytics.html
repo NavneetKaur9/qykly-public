@@ -58,26 +58,29 @@ div>table>tbody>tr:nth-child(even)>td {
                                     <span ng-bind="allExpanded ? '-' : '+'"></span>
                                 </button> -->
                             </th>
-                            <th>User Id</th>
-                            <!-- <th>Address</th>
-                            <th>City</th>
-                            <th>State</th>
+                            <th>User</th>
+                            <th>Total No of Credit Cards</th>
+                            <th>Total Income</th>
+                            <!-- <th>State</th>
                             <th>ZIP Code</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat-start="dealer in dealers">
                             <td>
+                                <!--                                 <button ng-click="expanded = !expanded;test(expanded,$index);">
+ -->
                                 <button ng-click="expanded = !expanded">
+                                    <!-- <span ng-bind="dayDataCollapse[$index] ? '-' : '+'"></span> -->
                                     <span ng-bind="expanded ? '-' : '+'"></span>
                                 </button>
                             </td>
-                            <td ng-bind="dealer.userId"></td>
-                            <!-- <td ng-bind="dealer.Address"></td>
-                            <td ng-bind="dealer.City"></td>
-                            <td ng-bind="dealer.State"></td>
-                            <td ng-bind="dealer['ZIP Code']"></td> -->
+                            <td ng-bind="dealer.userEmail"></td>
+                            <td ng-bind="dealer.totalNoOfCards"></td>
+                            <td ng-bind="dealer.totalIncome"></td>
                         </tr>
+                        <!--                         <tr ng-repeat-end ng-show="dayDataCollapse[$index]">
+ -->
                         <tr ng-repeat-end ng-show="expanded">
                             <td></td>
                             <td colspan="6">
