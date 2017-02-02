@@ -61,15 +61,14 @@ div>table>tbody>tr:nth-child(even)>td {
                             <th>User</th>
                             <th>Total No of Credit Cards</th>
                             <th>Total Income</th>
-                            <!-- <th>State</th>
-                            <th>ZIP Code</th> -->
+                            <th>Total Expense</th>
+                            <!--<th>ZIP Code</th> -->
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat-start="dealer in dealers">
                             <td>
-                                <!--                                 <button ng-click="expanded = !expanded;test(expanded,$index);">
- -->
+                                <!-- <button ng-click="expanded = !expanded;test(expanded,$index);"> -->
                                 <button ng-click="expanded = !expanded">
                                     <!-- <span ng-bind="dayDataCollapse[$index] ? '-' : '+'"></span> -->
                                     <span ng-bind="expanded ? '-' : '+'"></span>
@@ -77,13 +76,14 @@ div>table>tbody>tr:nth-child(even)>td {
                             </td>
                             <td ng-bind="dealer.userEmail"></td>
                             <td ng-bind="dealer.totalNoOfCards"></td>
-                            <td ng-bind="dealer.totalIncome"></td>
+                            <td>{{dealer.totalIncome | number:0}}</td>
+                            <td>{{dealer.totalExpense | number:0}}</td>
                         </tr>
-                        <!--                         <tr ng-repeat-end ng-show="dayDataCollapse[$index]">
+                        <!--                         <tr ng-repeat-end ng-show="expanded && dayDataCollapse[$index]">
  -->
                         <tr ng-repeat-end ng-show="expanded">
                             <td></td>
-                            <td colspan="6">
+                            <td>
                                 <table class="table table-condensed table-bordered">
                                     <thead>
                                         <tr>
@@ -96,9 +96,32 @@ div>table>tbody>tr:nth-child(even)>td {
                                     <tbody>
                                         <tr ng-repeat="brand in dealer.incomeDetails">
                                             <td ng-bind="brand.creditTransactionAccountNumber"></td>
-                                            <td style="width:15%;" ng-bind="brand.creditTransactionAmount"></td>
+                                            <td style="width:15%;">{{brand.creditTransactionAmount | number:0}}</td>
                                             <td style="width:15%;" ng-bind="brand.creditTransactionBankName"></td>
-                                            <td style="width:15%;" ng-bind="brand.creditTransactionBalance"></td>
+                                            <td style="width:15%;">{{brand.creditTransactionBalance | number:0}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <!-- </tr>
+                        <tr ng-repeat-end ng-show="expanded"> -->
+                            <td></td>
+                            <td>
+                                <table class="table table-condensed table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:15%;">Account No.</th>
+                                            <th style="width:15%;">Debit Transaction</th>
+                                            <th style="width:15%;">Bank Name</th>
+                                            <th style="width:15%;">Account Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="expense in dealer.expenseDetails">
+                                            <td ng-bind="expense.debitTransactionAccountNumber"></td>
+                                            <td style="width:15%;">{{expense.debitTransactionAmount | number:0}}</td>
+                                            <td style="width:15%;" ng-bind="expense.debitTransactionBankName"></td>
+                                            <td style="width:15%;">{{expense.debitTransactionBalance | number:0}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

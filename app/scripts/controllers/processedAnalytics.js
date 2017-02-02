@@ -37,18 +37,31 @@ angular.module('sbAdminApp').controller('processedAnalyticsCtrl', function($scop
         // $scope is required here, hence the injection above, even though we're using "controller as" syntax
         $scope.$broadcast('onExpandAll', { expanded: expanded });
     };
+    $scope.prevRow = false;
+    $scope.currRow = false;
 
     $scope.test = function(expanded, index) {
         console.log('expanded', expanded);
         $scope.dayDataCollapse = [];
+        $scope.expenseExpanded = expanded;
         for (var i = 0; i < $scope.dealers.length; i += 1) {
             if (expanded && i == index) {
+                $scope.currRow = true;
                 console.log('if satisfy condition');
-                $scope.expanded = false;
+                // $scope.expanded = false;
                 $scope.dayDataCollapse.push(true);
             } else if (!expanded && i == index) {
                 console.log('satisfy condition');
+                expanded = true;
+                $scope.prevRow = true;
                 $scope.dayDataCollapse.push(false);
+
+                // if ($scope.currRow && i == index) {
+                //     console.log('current row condition');
+                //     expanded = true;
+                //     $scope.prevRow = true;
+                //     $scope.dayDataCollapse.push(true);
+                // }
             } else {
                 $scope.dayDataCollapse.push(false);
             }
