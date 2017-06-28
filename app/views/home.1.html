@@ -1,0 +1,180 @@
+<div class="x_panel">
+    <div class="loader col-md-offset-6" ng-show="showLoader"></div>
+    <div class="x_title" ng-show="unProc.codes.length||proc.codes.length||new.codes.length||todayusers.length||yesterdayusers.length||weekusers.length">
+        <h2 ng-show="unProc.codes.length">Unprocessed Shortcodes</h2>
+        <h2 ng-show="proc.codes.length">Processed Shortcodes</h2>
+        <h2 ng-show="new.codes.length">New Shortcodes</h2>
+        <h2 ng-show="todayusers.length">Today Users</h2>
+        <h2 ng-show="yesterdayusers.length">Yesterday Users</h2>
+        <h2 ng-show="weekusers.length">Last Week Users</h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li>
+                <a class="collapse-link" ng-click="isCollapsed = !isCollapsed">
+                    <i class="fa fa-chevron-up"></i>
+                    <i class="fa fa-chevron-up" ng-show=""></i>
+                </a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content" uib-collapse="isCollapsed">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-2">
+                    <label> Select Category</label>
+                    <input type="hidden" ng-model="assignTo" value="{{selected}}" />
+                    <select id="cat_select" class="form-control" tabindex="-1" ng-model="category" ng-options="x for x in categories" ng-change="getMerchants()">
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <!-- range -->
+                    <label ng-if="category==='travel' " ng-show="merchantName.length">No.of tickets</label>
+                    <label ng-if="category==='purchases'" ng-show="merchantName.length">No.of Users</label>
+                    <label ng-if="category==='credit-transaction' || category==='debit-transaction'" ng-show="merchantName.length">Amount Range</label>
+                    <div class="input-group input-group-sm" ng-show="merchantName.length">
+                        <label class="input-group-addon" for="dataX">Start</label>
+                        <input class="form-control" id="dataX" placeholder="start" type="number" ng-model="start">
+                        <!-- </div>
+                <div class="input-group input-group-sm"> -->
+                        <label class="input-group-addon" for="dataX">End</label>
+                        <input class="form-control" id="dataX" placeholder="end" type="number" ng-model="end">
+                    </div>
+                    <!-- /range -->
+                </div>
+                <div class="col-md-2">
+                    <label>From :</label>
+                    <p class="input-group">
+                        <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                        <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="dt1" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                    </p>
+                </div>
+                <div class="col-md-2">
+                    <label>To :</label>
+                    <p class="input-group">
+                        <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                        <input type="text" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="dt2" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                    </p>
+                </div>
+                <div class="col-md-2" style="margin-top: 25px;">
+                    <label></label>
+                    <button class="btn btn-sm btn-info" ng-click="getUserCount(category)">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div ng-show="showLoader1">
+            <img src="assets/images/ajax-loader.gif" /> Loading Merchants
+        </div>
+        <fieldset class="scheduler-border" ng-show="merchantName.length">
+            <legend class="scheduler-border">{{category}}</legend>
+            <div class="col-md-2">
+                <ul class="list-group" ng-show="merchantName.length">
+                    <li class="list-group-item active">
+                        Select all<span class="right"><input type="checkbox" id="check-all" class="flat" ng-model="selected" /></span>
+                    </li>
+                    <li class="list-group-item" ng-repeat="(key,value) in merchantName |filter:q">
+                        {{value}} <span class="right"><input type="checkbox" value="{{value}}" name="merchantCheckbox" ng-checked="selected"/></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-5">
+                <div ng-show="showLoader2" style="text-align:center">
+                    <img src="assets/images/ajax-loader1.gif" /> Filtering Data
+                </div>
+                <div class="" ng-show="usersPurchases.length">
+                    <table class="table table-bordered" ng-show="usersPurchases.length">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Merchant</th>
+                                <th>No. Of Users</th>
+                                <th>No. of Purchases</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(key, value) in usersPurchases">
+                                <th scope="row">{{$index+1}}</th>
+                                <td>{{value.merchantName}}</td>
+                                <td><a href="" ng-click="getUserList(value.userId)"><h4><span class="label label-info">{{value.users}}</span></h4></a></td>
+                                <td><a href="" ng-click="getUserList(value.userId)"><h4><span class="label label-success">{{value.purchases}}</span></h4></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered" ng-show="bankUsers.length">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Merchant</th>
+                                <th>No. Of Users</th>
+                                <th>No. of transactions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(key, value) in bankUsers">
+                                <th scope="row">{{$index+1}}</th>
+                                <td>{{value.merchantname}}</td>
+                                <td>{{value.user}}</td>
+                                <td>{{value.count}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="" ng-show="users.length || bankUsers.length">
+                    <table class="table table-bordered" ng-show="users.length">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Merchant</th>
+                                <th>No. Of Users</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(key, value) in users">
+                                <th scope="row">{{$index+1}}</th>
+                                <td>{{value.merchantname}}</td>
+                                <td>{{value.count}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-bordered" ng-show="bankUsers.length">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Merchant</th>
+                                <th>No. Of Users</th>
+                                <th>No. of transactions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="(key, value) in bankUsers">
+                                <th scope="row">{{$index+1}}</th>
+                                <td>{{value.merchantname}}</td>
+                                <td>{{value.user}}</td>
+                                <td>{{value.count}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-5" ng-show="showChart">
+                <div google-chart chart="myChartObject" style="height:600px; width:100%;"></div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+<!-- BLOCK 4: COMMON ALERT -->
+<div aria-role="alertdialog" aria-live="assertive" style="position: fixed; width: 300px; right: 36px; top: 36px; cursor: auto;" class="ui-pnotify dark ui-pnotify-fade-normal ui-pnotify-in ui-pnotify-fade-in ui-pnotify-move" ng-show="alert">
+    <div style="min-height: 16px;" role="alert" class="alert ui-pnotify-container alert-info ui-pnotify-shadow">
+        <div style="cursor: pointer; " title="Close" tabindex="0" aria-role="button" class="ui-pnotify-closer pull-right">
+            <span class="glyphicon glyphicon-remove" ng-click="closeAlert()">
+                </span>
+        </div>
+        <div aria-role="alert" class="ui-pnotify-text" dismiss-on-timeout="5000" ng-hide="parseSmsResult.output.length">
+            {{alert}}
+        </div>
+    </div>
+</div>
+<!-- BLOCK 4: COMMON ALERT -->

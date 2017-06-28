@@ -255,5 +255,17 @@ angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datat
                 });
             }
         }
+    }).state('dashboard.broadcast', {
+        url: '/broadcast',
+        templateUrl: 'views/broadcast.html',
+        controller: 'broadcastCtrl',
+        resolve: {
+            loadMyFile: function($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name: 'sbAdminApp',
+                    files: ['scripts/controllers/broadcast.js']
+                });
+            }
+        }
     });
 }]);
