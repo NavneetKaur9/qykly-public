@@ -100,7 +100,7 @@ angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api,
   };
 
   //date
-  $scope.dt2 = new Date();
+  // $scope.dt2 = new Date();
   $scope.dateOptions = {
     formatYear: 'yy',
     maxDate: new Date(),
@@ -112,11 +112,23 @@ angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api,
   $scope.open2 = function() {
     $scope.popup2.opened = true;
   };
+  $scope.open3 = function() {
+    $scope.popup3.opened = true;
+  };
+  $scope.open4 = function() {
+    $scope.popup4.opened = true;
+  };
   $scope.altInputFormats = ['M!/d!/yyyy'];
   $scope.popup1 = {
     opened: false
   };
   $scope.popup2 = {
+    opened: false
+  };
+  $scope.popup3 = {
+    opened: false
+  };
+  $scope.popup4 = {
     opened: false
   };
   //date
@@ -182,4 +194,24 @@ angular.module('sbAdminApp').controller('homeCtrl', function($scope, $http, api,
       generatePieChart(response.result);
     });
   };
+
+
+ 
+
+
+
+ $scope.options = [
+    "EKART",
+"SHOPCLUES",
+"EBAY",
+"SHOP CLUES",
+"MYNTRA",
+"PAYTM",
+"BOOKMYSHOW",
+"SNAPDEAL",
+"FLIPKART",
+"AMAZON"
+];
+
+
 });

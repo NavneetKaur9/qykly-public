@@ -7,7 +7,7 @@
  *
  * Main module of the application.
  */
-angular.module('sbAdminApp', ['oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datatables', 'datatables.bootstrap', 'ngCookies', 'angularUtils.directives.dirPagination']).config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider) {
+angular.module('sbAdminApp', ['btorfs.multiselect','oc.lazyLoad', 'ui.router', 'ui.bootstrap', 'datatables', 'datatables.bootstrap', 'ngCookies', 'angularUtils.directives.dirPagination']).config(['$stateProvider', '$urlRouterProvider', '$ocLazyLoadProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $httpProvider) {
     $ocLazyLoadProvider.config({
         debug: false,
         events: true,

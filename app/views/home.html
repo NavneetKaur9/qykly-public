@@ -25,7 +25,8 @@
                         <div class="row">
       <div class="col-md-6">
         <p class="input-group">
-          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+          <input placeholder="From" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt1" 
+          is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
           <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
@@ -34,7 +35,8 @@
 
       <div class="col-md-6">
         <p class="input-group">
-          <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+          <input placeholder="To" type="text" class="form-control" uib-datepicker-popup ng-model="dt2" 
+          is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
           <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
@@ -56,13 +58,9 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
-            <select class="form-control">
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-</select>
+<multiselect ng-model="selection" text="data" options="options">
+</multiselect>
+{{selection}}
 </div>
         </div>
 <div class="col-md-3">
@@ -97,18 +95,20 @@
         </div>
         <div class="col-md-3">
         <p class="input-group">
-          <input  placeholder="Age From" type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+          <input  placeholder="Age From" type="text" class="form-control" uib-datepicker-popup="{{format}}" 
+          ng-model="dt3" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
           <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+            <button type="button" class="btn btn-default" ng-click="open3()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
         </p>
       </div>
 
       <div class="col-md-3">
         <p class="input-group">
-          <input placeholder="Age To" type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+          <input placeholder="Age To" type="text" class="form-control" uib-datepicker-popup 
+          ng-model="dt4" is-open="popup4.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
           <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+            <button type="button" class="btn btn-default" ng-click="open4()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
         </p>
       </div>
